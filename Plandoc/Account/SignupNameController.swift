@@ -37,6 +37,7 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
     
     @IBAction func goToPhoneVerification() {
         UserDefaults.standard.set(txtName.text, forKey: "name")
+        UserDefaults.standard.set(txtEmail.text, forKey: "email")
         self.performSegue(withIdentifier: "SegueNameToPhone", sender: self)
     }
     

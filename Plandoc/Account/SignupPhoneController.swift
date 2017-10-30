@@ -21,8 +21,8 @@ class SignupPhoneController : UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let name = UserDefaults.standard.string(forKey: "name")
-        txtTitle.text = txtTitle.text!.replacingOccurrences(of: "%s", with: name!)
+        let name = UserDefaults.standard.string(forKey: "name")?.split(separator: " ").first
+        txtTitle.text = txtTitle.text!.replacingOccurrences(of: "%s", with: String(name!))
         
         txtPhone.delegate = self
         txtPhone.applyBottomBorder()

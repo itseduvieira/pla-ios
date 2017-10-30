@@ -39,6 +39,8 @@ class SignupCodeController : UIViewController, UITextFieldDelegate {
             
             print(user)
             
+            UserDefaults.standard.set(true, forKey: "phoneValid")
+            
             let when = DispatchTime.now() + 0.3
             DispatchQueue.main.asyncAfter(deadline: when) {
                 self.performSegue(withIdentifier: "SegueCodeToFirstSteps", sender: self)
