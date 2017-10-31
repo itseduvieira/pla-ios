@@ -12,10 +12,13 @@ class FirstStepsController : UIViewController {
     @IBOutlet weak var txtTitle: UILabel!
     @IBOutlet weak var imgCheckProfile: UIImageView!
     @IBOutlet weak var txtProfile: UILabel!
+    @IBOutlet weak var txtDescProfile: UILabel!
     @IBOutlet weak var imgCheckCompany: UIImageView!
     @IBOutlet weak var txtCompany: UILabel!
+    @IBOutlet weak var txtDescCompany: UILabel!
     @IBOutlet weak var imgCheckShift: UIImageView!
     @IBOutlet weak var txtShift: UILabel!
+    @IBOutlet weak var txtDescShift: UILabel!
     @IBOutlet weak var btnCompleteStep: UIRoundedButton!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,7 +28,7 @@ class FirstStepsController : UIViewController {
         txtTitle.text = txtTitle.text!.replacingOccurrences(of: "%s", with: String(name!))
         
         if UserDefaults.standard.string(forKey: "profile") != nil {
-            txtProfile.text = "Perfil Cadastrado"
+            txtProfile.text = "Perfil Médico Cadastrado"
             txtProfile.textColor = UIColor(hexString: "#01aa01")
             
             if UserDefaults.standard.string(forKey: "companies") != nil {
@@ -51,12 +54,15 @@ class FirstStepsController : UIViewController {
         
         if UserDefaults.standard.string(forKey: "profile") != nil {
             animate(label: txtProfile, img: imgCheckProfile)
+            txtDescProfile.alpha = 0
             
             if UserDefaults.standard.string(forKey: "companies") != nil {
                 animate(label: txtCompany, img: imgCheckCompany)
+                txtDescCompany.alpha = 0
                 
                 if UserDefaults.standard.string(forKey: "shifts") != nil {
                     animate(label: txtShift, img: imgCheckShift)
+                    txtDescShift.alpha = 0
                     
                     btnCompleteStep.isHidden = true
                     
@@ -66,12 +72,15 @@ class FirstStepsController : UIViewController {
                     }
                 } else {
                     animate(label: txtShift, img: nil)
+                    animate(label: txtDescShift, img: nil)
                 }
             } else {
                 animate(label: txtCompany, img: nil)
+                animate(label: txtDescCompany, img: nil)
             }
         } else {
             animate(label: txtProfile, img: nil)
+            animate(label: txtDescProfile, img: nil)
         }
     }
     

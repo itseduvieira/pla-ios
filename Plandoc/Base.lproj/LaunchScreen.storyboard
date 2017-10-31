@@ -21,15 +21,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="iL6-UW-NDv" userLabel="SplashPlandoc">
-                                <rect key="frame" x="70" y="195" width="235" height="297"/>
+                                <rect key="frame" x="127.5" y="253.5" width="120" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="B95-tD-PNp"/>
+                                    <constraint firstAttribute="height" constant="180" id="JGv-kc-pvd"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.11372549019607843" green="0.61568627450980395" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="iL6-UW-NDv" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="70" id="BwC-yc-Q1k"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="iL6-UW-NDv" secondAttribute="bottom" constant="175" id="U0s-rb-4Gh"/>
-                            <constraint firstItem="iL6-UW-NDv" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="175" id="uEF-po-OQe"/>
-                            <constraint firstAttribute="trailing" secondItem="iL6-UW-NDv" secondAttribute="trailing" constant="70" id="vl9-Gg-Iua"/>
+                            <constraint firstItem="iL6-UW-NDv" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="10" id="7mG-lm-R7C"/>
+                            <constraint firstItem="iL6-UW-NDv" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="OCA-Kk-KdI"/>
                         </constraints>
                     </view>
                 </viewController>
