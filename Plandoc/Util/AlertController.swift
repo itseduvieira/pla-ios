@@ -10,6 +10,11 @@ import UIKit
 
 class AlertController: UIViewController {
     //MARK: Properties
+    var customView: UIView!
+    @IBOutlet weak var mainView: UIView!
     
     //MARK: Actions
+    override func viewDidLoad() {
+        mainView.addSubview(customView)
+    }
 }

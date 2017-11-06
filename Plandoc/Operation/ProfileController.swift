@@ -56,7 +56,14 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func save() {
-        UserDefaults.standard.set("test", forKey: "profile")
+        let profile = Profile()
+        profile.crm = txtCRM.text
+        profile.uf = txtUF.text
+        profile.graduationDate = txtGraduationDate.text
+        profile.field = txtField.text
+        profile.institution = txtGraduation.text
+        
+        UserDefaults.standard.set(profile, forKey: "profile")
         
         cancel()
     }

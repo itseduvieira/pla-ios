@@ -13,6 +13,7 @@
         <scene sceneID="klw-lU-Jya">
             <objects>
                 <viewController storyboardIdentifier="AlertViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="O1G-QM-Qpw" customClass="AlertController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides/>
                     <view key="view" contentMode="scaleToFill" id="8V3-DO-hFy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,6 +34,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1KX-w8-bqK"/>
                     </view>
+                    <connections>
+                        <outlet property="mainView" destination="vDt-VR-QTl" id="VfS-Z4-MKI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KxQ-ad-Uh4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

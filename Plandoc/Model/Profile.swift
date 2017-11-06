@@ -12,29 +12,26 @@ class Profile: NSObject, NSCoding {
     var crm: String!
     var uf: String!
     var graduationDate: String!
-    var medical: String!
-    var password: String!
-    var phoneValid: Bool! = false
+    var institution: String!
+    var field: String!
     
     override init() {
         super.init()
     }
     
     required init(coder decoder: NSCoder) {
-//        id = decoder.decodeObject(forKey: "id") as? String
-//        name = decoder.decodeObject(forKey: "name") as? String
-//        email = decoder.decodeObject(forKey: "email") as? String
-//        phone = decoder.decodeObject(forKey: "phone") as? String
-//        password = decoder.decodeObject(forKey: "password") as? String
-//        phoneValid = decoder.decodeObject(forKey: "phoneValid") as? Bool
+        crm = decoder.decodeObject(forKey: "crm") as? String
+        uf = decoder.decodeObject(forKey: "uf") as? String
+        graduationDate = decoder.decodeObject(forKey: "graduationDate") as? String
+        institution = decoder.decodeObject(forKey: "institution") as? String
+        field = decoder.decodeObject(forKey: "field") as? String
     }
     
     public func encode(with aCoder: NSCoder) {
-//        aCoder.encode(id, forKey: "id")
-//        aCoder.encode(name, forKey: "name")
-//        aCoder.encode(email, forKey: "email")
-//        aCoder.encode(phone, forKey: "phone")
-//        aCoder.encode(password, forKey: "password")
-//        aCoder.encode(phoneValid, forKey: "phoneValid")
+        aCoder.encode(crm, forKey: "crm")
+        aCoder.encode(uf, forKey: "uf")
+        aCoder.encode(graduationDate, forKey: "graduationDate")
+        aCoder.encode(institution, forKey: "institution")
+        aCoder.encode(field, forKey: "field")
     }
 }

@@ -22,6 +22,7 @@
 		3455CEEC1FA642A7001DB405 /* ShiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455CEEB1FA642A7001DB405 /* ShiftController.swift */; };
 		3455CEEE1FA65C0A001DB405 /* CompletionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455CEED1FA65C0A001DB405 /* CompletionController.swift */; };
 		346322091F93D67A00F0CCF4 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 346322081F93D67A00F0CCF4 /* Podfile */; };
+		346BDC3A1FB0F02000635ABA /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346BDC391FB0F02000635ABA /* Company.swift */; };
 		347765541F8FE93200082442 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347765531F8FE93200082442 /* AppDelegate.swift */; };
 		3477655B1F8FE93200082442 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3477655A1F8FE93200082442 /* Assets.xcassets */; };
 		3477655E1F8FE93200082442 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3477655C1F8FE93200082442 /* LaunchScreen.storyboard */; };
@@ -59,6 +60,7 @@
 		3455CEEB1FA642A7001DB405 /* ShiftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftController.swift; sourceTree = "<group>"; };
 		3455CEED1FA65C0A001DB405 /* CompletionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionController.swift; sourceTree = "<group>"; };
 		346322081F93D67A00F0CCF4 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		346BDC391FB0F02000635ABA /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		347765501F8FE93200082442 /* Plandoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Plandoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		347765531F8FE93200082442 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3477655A1F8FE93200082442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				3426E1AE1FAB756A0087E1A5 /* User.swift */,
 				3426E1B01FABA59C0087E1A5 /* Profile.swift */,
 				3426E1B21FABA5B30087E1A5 /* Shift.swift */,
+				346BDC391FB0F02000635ABA /* Company.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Plandoc/Pods-Plandoc-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
+				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
@@ -331,6 +335,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
@@ -397,6 +402,7 @@
 				34D056051F9583F800C0344B /* SignupPhoneController.swift in Sources */,
 				34AD2D581F976D010083E942 /* PageController.swift in Sources */,
 				3450E7A91F950D6E00A239E4 /* SignupNameController.swift in Sources */,
+				346BDC3A1FB0F02000635ABA /* Company.swift in Sources */,
 				341BDBBE1F9E592A000DEFCB /* InitialController.swift in Sources */,
 				3455CEEE1FA65C0A001DB405 /* CompletionController.swift in Sources */,
 				3450E7AB1F953DD900A239E4 /* UIStoryboardSegueSlide.swift in Sources */,

@@ -34,11 +34,25 @@ class CompanyController : UIViewController, ChromaColorPickerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.showColorAlert()
+//        self.showColorAlert()
     }
     
     @IBAction func save() {
-        UserDefaults.standard.set("test", forKey: "companies")
+        var companies: Array<Company>
+        
+        if let companiesSaved = UserDefaults.standard.array(forKey: "companies") as? Array<Company> {
+            companies = companiesSaved
+        } else {
+            companies = Array()
+        }
+        
+        let company = Company()
+        company.name = txtCompany.text
+        company.address = txtAddress.text
+        company.admin = txtAdmin.text
+        company.phone = txtPhone.text
+        companies.append(company)
+        UserDefaults.standard.set(companies, forKey: "companies")
         
         self.performSegue(withIdentifier: "SegueCompanyToFirstSteps", sender: self)
     }
@@ -71,12 +85,9 @@ class CompanyController : UIViewController, ChromaColorPickerDelegate {
         neatColorPicker.stroke = 3
         neatColorPicker.hexLabel.textColor = UIColor.white
         
-        let alertController = UIViewController()
-        alertController.view.backgroundColor = UIColor.white
-        alertController.view.addSubview(neatColorPicker)
         
-        alertController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        alertController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        let alertController = UIStoryboard(name: "Util", bundle: nil).instantiateViewController(withIdentifier: "AlertViewController") as! AlertController
+        alertController.customView = neatColorPicker
         self.present(alertController, animated: true, completion: nil)
     }
     

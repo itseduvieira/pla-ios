@@ -7,4 +7,5 @@ target 'Plandoc' do
     pod 'Firebase/Auth'
     pod 'IQKeyboardManagerSwift'
     pod 'ChromaColorPicker'
+    pod 'FSCalendar'
 end

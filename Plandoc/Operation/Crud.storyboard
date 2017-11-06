@@ -13,6 +13,7 @@
         <scene sceneID="7zN-xj-fms">
             <objects>
                 <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="E3b-aN-3Nq" customClass="ProfileController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides/>
                     <view key="view" contentMode="scaleToFill" id="FGm-Hw-EcW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -158,13 +159,14 @@
         <scene sceneID="Vea-tg-Msm">
             <objects>
                 <viewController storyboardIdentifier="CompanyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VA5-PV-IB3" customClass="CompanyController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides/>
                     <view key="view" contentMode="scaleToFill" id="45z-Oh-CCL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gh4-r6-uto">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.197388698630137" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="Xrd-wj-tfW"/>
                                 </constraints>
@@ -298,6 +300,7 @@
         <scene sceneID="V6M-m1-GiY">
             <objects>
                 <viewController storyboardIdentifier="ShiftsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fy8-l9-nGX" customClass="ShiftController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides/>
                     <view key="view" contentMode="scaleToFill" id="2eQ-sX-xIo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -355,6 +358,7 @@
         <scene sceneID="Jjx-Bc-RDu">
             <objects>
                 <viewController storyboardIdentifier="AccountViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YBs-IC-09W" sceneMemberID="viewController">
+                    <layoutGuides/>
                     <view key="view" contentMode="scaleToFill" id="HRb-Fu-kxq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -511,6 +515,6 @@
         <image name="RevealPasswordIcon" width="398" height="396"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SBL-H7-X7T"/>
+        <segue reference="LNd-Cq-P0l"/>
     </inferredMetricsTieBreakers>
 </document>
