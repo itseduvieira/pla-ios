@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LQB-pO-zZ1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LQB-pO-zZ1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,10 +21,6 @@
         <scene sceneID="rYB-QA-uZQ">
             <objects>
                 <viewController id="LQB-pO-zZ1" customClass="LoginController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zaw-Vd-ezd"/>
-                        <viewControllerLayoutGuide type="bottom" id="XmK-Yr-WYE"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="r8U-5R-Voe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,23 +87,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WV0-EW-jpn" firstAttribute="leading" secondItem="r8U-5R-Voe" secondAttribute="leading" constant="46" id="57O-ro-ecg"/>
-                            <constraint firstAttribute="trailing" secondItem="WV0-EW-jpn" secondAttribute="trailing" constant="46" id="HUf-Kb-OaL"/>
+                            <constraint firstItem="WV0-EW-jpn" firstAttribute="leading" secondItem="WPw-jR-T8d" secondAttribute="leading" constant="46" id="57O-ro-ecg"/>
+                            <constraint firstItem="WPw-jR-T8d" firstAttribute="trailing" secondItem="WV0-EW-jpn" secondAttribute="trailing" constant="46" id="HUf-Kb-OaL"/>
                             <constraint firstItem="VgU-Ab-tLg" firstAttribute="top" secondItem="WV0-EW-jpn" secondAttribute="bottom" constant="24" id="LfY-dX-RoA"/>
-                            <constraint firstItem="58Z-eH-IvZ" firstAttribute="leading" secondItem="r8U-5R-Voe" secondAttribute="leading" constant="26" id="N2w-o3-vdT"/>
-                            <constraint firstItem="XmK-Yr-WYE" firstAttribute="top" secondItem="aCG-90-ieA" secondAttribute="bottom" constant="10" id="ODd-a7-Rni"/>
+                            <constraint firstItem="58Z-eH-IvZ" firstAttribute="leading" secondItem="WPw-jR-T8d" secondAttribute="leading" constant="26" id="N2w-o3-vdT"/>
+                            <constraint firstItem="WPw-jR-T8d" firstAttribute="bottom" secondItem="aCG-90-ieA" secondAttribute="bottom" constant="10" id="ODd-a7-Rni"/>
                             <constraint firstItem="58Z-eH-IvZ" firstAttribute="top" secondItem="VgU-Ab-tLg" secondAttribute="bottom" constant="12" id="OQI-1O-0m9"/>
-                            <constraint firstItem="WV0-EW-jpn" firstAttribute="centerX" secondItem="r8U-5R-Voe" secondAttribute="centerX" id="OTs-Yf-lqa"/>
-                            <constraint firstItem="5CF-fD-C5J" firstAttribute="centerX" secondItem="r8U-5R-Voe" secondAttribute="centerX" id="dKb-0s-6IO"/>
-                            <constraint firstItem="VgU-Ab-tLg" firstAttribute="leading" secondItem="r8U-5R-Voe" secondAttribute="leading" constant="26" id="di0-8L-QjS"/>
+                            <constraint firstItem="WV0-EW-jpn" firstAttribute="centerX" secondItem="WPw-jR-T8d" secondAttribute="centerX" id="OTs-Yf-lqa"/>
+                            <constraint firstItem="5CF-fD-C5J" firstAttribute="centerX" secondItem="WPw-jR-T8d" secondAttribute="centerX" id="dKb-0s-6IO"/>
+                            <constraint firstItem="VgU-Ab-tLg" firstAttribute="leading" secondItem="WPw-jR-T8d" secondAttribute="leading" constant="26" id="di0-8L-QjS"/>
                             <constraint firstItem="5CF-fD-C5J" firstAttribute="top" secondItem="58Z-eH-IvZ" secondAttribute="bottom" constant="16" id="hvo-rc-9PT"/>
-                            <constraint firstAttribute="trailing" secondItem="5CF-fD-C5J" secondAttribute="trailing" constant="26" id="k06-SC-5fB"/>
-                            <constraint firstItem="aCG-90-ieA" firstAttribute="centerX" secondItem="r8U-5R-Voe" secondAttribute="centerX" id="lwx-6E-ZRD"/>
-                            <constraint firstAttribute="trailing" secondItem="VgU-Ab-tLg" secondAttribute="trailing" constant="26" id="mN7-7S-XJ4"/>
+                            <constraint firstItem="WPw-jR-T8d" firstAttribute="trailing" secondItem="5CF-fD-C5J" secondAttribute="trailing" constant="26" id="k06-SC-5fB"/>
+                            <constraint firstItem="aCG-90-ieA" firstAttribute="centerX" secondItem="WPw-jR-T8d" secondAttribute="centerX" id="lwx-6E-ZRD"/>
+                            <constraint firstItem="WPw-jR-T8d" firstAttribute="trailing" secondItem="VgU-Ab-tLg" secondAttribute="trailing" constant="26" id="mN7-7S-XJ4"/>
                             <constraint firstItem="VgU-Ab-tLg" firstAttribute="centerY" secondItem="r8U-5R-Voe" secondAttribute="centerY" id="qkn-oF-Gvp"/>
-                            <constraint firstAttribute="trailing" secondItem="58Z-eH-IvZ" secondAttribute="trailing" constant="26" id="rqw-cf-WcB"/>
-                            <constraint firstItem="5CF-fD-C5J" firstAttribute="leading" secondItem="r8U-5R-Voe" secondAttribute="leading" constant="26" id="vZ5-m1-Hid"/>
+                            <constraint firstItem="WPw-jR-T8d" firstAttribute="trailing" secondItem="58Z-eH-IvZ" secondAttribute="trailing" constant="26" id="rqw-cf-WcB"/>
+                            <constraint firstItem="5CF-fD-C5J" firstAttribute="leading" secondItem="WPw-jR-T8d" secondAttribute="leading" constant="26" id="vZ5-m1-Hid"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="WPw-jR-T8d"/>
                     </view>
                     <connections>
                         <outlet property="txtLogin" destination="VgU-Ab-tLg" id="y9Y-HY-ABp"/>
@@ -121,10 +119,6 @@
         <scene sceneID="svc-uN-gzC">
             <objects>
                 <viewController id="ZTy-aS-cm3" customClass="LoginController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nMX-Wc-Lav"/>
-                        <viewControllerLayoutGuide type="bottom" id="aRN-JK-1qg"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="52w-LC-Dgl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -157,6 +151,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="Hf2-EO-BtP"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mtR-WD-EJA" userLabel="First Responder" sceneMemberID="firstResponder"/>

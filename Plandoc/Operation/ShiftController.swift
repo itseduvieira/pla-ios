@@ -10,6 +10,8 @@ import UIKit
 
 class ShiftController : UIViewController {
     //MARK: Properties
+    @IBOutlet weak var imgPicture: UIImageView!
+    
     weak var sender: UIViewController!
     
     //MARK: Actions

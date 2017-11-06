@@ -24,8 +24,11 @@ class FirstStepsController : UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let name = UserDefaults.standard.string(forKey: "name")?.split(separator: " ").first
-        txtTitle.text = txtTitle.text!.replacingOccurrences(of: "%s", with: String(name!))
+        if let data = UserDefaults.standard.object(forKey: "activation") as? NSData,
+            let pdcUser = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? Plandoc.User {
+            let name = pdcUser.name.split(separator: " ").first
+            txtTitle.text = txtTitle.text!.replacingOccurrences(of: "%s", with: String(name!))
+        }
         
         if UserDefaults.standard.string(forKey: "profile") != nil {
             txtProfile.text = "Perfil Médico Cadastrado"

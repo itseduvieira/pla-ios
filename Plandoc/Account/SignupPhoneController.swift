@@ -21,8 +21,11 @@ class SignupPhoneController : UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let name = UserDefaults.standard.string(forKey: "name")?.split(separator: " ").first
-        txtTitle.text = txtTitle.text!.replacingOccurrences(of: "%s", with: String(name!))
+        if let data = UserDefaults.standard.object(forKey: "activation") as? NSData,
+            let pdcUser = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? User {
+            let name = pdcUser.name.split(separator: " ").first
+            txtTitle.text = txtTitle.text!.replacingOccurrences(of: "%s", with: String(name!))
+        }
         
         txtPhone.delegate = self
         txtPhone.applyBottomBorder()
@@ -49,15 +52,21 @@ class SignupPhoneController : UIViewController, UITextFieldDelegate {
             phone = "+55" + phone
         }
         
-        UserDefaults.standard.set(phone, forKey: "phone")
-        PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { (verificationID, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
+        if let data = UserDefaults.standard.object(forKey: "activation") as? NSData,
+            let pdcUser = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? User {
+            pdcUser.phone = phone
             
-            self.verificationID = verificationID
-            self.performSegue(withIdentifier: "SeguePhoneToCode", sender: self)
+            PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { (verificationID, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
+                    UserDefaults.standard.set(encoded, forKey: "activation")
+                    
+                    self.verificationID = verificationID
+                    self.performSegue(withIdentifier: "SeguePhoneToCode", sender: self)
+                }
+            }
         }
     }
     

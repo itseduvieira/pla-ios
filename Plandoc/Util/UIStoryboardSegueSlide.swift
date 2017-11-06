@@ -10,8 +10,7 @@ import UIKit
 
 class UIStoryboardSegueFromRight: UIStoryboardSegue {
     
-    override func perform()
-    {
+    override func perform() {
         let src = self.source as UIViewController
         let dst = self.destination as UIViewController
         
@@ -23,18 +22,16 @@ class UIStoryboardSegueFromRight: UIStoryboardSegue {
                        options: UIViewAnimationOptions.curveEaseInOut,
                        animations: {
                         dst.view.transform = CGAffineTransform(translationX: 0, y: 0)
-        },
+                       },
                        completion: { finished in
                         src.present(dst, animated: false, completion: nil)
-        }
-        )
+                       })
     }
 }
 
 class UIStoryboardUnwindSegueFromRight: UIStoryboardSegue {
     
-    override func perform()
-    {
+    override func perform() {
         let src = self.source as UIViewController
         let dst = self.destination as UIViewController
         
@@ -45,11 +42,10 @@ class UIStoryboardUnwindSegueFromRight: UIStoryboardSegue {
                        delay: 0.0,
                        options: UIViewAnimationOptions.curveEaseInOut,
                        animations: {
-                        src.view.transform = CGAffineTransform(translationX: src.view.frame.size.width, y: 0)
-        },
+                            src.view.transform = CGAffineTransform(translationX: src.view.frame.size.width, y: 0)
+                       },
                        completion: { finished in
-                        src.dismiss(animated: false, completion: nil)
-        }
-        )
+                            src.dismiss(animated: false, completion: nil)
+                       })
     }
 }
