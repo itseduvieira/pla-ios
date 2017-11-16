@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Alert Controller-->
-        <scene sceneID="klw-lU-Jya">
+        <!--Preferências-->
+        <scene sceneID="FX0-jm-e1b">
             <objects>
-                <viewController storyboardIdentifier="AlertViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="O1G-QM-Qpw" customClass="AlertController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides/>
-                    <view key="view" contentMode="scaleToFill" id="8V3-DO-hFy">
+                <viewController storyboardIdentifier="PreferencesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zyy-RP-v4H" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HcW-gR-Yfu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDt-VR-QTl">
-                                <rect key="frame" x="67" y="279.5" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i2M-53-y3g">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="M51-DE-dCF"/>
-                                    <constraint firstAttribute="width" constant="240" id="rKR-Fy-i7h"/>
+                                    <constraint firstAttribute="height" constant="44" id="5MU-AO-AWo"/>
                                 </constraints>
-                            </view>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Preferências" id="RwS-Yk-imG"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.74780607876712324" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="vDt-VR-QTl" firstAttribute="centerX" secondItem="1KX-w8-bqK" secondAttribute="centerX" id="B6G-fY-WlW"/>
-                            <constraint firstItem="vDt-VR-QTl" firstAttribute="centerY" secondItem="1KX-w8-bqK" secondAttribute="centerY" id="TNl-LC-03E"/>
+                            <constraint firstItem="i2M-53-y3g" firstAttribute="trailing" secondItem="9MB-Gc-A78" secondAttribute="trailing" id="895-9z-PpV"/>
+                            <constraint firstItem="i2M-53-y3g" firstAttribute="top" secondItem="HcW-gR-Yfu" secondAttribute="top" constant="20" id="AGd-ku-f1T"/>
+                            <constraint firstItem="i2M-53-y3g" firstAttribute="leading" secondItem="9MB-Gc-A78" secondAttribute="leading" id="bTZ-wJ-xKB"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="1KX-w8-bqK"/>
+                        <viewLayoutGuide key="safeArea" id="9MB-Gc-A78"/>
                     </view>
-                    <connections>
-                        <outlet property="mainView" destination="vDt-VR-QTl" id="VfS-Z4-MKI"/>
-                    </connections>
+                    <tabBarItem key="tabBarItem" title="Preferências" image="IconBarPreferences" selectedImage="IconBarPreferences" id="oQM-eG-2QL"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KxQ-ad-Uh4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gEB-Rv-jIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="98" y="-78"/>
+            <point key="canvasLocation" x="335" y="-60"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="IconBarPreferences" width="25" height="25"/>
+    </resources>
 </document>

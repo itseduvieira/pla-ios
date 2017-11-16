@@ -8,17 +8,18 @@
 
 import UIKit
 
-class ProfileController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     //MARK: Properties
-    @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var imgPicture: UIImageView!
     @IBOutlet weak var txtCRM: UITextField!
     @IBOutlet weak var txtUF: UITextField!
     @IBOutlet weak var txtGraduationDate: UITextField!
     @IBOutlet weak var txtGraduation: UITextField!
     @IBOutlet weak var txtField: UITextField!
+    @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var navItem: UINavigationItem!
     
-    let imagePicker = UIImagePickerController()
-    var fieldPicker: UIPickerView!
+    var picker: UIPickerView!
     
     weak var sender: UIViewController!
     
@@ -30,11 +31,15 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         "Psiquiatria", "Radiologia e Diagnóstico por Imagem", "Radioterapia", "Reumatologia", "Urologia"
     ]
     
+    let pickerUFData = [
+        "", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO",
+        "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ",
+        "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
+    ]
+    
     //MARK: Actions
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        imagePicker.delegate = self
         
         self.setupPictureRound()
         
@@ -46,7 +51,11 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         
         self.setupGraduationDateField()
         
-        //UITextField.connectFields(fields: [txtCRM, txtUF, txtGraduationDate, txtGraduation, txtField])
+        self.setNavigationBar()
+        
+        self.loadExistingData()
+        
+        UITextField.connectFields(fields: [txtCRM, txtUF, txtGraduationDate, txtGraduation, txtField])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,44 +64,42 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         txtCRM.becomeFirstResponder()
     }
     
-    @IBAction func save() {
-        let profile = Profile()
-        profile.crm = txtCRM.text
-        profile.uf = txtUF.text
-        profile.graduationDate = txtGraduationDate.text
-        profile.field = txtField.text
-        profile.institution = txtGraduation.text
+    @objc func save() {
+        let pdcProfile = Profile()
+        pdcProfile.crm = txtCRM.text
+        pdcProfile.uf = txtUF.text
+        pdcProfile.graduationDate = txtGraduationDate.text
+        pdcProfile.field = txtField.text
+        pdcProfile.institution = txtGraduation.text
         
+        let profile = NSKeyedArchiver.archivedData(withRootObject: pdcProfile)
         UserDefaults.standard.set(profile, forKey: "profile")
         
         cancel()
     }
     
-    @IBAction func choosePicture() {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        
-        present(imagePicker, animated: true, completion: nil)
+    @IBAction func chooseUF() {
+        self.pickUp(txtUF)
     }
     
     @IBAction func chooseField() {
         self.pickUp(txtField)
     }
     
-    @IBAction func cancel() {
+    @objc func cancel() {
         if self.sender.restorationIdentifier == "FirstStepsViewController" {
             self.performSegue(withIdentifier: "SegueProfileToFirstSteps", sender: self)
+        } else {
+            if self.sender.restorationIdentifier == "AccountViewController" {
+                self.performSegue(withIdentifier: "SegueProfileToAccount", sender: self)
+            }
         }
     }
     
     @IBAction func openPicker(_ sender: UITextField) {
         let datePickerView = MonthYearPickerView()
         
-        //datePickerView.datePickerMode = UIDatePickerMode.date
-        
         sender.inputView = datePickerView
-        
-//        datePickerView.addTarget(self, action: #selector(ProfileController.datePickerValueChanged), for: UIControlEvents.valueChanged)
         
         datePickerView.onDateSelected = { (month: Int, year: Int) in
             self.txtGraduationDate.text = DateFormatter().monthSymbols[month - 1].capitalized + " de " + String(year)
@@ -109,44 +116,52 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
         txtGraduationDate.text = dateFormatter.string(for: sender.date)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imgProfile.contentMode = .scaleAspectFit
-            imgProfile.image = pickedImage
-        }
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerFieldData.count
+        if txtField.isFirstResponder {
+            return pickerFieldData.count
+        } else if txtUF.isFirstResponder {
+            return pickerUFData.count
+        }
+        
+        return -1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerFieldData[row]
+        if txtField.isFirstResponder {
+            return pickerFieldData[row]
+        } else if txtUF.isFirstResponder {
+            return pickerUFData[row]
+        }
+        
+        return nil
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        txtField.text = pickerFieldData[row]
+        if txtField.isFirstResponder {
+            txtField.text = pickerFieldData[row]
+        } else if txtUF.isFirstResponder {
+            txtUF.text = pickerUFData[row]
+        }
     }
     
     @objc func doneClick() {
-        txtField.resignFirstResponder()
+        if txtField.isFirstResponder {
+            txtField.resignFirstResponder()
+        } else if txtUF.isFirstResponder {
+            txtUF.resignFirstResponder()
+        }
     }
     
     func pickUp(_ textField : UITextField){
-        self.fieldPicker = UIPickerView(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 216))
-        self.fieldPicker.delegate = self
-        self.fieldPicker.dataSource = self
-        textField.inputView = self.fieldPicker
+        self.picker = UIPickerView(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 216))
+        self.picker.delegate = self
+        self.picker.dataSource = self
+        
+        textField.inputView = self.picker
         
         let toolBar = UIToolbar()
         toolBar.barStyle = .default
@@ -200,10 +215,28 @@ class ProfileController : UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     private func setupPictureRound() {
-        imgProfile.layer.cornerRadius = imgProfile.frame.size.width / 2
-        imgProfile.clipsToBounds = true
+        imgPicture.layer.cornerRadius = imgPicture.frame.size.width / 2
+    }
+    
+    func setNavigationBar() {
+        navBar.setBackgroundImage(UIImage(), for: .default)
+        navBar.shadowImage = UIImage()
+        let backItem = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(cancel))
+        navItem.leftBarButtonItem = backItem
+        let doneItem = UIBarButtonItem(title: "Salvar", style: .plain, target: self, action: #selector(save))
+        navItem.rightBarButtonItem = doneItem
+    }
+    
+    private func loadExistingData() {
+        guard let profile = UserDefaults.standard.object(forKey: "profile") else {
+            return
+        }
         
-//        imgProfile.layer.borderWidth = 2.0;
-//        imgProfile.layer.borderColor = UIColor(hexString: "#1D9DD5").cgColor
+        let pdcProfile = NSKeyedUnarchiver.unarchiveObject(with: profile as! Data) as! Profile
+        txtCRM.text = pdcProfile.crm
+        txtUF.text = pdcProfile.uf
+        txtGraduationDate.text = pdcProfile.graduationDate
+        txtGraduation.text = pdcProfile.institution
+        txtField.text = pdcProfile.field
     }
 }

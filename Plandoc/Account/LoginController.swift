@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginController : UIViewController {
     //MARK: Properties
@@ -17,11 +18,54 @@ class LoginController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let username = UserDefaults.standard.string(forKey: "username") {
+            txtLogin.text = username
+        }
+        
+        if let password = UserDefaults.standard.string(forKey: "password") {
+            txtPassword.text = password
+        }
+        
         self.hideKeyboardWhenTappedAround()
+        
+        self.applyBorders()
+        
+        UITextField.connectFields(fields: [txtLogin, txtPassword])
     }
     
     @IBAction func login() {
-        let sb = UIStoryboard(name: "Profile", bundle:nil)
-        self.present(sb.instantiateViewController(withIdentifier: "ProfileViewController"), animated: true, completion: nil)
+        if self.txtLogin.text == "" || self.txtPassword.text == "" {
+            
+            let alertController = UIAlertController(title: "Error", message: "Preencha os campos de email e senha.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        } else {
+            Auth.auth().signIn(withEmail: self.txtLogin.text!, password: self.txtPassword.text!) { (user, error) in
+                
+                if error == nil {
+                UserDefaults.standard.set(self.txtLogin.text!, forKey: "username")
+                UserDefaults.standard.set(self.txtPassword.text!, forKey: "password")
+                    
+                    self.performSegue(withIdentifier: "SegueLoginToMenu", sender: self)
+                    
+                } else {
+                    let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                    
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(defaultAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    private func applyBorders() {
+        txtLogin.applyBottomBorder()
+        txtPassword.applyBottomBorder()
     }
 }

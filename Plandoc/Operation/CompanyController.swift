@@ -8,17 +8,20 @@
 
 import UIKit
 import ChromaColorPicker
+import SearchTextField
+import MapboxGeocoder
 
-class CompanyController : UIViewController, ChromaColorPickerDelegate {
+class CompanyController : UIViewController {
     //MARK: Properties
-    @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var imgPicture: UIImageView!
     @IBOutlet weak var txtCompany: UITextField!
-    @IBOutlet weak var txtAddress: UITextField!
+    @IBOutlet weak var txtAddress: SearchTextField!
     @IBOutlet weak var txtAdmin: UITextField!
     @IBOutlet weak var txtPhone: UITextField!
     @IBOutlet weak var selectedColor: UIView!
     
     weak var sender: UIViewController!
+    var geocoder: Geocoder!
     
     //MARK: Actions
     override func viewDidLoad() {
@@ -29,32 +32,32 @@ class CompanyController : UIViewController, ChromaColorPickerDelegate {
         self.hideKeyboardWhenTappedAround()
         
         self.applyBorders()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-//        self.showColorAlert()
+        //self.setupAddressField()
+        
+        geocoder = Geocoder.shared
     }
     
     @IBAction func save() {
-        var companies: Array<Company>
+        var companies: Array<Data>
         
-        if let companiesSaved = UserDefaults.standard.array(forKey: "companies") as? Array<Company> {
+        if let companiesSaved = UserDefaults.standard.array(forKey: "companies") as? Array<Data> {
             companies = companiesSaved
         } else {
             companies = Array()
         }
         
-        let company = Company()
-        company.name = txtCompany.text
-        company.address = txtAddress.text
-        company.admin = txtAdmin.text
-        company.phone = txtPhone.text
+        let pdcCompany = Company()
+        pdcCompany.name = txtCompany.text
+        pdcCompany.address = txtAddress.text
+        pdcCompany.admin = txtAdmin.text
+        pdcCompany.phone = txtPhone.text
+        
+        let company = NSKeyedArchiver.archivedData(withRootObject: pdcCompany)
         companies.append(company)
         UserDefaults.standard.set(companies, forKey: "companies")
         
-        self.performSegue(withIdentifier: "SegueCompanyToFirstSteps", sender: self)
+        cancel()
     }
     
     @IBAction func cancel() {
@@ -64,11 +67,7 @@ class CompanyController : UIViewController, ChromaColorPickerDelegate {
     }
     
     private func setupPictureRound() {
-        imgProfile.layer.cornerRadius = imgProfile.frame.size.width / 2
-        imgProfile.clipsToBounds = true
-        
-        //        imgProfile.layer.borderWidth = 2.0;
-        //        imgProfile.layer.borderColor = UIColor(hexString: "#1D9DD5").cgColor
+        imgPicture.layer.cornerRadius = imgPicture.frame.size.width / 2
     }
     
     private func applyBorders() {
@@ -78,19 +77,99 @@ class CompanyController : UIViewController, ChromaColorPickerDelegate {
         txtPhone.applyBottomBorder()
     }
     
-    private func showColorAlert() {
-        let neatColorPicker = ChromaColorPicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        neatColorPicker.delegate = self //ChromaColorPickerDelegate
-        neatColorPicker.padding = 5
-        neatColorPicker.stroke = 3
-        neatColorPicker.hexLabel.textColor = UIColor.white
+    private func setupAddressField() {
+        txtAddress.startVisibleWithoutInteraction = true
         
-        
-        let alertController = UIStoryboard(name: "Util", bundle: nil).instantiateViewController(withIdentifier: "AlertViewController") as! AlertController
-        alertController.customView = neatColorPicker
-        self.present(alertController, animated: true, completion: nil)
+        txtAddress.userStoppedTypingHandler = {
+            if let criteria = self.txtAddress.text {
+                if criteria.characters.count > 2 {
+                    
+                    // Show loading indicator
+                    self.txtAddress.showLoadingIndicator()
+                    
+                    self.filterAcronymInBackground(criteria) { results in
+                        // Set new items to filter
+                        self.txtAddress.filterItems(results)
+                        
+                        // Stop loading indicator
+                        self.txtAddress.stopLoadingIndicator()
+                    }
+                }
+            }
+        } as (() -> Void)
     }
     
-    func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
+    fileprivate func filterAcronymInBackground(_ criteria: String, callback: @escaping ((_ results: [SearchTextFieldItem]) -> Void)) {
+//        let url = URL(string: "http://www.nactem.ac.uk/software/acromine/dictionary.py?sf=\(criteria)")
+//
+//        if let url = url {
+//            let task = URLSession.shared.dataTask(with: url, completionHandler: {(data, response, error) in
+//                do {
+//                    if let data = data {
+//                        let jsonData = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String:AnyObject]]
+//
+//                        if let firstElement = jsonData.first {
+//                            let jsonResults = firstElement["lfs"] as! [[String: AnyObject]]
+//
+//                            var results = [SearchTextFieldItem]()
+//
+//                            for result in jsonResults {
+//                                results.append(SearchTextFieldItem(title: result["lf"] as! String, subtitle: criteria.uppercased(), image: UIImage(named: "acronym_icon")))
+//                            }
+//
+//                            DispatchQueue.main.async {
+//                                callback(results)
+//                            }
+//                        } else {
+//                            DispatchQueue.main.async {
+//                                callback([])
+//                            }
+//                        }
+//                    } else {
+//                        DispatchQueue.main.async {
+//                            callback([])
+//                        }
+//                    }
+//                }
+//                catch {
+//                    print("Network error: \(error)")
+//                    DispatchQueue.main.async {
+//                        callback([])
+//                    }
+//                }
+//            })
+//
+//            task.resume()
+//        }
+        
+        let options = ForwardGeocodeOptions(query: criteria)
+        
+        options.allowedISOCountryCodes = ["BR"]
+//        options.focalLocation = CLLocation(latitude: 45.3, longitude: -66.1)
+        options.allowedScopes = [.address, .pointOfInterest]
+        
+        let task = geocoder.geocode(options) { (placemarks, attribution, error) in
+            guard let placemark = placemarks?.first else {
+                return
+            }
+            
+            print(placemark.name)
+            print(placemark.qualifiedName)
+            
+            let coordinate = placemark.location.coordinate
+            print("\(coordinate.latitude), \(coordinate.longitude)")
+            
+            var results = [SearchTextFieldItem]()
+            
+            for result in placemarks! {
+                results.append(SearchTextFieldItem(title: result.name, subtitle: result.qualifiedName))
+            }
+            
+            DispatchQueue.main.async {
+                callback(results)
+            }
+        }
+        
+        //task.resume()
     }
 }

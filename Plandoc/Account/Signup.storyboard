@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N3G-CD-B6s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N3G-CD-B6s">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -148,18 +148,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sia-JJ-hUC">
-                                <rect key="frame" x="17" y="27" width="75" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="KB1-7a-5M0"/>
-                                    <constraint firstAttribute="width" constant="75" id="dbG-l9-r2a"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Cancelar"/>
-                                <connections>
-                                    <segue destination="N3G-CD-B6s" kind="show" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="7uI-xV-bJI"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nome completo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zvd-Ob-QgC">
                                 <rect key="frame" x="16" y="172" width="288" height="36"/>
                                 <constraints>
@@ -206,18 +194,16 @@
                             <constraint firstItem="34W-gP-wLI" firstAttribute="top" secondItem="DO0-vm-Jhs" secondAttribute="top" constant="14" id="0fO-Ma-MWW"/>
                             <constraint firstItem="DO0-vm-Jhs" firstAttribute="trailing" secondItem="YCQ-c8-LGa" secondAttribute="trailing" constant="16" id="3vk-SJ-5GZ"/>
                             <constraint firstItem="YCQ-c8-LGa" firstAttribute="top" secondItem="RCB-uV-a6Q" secondAttribute="bottom" constant="17" id="4PV-U0-SdE"/>
+                            <constraint firstItem="DO0-vm-Jhs" firstAttribute="trailing" secondItem="zvd-Ob-QgC" secondAttribute="trailing" constant="16" id="G5Y-Qy-eCz"/>
                             <constraint firstItem="DO0-vm-Jhs" firstAttribute="trailing" secondItem="FXe-SS-Ohg" secondAttribute="trailing" constant="16" id="K9Q-Tj-3um"/>
-                            <constraint firstItem="DO0-vm-Jhs" firstAttribute="trailing" secondItem="zvd-Ob-QgC" secondAttribute="trailing" constant="16" id="KdI-Fl-Xgj"/>
-                            <constraint firstItem="Sia-JJ-hUC" firstAttribute="top" secondItem="DO0-vm-Jhs" secondAttribute="top" constant="7" id="Qrc-SD-brt"/>
-                            <constraint firstItem="DO0-vm-Jhs" firstAttribute="trailing" secondItem="RCB-uV-a6Q" secondAttribute="trailing" constant="16" id="Sjp-vG-5uF"/>
                             <constraint firstItem="zvd-Ob-QgC" firstAttribute="leading" secondItem="DO0-vm-Jhs" secondAttribute="leading" constant="16" id="c0V-C5-cJ0"/>
                             <constraint firstItem="FXe-SS-Ohg" firstAttribute="top" secondItem="9Td-0j-4mh" secondAttribute="bottom" constant="-2" id="cc7-BB-9It"/>
                             <constraint firstItem="9Td-0j-4mh" firstAttribute="leading" secondItem="DO0-vm-Jhs" secondAttribute="leading" constant="16" id="d0D-1o-b4v"/>
                             <constraint firstItem="RCB-uV-a6Q" firstAttribute="leading" secondItem="DO0-vm-Jhs" secondAttribute="leading" constant="16" id="dIW-59-LVI"/>
+                            <constraint firstItem="DO0-vm-Jhs" firstAttribute="trailing" secondItem="RCB-uV-a6Q" secondAttribute="trailing" constant="16" id="gTT-2I-vla"/>
                             <constraint firstItem="DO0-vm-Jhs" firstAttribute="trailing" secondItem="34W-gP-wLI" secondAttribute="trailing" constant="14" id="i8a-bq-sUr"/>
                             <constraint firstItem="FXe-SS-Ohg" firstAttribute="leading" secondItem="DO0-vm-Jhs" secondAttribute="leading" constant="16" id="lX4-3H-HCt"/>
                             <constraint firstItem="zvd-Ob-QgC" firstAttribute="top" secondItem="FXe-SS-Ohg" secondAttribute="bottom" constant="16" id="rE5-BF-Ue4"/>
-                            <constraint firstItem="Sia-JJ-hUC" firstAttribute="leading" secondItem="DO0-vm-Jhs" secondAttribute="leading" constant="17" id="rYh-VO-ISr"/>
                             <constraint firstItem="9Td-0j-4mh" firstAttribute="top" secondItem="34W-gP-wLI" secondAttribute="bottom" constant="14" id="wUc-88-Vn2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DO0-vm-Jhs"/>
@@ -227,6 +213,7 @@
                         <outlet property="txtEmail" destination="RCB-uV-a6Q" id="Ra3-EZ-10f"/>
                         <outlet property="txtName" destination="zvd-Ob-QgC" id="ikE-6c-nbw"/>
                         <segue destination="aZQ-xJ-UOg" kind="show" identifier="SegueNameToPhone" customClass="UIStoryboardSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="iG0-Bt-aEf"/>
+                        <segue destination="N3G-CD-B6s" kind="show" identifier="SegueNameToInitial" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="Qeg-aq-WMh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QFZ-l8-V49" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -289,18 +276,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IHX-i0-bul">
-                                <rect key="frame" x="17" y="26" width="75" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="fRV-7t-DQa"/>
-                                    <constraint firstAttribute="height" constant="33" id="yTS-c8-2zS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Voltar"/>
-                                <connections>
-                                    <segue destination="yNd-2u-KlV" kind="show" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="2q9-iW-dWD"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Telefone com DDD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gOx-9L-fng">
                                 <rect key="frame" x="16" y="224" width="288" height="36"/>
                                 <constraints>
@@ -339,13 +314,11 @@
                             <constraint firstItem="Gy0-1R-tOa" firstAttribute="leading" secondItem="zH4-Yd-Oih" secondAttribute="leading" constant="16" id="Aih-nz-vFn"/>
                             <constraint firstItem="Gy0-1R-tOa" firstAttribute="top" secondItem="pY1-NC-ETp" secondAttribute="bottom" constant="-2" id="DHp-7N-kWJ"/>
                             <constraint firstItem="pY1-NC-ETp" firstAttribute="top" secondItem="VPX-e9-b5T" secondAttribute="bottom" constant="12" id="OR5-Qd-cdd"/>
-                            <constraint firstItem="IHX-i0-bul" firstAttribute="top" secondItem="zH4-Yd-Oih" secondAttribute="top" constant="6" id="Tbd-Xn-9DL"/>
                             <constraint firstItem="pY1-NC-ETp" firstAttribute="leading" secondItem="zH4-Yd-Oih" secondAttribute="leading" constant="16" id="Ybb-TH-GCU"/>
                             <constraint firstItem="zH4-Yd-Oih" firstAttribute="trailing" secondItem="Gy0-1R-tOa" secondAttribute="trailing" constant="16" id="Yr2-d4-RZN"/>
                             <constraint firstItem="VPX-e9-b5T" firstAttribute="top" secondItem="zH4-Yd-Oih" secondAttribute="top" constant="14" id="fjB-Su-wNN"/>
                             <constraint firstItem="1Uh-D1-8cX" firstAttribute="top" secondItem="gOx-9L-fng" secondAttribute="bottom" constant="17" id="hdt-cf-e64"/>
                             <constraint firstItem="zH4-Yd-Oih" firstAttribute="trailing" secondItem="1Uh-D1-8cX" secondAttribute="trailing" constant="16" id="qWB-bO-g5f"/>
-                            <constraint firstItem="IHX-i0-bul" firstAttribute="leading" secondItem="zH4-Yd-Oih" secondAttribute="leading" constant="17" id="sFk-0A-8jw"/>
                             <constraint firstItem="gOx-9L-fng" firstAttribute="top" secondItem="Gy0-1R-tOa" secondAttribute="bottom" constant="16" id="x5q-Pn-MYP"/>
                             <constraint firstItem="zH4-Yd-Oih" firstAttribute="trailing" secondItem="VPX-e9-b5T" secondAttribute="trailing" constant="14" id="xKr-7z-RlP"/>
                             <constraint firstItem="gOx-9L-fng" firstAttribute="leading" secondItem="zH4-Yd-Oih" secondAttribute="leading" constant="16" id="y6Y-YX-gqk"/>
@@ -357,6 +330,7 @@
                         <outlet property="txtPhone" destination="gOx-9L-fng" id="xp5-7v-nCf"/>
                         <outlet property="txtTitle" destination="pY1-NC-ETp" id="KRj-JQ-mOG"/>
                         <segue destination="rIp-a9-I3S" kind="show" identifier="SeguePhoneToCode" customClass="UIStoryboardSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="8fI-1R-cSY"/>
+                        <segue destination="yNd-2u-KlV" kind="show" identifier="SeguePhoneToName" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="YsE-0V-e33"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i3h-O7-k2n" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -432,6 +406,6 @@
         <image name="LogoPlandoc" width="774" height="413"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8uY-9c-2b6"/>
+        <segue reference="YsE-0V-e33"/>
     </inferredMetricsTieBreakers>
 </document>

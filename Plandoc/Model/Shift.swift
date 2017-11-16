@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+class Shift: NSObject, NSCoding {
+    var id: String!
+    
+    override init() {
+        super.init()
+    }
+    
+    required init(coder decoder: NSCoder) {
+        id = decoder.decodeObject(forKey: "id") as? String
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: "id")
+    }
+}
+

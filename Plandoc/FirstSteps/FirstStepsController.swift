@@ -30,15 +30,15 @@ class FirstStepsController : UIViewController {
             txtTitle.text = txtTitle.text!.replacingOccurrences(of: "%s", with: String(name!))
         }
         
-        if UserDefaults.standard.string(forKey: "profile") != nil {
+        if UserDefaults.standard.object(forKey: "profile") != nil {
             txtProfile.text = "Perfil Médico Cadastrado"
             txtProfile.textColor = UIColor(hexString: "#01aa01")
             
-            if UserDefaults.standard.string(forKey: "companies") != nil {
+            if UserDefaults.standard.object(forKey: "companies") != nil {
                 txtCompany.text = "Empresa Cadastrada"
                 txtCompany.textColor = UIColor(hexString: "#01aa01")
                 
-                if UserDefaults.standard.string(forKey: "shifts") != nil {
+                if UserDefaults.standard.object(forKey: "shifts") != nil {
                     txtShift.text = "Plantão Cadastrado"
                     txtShift.textColor = UIColor(hexString: "#01aa01")
                 } else {
@@ -55,17 +55,17 @@ class FirstStepsController : UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if UserDefaults.standard.string(forKey: "profile") != nil {
+        if UserDefaults.standard.object(forKey: "profile") != nil {
             animate(label: txtProfile, img: imgCheckProfile)
-            txtDescProfile.alpha = 0
+            animate(label: txtDescProfile, img: nil)
             
-            if UserDefaults.standard.string(forKey: "companies") != nil {
+            if UserDefaults.standard.object(forKey: "companies") != nil {
                 animate(label: txtCompany, img: imgCheckCompany)
-                txtDescCompany.alpha = 0
+                animate(label: txtDescCompany, img: nil)
                 
-                if UserDefaults.standard.string(forKey: "shifts") != nil {
+                if UserDefaults.standard.object(forKey: "shifts") != nil {
                     animate(label: txtShift, img: imgCheckShift)
-                    txtDescShift.alpha = 0
+                    animate(label: txtDescShift, img: nil)
                     
                     btnCompleteStep.isHidden = true
                     

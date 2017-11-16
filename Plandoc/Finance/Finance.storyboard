@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IO9-zP-AX1">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Financeiro-->
+        <scene sceneID="z1p-06-dGH">
+            <objects>
+                <viewController id="IO9-zP-AX1" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XOx-d8-ydQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjF-7A-4wC">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="BwX-EQ-rrs"/>
+                                </constraints>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Financeiro" id="tgc-qh-j1a"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sjF-7A-4wC" firstAttribute="trailing" secondItem="dyx-F1-Fko" secondAttribute="trailing" id="9cr-yv-67F"/>
+                            <constraint firstItem="sjF-7A-4wC" firstAttribute="top" secondItem="XOx-d8-ydQ" secondAttribute="top" constant="20" id="MsT-Rm-OeE"/>
+                            <constraint firstItem="sjF-7A-4wC" firstAttribute="leading" secondItem="dyx-F1-Fko" secondAttribute="leading" id="z2C-7P-C4H"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dyx-F1-Fko"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Financeiro" image="IconBarFinancial" selectedImage="IconBarFinancial" id="EYd-jQ-dHF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aCl-Ig-Bu9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1282" y="596"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="IconBarFinancial" width="25" height="25"/>
+    </resources>
+</document>

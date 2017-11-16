@@ -48,9 +48,11 @@ class SignupCodeController : UIViewController, UITextFieldDelegate {
                         let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
                         UserDefaults.standard.set(encoded, forKey: "activation")
                         
-                        let when = DispatchTime.now() + 0.1
-                        DispatchQueue.main.asyncAfter(deadline: when) {
-                            self.performSegue(withIdentifier: "SegueCodeToFirstSteps", sender: self)
+                        Auth.auth().sendPasswordReset(withEmail: (user?.email)!) { (error) in
+                            let when = DispatchTime.now() + 0.1
+                            DispatchQueue.main.asyncAfter(deadline: when) {
+                                self.performSegue(withIdentifier: "SegueCodeToFirstSteps", sender: self)
+                            }
                         }
                     }
                 }

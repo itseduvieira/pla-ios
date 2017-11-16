@@ -40,11 +40,14 @@ PODS:
   - GTMSessionFetcher/Core (1.1.12)
   - IQKeyboardManagerSwift (5.0.2)
   - leveldb-library (1.18.3)
+  - MapboxGeocoder.swift (0.6.3)
+  - MapboxStatic.swift (0.9.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - SearchTextField (1.2.0)
 
 DEPENDENCIES:
   - ChromaColorPicker
@@ -52,6 +55,9 @@ DEPENDENCIES:
   - Firebase/Database
   - FSCalendar
   - IQKeyboardManagerSwift
+  - MapboxGeocoder.swift (~> 0.6)
+  - MapboxStatic.swift (~> 0.9)
+  - SearchTextField
 
 SPEC CHECKSUMS:
   ChromaColorPicker: cc7fc1d92569a8a9198fe89d9a420147e508462c
@@ -66,8 +72,11 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   IQKeyboardManagerSwift: e580da046d804d2836ee84668cc17e43a850a35d
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
+  MapboxGeocoder.swift: fbd6f0f79eda6d0b714a36259c5ff5dcd72c1bf1
+  MapboxStatic.swift: 247d98dd6e11b8934aa5d122efcb50384f8d66f6
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
 
-PODFILE CHECKSUM: d99c0ca8db9e47b68f9b88edfe6b50c93ecf4b09
+PODFILE CHECKSUM: dbb19e0291fb685dad62d948d60bdaafefd4cbb0
 
 COCOAPODS: 1.3.1
