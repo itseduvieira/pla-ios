@@ -273,24 +273,11 @@
                                     <action selector="chooseField" destination="E3b-aN-3Nq" eventType="editingDidBegin" id="zK7-2N-XaY"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6d-bQ-0nd">
-                                <rect key="frame" x="287" y="435" width="72" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="72" id="MOw-67-pcH"/>
-                                    <constraint firstAttribute="height" constant="30" id="faj-0t-X6t"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="12"/>
-                                <state key="normal" title="SALVAR"/>
-                                <connections>
-                                    <action selector="save" destination="VA5-PV-IB3" eventType="touchUpInside" id="MYh-Qq-Tv6"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="29V-wZ-jgI" firstAttribute="leading" secondItem="cN1-TS-Tbn" secondAttribute="leading" constant="16" id="EMK-F7-Jqq"/>
                             <constraint firstItem="SMl-fb-vii" firstAttribute="centerX" secondItem="cN1-TS-Tbn" secondAttribute="centerX" id="NJ1-Lt-7NA"/>
-                            <constraint firstItem="W6d-bQ-0nd" firstAttribute="top" secondItem="7yd-gH-R8Z" secondAttribute="bottom" constant="28" id="Olm-HG-Xcp"/>
                             <constraint firstItem="7yd-gH-R8Z" firstAttribute="leading" secondItem="cN1-TS-Tbn" secondAttribute="leading" constant="16" id="PHo-1O-GW8"/>
                             <constraint firstItem="cN1-TS-Tbn" firstAttribute="trailing" secondItem="Y9x-CG-CvL" secondAttribute="trailing" constant="16" id="RPT-BW-SMR"/>
                             <constraint firstItem="Gh4-r6-uto" firstAttribute="top" secondItem="45z-Oh-CCL" secondAttribute="top" id="TFX-TK-I7I"/>
@@ -304,7 +291,6 @@
                             <constraint firstItem="cN1-TS-Tbn" firstAttribute="trailing" secondItem="Gh4-r6-uto" secondAttribute="trailing" id="l3v-2a-HOl"/>
                             <constraint firstItem="Y9x-CG-CvL" firstAttribute="leading" secondItem="cN1-TS-Tbn" secondAttribute="leading" constant="16" id="lVM-py-7qa"/>
                             <constraint firstItem="Y9x-CG-CvL" firstAttribute="top" secondItem="29V-wZ-jgI" secondAttribute="bottom" constant="20" id="mNe-lW-v6y"/>
-                            <constraint firstItem="cN1-TS-Tbn" firstAttribute="trailing" secondItem="W6d-bQ-0nd" secondAttribute="trailing" constant="16" id="rQc-Ha-AbO"/>
                             <constraint firstItem="SMl-fb-vii" firstAttribute="top" secondItem="cN1-TS-Tbn" secondAttribute="top" constant="65" id="y34-nj-fzW"/>
                             <constraint firstItem="AEr-jk-wST" firstAttribute="top" secondItem="SMl-fb-vii" secondAttribute="bottom" constant="12" id="zse-HI-Bz2"/>
                         </constraints>
@@ -312,6 +298,8 @@
                     </view>
                     <connections>
                         <outlet property="imgPicture" destination="SMl-fb-vii" id="lvt-TJ-Rlm"/>
+                        <outlet property="navBar" destination="dMo-5e-CWg" id="iSv-Ra-L6q"/>
+                        <outlet property="navItem" destination="KNJ-CE-CzV" id="7H6-Y7-H1f"/>
                         <outlet property="selectedColor" destination="Gh4-r6-uto" id="OOj-uP-vmj"/>
                         <outlet property="txtAddress" destination="29V-wZ-jgI" id="t9H-sZ-fhd"/>
                         <outlet property="txtAdmin" destination="Y9x-CG-CvL" id="biY-l6-Gzc"/>
@@ -689,6 +677,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lgJ-Eo-KBa"/>
-        <segue reference="WFf-fQ-ajR"/>
+        <segue reference="SBL-H7-X7T"/>
     </inferredMetricsTieBreakers>
 </document>

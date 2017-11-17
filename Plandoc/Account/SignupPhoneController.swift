@@ -38,9 +38,9 @@ class SignupPhoneController : UIViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        var text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
-        btnVerify.isEnabled = text.characters.count >= 11
+        btnVerify.isEnabled = text.count >= 11
         
         return true
     }

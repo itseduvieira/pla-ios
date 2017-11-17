@@ -58,24 +58,27 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
         UITextField.connectFields(fields: [txtCRM, txtUF, txtGraduationDate, txtGraduation, txtField])
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        txtCRM.becomeFirstResponder()
-    }
-    
     @objc func save() {
-        let pdcProfile = Profile()
-        pdcProfile.crm = txtCRM.text
-        pdcProfile.uf = txtUF.text
-        pdcProfile.graduationDate = txtGraduationDate.text
-        pdcProfile.field = txtField.text
-        pdcProfile.institution = txtGraduation.text
-        
-        let profile = NSKeyedArchiver.archivedData(withRootObject: pdcProfile)
-        UserDefaults.standard.set(profile, forKey: "profile")
-        
-        cancel()
+        if txtCRM.text! == "" || txtUF.text! == "" || txtGraduationDate.text! == "" || txtField.text! == "" || txtGraduation.text! == "" {
+            let alertController = UIAlertController(title: "Erro", message: "Preencha corretamente os campos.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            let pdcProfile = Profile()
+            pdcProfile.crm = txtCRM.text
+            pdcProfile.uf = txtUF.text
+            pdcProfile.graduationDate = txtGraduationDate.text
+            pdcProfile.field = txtField.text
+            pdcProfile.institution = txtGraduation.text
+            
+            let profile = NSKeyedArchiver.archivedData(withRootObject: pdcProfile)
+            UserDefaults.standard.set(profile, forKey: "profile")
+            
+            cancel()
+        }
     }
     
     @IBAction func chooseUF() {
@@ -152,7 +155,7 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
         if txtField.isFirstResponder {
             txtField.resignFirstResponder()
         } else if txtUF.isFirstResponder {
-            txtUF.resignFirstResponder()
+            txtGraduationDate.becomeFirstResponder()
         }
     }
     
@@ -175,7 +178,7 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
     }
     
     @objc func doneToolbarGraduation() {
-        txtGraduationDate.resignFirstResponder()
+        txtGraduation.becomeFirstResponder()
     }
     
     private func setupGraduationDateField() {
@@ -191,7 +194,7 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
     }
     
     @objc func doneToolbarCRM() {
-        txtCRM.resignFirstResponder()
+        txtUF.becomeFirstResponder()
     }
     
     private func setupCRMField() {

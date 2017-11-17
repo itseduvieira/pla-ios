@@ -19,6 +19,8 @@ class CompanyController : UIViewController {
     @IBOutlet weak var txtAdmin: UITextField!
     @IBOutlet weak var txtPhone: UITextField!
     @IBOutlet weak var selectedColor: UIView!
+    @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var navItem: UINavigationItem!
     
     weak var sender: UIViewController!
     var geocoder: Geocoder!
@@ -34,6 +36,8 @@ class CompanyController : UIViewController {
         self.applyBorders()
         
         //self.setupAddressField()
+        
+        self.setNavigationBar()
         
         geocoder = Geocoder.shared
     }
@@ -60,7 +64,7 @@ class CompanyController : UIViewController {
         cancel()
     }
     
-    @IBAction func cancel() {
+    @objc func cancel() {
         if self.sender.restorationIdentifier == "FirstStepsViewController" {
             self.performSegue(withIdentifier: "SegueCompanyToFirstSteps", sender: self)
         }
@@ -82,7 +86,7 @@ class CompanyController : UIViewController {
         
         txtAddress.userStoppedTypingHandler = {
             if let criteria = self.txtAddress.text {
-                if criteria.characters.count > 2 {
+                if criteria.count > 2 {
                     
                     // Show loading indicator
                     self.txtAddress.showLoadingIndicator()
@@ -171,5 +175,14 @@ class CompanyController : UIViewController {
         }
         
         //task.resume()
+    }
+    
+    func setNavigationBar() {
+        navBar.setBackgroundImage(UIImage(), for: .default)
+        navBar.shadowImage = UIImage()
+        let backItem = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(cancel))
+        navItem.leftBarButtonItem = backItem
+        let doneItem = UIBarButtonItem(title: "Salvar", style: .plain, target: self, action: #selector(save))
+        navItem.rightBarButtonItem = doneItem
     }
 }
