@@ -14,6 +14,8 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var btnNext: UIButton!
+    @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var navItem: UINavigationItem!
     
     //MARK: Actions
     override func viewDidLoad() {
@@ -24,7 +26,9 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
         txtEmail.delegate = self
         txtEmail.applyBottomBorder()
         
-        hideKeyboardWhenTappedAround()
+        self.hideKeyboardWhenTappedAround()
+        
+        self.setNavigationBar()
         
         UITextField.connectFields(fields: [txtName, txtEmail])
     }
@@ -36,7 +40,7 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func goToPhoneVerification() {
-        Auth.auth().createUser(withEmail: txtEmail.text!, password: String(random(6)), completion: { (user: FirebaseAuth.User?, error) in
+        Auth.auth().createUser(withEmail: txtEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: String(random(6)), completion: { (user: FirebaseAuth.User?, error) in
             if let error = error {
                 print(error)
                 
@@ -60,8 +64,8 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
                     } else {
                         let pdcUser = User()
                         pdcUser.id = user?.uid
-                        pdcUser.email = self.txtEmail.text!
-                        pdcUser.name = self.txtName.text!
+                        pdcUser.email = self.txtEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                        pdcUser.name = self.txtName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                         let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
                         UserDefaults.standard.set(encoded, forKey: "activation")
                         self.performSegue(withIdentifier: "SegueNameToPhone", sender: self)
@@ -89,5 +93,16 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
             number += "\(randomNumber)"
         }
         return number
+    }
+    
+    func setNavigationBar() {
+        navBar.setBackgroundImage(UIImage(), for: .default)
+        navBar.shadowImage = UIImage()
+        let backItem = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(back))
+        navItem.leftBarButtonItem = backItem
+    }
+    
+    @objc func back() {
+        self.performSegue(withIdentifier: "SegueNameToInitial", sender: self)
     }
 }

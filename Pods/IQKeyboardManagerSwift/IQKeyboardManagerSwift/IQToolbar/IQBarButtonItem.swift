@@ -23,6 +23,7 @@
 
 
 import UIKit
+import Foundation
 
 open class IQBarButtonItem: UIBarButtonItem {
 
@@ -45,12 +46,8 @@ open class IQBarButtonItem: UIBarButtonItem {
 
         let states : [UIControlState] = [.normal,.highlighted,.disabled,.selected,.application,.reserved];
 
-        //Tint color
-        appearanceProxy.tintColor = nil
-
         for state in states {
 
-            appearanceProxy.setTitleTextAttributes(nil, for: state)
             appearanceProxy.setBackgroundImage(nil, for: state, barMetrics: .default)
             appearanceProxy.setBackgroundImage(nil, for: state, style: .done, barMetrics: .default)
             appearanceProxy.setBackgroundImage(nil, for: state, style: .plain, barMetrics: .default)
@@ -62,11 +59,45 @@ open class IQBarButtonItem: UIBarButtonItem {
         appearanceProxy.setBackButtonTitlePositionAdjustment(UIOffset.zero, for: .default)
         appearanceProxy.setBackButtonBackgroundVerticalPositionAdjustment(0, for: .default)
     }
+    
+    open override var tintColor: UIColor? {
+        didSet {
+
+            #if swift(>=4)
+                var textAttributes = [NSAttributedStringKey : Any]()
+                
+                if let attributes = titleTextAttributes(for: .normal) {
+                
+                    for (key, value) in attributes {
+                
+                        textAttributes[NSAttributedStringKey.init(key)] = value
+                    }
+                }
+                
+                textAttributes[NSAttributedStringKey.foregroundColor] = tintColor
+                
+                setTitleTextAttributes(textAttributes, for: .normal)
+
+            #else
+
+                var textAttributes = [String:Any]()
+                
+                if let attributes = titleTextAttributes(for: .normal) {
+                    textAttributes = attributes
+                }
+                
+                textAttributes[NSForegroundColorAttributeName] = tintColor
+                
+                setTitleTextAttributes(textAttributes, for: .normal)
+
+            #endif
+        }
+    }
 
     /**
      Boolean to know if it's a system item or custom item, we are having a limitation that we cannot override a designated initializer, so we are manually setting this property once in initialization
      */
-    var isSystemItem = false
+    @objc var isSystemItem = false
     
 //    public override init(barButtonSystemItem systemItem: UIBarButtonSystemItem, target: Any?, action: Selector?) {
 //        return super.init(barButtonSystemItem: systemItem, target: target, action: action)

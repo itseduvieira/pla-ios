@@ -10,6 +10,7 @@ import Foundation
 
 class Company: NSObject, NSCoding {
     var id: String!
+    var type: String!
     var name: String!
     var address: String!
     var phone: String!
@@ -20,6 +21,7 @@ class Company: NSObject, NSCoding {
     }
     
     required init(coder decoder: NSCoder) {
+        type = decoder.decodeObject(forKey: "type") as? String
         id = decoder.decodeObject(forKey: "id") as? String
         name = decoder.decodeObject(forKey: "name") as? String
         address = decoder.decodeObject(forKey: "address") as? String
@@ -28,6 +30,7 @@ class Company: NSObject, NSCoding {
     }
     
     public func encode(with aCoder: NSCoder) {
+        aCoder.encode(type, forKey: "type")
         aCoder.encode(id, forKey: "id")
         aCoder.encode(name, forKey: "name")
         aCoder.encode(address, forKey: "address")

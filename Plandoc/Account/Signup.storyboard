@@ -89,6 +89,9 @@
                                 <state key="normal" title="CADASTRAR COM FACEBOOK">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginWithFB" destination="N3G-CD-B6s" eventType="touchUpInside" id="GAy-UY-gYK"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -131,6 +134,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXX-Df-gT2">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7fN-xF-UZ4"/>
+                                </constraints>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem id="eGy-LM-WGQ"/>
+                                </items>
+                            </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="34W-gP-wLI">
                                 <rect key="frame" x="201" y="34" width="105" height="47"/>
                                 <constraints>
@@ -196,6 +211,7 @@
                             <constraint firstItem="YCQ-c8-LGa" firstAttribute="top" secondItem="RCB-uV-a6Q" secondAttribute="bottom" constant="17" id="4PV-U0-SdE"/>
                             <constraint firstItem="DO0-vm-Jhs" firstAttribute="trailing" secondItem="zvd-Ob-QgC" secondAttribute="trailing" constant="16" id="G5Y-Qy-eCz"/>
                             <constraint firstItem="DO0-vm-Jhs" firstAttribute="trailing" secondItem="FXe-SS-Ohg" secondAttribute="trailing" constant="16" id="K9Q-Tj-3um"/>
+                            <constraint firstItem="bXX-Df-gT2" firstAttribute="top" secondItem="lRN-h2-sVx" secondAttribute="top" constant="20" id="Uta-iA-QgY"/>
                             <constraint firstItem="zvd-Ob-QgC" firstAttribute="leading" secondItem="DO0-vm-Jhs" secondAttribute="leading" constant="16" id="c0V-C5-cJ0"/>
                             <constraint firstItem="FXe-SS-Ohg" firstAttribute="top" secondItem="9Td-0j-4mh" secondAttribute="bottom" constant="-2" id="cc7-BB-9It"/>
                             <constraint firstItem="9Td-0j-4mh" firstAttribute="leading" secondItem="DO0-vm-Jhs" secondAttribute="leading" constant="16" id="d0D-1o-b4v"/>
@@ -204,12 +220,16 @@
                             <constraint firstItem="DO0-vm-Jhs" firstAttribute="trailing" secondItem="34W-gP-wLI" secondAttribute="trailing" constant="14" id="i8a-bq-sUr"/>
                             <constraint firstItem="FXe-SS-Ohg" firstAttribute="leading" secondItem="DO0-vm-Jhs" secondAttribute="leading" constant="16" id="lX4-3H-HCt"/>
                             <constraint firstItem="zvd-Ob-QgC" firstAttribute="top" secondItem="FXe-SS-Ohg" secondAttribute="bottom" constant="16" id="rE5-BF-Ue4"/>
+                            <constraint firstAttribute="trailing" secondItem="bXX-Df-gT2" secondAttribute="trailing" id="sQg-X8-haC"/>
+                            <constraint firstItem="bXX-Df-gT2" firstAttribute="leading" secondItem="DO0-vm-Jhs" secondAttribute="leading" id="uyi-6M-HMg"/>
                             <constraint firstItem="9Td-0j-4mh" firstAttribute="top" secondItem="34W-gP-wLI" secondAttribute="bottom" constant="14" id="wUc-88-Vn2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DO0-vm-Jhs"/>
                     </view>
                     <connections>
                         <outlet property="btnNext" destination="YCQ-c8-LGa" id="7dA-aM-VOV"/>
+                        <outlet property="navBar" destination="bXX-Df-gT2" id="zMd-C9-1ZG"/>
+                        <outlet property="navItem" destination="eGy-LM-WGQ" id="M2g-UO-Zj9"/>
                         <outlet property="txtEmail" destination="RCB-uV-a6Q" id="Ra3-EZ-10f"/>
                         <outlet property="txtName" destination="zvd-Ob-QgC" id="ikE-6c-nbw"/>
                         <segue destination="aZQ-xJ-UOg" kind="show" identifier="SegueNameToPhone" customClass="UIStoryboardSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="iG0-Bt-aEf"/>
@@ -362,7 +382,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Código" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ONX-OT-Amt">
-                                <rect key="frame" x="16" y="140" width="288" height="40"/>
+                                <rect key="frame" x="16" y="142" width="288" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5KR-m6-Wv8"/>
                                 </constraints>
@@ -370,16 +390,42 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="go"/>
                             </textField>
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJ9-c3-k7F">
+                                <rect key="frame" x="188" y="206" width="118" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="bRj-nU-P5h"/>
+                                    <constraint firstAttribute="width" constant="118" id="top-O7-Mta"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="requisite novamente"/>
+                                <connections>
+                                    <action selector="retry" destination="rIp-a9-I3S" eventType="touchUpInside" id="BaM-XA-aft"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Se você não recebeu o código," textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORG-Jo-Uof">
+                                <rect key="frame" x="8" y="206" width="180" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Mfh-mW-yQY"/>
+                                    <constraint firstAttribute="width" constant="180" id="yzd-jM-lDx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ONX-OT-Amt" firstAttribute="top" secondItem="GnR-4B-olw" secondAttribute="bottom" constant="16" id="6Dh-Ip-EY2"/>
+                            <constraint firstItem="ONX-OT-Amt" firstAttribute="top" secondItem="GnR-4B-olw" secondAttribute="bottom" constant="18" id="6Dh-Ip-EY2"/>
+                            <constraint firstItem="HJ9-c3-k7F" firstAttribute="leading" secondItem="ORG-Jo-Uof" secondAttribute="trailing" id="8ju-v1-6hu"/>
                             <constraint firstItem="9ol-IA-3oS" firstAttribute="trailing" secondItem="ONX-OT-Amt" secondAttribute="trailing" constant="16" id="BLe-Th-i6B"/>
                             <constraint firstItem="9ol-IA-3oS" firstAttribute="trailing" secondItem="GnR-4B-olw" secondAttribute="trailing" constant="16" id="Br9-aN-fuN"/>
                             <constraint firstItem="9ol-IA-3oS" firstAttribute="trailing" secondItem="cec-WR-m16" secondAttribute="trailing" constant="14" id="FBF-lK-gvA"/>
+                            <constraint firstItem="HJ9-c3-k7F" firstAttribute="top" secondItem="ONX-OT-Amt" secondAttribute="bottom" constant="24" id="GAi-sF-190"/>
                             <constraint firstItem="GnR-4B-olw" firstAttribute="top" secondItem="cec-WR-m16" secondAttribute="bottom" constant="14" id="KoJ-zg-naU"/>
                             <constraint firstItem="cec-WR-m16" firstAttribute="top" secondItem="9ol-IA-3oS" secondAttribute="top" constant="14" id="Nxe-AQ-SUc"/>
                             <constraint firstItem="GnR-4B-olw" firstAttribute="leading" secondItem="9ol-IA-3oS" secondAttribute="leading" constant="16" id="Qat-rc-kUr"/>
+                            <constraint firstItem="9ol-IA-3oS" firstAttribute="trailing" secondItem="HJ9-c3-k7F" secondAttribute="trailing" constant="14" id="bxW-Al-OL6"/>
+                            <constraint firstItem="ORG-Jo-Uof" firstAttribute="top" secondItem="ONX-OT-Amt" secondAttribute="bottom" constant="24" id="dxz-xb-IKA"/>
                             <constraint firstItem="ONX-OT-Amt" firstAttribute="leading" secondItem="9ol-IA-3oS" secondAttribute="leading" constant="16" id="wzg-V1-KaU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9ol-IA-3oS"/>
@@ -387,6 +433,7 @@
                     <connections>
                         <outlet property="txtCode" destination="ONX-OT-Amt" id="hkq-1e-fmD"/>
                         <segue destination="ype-Uk-IgS" kind="show" identifier="SegueCodeToFirstSteps" id="qoL-CP-WF1"/>
+                        <segue destination="aZQ-xJ-UOg" kind="show" identifier="SegueCodeToPhone" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="0hP-4z-ssr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r9T-BF-WoL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -406,6 +453,7 @@
         <image name="LogoPlandoc" width="774" height="413"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YsE-0V-e33"/>
+        <segue reference="0hP-4z-ssr"/>
+        <segue reference="8uY-9c-2b6"/>
     </inferredMetricsTieBreakers>
 </document>

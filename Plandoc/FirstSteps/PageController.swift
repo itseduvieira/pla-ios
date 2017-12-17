@@ -22,7 +22,7 @@ class PageController: UIViewController {
     }
     
     @IBAction func goToMenu() {
-        UserDefaults.standard.set(true, forKey: "tutorial")
+        UserDefaults.standard.removeObject(forKey: "activation")
         
         self.performSegue(withIdentifier: "SegueTutorialToMenu", sender: self)
     }

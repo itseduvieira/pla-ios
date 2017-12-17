@@ -28,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="1562" y="336"/>
         </scene>
-        <!--MainCalendarViewController-->
+        <!--CalendarViewController-->
         <scene sceneID="6Wo-Tp-rve">
             <objects>
-                <viewControllerPlaceholder storyboardName="Calendar" referencedIdentifier="MainCalendarViewController" id="cxk-15-cEf" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Calendar" referencedIdentifier="CalendarViewController" id="cxk-15-cEf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Agenda" id="sXi-g5-Skp"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pOd-28-Q41" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -65,7 +65,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="6DC-RY-ihf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="selectedImageTintColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="cxk-15-cEf" kind="relationship" relationship="viewControllers" id="rxw-nx-fEd"/>

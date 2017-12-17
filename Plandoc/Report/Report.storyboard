@@ -12,7 +12,7 @@
         <!--Relatórios-->
         <scene sceneID="tZA-5r-OnM">
             <objects>
-                <viewController id="7Qj-6m-LwZ" sceneMemberID="viewController">
+                <viewController id="7Qj-6m-LwZ" customClass="MainReportController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bi5-TM-lH0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,20 +29,33 @@
                                     <navigationItem title="Resumo" id="0Cp-g7-tdx"/>
                                 </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="204-Xb-NjN" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="64" width="375" height="163"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="163" id="MKr-sT-BoE"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LHF-l7-zJY" firstAttribute="top" secondItem="Bi5-TM-lH0" secondAttribute="top" constant="20" id="0np-MA-Im9"/>
                             <constraint firstItem="LHF-l7-zJY" firstAttribute="leading" secondItem="sFP-SC-tA6" secondAttribute="leading" id="3ff-9C-rq4"/>
+                            <constraint firstItem="204-Xb-NjN" firstAttribute="trailing" secondItem="sFP-SC-tA6" secondAttribute="trailing" id="DMx-ZH-dlq"/>
                             <constraint firstItem="LHF-l7-zJY" firstAttribute="trailing" secondItem="sFP-SC-tA6" secondAttribute="trailing" id="IRg-Y5-w64"/>
+                            <constraint firstItem="204-Xb-NjN" firstAttribute="leading" secondItem="sFP-SC-tA6" secondAttribute="leading" id="bfc-tt-PMf"/>
+                            <constraint firstItem="204-Xb-NjN" firstAttribute="top" secondItem="LHF-l7-zJY" secondAttribute="bottom" id="dQ4-UG-FIh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sFP-SC-tA6"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Relatórios" image="IconBarReport" selectedImage="IconBarReport" id="rW9-k0-keX"/>
+                    <connections>
+                        <outlet property="chart" destination="204-Xb-NjN" id="1Jf-KM-ASi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTk-u1-9sT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="569" y="596"/>
+            <point key="canvasLocation" x="568.79999999999995" y="595.95202398800609"/>
         </scene>
     </scenes>
     <resources>

@@ -11,4 +11,6 @@ target 'Plandoc' do
     pod 'SearchTextField'
     pod 'MapboxGeocoder.swift', '~> 0.6'
     pod 'MapboxStatic.swift', '~> 0.9'
+    pod 'Bolts'
+    pod 'Charts'
 end

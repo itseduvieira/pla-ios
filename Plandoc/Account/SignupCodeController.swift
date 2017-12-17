@@ -32,7 +32,7 @@ class SignupCodeController : UIViewController, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
-        if text.characters.count == 6 {
+        if text.count == 6 {
             let credential = PhoneAuthProvider.provider().credential(
                 withVerificationID: self.verificationID,
                 verificationCode: text)
@@ -59,6 +59,12 @@ class SignupCodeController : UIViewController, UITextFieldDelegate {
             }
         }
         
-        return text.characters.count < 7
+        return text.count < 7
+    }
+    
+    @IBAction func retry() {
+        
+        
+        self.performSegue(withIdentifier: "SegueCodeToPhone", sender: self)
     }
 }

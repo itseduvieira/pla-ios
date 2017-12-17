@@ -24,7 +24,7 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
     weak var sender: UIViewController!
     
     let pickerFieldData = [
-        "", "Acupuntura", "Alergia e Imunologia", "Anestesiologia", "Angiologia", "Cancerologia", "Cardiologia", "Cirurgia Cardiovascular", "Cirurgia da Mão", "Cirurgia de Cabeça e Pescoço", "Cirurgia do Aparelho Digestivo", "Cirurgia Geral", "Cirurgia Pediátrica",
+        "Acupuntura", "Alergia e Imunologia", "Anestesiologia", "Angiologia", "Cancerologia", "Cardiologia", "Cirurgia Cardiovascular", "Cirurgia da Mão", "Cirurgia de Cabeça e Pescoço", "Cirurgia do Aparelho Digestivo", "Cirurgia Geral", "Cirurgia Pediátrica",
         "Cirurgia Plástica", "Cirurgia Torácica", "Cirurgia Vascular", "Clínica Médica", "Coloproctologia", "Dermatologia", "Endocrinologia", "Endoscopia", "Gastroenterologia", "Genética Médica", "Geriatria", "Ginecologia e Obstetrícia",
         "Hematologia e Hemoterapia", "Homeopatia", "Infectologia", "Mastologia", "Medicina de Família e Comunidade", "Medicina do Trabalho", "Medicina de Tráfego", "Medicina Esportiva", "Medicina Física e Reabilitação", "Medicina Intensiva", "Medicina Legal", "Medicina Nuclear",
         "Medicina Preventiva e Social", "Nefrologia", "Neurocirurgia", "Neurologia", "Nutrologia", "Oftalmologia", "Ortopedia e Traumatologia", "Otorrinolaringologia", "Patologia", "Patologia Clínica/Medicina Laboratorial", "Pediatria", "Pneumologia",
@@ -32,7 +32,7 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
     ]
     
     let pickerUFData = [
-        "", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO",
+        "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO",
         "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ",
         "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
     ]
@@ -58,6 +58,11 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
         UITextField.connectFields(fields: [txtCRM, txtUF, txtGraduationDate, txtGraduation, txtField])
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
     @objc func save() {
         if txtCRM.text! == "" || txtUF.text! == "" || txtGraduationDate.text! == "" || txtField.text! == "" || txtGraduation.text! == "" {
             let alertController = UIAlertController(title: "Erro", message: "Preencha corretamente os campos.", preferredStyle: .alert)
@@ -80,7 +85,7 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
             cancel()
         }
     }
-    
+
     @IBAction func chooseUF() {
         self.pickUp(txtUF)
     }
@@ -175,6 +180,10 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
         toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         textField.inputAccessoryView = toolBar
+        
+        if txtField.text!.isEmpty {
+            self.picker.delegate?.pickerView!(self.picker, didSelectRow: 0, inComponent: 0)
+        }
     }
     
     @objc func doneToolbarGraduation() {
@@ -226,7 +235,7 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
         navBar.shadowImage = UIImage()
         let backItem = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(cancel))
         navItem.leftBarButtonItem = backItem
-        let doneItem = UIBarButtonItem(title: "Salvar", style: .plain, target: self, action: #selector(save))
+        let doneItem = UIBarButtonItem(title: "Salvar", style: .done, target: self, action: #selector(save))
         navItem.rightBarButtonItem = doneItem
     }
     

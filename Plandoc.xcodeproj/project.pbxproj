@@ -15,9 +15,13 @@
 		3426E1B31FABA5B30087E1A5 /* Shift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3426E1B21FABA5B30087E1A5 /* Shift.swift */; };
 		3426E1B51FACE01D0087E1A5 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3426E1B41FACE01D0087E1A5 /* Calendar.storyboard */; };
 		3426E1B71FAD0FB70087E1A5 /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3426E1B61FAD0FB60087E1A5 /* MonthYearPickerView.swift */; };
+		343B60181FCF8E83004A4418 /* ShiftCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */; };
+		34415CDB1FC07A8C0093F761 /* ForgotPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */; };
+		344353581FE5DEA000363111 /* FinanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344353571FE5DEA000363111 /* FinanceController.swift */; };
 		3450E7A61F94284000A239E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3450E7A51F94281F00A239E4 /* GoogleService-Info.plist */; };
 		3450E7A91F950D6E00A239E4 /* SignupNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450E7A81F950D6E00A239E4 /* SignupNameController.swift */; };
 		3450E7AB1F953DD900A239E4 /* UIStoryboardSegueSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450E7AA1F953BBF00A239E4 /* UIStoryboardSegueSlide.swift */; };
+		345568371FBF535E00B32627 /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345568361FBF535E00B32627 /* CalendarController.swift */; };
 		3455CEEA1FA64279001DB405 /* CompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455CEE91FA64279001DB405 /* CompanyController.swift */; };
 		3455CEEC1FA642A7001DB405 /* ShiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455CEEB1FA642A7001DB405 /* ShiftController.swift */; };
 		3455CEEE1FA65C0A001DB405 /* CompletionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455CEED1FA65C0A001DB405 /* CompletionController.swift */; };
@@ -40,11 +44,14 @@
 		34AD2D561F976D010083E942 /* TutorialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AD2D521F976D010083E942 /* TutorialController.swift */; };
 		34AD2D571F976D010083E942 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34AD2D531F976D010083E942 /* Tutorial.storyboard */; };
 		34AD2D581F976D010083E942 /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AD2D541F976D010083E942 /* PageController.swift */; };
+		34C478871FE48F9400FF6E05 /* MainReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C478861FE48F9400FF6E05 /* MainReportController.swift */; };
 		34D056051F9583F800C0344B /* SignupPhoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D056041F9583F800C0344B /* SignupPhoneController.swift */; };
 		34D056071F96608100C0344B /* SignupCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D056061F96608100C0344B /* SignupCodeController.swift */; };
 		34D409FE1F9F8948002F3F51 /* FirstStepsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D409FD1F9F8948002F3F51 /* FirstStepsController.swift */; };
 		34D40A001F9FAB66002F3F51 /* Crud.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34D409FF1F9FAB66002F3F51 /* Crud.storyboard */; };
 		34D40A021F9FBD81002F3F51 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D40A011F9FBD81002F3F51 /* ProfileController.swift */; };
+		34EFC43B1FC5B9AF003640CC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EFC4391FC5B9AD003640CC /* FBSDKCoreKit.framework */; };
+		34EFC43C1FC5B9AF003640CC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EFC43A1FC5B9AE003640CC /* FBSDKLoginKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,10 +63,14 @@
 		3426E1B21FABA5B30087E1A5 /* Shift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shift.swift; sourceTree = "<group>"; };
 		3426E1B41FACE01D0087E1A5 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		3426E1B61FAD0FB60087E1A5 /* MonthYearPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthYearPickerView.swift; sourceTree = "<group>"; };
+		343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftCustomCell.swift; sourceTree = "<group>"; };
+		34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordController.swift; sourceTree = "<group>"; };
+		344353571FE5DEA000363111 /* FinanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceController.swift; sourceTree = "<group>"; };
 		3450E7A51F94281F00A239E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3450E7A71F94437700A239E4 /* Plandoc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Plandoc.entitlements; sourceTree = "<group>"; };
 		3450E7A81F950D6E00A239E4 /* SignupNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNameController.swift; sourceTree = "<group>"; };
 		3450E7AA1F953BBF00A239E4 /* UIStoryboardSegueSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegueSlide.swift; sourceTree = "<group>"; };
+		345568361FBF535E00B32627 /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
 		3455CEE91FA64279001DB405 /* CompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyController.swift; sourceTree = "<group>"; };
 		3455CEEB1FA642A7001DB405 /* ShiftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftController.swift; sourceTree = "<group>"; };
 		3455CEED1FA65C0A001DB405 /* CompletionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionController.swift; sourceTree = "<group>"; };
@@ -84,11 +95,14 @@
 		34AD2D521F976D010083E942 /* TutorialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialController.swift; sourceTree = "<group>"; };
 		34AD2D531F976D010083E942 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		34AD2D541F976D010083E942 /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
+		34C478861FE48F9400FF6E05 /* MainReportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainReportController.swift; sourceTree = "<group>"; };
 		34D056041F9583F800C0344B /* SignupPhoneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPhoneController.swift; sourceTree = "<group>"; };
 		34D056061F96608100C0344B /* SignupCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCodeController.swift; sourceTree = "<group>"; };
 		34D409FD1F9F8948002F3F51 /* FirstStepsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStepsController.swift; sourceTree = "<group>"; };
 		34D409FF1F9FAB66002F3F51 /* Crud.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Crud.storyboard; sourceTree = "<group>"; };
 		34D40A011F9FBD81002F3F51 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		34EFC4391FC5B9AD003640CC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		34EFC43A1FC5B9AE003640CC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		9D2DF7B5344CC92E9B49A5F9 /* Pods-Plandoc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plandoc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plandoc/Pods-Plandoc.debug.xcconfig"; sourceTree = "<group>"; };
 		DF2AC1154E943F506F5EADE6 /* Pods_Plandoc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plandoc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,6 +113,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				25BCB6677C2DCECE86B87D7A /* Pods_Plandoc.framework in Frameworks */,
+				34EFC43B1FC5B9AF003640CC /* FBSDKCoreKit.framework in Frameworks */,
+				34EFC43C1FC5B9AF003640CC /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +181,7 @@
 				34D056041F9583F800C0344B /* SignupPhoneController.swift */,
 				34D056061F96608100C0344B /* SignupCodeController.swift */,
 				341BDBBD1F9E592A000DEFCB /* InitialController.swift */,
+				34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -180,6 +197,8 @@
 				3455CEEB1FA642A7001DB405 /* ShiftController.swift */,
 				346BDC3B1FB21E4B00635ABA /* MenuController.swift */,
 				346BDC3D1FB4B9D300635ABA /* AccountController.swift */,
+				345568361FBF535E00B32627 /* CalendarController.swift */,
+				343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */,
 			);
 			path = Operation;
 			sourceTree = "<group>";
@@ -188,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				346EDE391FBD0E7F00F03EF4 /* Finance.storyboard */,
+				344353571FE5DEA000363111 /* FinanceController.swift */,
 			);
 			path = Finance;
 			sourceTree = "<group>";
@@ -196,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				346EDE371FBD0C6E00F03EF4 /* Report.storyboard */,
+				34C478861FE48F9400FF6E05 /* MainReportController.swift */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -237,6 +258,8 @@
 		E81CAC70CACD9A451F4E57D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				34EFC4391FC5B9AD003640CC /* FBSDKCoreKit.framework */,
+				34EFC43A1FC5B9AE003640CC /* FBSDKLoginKit.framework */,
 				DF2AC1154E943F506F5EADE6 /* Pods_Plandoc.framework */,
 			);
 			name = Frameworks;
@@ -338,6 +361,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Plandoc/Pods-Plandoc-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -351,6 +376,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -412,6 +439,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3426E1B11FABA59C0087E1A5 /* Profile.swift in Sources */,
+				345568371FBF535E00B32627 /* CalendarController.swift in Sources */,
+				34C478871FE48F9400FF6E05 /* MainReportController.swift in Sources */,
 				347765541F8FE93200082442 /* AppDelegate.swift in Sources */,
 				34D056071F96608100C0344B /* SignupCodeController.swift in Sources */,
 				3455CEEC1FA642A7001DB405 /* ShiftController.swift in Sources */,
@@ -420,10 +449,12 @@
 				3426E1AF1FAB756A0087E1A5 /* User.swift in Sources */,
 				347765721F905F8400082442 /* UIExtensions.swift in Sources */,
 				34D056051F9583F800C0344B /* SignupPhoneController.swift in Sources */,
+				34415CDB1FC07A8C0093F761 /* ForgotPasswordController.swift in Sources */,
 				34AD2D581F976D010083E942 /* PageController.swift in Sources */,
 				3450E7A91F950D6E00A239E4 /* SignupNameController.swift in Sources */,
 				346BDC3E1FB4B9D300635ABA /* AccountController.swift in Sources */,
 				346BDC3A1FB0F02000635ABA /* Company.swift in Sources */,
+				343B60181FCF8E83004A4418 /* ShiftCustomCell.swift in Sources */,
 				341BDBBE1F9E592A000DEFCB /* InitialController.swift in Sources */,
 				3455CEEE1FA65C0A001DB405 /* CompletionController.swift in Sources */,
 				3450E7AB1F953DD900A239E4 /* UIStoryboardSegueSlide.swift in Sources */,
@@ -433,6 +464,7 @@
 				34A075D81FAFFB2F006DDF68 /* AlertController.swift in Sources */,
 				34AD2D561F976D010083E942 /* TutorialController.swift in Sources */,
 				3426E1B71FAD0FB70087E1A5 /* MonthYearPickerView.swift in Sources */,
+				344353581FE5DEA000363111 /* FinanceController.swift in Sources */,
 				34D40A021F9FBD81002F3F51 /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,10 +593,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Plandoc/Plandoc.entitlements;
 				DEVELOPMENT_TEAM = KYAUQ77CED;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"~/Documents/FacebookSDK",
+				);
 				INFOPLIST_FILE = Plandoc/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = app.plandoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_REFLECTION_METADATA_LEVEL = none;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -577,10 +616,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Plandoc/Plandoc.entitlements;
 				DEVELOPMENT_TEAM = KYAUQ77CED;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"~/Documents/FacebookSDK",
+				);
 				INFOPLIST_FILE = Plandoc/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = app.plandoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_REFLECTION_METADATA_LEVEL = none;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

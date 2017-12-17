@@ -20,6 +20,13 @@ class User: NSObject, NSCoding {
         super.init()
     }
     
+    init(id: String, name: String, email: String, phone: String) {
+        self.id = id
+        self.name = name
+        self.email = email
+        self.phone = phone
+    }
+    
     required init(coder decoder: NSCoder) {
         id = decoder.decodeObject(forKey: "id") as? String
         name = decoder.decodeObject(forKey: "name") as? String

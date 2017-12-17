@@ -20,6 +20,13 @@ class FirstStepsController : UIViewController {
     @IBOutlet weak var txtShift: UILabel!
     @IBOutlet weak var txtDescShift: UILabel!
     @IBOutlet weak var btnCompleteStep: UIRoundedButton!
+    @IBOutlet weak var navBar: UINavigationBar!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.setNavigationBar()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,6 +57,8 @@ class FirstStepsController : UIViewController {
         } else {
             btnCompleteStep.setTitle("CADASTRAR PERFIL", for: .normal)
         }
+        
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,6 +96,11 @@ class FirstStepsController : UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
     @IBAction func completeStep() {
         if btnCompleteStep.titleLabel?.text == "CADASTRAR PERFIL" {
             self.performSegue(withIdentifier: "SegueFirstStepsToProfile", sender: self)
@@ -116,5 +130,10 @@ class FirstStepsController : UIViewController {
             let vc = segue.destination as! ShiftController
             vc.sender = self
         }
+    }
+    
+    func setNavigationBar() {
+        navBar.setBackgroundImage(UIImage(), for: .default)
+        navBar.shadowImage = UIImage()
     }
 }

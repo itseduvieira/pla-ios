@@ -40,16 +40,6 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
         self.loadExistingData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = .default
-    }
-    
     @IBAction func choosePicture() {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
@@ -94,12 +84,29 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
     func setNavigationBar() {
         navBar.setBackgroundImage(UIImage(), for: .default)
         navBar.shadowImage = UIImage()
-        let doneItem = UIBarButtonItem(title: "Salvar", style: .plain, target: self, action: #selector(save))
+        let doneItem = UIBarButtonItem(title: "Salvar", style: .done, target: self, action: #selector(save))
         navItem.rightBarButtonItem = doneItem
+        let logoffItem = UIBarButtonItem(title: "Sair", style: .plain, target: self, action: #selector(logoff))
+        navItem.leftBarButtonItem = logoffItem
     }
     
     @objc func save() {
         
+    }
+    
+    @objc func logoff() {
+        do {
+            try Auth.auth().signOut()
+            UserDefaults.standard.removeObject(forKey: "loggedUser")
+            self.performSegue(withIdentifier: "SegueProfileToLogin", sender: self)
+        } catch {
+            
+        }
+        
+    }
+    
+    @IBAction func showOrHidePassword(_ sender: UIButton) {
+        txtPassword.isSecureTextEntry = !txtPassword.isSecureTextEntry
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
