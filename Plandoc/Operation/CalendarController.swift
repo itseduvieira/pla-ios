@@ -16,7 +16,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableShifts: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
     
-    let animals: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
+    var shifts: Array<Data>!
     let colors = [UIColor.blue, UIColor.yellow, UIColor.magenta, UIColor.red, UIColor.brown]
     
     //MARK: Actions
@@ -28,14 +28,13 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         tableShifts.delegate = self
         tableShifts.dataSource = self
         
-        tableShifts.register(ShiftCustomCell.self, forCellReuseIdentifier: "ShiftCell")
-        
         calendar.locale = Locale(identifier: "pt_BR")
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
+        shifts = UserDefaults.standard.array(forKey: "shifts") as? Array<Data>
+        
+        tableShifts.reloadData()
     }
     
     func setNavigationBar() {
@@ -57,20 +56,31 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.animals.count
+        return self.shifts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier:"ShiftCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ShiftCell", for: indexPath) as! ShiftCustomCell
 
-        //cell.backgroundColor = self.colors[indexPath.row]
-        cell.textLabel?.text = self.animals[indexPath.row]
-
+        let shift = self.shifts[indexPath.row]
+        let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: shift) as! Shift
+        cell.color.backgroundColor = self.colors[indexPath.row]
+        //cell.company.text = String(shiftPdc.value)
+        
         return cell
     }
     
-//     method to run when table view cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
+        self.performSegue(withIdentifier: "SegueCalendarToShift", sender: self)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+        }
     }
 }

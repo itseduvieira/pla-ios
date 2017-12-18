@@ -9,6 +9,6 @@
 import UIKit
 
 class ShiftCustomCell: UITableViewCell {
-    @IBOutlet weak var myView: UIView!
-    @IBOutlet weak var myCellLabel: UILabel!
+    @IBOutlet weak var color: UIView!
+    @IBOutlet weak var company: UILabel!
 }

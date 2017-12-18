@@ -10,6 +10,8 @@ import Foundation
 
 class Shift: NSObject, NSCoding {
     var id: String!
+    var company: Company!
+    var value: Double!
     
     override init() {
         super.init()
@@ -17,10 +19,14 @@ class Shift: NSObject, NSCoding {
     
     required init(coder decoder: NSCoder) {
         id = decoder.decodeObject(forKey: "id") as? String
+        company = decoder.decodeObject(forKey: "company") as? Company
+        value = decoder.decodeObject(forKey: "value") as? Double
     }
     
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(id, forKey: "id")
+        aCoder.encode(company, forKey: "company")
+        aCoder.encode(value, forKey: "value")
     }
 }
 

@@ -25,6 +25,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     var picker: UIPickerView!
     
     var companiesData: Array<Data>!
+    var shiftTimeData = ["6 Horas", "12 Horas"]
     
     lazy var datePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -76,7 +77,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         }
         
         let pdcShift = Shift()
-//        pdcShift.name = txtCompany.text
+        pdcShift.value = Double(txtSalary.text!)
 //        pdcShift.address = txtAddress.text
 //        pdcShift.admin = txtAdmin.text
 //        pdcShift.phone = txtPhone.text
@@ -93,6 +94,24 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             self.performSegue(withIdentifier: "SegueShiftsToFirstSteps", sender: self)
         } else if self.sender.restorationIdentifier == "CalendarViewController" {
             self.performSegue(withIdentifier: "SegueShiftToCalendar", sender: self)
+        }
+    }
+    
+    @IBAction func enterDate() {
+        if (txtDate.text?.isEmpty)! {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            
+            txtDate.text = formatter.string(from: Date())
+        }
+    }
+    
+    @IBAction func enterTime() {
+        if (txtHour.text?.isEmpty)! {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            
+            txtHour.text = formatter.string(from: Date())
         }
     }
     
@@ -129,6 +148,8 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if txtCompany.isFirstResponder {
             return companiesData.count
+        } else if txtShiftTime.isFirstResponder {
+            return shiftTimeData.count
         }
         
         return -1
@@ -138,6 +159,8 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         if txtCompany.isFirstResponder {
             let company = NSKeyedUnarchiver.unarchiveObject(with: companiesData[row]) as! Company
             return "\(company.type!) \(company.name!)"
+        } else if txtShiftTime.isFirstResponder {
+            return shiftTimeData[row]
         }
         
         return nil
@@ -147,12 +170,16 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         if txtCompany.isFirstResponder {
             let company = NSKeyedUnarchiver.unarchiveObject(with: companiesData[row]) as! Company
             txtCompany.text = "\(company.type!) \(company.name!)"
+        } else if txtShiftTime.isFirstResponder {
+            txtShiftTime.text = shiftTimeData[row]
         }
     }
     
     @objc func doneClick() {
         if txtCompany.isFirstResponder {
             txtDate.becomeFirstResponder()
+        } else if txtShiftTime.isFirstResponder {
+            txtPaymentType.becomeFirstResponder()
         }
     }
     

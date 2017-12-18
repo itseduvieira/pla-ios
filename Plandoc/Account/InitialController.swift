@@ -42,6 +42,11 @@ class InitialController : UIViewController {
         UIApplication.shared.statusBarStyle = .default
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
     @IBAction func loginWithFB() {
         FBSDKLoginManager().logIn(withReadPermissions: ["public_profile", "email"], from: self, handler: { (result, error) in
             if let error = error {
