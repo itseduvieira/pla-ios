@@ -67,6 +67,12 @@ extension UIView {
         self.layer.cornerRadius = radius ?? self.frame.width / 2;
         self.layer.masksToBounds = true;
     }
+    
+    func animateConstraintWithDuration(duration: TimeInterval = 0.5, delay: TimeInterval = 0.0, options: UIViewAnimationOptions? = nil, completion: ((Bool) -> Void)? = nil) {
+        UIView.animate(withDuration: duration, delay:delay, options: options!, animations: { [weak self] in
+            self?.layoutIfNeeded() ?? ()
+            }, completion: completion)
+    }
 }
 
 extension UIColor {

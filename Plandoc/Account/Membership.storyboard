@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4kx-zW-FPQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Pagamento-->
+        <scene sceneID="ifB-LK-gVj">
+            <objects>
+                <viewController id="4kx-zW-FPQ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8kT-aB-x6v">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAyment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ck0-PH-t6f">
+                                <rect key="frame" x="166" y="323" width="68" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="cb9-t8-TNe"/>
+                                    <constraint firstAttribute="width" constant="68" id="s96-nb-3Iw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ck0-PH-t6f" firstAttribute="top" secondItem="nBG-qe-IP0" secondAttribute="top" constant="303" id="3gM-oZ-Nhs"/>
+                            <constraint firstItem="Ck0-PH-t6f" firstAttribute="leading" secondItem="nBG-qe-IP0" secondAttribute="leading" constant="166" id="CCR-U5-lwN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nBG-qe-IP0"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Pagamento" id="NEf-2t-faj"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EI0-la-1wC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-134" y="78"/>
+        </scene>
+    </scenes>
+</document>

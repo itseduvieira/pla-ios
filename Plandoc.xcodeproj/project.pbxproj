@@ -50,6 +50,7 @@
 		34D409FE1F9F8948002F3F51 /* FirstStepsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D409FD1F9F8948002F3F51 /* FirstStepsController.swift */; };
 		34D40A001F9FAB66002F3F51 /* Crud.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34D409FF1F9FAB66002F3F51 /* Crud.storyboard */; };
 		34D40A021F9FBD81002F3F51 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D40A011F9FBD81002F3F51 /* ProfileController.swift */; };
+		34E17B6C1FE899D500D2973F /* Membership.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34E17B6B1FE899D500D2973F /* Membership.storyboard */; };
 		34EFC43B1FC5B9AF003640CC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EFC4391FC5B9AD003640CC /* FBSDKCoreKit.framework */; };
 		34EFC43C1FC5B9AF003640CC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EFC43A1FC5B9AE003640CC /* FBSDKLoginKit.framework */; };
 /* End PBXBuildFile section */
@@ -101,6 +102,7 @@
 		34D409FD1F9F8948002F3F51 /* FirstStepsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStepsController.swift; sourceTree = "<group>"; };
 		34D409FF1F9FAB66002F3F51 /* Crud.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Crud.storyboard; sourceTree = "<group>"; };
 		34D40A011F9FBD81002F3F51 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		34E17B6B1FE899D500D2973F /* Membership.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Membership.storyboard; sourceTree = "<group>"; };
 		34EFC4391FC5B9AD003640CC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		34EFC43A1FC5B9AE003640CC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		9D2DF7B5344CC92E9B49A5F9 /* Pods-Plandoc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plandoc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plandoc/Pods-Plandoc.debug.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		347765651F8FF4F200082442 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				34E17B6B1FE899D500D2973F /* Membership.storyboard */,
 				347765661F8FF50D00082442 /* Login.storyboard */,
 				3477656E1F904BEC00082442 /* Signup.storyboard */,
 				347765681F8FF60100082442 /* LoginController.swift */,
@@ -337,6 +340,7 @@
 				34A075D61FAFFA2F006DDF68 /* Util.storyboard in Resources */,
 				346322091F93D67A00F0CCF4 /* Podfile in Resources */,
 				3477655E1F8FE93200082442 /* LaunchScreen.storyboard in Resources */,
+				34E17B6C1FE899D500D2973F /* Membership.storyboard in Resources */,
 				34D40A001F9FAB66002F3F51 /* Crud.storyboard in Resources */,
 				3477655B1F8FE93200082442 /* Assets.xcassets in Resources */,
 				341BDBC01F9E5F04000DEFCB /* Menu.storyboard in Resources */,

@@ -9,12 +9,13 @@
 import UIKit
 import FSCalendar
 
-class CalendarController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CalendarController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate {
     //MARK: Properties
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tableShifts: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var constraintCalendar: NSLayoutConstraint!
     
     var shifts: Array<Data>!
     let colors = [UIColor.blue, UIColor.yellow, UIColor.magenta, UIColor.red, UIColor.brown]
@@ -28,6 +29,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         tableShifts.delegate = self
         tableShifts.dataSource = self
         
+        calendar.delegate = self
         calendar.locale = Locale(identifier: "pt_BR")
     }
     
@@ -42,10 +44,44 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         navBar.shadowImage = UIImage()
         let doneItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
         navItem.rightBarButtonItem = doneItem
+        let calendarTypeItem = UIBarButtonItem(title: "Semana", style: .plain, target: self, action: #selector(changeCalendarType))
+        navItem.leftBarButtonItem = calendarTypeItem
     }
     
     @objc func add() {
         self.performSegue(withIdentifier: "SegueCalendarToShift", sender: self)
+    }
+    
+    @objc func changeCalendarType() {
+        if calendar.scope == .month {
+            calendar.scope = .week
+            calendar.appearance.titleFont = UIFont(descriptor: calendar.appearance.titleFont.fontDescriptor, size: 18)
+            
+            constraintCalendar.constant = 92
+            
+            navItem.leftBarButtonItem?.title = "Mês"
+        } else {
+            calendar.scope = .month
+            
+            calendar.appearance.titleFont = UIFont(descriptor: calendar.appearance.titleFont.fontDescriptor, size: 12)
+            
+            constraintCalendar.constant = 240
+            
+            navItem.leftBarButtonItem?.title = "Semana"
+        }
+        
+        
+        self.updateViewConstraints()
+    }
+    
+    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        if calendar.selectedDate == date {
+            calendar.deselect(date)
+            
+            return false
+        }
+        
+        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

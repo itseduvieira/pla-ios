@@ -163,6 +163,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="calendar" destination="xrv-KX-ml9" id="BSr-Rr-eeO"/>
+                        <outlet property="constraintCalendar" destination="Zbk-1t-p6m" id="dRx-p8-GMG"/>
                         <outlet property="navBar" destination="XM4-Yc-75O" id="dHM-L3-XGI"/>
                         <outlet property="navItem" destination="h6u-WL-GFy" id="mfE-KI-R5X"/>
                         <outlet property="tableShifts" destination="gm4-jG-Nrw" id="px7-ee-Ld3"/>

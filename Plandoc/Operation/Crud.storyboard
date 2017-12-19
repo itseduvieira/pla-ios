@@ -215,7 +215,7 @@
             </objects>
             <point key="canvasLocation" x="-170.625" y="109.85915492957747"/>
         </scene>
-        <!--View Controller-->
+        <!--Empresas-->
         <scene sceneID="JfS-S0-NJu">
             <objects>
                 <viewController storyboardIdentifier="ListCompaniesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uGd-Hp-7gN" sceneMemberID="viewController">
@@ -224,7 +224,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a35-Zs-2Fk">
-                                <rect key="frame" x="174.66666666666666" y="363" width="65" height="30"/>
+                                <rect key="frame" x="174.66666666666666" y="338.66666666666669" width="65" height="30"/>
                                 <state key="normal" title="Adicionar"/>
                                 <connections>
                                     <segue destination="VA5-PV-IB3" kind="show" identifier="SegueListToCompany" customClass="UIStoryboardSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="fE8-VO-WDT"/>
@@ -238,6 +238,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oyp-rs-ebW"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Empresas" id="jU7-AT-CjU"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VEa-Vr-fqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -909,6 +911,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lgJ-Eo-KBa"/>
-        <segue reference="LNd-Cq-P0l"/>
+        <segue reference="SBL-H7-X7T"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -59,7 +59,9 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         
         timePicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
         
+        datePicker.locale = Locale(identifier: "pt_BR")
         txtDate.inputView = datePicker
+        timePicker.locale = Locale(identifier: "pt_BR")
         txtHour.inputView = timePicker
         
         self.setupDateField()
@@ -206,23 +208,17 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     }
     
     @objc func datePickerValueChanged(sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
         
-        dateFormatter.dateStyle = DateFormatter.Style.short
-        
-        dateFormatter.timeStyle = DateFormatter.Style.none
-        
-        txtDate.text = dateFormatter.string(for: sender.date)
+        txtDate.text = formatter.string(from: sender.date)
     }
     
     @objc func timePickerValueChanged(sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
         
-        dateFormatter.dateStyle = DateFormatter.Style.none
-        
-        dateFormatter.timeStyle = DateFormatter.Style.short
-        
-        txtHour.text = dateFormatter.string(for: sender.date)
+        txtHour.text = formatter.string(from: sender.date)
     }
     
     private func setupDateField() {
