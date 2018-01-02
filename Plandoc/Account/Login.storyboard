@@ -12,16 +12,16 @@
         <!--Menu-->
         <scene sceneID="H2L-w2-91G">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="moc-zk-jCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Menu" id="aQG-fV-duX" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="moc-zk-jCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-370" y="381"/>
         </scene>
         <!--Signup-->
         <scene sceneID="g2X-ab-Fsf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AMn-kx-Frx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Signup" id="IO7-xn-Wku" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AMn-kx-Frx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-185" y="381"/>
         </scene>
@@ -117,12 +117,34 @@
                                     <navigationItem id="5Yw-xj-fyy"/>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qM0-oe-iCe">
+                                <rect key="frame" x="16" y="212" width="82" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="DAs-Eg-eV2"/>
+                                    <constraint firstAttribute="width" constant="82" id="cSY-Xu-9Tj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                                <color key="textColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Senha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nh-zT-qds">
+                                <rect key="frame" x="16" y="268" width="82" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="CSB-LP-Yg6"/>
+                                    <constraint firstAttribute="width" constant="82" id="yiP-k0-4qq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                                <color key="textColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iU4-Zb-1y4" firstAttribute="centerY" secondItem="58Z-eH-IvZ" secondAttribute="centerY" id="1hO-Pa-xXg"/>
                             <constraint firstItem="WV0-EW-jpn" firstAttribute="leading" secondItem="WPw-jR-T8d" secondAttribute="leading" constant="46" id="57O-ro-ecg"/>
+                            <constraint firstItem="58Z-eH-IvZ" firstAttribute="top" secondItem="5nh-zT-qds" secondAttribute="bottom" constant="-3" id="5MM-90-Ts7"/>
                             <constraint firstItem="jEh-62-i9y" firstAttribute="top" secondItem="r8U-5R-Voe" secondAttribute="top" constant="20" id="9DD-jU-Lm7"/>
+                            <constraint firstItem="qM0-oe-iCe" firstAttribute="leading" secondItem="WPw-jR-T8d" secondAttribute="leading" constant="16" id="ElI-Yg-9bZ"/>
                             <constraint firstItem="WPw-jR-T8d" firstAttribute="trailing" secondItem="WV0-EW-jpn" secondAttribute="trailing" constant="46" id="HUf-Kb-OaL"/>
                             <constraint firstItem="WPw-jR-T8d" firstAttribute="trailing" secondItem="nOT-6M-PjN" secondAttribute="trailing" constant="20" id="IMN-NI-8hJ"/>
                             <constraint firstItem="VgU-Ab-tLg" firstAttribute="top" secondItem="WV0-EW-jpn" secondAttribute="bottom" constant="24" id="LfY-dX-RoA"/>
@@ -131,7 +153,9 @@
                             <constraint firstItem="58Z-eH-IvZ" firstAttribute="top" secondItem="VgU-Ab-tLg" secondAttribute="bottom" constant="18" id="OQI-1O-0m9"/>
                             <constraint firstItem="WV0-EW-jpn" firstAttribute="centerX" secondItem="WPw-jR-T8d" secondAttribute="centerX" id="OTs-Yf-lqa"/>
                             <constraint firstItem="WPw-jR-T8d" firstAttribute="trailing" secondItem="iU4-Zb-1y4" secondAttribute="trailing" constant="27" id="UO5-1G-Umt"/>
+                            <constraint firstItem="VgU-Ab-tLg" firstAttribute="top" secondItem="qM0-oe-iCe" secondAttribute="bottom" constant="-3" id="ZSJ-2H-T0t"/>
                             <constraint firstItem="nOT-6M-PjN" firstAttribute="top" secondItem="5CF-fD-C5J" secondAttribute="bottom" constant="16" id="aC5-5n-cfE"/>
+                            <constraint firstItem="5nh-zT-qds" firstAttribute="leading" secondItem="WPw-jR-T8d" secondAttribute="leading" constant="16" id="bEn-Qi-tRT"/>
                             <constraint firstItem="nOT-6M-PjN" firstAttribute="leading" secondItem="WPw-jR-T8d" secondAttribute="leading" constant="20" id="cfR-fN-Mwk"/>
                             <constraint firstItem="5CF-fD-C5J" firstAttribute="centerX" secondItem="WPw-jR-T8d" secondAttribute="centerX" id="dKb-0s-6IO"/>
                             <constraint firstItem="VgU-Ab-tLg" firstAttribute="leading" secondItem="WPw-jR-T8d" secondAttribute="leading" constant="20" id="di0-8L-QjS"/>
@@ -219,15 +243,27 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgv-z3-3lN">
+                                <rect key="frame" x="16" y="268" width="82" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="82" id="9yy-b2-dM3"/>
+                                    <constraint firstAttribute="height" constant="10" id="Aez-61-WwV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                                <color key="textColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="y8I-iW-mQT" firstAttribute="leading" secondItem="Hf2-EO-BtP" secondAttribute="leading" constant="60" id="1vg-iO-iMw"/>
                             <constraint firstItem="Hf2-EO-BtP" firstAttribute="trailing" secondItem="zMS-K9-8Ms" secondAttribute="trailing" constant="46" id="2Da-Nm-DdX"/>
                             <constraint firstItem="Hf2-EO-BtP" firstAttribute="trailing" secondItem="R62-CX-v1Y" secondAttribute="trailing" constant="20" id="5HU-AO-IAa"/>
+                            <constraint firstItem="wgv-z3-3lN" firstAttribute="leading" secondItem="Hf2-EO-BtP" secondAttribute="leading" constant="16" id="BsO-fR-Q65"/>
                             <constraint firstItem="Hf2-EO-BtP" firstAttribute="trailing" secondItem="y8I-iW-mQT" secondAttribute="trailing" constant="60" id="HyD-3k-JZh"/>
                             <constraint firstItem="RLw-MN-6SN" firstAttribute="top" secondItem="52w-LC-Dgl" secondAttribute="top" constant="20" id="PR7-vB-CQn"/>
                             <constraint firstItem="RLw-MN-6SN" firstAttribute="leading" secondItem="Hf2-EO-BtP" secondAttribute="leading" id="Rh1-mG-iUM"/>
+                            <constraint firstItem="xSk-Ye-uqV" firstAttribute="top" secondItem="wgv-z3-3lN" secondAttribute="bottom" constant="-3" id="TX0-mX-au1"/>
                             <constraint firstItem="R62-CX-v1Y" firstAttribute="leading" secondItem="Hf2-EO-BtP" secondAttribute="leading" constant="20" id="VLm-ja-XWD"/>
                             <constraint firstItem="R62-CX-v1Y" firstAttribute="top" secondItem="xSk-Ye-uqV" secondAttribute="bottom" constant="24" id="aV5-DF-c4g"/>
                             <constraint firstAttribute="trailing" secondItem="RLw-MN-6SN" secondAttribute="trailing" id="bOd-UF-3Tg"/>
@@ -254,6 +290,6 @@
     </scenes>
     <resources>
         <image name="LogoPlandoc" width="774" height="413"/>
-        <image name="RevealPasswordIcon" width="398" height="396"/>
+        <image name="RevealPasswordIcon" width="80" height="80"/>
     </resources>
 </document>

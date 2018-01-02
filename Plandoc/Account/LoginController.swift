@@ -43,6 +43,11 @@ class LoginController : UIViewController {
         UIApplication.shared.statusBarStyle = .default
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
     @IBAction func login() {
         if self.txtLogin.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "" || self.txtPassword.text == "" {
             

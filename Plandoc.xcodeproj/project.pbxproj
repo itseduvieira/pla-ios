@@ -15,6 +15,9 @@
 		3426E1B31FABA5B30087E1A5 /* Shift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3426E1B21FABA5B30087E1A5 /* Shift.swift */; };
 		3426E1B51FACE01D0087E1A5 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3426E1B41FACE01D0087E1A5 /* Calendar.storyboard */; };
 		3426E1B71FAD0FB70087E1A5 /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3426E1B61FAD0FB60087E1A5 /* MonthYearPickerView.swift */; };
+		34305F3F1FFAC0FA00396D61 /* ExtendedMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34305F3E1FFAC0FA00396D61 /* ExtendedMenuController.swift */; };
+		34305F411FFACED000396D61 /* MenuCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34305F401FFACED000396D61 /* MenuCustomCell.swift */; };
+		34305F431FFAFA9800396D61 /* CompanyListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34305F421FFAFA9800396D61 /* CompanyListController.swift */; };
 		343B60181FCF8E83004A4418 /* ShiftCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */; };
 		34415CDB1FC07A8C0093F761 /* ForgotPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */; };
 		344353581FE5DEA000363111 /* FinanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344353571FE5DEA000363111 /* FinanceController.swift */; };
@@ -64,6 +67,9 @@
 		3426E1B21FABA5B30087E1A5 /* Shift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shift.swift; sourceTree = "<group>"; };
 		3426E1B41FACE01D0087E1A5 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		3426E1B61FAD0FB60087E1A5 /* MonthYearPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthYearPickerView.swift; sourceTree = "<group>"; };
+		34305F3E1FFAC0FA00396D61 /* ExtendedMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedMenuController.swift; sourceTree = "<group>"; };
+		34305F401FFACED000396D61 /* MenuCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCustomCell.swift; sourceTree = "<group>"; };
+		34305F421FFAFA9800396D61 /* CompanyListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyListController.swift; sourceTree = "<group>"; };
 		343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftCustomCell.swift; sourceTree = "<group>"; };
 		34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordController.swift; sourceTree = "<group>"; };
 		344353571FE5DEA000363111 /* FinanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceController.swift; sourceTree = "<group>"; };
@@ -195,13 +201,16 @@
 				341BDBBF1F9E5F04000DEFCB /* Menu.storyboard */,
 				3426E1B41FACE01D0087E1A5 /* Calendar.storyboard */,
 				34D409FF1F9FAB66002F3F51 /* Crud.storyboard */,
+				34305F3E1FFAC0FA00396D61 /* ExtendedMenuController.swift */,
 				34D40A011F9FBD81002F3F51 /* ProfileController.swift */,
 				3455CEE91FA64279001DB405 /* CompanyController.swift */,
 				3455CEEB1FA642A7001DB405 /* ShiftController.swift */,
 				346BDC3B1FB21E4B00635ABA /* MenuController.swift */,
 				346BDC3D1FB4B9D300635ABA /* AccountController.swift */,
-				345568361FBF535E00B32627 /* CalendarController.swift */,
 				343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */,
+				345568361FBF535E00B32627 /* CalendarController.swift */,
+				34305F401FFACED000396D61 /* MenuCustomCell.swift */,
+				34305F421FFAFA9800396D61 /* CompanyListController.swift */,
 			);
 			path = Operation;
 			sourceTree = "<group>";
@@ -455,6 +464,8 @@
 				34D056051F9583F800C0344B /* SignupPhoneController.swift in Sources */,
 				34415CDB1FC07A8C0093F761 /* ForgotPasswordController.swift in Sources */,
 				34AD2D581F976D010083E942 /* PageController.swift in Sources */,
+				34305F411FFACED000396D61 /* MenuCustomCell.swift in Sources */,
+				34305F431FFAFA9800396D61 /* CompanyListController.swift in Sources */,
 				3450E7A91F950D6E00A239E4 /* SignupNameController.swift in Sources */,
 				346BDC3E1FB4B9D300635ABA /* AccountController.swift in Sources */,
 				346BDC3A1FB0F02000635ABA /* Company.swift in Sources */,
@@ -466,6 +477,7 @@
 				346BDC3C1FB21E4B00635ABA /* MenuController.swift in Sources */,
 				347765691F8FF60100082442 /* LoginController.swift in Sources */,
 				34A075D81FAFFB2F006DDF68 /* AlertController.swift in Sources */,
+				34305F3F1FFAC0FA00396D61 /* ExtendedMenuController.swift in Sources */,
 				34AD2D561F976D010083E942 /* TutorialController.swift in Sources */,
 				3426E1B71FAD0FB70087E1A5 /* MonthYearPickerView.swift in Sources */,
 				344353581FE5DEA000363111 /* FinanceController.swift in Sources */,

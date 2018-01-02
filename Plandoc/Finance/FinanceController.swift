@@ -19,11 +19,6 @@ class FinanceController: UIViewController {
         self.setNavigationBar()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-    
     func setNavigationBar() {
         navBar.setBackgroundImage(UIImage(), for: .default)
         navBar.shadowImage = UIImage()

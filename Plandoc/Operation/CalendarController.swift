@@ -34,6 +34,8 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         shifts = UserDefaults.standard.array(forKey: "shifts") as? Array<Data>
         
         tableShifts.reloadData()

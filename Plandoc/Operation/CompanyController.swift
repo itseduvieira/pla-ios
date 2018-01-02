@@ -91,6 +91,8 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @objc func cancel() {
         if self.sender.restorationIdentifier == "FirstStepsViewController" {
             self.performSegue(withIdentifier: "SegueCompanyToFirstSteps", sender: self)
+        } else if self.sender.restorationIdentifier == "ListCompaniesViewController" {
+            self.performSegue(withIdentifier: "SegueCompanyToList", sender: self)
         }
     }
     

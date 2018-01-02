@@ -50,6 +50,16 @@ class TutorialController: UIPageViewController, UIPageViewControllerDataSource, 
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
     private func getVCInstance(name: String) -> UIViewController {
         return UIStoryboard(name: "Tutorial", bundle: nil).instantiateViewController(withIdentifier: name)
     }

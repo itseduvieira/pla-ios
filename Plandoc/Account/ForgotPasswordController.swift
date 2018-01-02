@@ -30,6 +30,11 @@ class ForgotPasswordController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
     func setNavigationBar() {
         navBar.setBackgroundImage(UIImage(), for: .default)
         navBar.shadowImage = UIImage()
