@@ -17,7 +17,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var constraintCalendar: NSLayoutConstraint!
     
-    var shifts: Array<Data>!
+    var shifts: [Data]!
     let colors = [UIColor.blue, UIColor.yellow, UIColor.magenta, UIColor.red, UIColor.brown]
     
     //MARK: Actions
@@ -36,9 +36,14 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        shifts = UserDefaults.standard.array(forKey: "shifts") as? Array<Data>
-        
-        tableShifts.reloadData()
+        if let dict = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] {
+            
+            self.shifts = Array<Data>(dict.values)
+            
+            tableShifts.reloadData()
+        } else {
+            self.shifts = []
+        }
     }
     
     func setNavigationBar() {
@@ -102,8 +107,8 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
 
         let shift = self.shifts[indexPath.row]
         let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: shift) as! Shift
-        cell.color.backgroundColor = self.colors[indexPath.row]
-        //cell.company.text = String(shiftPdc.value)
+        cell.color.backgroundColor = UIColor(hexString: shiftPdc.company.color)
+        cell.company.text = "\(shiftPdc.company.type!) \(shiftPdc.company.name!)"
         
         return cell
     }
@@ -118,7 +123,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
+            
         }
     }
 }

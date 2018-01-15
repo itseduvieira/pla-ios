@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LQB-pO-zZ1">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -30,17 +30,17 @@
             <objects>
                 <viewController id="LQB-pO-zZ1" customClass="LoginController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r8U-5R-Voe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="WV0-EW-jpn">
-                                <rect key="frame" x="46" y="95" width="228" height="100"/>
+                                <rect key="frame" x="46" y="144.5" width="283" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="70P-0o-3zy"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VgU-Ab-tLg">
-                                <rect key="frame" x="20" y="219" width="280" height="38"/>
+                                <rect key="frame" x="20" y="268.5" width="335" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="k71-7h-p6f"/>
                                 </constraints>
@@ -49,7 +49,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="username"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Senha" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="58Z-eH-IvZ">
-                                <rect key="frame" x="20" y="275" width="280" height="38"/>
+                                <rect key="frame" x="20" y="324.5" width="335" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="PrJ-Xv-SWA"/>
                                 </constraints>
@@ -58,7 +58,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iU4-Zb-1y4">
-                                <rect key="frame" x="267" y="281" width="26" height="26"/>
+                                <rect key="frame" x="322" y="330.5" width="26" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="avn-bm-Ayy"/>
                                     <constraint firstAttribute="width" constant="26" id="zep-w3-6wk"/>
@@ -69,7 +69,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CF-fD-C5J" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
-                                <rect key="frame" x="20" y="337" width="280" height="40"/>
+                                <rect key="frame" x="20" y="386.5" width="335" height="40"/>
                                 <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="c7A-cW-OXf"/>
@@ -83,7 +83,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCG-90-ieA">
-                                <rect key="frame" x="63.5" y="528" width="193" height="30"/>
+                                <rect key="frame" x="91" y="627" width="193" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="193" id="JaH-Ow-mM7"/>
                                     <constraint firstAttribute="height" constant="30" id="Jzv-Z3-0jU"/>
@@ -95,7 +95,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOT-6M-PjN" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
-                                <rect key="frame" x="20" y="393" width="280" height="40"/>
+                                <rect key="frame" x="20" y="442.5" width="335" height="40"/>
                                 <color key="backgroundColor" red="0.2274509804" green="0.33333333329999998" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="30L-zj-NaE"/>
@@ -106,7 +106,7 @@
                                 </state>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEh-62-i9y">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="17I-wH-8xo"/>
                                 </constraints>
@@ -118,7 +118,7 @@
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qM0-oe-iCe">
-                                <rect key="frame" x="16" y="212" width="82" height="10"/>
+                                <rect key="frame" x="16" y="261.5" width="82" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="DAs-Eg-eV2"/>
                                     <constraint firstAttribute="width" constant="82" id="cSY-Xu-9Tj"/>
@@ -128,7 +128,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Senha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nh-zT-qds">
-                                <rect key="frame" x="16" y="268" width="82" height="10"/>
+                                <rect key="frame" x="16" y="317.5" width="82" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="CSB-LP-Yg6"/>
                                     <constraint firstAttribute="width" constant="82" id="yiP-k0-4qq"/>
@@ -178,7 +178,7 @@
                         <outlet property="txtLogin" destination="VgU-Ab-tLg" id="y9Y-HY-ABp"/>
                         <outlet property="txtPassword" destination="58Z-eH-IvZ" id="9GZ-le-tiE"/>
                         <segue destination="aQG-fV-duX" kind="show" identifier="SegueLoginToMenu" id="up2-7p-s9h"/>
-                        <segue destination="IO7-xn-Wku" kind="show" identifier="SegueLoginToSignup" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="QmW-sd-crn"/>
+                        <segue destination="IO7-xn-Wku" kind="show" identifier="SegueLoginToSignup" animates="NO" id="QmW-sd-crn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Yv-Vr-wu6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -190,11 +190,11 @@
             <objects>
                 <viewController id="ZTy-aS-cm3" customClass="ForgotPasswordController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="52w-LC-Dgl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xSk-Ye-uqV">
-                                <rect key="frame" x="20" y="275" width="280" height="38"/>
+                                <rect key="frame" x="20" y="324.5" width="335" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="UwD-BB-RtD"/>
                                 </constraints>
@@ -203,13 +203,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="zMS-K9-8Ms">
-                                <rect key="frame" x="46" y="95" width="228" height="100"/>
+                                <rect key="frame" x="46" y="144.5" width="283" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="aoK-Dh-4l9"/>
                                 </constraints>
                             </imageView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLw-MN-6SN">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="RwO-5d-kXe"/>
                                 </constraints>
@@ -221,7 +221,7 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R62-CX-v1Y" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
-                                <rect key="frame" x="20" y="337" width="280" height="40"/>
+                                <rect key="frame" x="20" y="386.5" width="335" height="40"/>
                                 <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="vvj-MO-5rA"/>
@@ -232,10 +232,11 @@
                                 </state>
                                 <connections>
                                     <action selector="login" destination="LQB-pO-zZ1" eventType="touchUpInside" id="7gn-pE-BcW"/>
+                                    <action selector="sendRecover" destination="ZTy-aS-cm3" eventType="touchUpInside" id="lEF-vP-2DO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insira o e-mail cadastrado para enviarmos a nova senha." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8I-iW-mQT">
-                                <rect key="frame" x="60" y="210.5" width="200" height="52"/>
+                                <rect key="frame" x="60" y="260" width="255" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="J5S-Ht-Qzk"/>
                                 </constraints>
@@ -244,7 +245,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgv-z3-3lN">
-                                <rect key="frame" x="16" y="268" width="82" height="10"/>
+                                <rect key="frame" x="16" y="317.5" width="82" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="82" id="9yy-b2-dM3"/>
                                     <constraint firstAttribute="height" constant="10" id="Aez-61-WwV"/>

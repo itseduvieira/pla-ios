@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
 import FBSDKLoginKit
 
 class LoginController : UIViewController {
@@ -66,11 +67,24 @@ class LoginController : UIViewController {
                     UserDefaults.standard.set(self.txtPassword.text!, forKey: "password")
                     if let user = user {
                         let pdcUser = User(id: user.uid, name: user.displayName!, email: user.email!, phone: user.phoneNumber!)
-                        let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
-                        UserDefaults.standard.set(encoded, forKey: "loggedUser")
+                        
+                        let storage = Storage.storage()
+                        let ref = storage.reference().child("\(user.uid)/profile.jpg")
+                        
+                        ref.getData(maxSize: 8 * 1024 * 1024) { data, error in
+                            if let error = error {
+                                print(error)
+                                
+                                self.saveCredentialsAndGoToCalendar(pdcUser: pdcUser)
+                            } else {
+                                pdcUser.picture = data!
+                                
+                                self.saveCredentialsAndGoToCalendar(pdcUser: pdcUser)
+                            }
+                        }                        
                     }
                     
-                    self.performSegue(withIdentifier: "SegueLoginToMenu", sender: self)
+                    
                     
                 } else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
@@ -82,6 +96,13 @@ class LoginController : UIViewController {
                 }
             }
         }
+    }
+    
+    private func saveCredentialsAndGoToCalendar(pdcUser: User) {
+        let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
+        UserDefaults.standard.set(encoded, forKey: "loggedUser")
+        
+        self.performSegue(withIdentifier: "SegueLoginToMenu", sender: self)
     }
     
     private func applyBorders() {

@@ -27,11 +27,33 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Y6-at-jRh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="8qt-Xz-RiB"/>
+                                </constraints>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jH9-OJ-aq8">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="pba-q6-Dmu"/>
+                                </constraints>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Minha Conta" id="bNm-zg-PcQ"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ck0-PH-t6f" firstAttribute="top" secondItem="nBG-qe-IP0" secondAttribute="top" constant="303" id="3gM-oZ-Nhs"/>
+                            <constraint firstItem="9Y6-at-jRh" firstAttribute="top" secondItem="8kT-aB-x6v" secondAttribute="top" id="9EU-WU-r87"/>
                             <constraint firstItem="Ck0-PH-t6f" firstAttribute="leading" secondItem="nBG-qe-IP0" secondAttribute="leading" constant="166" id="CCR-U5-lwN"/>
+                            <constraint firstItem="9Y6-at-jRh" firstAttribute="trailing" secondItem="nBG-qe-IP0" secondAttribute="trailing" id="Pjt-EL-ver"/>
+                            <constraint firstItem="9Y6-at-jRh" firstAttribute="leading" secondItem="nBG-qe-IP0" secondAttribute="leading" id="n0A-eY-Nue"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nBG-qe-IP0"/>
                     </view>

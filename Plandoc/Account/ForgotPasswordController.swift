@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ForgotPasswordController: UIViewController {
     //MARK: Properties
@@ -44,5 +45,28 @@ class ForgotPasswordController: UIViewController {
     
     @objc func back() {
         self.performSegue(withIdentifier: "SegueForgotToLogin", sender: self)
+    }
+    
+    @IBAction func sendRecover() {
+        if txtEmail.text == nil || txtEmail.text == "" {
+            return
+        }
+        
+        Auth.auth().sendPasswordReset(withEmail: txtEmail.text!, completion: {error in
+            var txt = "Um email foi enviado para \(self.txtEmail.text!)."
+            
+            if let error = error {
+                txt = error.localizedDescription
+            }
+            
+            let alertController = UIAlertController(title: "Esqueci a senha", message: txt, preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: {
+                self.txtEmail.text = ""
+            })
+        })
     }
 }

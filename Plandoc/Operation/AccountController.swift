@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
 
 class AccountController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     //MARK: Properties
@@ -74,11 +75,19 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
     }
     
     private func loadExistingData() {
-        let user = Auth.auth().currentUser
-        txtName.text = user?.displayName
-        txtPhone.text = user?.phoneNumber
-        txtEmail.text = user?.email
+        guard let user = UserDefaults.standard.object(forKey: "loggedUser") else {
+            return
+        }
+        
+        let pdcUser = NSKeyedUnarchiver.unarchiveObject(with: user as! Data) as! User
+        
+        txtName.text = pdcUser.name
+        txtPhone.text = pdcUser.phone
+        txtEmail.text = pdcUser.email
         txtPassword.text = UserDefaults.standard.string(forKey: "password")
+        if let img = pdcUser.picture {
+            imgPicture.image = UIImage(data: img)
+        }
     }
     
     func setNavigationBar() {
@@ -86,23 +95,50 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
         navBar.shadowImage = UIImage()
         let doneItem = UIBarButtonItem(title: "Salvar", style: .done, target: self, action: #selector(save))
         navItem.rightBarButtonItem = doneItem
-        let logoffItem = UIBarButtonItem(title: "Sair", style: .plain, target: self, action: #selector(logoff))
-        navItem.leftBarButtonItem = logoffItem
     }
     
     @objc func save() {
+        let pdcUser = NSKeyedUnarchiver.unarchiveObject(with: UserDefaults.standard.object(forKey: "loggedUser") as! Data) as! User
         
-    }
-    
-    @objc func logoff() {
-        do {
-            try Auth.auth().signOut()
-            UserDefaults.standard.removeObject(forKey: "loggedUser")
-            self.performSegue(withIdentifier: "SegueProfileToLogin", sender: self)
-        } catch {
+        if let user = Auth.auth().currentUser {
+            let changeRequest = user.createProfileChangeRequest()
             
+            if txtName.text! != user.displayName {
+                changeRequest.displayName = txtName.text!
+                
+                pdcUser.name = changeRequest.displayName
+            }
+            
+            let data = UIImageJPEGRepresentation(imgPicture.image!, 1.0)
+            
+            if pdcUser.picture != data {
+                let storage = Storage.storage()
+                let ref = storage.reference().child("\(user.uid)/profile.jpg")
+                
+                ref.putData(data!, metadata: nil) { (metadata, error) in
+                    guard let metadata = metadata else {
+                        
+                        return
+                    }
+                    
+                    pdcUser.picture = data
+                    
+                    //changeRequest.photoURL = metadata.downloadURL()
+                    //print("Picture uploaded at \(metadata.downloadURL()!.absoluteString)")
+                }
+            }
+            
+            if txtEmail.text! != user.email {
+                user.updateEmail(to: txtEmail.text!, completion: { error in
+                    pdcUser.email = self.txtEmail.text!
+                })
+            }
+            
+            changeRequest.commitChanges { (error) in
+                let archivedUser = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
+                UserDefaults.standard.set(archivedUser, forKey: "loggedUser")
+            }
         }
-        
     }
     
     @IBAction func showOrHidePassword(_ sender: UIButton) {

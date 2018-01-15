@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N3G-CD-B6s">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -13,19 +13,19 @@
         <scene sceneID="hl7-3n-fIm">
             <objects>
                 <viewController id="N3G-CD-B6s" customClass="InitialController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" hidden="YES" contentMode="scaleToFill" id="uWI-3L-2Ch">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <view key="view" contentMode="scaleToFill" id="uWI-3L-2Ch">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="tML-rq-ZC7">
-                                <rect key="frame" x="201" y="34" width="105" height="47"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="tML-rq-ZC7">
+                                <rect key="frame" x="256" y="34" width="105" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="105" id="4FK-3g-Oje"/>
                                     <constraint firstAttribute="height" constant="47" id="hLf-Yh-kL4"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKO-mj-CGo" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
-                                <rect key="frame" x="24" y="272" width="272" height="40"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKO-mj-CGo" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
+                                <rect key="frame" x="24" y="272" width="327" height="40"/>
                                 <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="zz6-5B-7Yn"/>
@@ -38,8 +38,8 @@
                                     <segue destination="yNd-2u-KlV" kind="show" customClass="UIStoryboardSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="8uY-9c-2b6"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tenha o controle de suas finanças na palma da mão." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDN-U8-lgp">
-                                <rect key="frame" x="32" y="149" width="256" height="105"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tenha o controle de suas finanças na palma da mão." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDN-U8-lgp">
+                                <rect key="frame" x="32" y="149" width="311" height="105"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="105" id="l31-qS-7fs"/>
                                 </constraints>
@@ -47,8 +47,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.904296875" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q17-y9-PA5">
-                                <rect key="frame" x="223" y="525" width="77" height="30"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q17-y9-PA5">
+                                <rect key="frame" x="278" y="624" width="77" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="fAl-S0-JbF"/>
                                     <constraint firstAttribute="width" constant="77" id="uZR-e3-Tag"/>
@@ -59,8 +59,8 @@
                                     <segue destination="iCT-rw-vNd" kind="show" customClass="UIStoryboardSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="BBS-XI-Cfp"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Se você já possui cadastro," textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-fA-wuJ">
-                                <rect key="frame" x="69" y="529" width="158" height="21"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Se você já possui cadastro," textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-fA-wuJ">
+                                <rect key="frame" x="124" y="628" width="158" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="158" id="7Zj-dj-4mF"/>
                                     <constraint firstAttribute="height" constant="21" id="VHl-eq-xe6"/>
@@ -69,8 +69,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OU" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dep-1E-haR">
-                                <rect key="frame" x="139" y="322" width="42" height="21"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OU" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dep-1E-haR">
+                                <rect key="frame" x="166.5" y="322" width="42" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="42" id="8kA-Z0-QmW"/>
                                     <constraint firstAttribute="height" constant="21" id="tms-hj-294"/>
@@ -79,8 +79,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVm-HV-VPm" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
-                                <rect key="frame" x="24" y="353" width="272" height="40"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVm-HV-VPm" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
+                                <rect key="frame" x="24" y="353" width="327" height="40"/>
                                 <color key="backgroundColor" red="0.22745098039215686" green="0.33333333333333331" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Gbo-55-0Up"/>
@@ -117,7 +117,7 @@
                         <viewLayoutGuide key="safeArea" id="UTk-3w-qU0"/>
                     </view>
                     <connections>
-                        <segue destination="OSa-VP-kPW" kind="show" identifier="SegueSignupToMenu" id="8pL-0e-KXe"/>
+                        <segue destination="OSa-VP-kPW" kind="show" identifier="SegueSignupToMenu" animates="NO" id="8pL-0e-KXe"/>
                         <segue destination="YGD-yl-rMz" kind="show" identifier="SegueSignupToFirstSteps" id="PFz-F0-AyR"/>
                         <segue destination="ZFC-ar-pCj" kind="show" identifier="SegueSignupToPhone" id="04d-s5-qjV"/>
                     </connections>
@@ -131,11 +131,11 @@
             <objects>
                 <viewController id="yNd-2u-KlV" customClass="SignupNameController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lRN-h2-sVx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXX-Df-gT2">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7fN-xF-UZ4"/>
                                 </constraints>
@@ -147,7 +147,7 @@
                                 </items>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="34W-gP-wLI">
-                                <rect key="frame" x="201" y="34" width="105" height="47"/>
+                                <rect key="frame" x="256" y="34" width="105" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="JP7-pl-KMt"/>
                                     <constraint firstAttribute="width" constant="105" id="V7i-As-3sW"/>
@@ -164,7 +164,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nome completo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zvd-Ob-QgC">
-                                <rect key="frame" x="16" y="172" width="288" height="36"/>
+                                <rect key="frame" x="16" y="172" width="343" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="ylI-B1-2ft"/>
                                 </constraints>
@@ -173,7 +173,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" spellCheckingType="no" returnKeyType="next" textContentType="name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RCB-uV-a6Q">
-                                <rect key="frame" x="16" y="228" width="288" height="36"/>
+                                <rect key="frame" x="16" y="228" width="343" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="Tph-ZJ-5vu"/>
                                 </constraints>
@@ -182,7 +182,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCQ-c8-LGa">
-                                <rect key="frame" x="232" y="281" width="72" height="30"/>
+                                <rect key="frame" x="287" y="281" width="72" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="Xvo-40-4ue"/>
                                     <constraint firstAttribute="height" constant="30" id="saV-4i-Feh"/>
@@ -194,7 +194,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nós queremos te conhecer melhor :) Preencha seu nome e email nos campos abaixo" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXe-SS-Ohg">
-                                <rect key="frame" x="16" y="122" width="288" height="34"/>
+                                <rect key="frame" x="16" y="122" width="343" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="1GH-19-kcQ"/>
                                 </constraints>
@@ -277,18 +277,18 @@
             <objects>
                 <viewController storyboardIdentifier="PhoneAuthViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aZQ-xJ-UOg" customClass="SignupPhoneController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lop-Ln-7nH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="VPX-e9-b5T">
-                                <rect key="frame" x="201" y="34" width="105" height="47"/>
+                                <rect key="frame" x="256" y="34" width="105" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="105" id="azd-iK-75s"/>
                                     <constraint firstAttribute="height" constant="47" id="lAt-su-0m3"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Muito prazer, %s. Agora vamos confirmar seu número de telefone." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pY1-NC-ETp">
-                                <rect key="frame" x="16" y="93" width="288" height="68"/>
+                                <rect key="frame" x="16" y="93" width="343" height="68"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="68" id="4hr-2c-XuR"/>
                                 </constraints>
@@ -297,7 +297,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Telefone com DDD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gOx-9L-fng">
-                                <rect key="frame" x="16" y="224" width="288" height="36"/>
+                                <rect key="frame" x="16" y="224" width="343" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="Cix-iW-NTf"/>
                                 </constraints>
@@ -306,7 +306,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="done" textContentType="tel"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Uh-D1-8cX">
-                                <rect key="frame" x="232" y="277" width="72" height="30"/>
+                                <rect key="frame" x="287" y="277" width="72" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="GRd-He-Iu5"/>
                                     <constraint firstAttribute="height" constant="30" id="YHB-pc-NNw"/>
@@ -318,7 +318,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insira seu número de celular no campo abaixo e lhe enviaremos um SMS com um código para verificação" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy0-1R-tOa">
-                                <rect key="frame" x="16" y="159" width="288" height="49"/>
+                                <rect key="frame" x="16" y="159" width="343" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="pwC-IV-1Zm"/>
                                 </constraints>
@@ -362,18 +362,18 @@
             <objects>
                 <viewController id="rIp-a9-I3S" customClass="SignupCodeController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="If1-pt-o6r">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="cec-WR-m16">
-                                <rect key="frame" x="201" y="34" width="105" height="47"/>
+                                <rect key="frame" x="256" y="34" width="105" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="105" id="r2w-1l-F22"/>
                                     <constraint firstAttribute="height" constant="47" id="sOJ-BQ-M5c"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Digite o código recebido" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnR-4B-olw">
-                                <rect key="frame" x="16" y="95" width="288" height="29"/>
+                                <rect key="frame" x="16" y="95" width="343" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="EmZ-9I-yeB"/>
                                 </constraints>
@@ -382,7 +382,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Código" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ONX-OT-Amt">
-                                <rect key="frame" x="16" y="142" width="288" height="40"/>
+                                <rect key="frame" x="16" y="142" width="343" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5KR-m6-Wv8"/>
                                 </constraints>
@@ -391,7 +391,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="go"/>
                             </textField>
                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJ9-c3-k7F">
-                                <rect key="frame" x="188" y="206" width="118" height="30"/>
+                                <rect key="frame" x="243" y="206" width="118" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="bRj-nU-P5h"/>
                                     <constraint firstAttribute="width" constant="118" id="top-O7-Mta"/>
@@ -403,7 +403,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Se você não recebeu o código," textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORG-Jo-Uof">
-                                <rect key="frame" x="8" y="206" width="180" height="30"/>
+                                <rect key="frame" x="63" y="206" width="180" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Mfh-mW-yQY"/>
                                     <constraint firstAttribute="width" constant="180" id="yzd-jM-lDx"/>

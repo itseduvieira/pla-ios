@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class User: NSObject, NSCoding {
     var id: String!
@@ -14,6 +15,7 @@ class User: NSObject, NSCoding {
     var email: String!
     var phone: String!
     var password: String!
+    var picture: Data!
     var phoneValid: Bool! = false
     
     override init() {
@@ -33,6 +35,7 @@ class User: NSObject, NSCoding {
         email = decoder.decodeObject(forKey: "email") as? String
         phone = decoder.decodeObject(forKey: "phone") as? String
         password = decoder.decodeObject(forKey: "password") as? String
+        picture = decoder.decodeObject(forKey: "picture") as? Data
         phoneValid = decoder.decodeObject(forKey: "phoneValid") as? Bool
     }
     
@@ -42,6 +45,7 @@ class User: NSObject, NSCoding {
         aCoder.encode(email, forKey: "email")
         aCoder.encode(phone, forKey: "phone")
         aCoder.encode(password, forKey: "password")
+        aCoder.encode(picture, forKey: "picture")
         aCoder.encode(phoneValid, forKey: "phoneValid")
     }
 }

@@ -8,16 +8,33 @@
 
 import UIKit
 
-class CompanyListController: UIViewController {
+class CompanyListController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
     //MARK: Properties
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var companyTable: UITableView!
+    
+    var companies: [Data]!
+    var id: String!
     
     //MARK: Actions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setNavigationBar()
+        
+        companyTable.dataSource = self
+        companyTable.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
+        self.companies = Array<Data>(dictCompanies.values)
+        id = nil
+        
+        companyTable.reloadData()
     }
     
     func setNavigationBar() {
@@ -41,6 +58,46 @@ class CompanyListController: UIViewController {
         if (segue.identifier == "SegueListToCompany") {
             let vc = segue.destination as! CompanyController
             vc.sender = self
+            vc.id = id
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.companies.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CompanyCell", for: indexPath) as! CompanyCustomCell
+        
+        let company = self.companies[indexPath.row]
+        let companyPdc = NSKeyedUnarchiver.unarchiveObject(with: company) as! Company
+        
+        if let color = companyPdc.color {
+            cell.color.backgroundColor = UIColor(hexString: color)
+        }
+        
+        cell.company.text = "\(companyPdc.type!) \(companyPdc.name!)"
+        cell.place.text = companyPdc.address
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let company = self.companies[indexPath.row]
+        let companyPdc = NSKeyedUnarchiver.unarchiveObject(with: company) as! Company
+        self.id = companyPdc.id
+        self.performSegue(withIdentifier: "SegueListToCompany", sender: self)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            companies.remove(at: indexPath.row)
+            UserDefaults.standard.set(companies, forKey: "companies")
+            tableView.reloadData()
         }
     }
 }

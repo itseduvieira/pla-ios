@@ -35,6 +35,13 @@ class SignupPhoneController : UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         txtPhone?.becomeFirstResponder()
+        
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

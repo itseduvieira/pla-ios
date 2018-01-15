@@ -14,6 +14,10 @@ class InitialController : UIViewController {
     //MARK: Properties
     
     //MARK: Actions
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -33,7 +37,9 @@ class InitialController : UIViewController {
                 self.performSegue(withIdentifier: "SegueSignupToPhone", sender: self)
             }
         } else {
-            view.isHidden = false
+            for v in view.subviews {
+                v.isHidden = false
+            }
         }
     }
     
@@ -54,7 +60,7 @@ class InitialController : UIViewController {
             } else {
                 let name = ""
                 let email = ""
-                let phone = ""
+//                let phone = ""
                 
                 Auth.auth().createUser(withEmail: email, password: String(self.random(6)), completion: { (user: FirebaseAuth.User?, error) in
                     if let error = error {

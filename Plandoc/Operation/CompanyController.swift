@@ -22,10 +22,13 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var selectedColor: UIView!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var colorIndicator: UIView!
+    @IBOutlet weak var stackColors: UIStackView!
     
     var picker: UIPickerView!
     
     weak var sender: UIViewController!
+    var id: String!
 //    var geocoder: Geocoder!
     
     let pickerTypeData = [
@@ -46,9 +49,17 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
         self.setNavigationBar()
         
+        self.setExistingCompany()
+        
 //        geocoder = Geocoder.shared
         
         UITextField.connectFields(fields: [txtCompany, txtAddress, txtAdmin, txtPhone])
+        
+        for v in stackColors.subviews {
+            if let btn = v as? UIButton {
+                btn.addTarget(self, action: #selector(changeColor), for: .touchUpInside)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,23 +76,34 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             self.present(alertController, animated: true, completion: nil)
         } else {
-            var companies: Array<Data>
+            var companies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
             
-            if let companiesSaved = UserDefaults.standard.array(forKey: "companies") as? Array<Data> {
-                companies = companiesSaved
+//            if let companiesSaved = UserDefaults.standard.array(forKey: "companies") as? Array<Data> {
+//                companies = companiesSaved
+//            } else {
+//                companies = Array()
+//            }
+            
+            var pdcCompany: Company
+            
+            if !companies.isEmpty, id != nil {
+                pdcCompany = NSKeyedUnarchiver.unarchiveObject(with: companies[id]!) as! Company
             } else {
-                companies = Array()
+                pdcCompany = Company()
+                pdcCompany.id = String.random()
             }
             
-            let pdcCompany = Company()
             pdcCompany.type = txtType.text
             pdcCompany.name = txtCompany.text
             pdcCompany.address = txtAddress.text
             pdcCompany.admin = txtAdmin.text
             pdcCompany.phone = txtPhone.text
+            pdcCompany.color = colorIndicator.backgroundColor?.hexCode
             
             let company = NSKeyedArchiver.archivedData(withRootObject: pdcCompany)
-            companies.append(company)
+            
+            companies[pdcCompany.id] = company
+            
             UserDefaults.standard.set(companies, forKey: "companies")
             
             cancel()
@@ -93,6 +115,29 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
             self.performSegue(withIdentifier: "SegueCompanyToFirstSteps", sender: self)
         } else if self.sender.restorationIdentifier == "ListCompaniesViewController" {
             self.performSegue(withIdentifier: "SegueCompanyToList", sender: self)
+        } else if self.sender.restorationIdentifier == "ShiftsViewController" {
+            self.performSegue(withIdentifier: "SegueCompanyToShift", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueCompanyToShift" {
+            let controller = segue.destination as! ShiftController
+            controller.sender = self.sender
+        }
+    }
+    
+    private func setExistingCompany() {
+        if id != nil, var companies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] {
+            let company = NSKeyedUnarchiver.unarchiveObject(with: companies[id]!) as! Company
+            txtType.text = company.type
+            txtCompany.text = company.name
+            txtAddress.text = company.address
+            txtAdmin.text = company.admin
+            txtPhone.text = company.phone
+            if let color = company.color {
+                colorIndicator.backgroundColor = UIColor(hexString: color)
+            }
         }
     }
     
@@ -181,7 +226,7 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
         if let url = components.url {
             let task = URLSession.shared.dataTask(with: url, completionHandler: {(data, response, error) in
-                do {
+//                do {
                     if let data = data {
                         let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
                         
@@ -244,12 +289,12 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
                             callback([])
                         }
                     }
-                } catch {
-                    print("Network error: \(error)")
-                    DispatchQueue.main.async {
-                        callback([])
-                    }
-                }
+//                } catch {
+//                    print("Network error: \(error)")
+//                    DispatchQueue.main.async {
+//                        callback([])
+//                    }
+//                }
             })
             
             task.resume()
@@ -321,5 +366,9 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
         if txtType.text!.isEmpty {
             self.picker.delegate?.pickerView!(self.picker, didSelectRow: 0, inComponent: 0)
         }
+    }
+    
+    @objc func changeColor(sender: UIButton) {
+        colorIndicator.backgroundColor = sender.backgroundColor
     }
 }

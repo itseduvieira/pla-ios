@@ -19,13 +19,18 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     @IBOutlet weak var txtSalary: UITextField!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var colorIndicator: UIView!
+    @IBOutlet weak var switchFixo: UISwitch!
     
     weak var sender: UIViewController!
+    var pending: Bool! = false
     
     var picker: UIPickerView!
     
-    var companiesData: Array<Data>!
+    var companiesData: [Data]!
     var shiftTimeData = ["6 Horas", "12 Horas"]
+    var paymentTypeData = ["A Vista", "Final do Mês Atual", "Final do Próximo Mês", "Após 1 Semana", "Após 2 Semanas", "Após 3 Semanas"]
+    var companyChoosed: Company!
     
     lazy var datePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -51,9 +56,11 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         
         self.setNavigationBar()
         
-        companiesData = UserDefaults.standard.array(forKey: "companies") as! Array<Data>
+        let dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
         
-        UITextField.connectFields(fields: [txtCompany, txtDate, txtHour, txtShiftTime, txtPaymentType, txtSalary])
+        self.companiesData = Array<Data>(dictCompanies.values)
+        
+        UITextField.connectFields(fields: [txtCompany, txtDate, txtHour, txtPaymentType, txtShiftTime, txtSalary])
         
         datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
         
@@ -69,23 +76,38 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         self.setupTimeField()
     }
     
-    @objc func save() {
-        var shifts: Array<Data>
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        if let shiftsSaved = UserDefaults.standard.array(forKey: "shifts") as? Array<Data> {
-            shifts = shiftsSaved
-        } else {
-            shifts = Array()
+        if companiesData.isEmpty {
+            let alertController = UIAlertController(title: "Nenhuma Empresa Cadastrada", message: "Para cadastrar um plantão, primeiro você deve cadastrar uma empresa.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "Entendi", style: .cancel, handler: {(action: UIAlertAction!) in
+                self.performSegue(withIdentifier: "SegueShiftToCompany", sender: self)
+            })
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueShiftToCompany" {
+            let vc = segue.destination as! CompanyController
+            vc.sender = self
+        }
+    }
+    
+    @objc func save() {
+        var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
         
         let pdcShift = Shift()
-        pdcShift.value = Double(txtSalary.text!)
-//        pdcShift.address = txtAddress.text
-//        pdcShift.admin = txtAdmin.text
-//        pdcShift.phone = txtPhone.text
+        pdcShift.id = String.random()
+        pdcShift.salary = Double(txtSalary.text!)
+        pdcShift.company = companyChoosed
         
         let shift = NSKeyedArchiver.archivedData(withRootObject: pdcShift)
-        shifts.append(shift)
+        shifts[pdcShift.id] = shift
         UserDefaults.standard.set(shifts, forKey: "shifts")
         
         cancel()
@@ -131,12 +153,19 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     }
     
     func setNavigationBar() {
-        navBar.setBackgroundImage(UIImage(), for: .default)
-        navBar.shadowImage = UIImage()
+        if pending {
+            navBar.barTintColor = UIColor(hexString: "#E93F33")
+        } else {
+            navBar.setBackgroundImage(UIImage(), for: .default)
+            navBar.shadowImage = UIImage()
+        }
+        
         let backItem = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(cancel))
         navItem.leftBarButtonItem = backItem
-        let doneItem = UIBarButtonItem(title: "Salvar", style: .done, target: self, action: #selector(save))
-        navItem.rightBarButtonItem = doneItem
+        if !pending {
+            let doneItem = UIBarButtonItem(title: "Salvar", style: .done, target: self, action: #selector(save))
+            navItem.rightBarButtonItem = doneItem
+        }
     }
     
     @IBAction func showPicker(_ sender: UITextField) {
@@ -152,6 +181,8 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             return companiesData.count
         } else if txtShiftTime.isFirstResponder {
             return shiftTimeData.count
+        } else if txtPaymentType.isFirstResponder {
+            return paymentTypeData.count
         }
         
         return -1
@@ -163,6 +194,8 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             return "\(company.type!) \(company.name!)"
         } else if txtShiftTime.isFirstResponder {
             return shiftTimeData[row]
+        } else if txtPaymentType.isFirstResponder {
+            return paymentTypeData[row]
         }
         
         return nil
@@ -171,9 +204,13 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if txtCompany.isFirstResponder {
             let company = NSKeyedUnarchiver.unarchiveObject(with: companiesData[row]) as! Company
+            self.companyChoosed = company
+            colorIndicator.backgroundColor = UIColor(hexString: company.color)
             txtCompany.text = "\(company.type!) \(company.name!)"
         } else if txtShiftTime.isFirstResponder {
             txtShiftTime.text = shiftTimeData[row]
+        } else if txtPaymentType.isFirstResponder {
+            txtPaymentType.text = paymentTypeData[row]
         }
     }
     
@@ -181,7 +218,9 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         if txtCompany.isFirstResponder {
             txtDate.becomeFirstResponder()
         } else if txtShiftTime.isFirstResponder {
-            txtPaymentType.becomeFirstResponder()
+            txtSalary.becomeFirstResponder()
+        } else if txtPaymentType.isFirstResponder {
+            txtShiftTime.becomeFirstResponder()
         }
     }
     
@@ -250,7 +289,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     }
     
     @objc func doneTime() {
-        txtShiftTime.becomeFirstResponder()
+        txtPaymentType.becomeFirstResponder()
     }
 }
 

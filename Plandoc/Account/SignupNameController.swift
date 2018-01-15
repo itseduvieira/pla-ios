@@ -37,6 +37,13 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         txtName?.becomeFirstResponder()
+        
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     @IBAction func goToPhoneVerification() {
