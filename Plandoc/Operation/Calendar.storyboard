@@ -162,11 +162,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PENDENTE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fao-gX-14K">
-                                                    <rect key="frame" x="281" y="24.5" width="60" height="21"/>
+                                                    <rect key="frame" x="285" y="29" width="56" height="12"/>
                                                     <color key="backgroundColor" red="0.98431372549019602" green="0.29803921568627451" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="A1f-LM-D4J"/>
-                                                        <constraint firstAttribute="height" constant="21" id="dsY-f3-yrM"/>
+                                                        <constraint firstAttribute="width" constant="56" id="A1f-LM-D4J"/>
+                                                        <constraint firstAttribute="height" constant="12" id="dsY-f3-yrM"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="9"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -192,6 +192,9 @@
                                         <connections>
                                             <outlet property="color" destination="ywF-8j-ByT" id="JeB-OJ-a2P"/>
                                             <outlet property="company" destination="zxu-Ch-RRO" id="SN8-CB-1qk"/>
+                                            <outlet property="day" destination="Pz9-kR-dNs" id="fnn-29-9O0"/>
+                                            <outlet property="salary" destination="eob-zg-R4g" id="a21-eT-7IE"/>
+                                            <outlet property="weekDay" destination="0rY-8E-NDl" id="ay8-mX-uOG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -223,6 +226,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="calendar" destination="xrv-KX-ml9" id="BSr-Rr-eeO"/>
+                        <outlet property="calendarHeightConstant" destination="Zbk-1t-p6m" id="siB-ro-08G"/>
                         <outlet property="constraintCalendar" destination="Zbk-1t-p6m" id="dRx-p8-GMG"/>
                         <outlet property="navBar" destination="XM4-Yc-75O" id="dHM-L3-XGI"/>
                         <outlet property="navItem" destination="h6u-WL-GFy" id="mfE-KI-R5X"/>

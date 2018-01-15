@@ -23,6 +23,9 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     @IBOutlet weak var switchFixo: UISwitch!
     
     weak var sender: UIViewController!
+    var id: String!
+    
+    var past: Bool! = false
     var pending: Bool! = false
     
     var picker: UIPickerView!
@@ -58,7 +61,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         
         let dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
         
-        self.companiesData = Array<Data>(dictCompanies.values)
+        self.companiesData = [Data](dictCompanies.values)
         
         UITextField.connectFields(fields: [txtCompany, txtDate, txtHour, txtPaymentType, txtShiftTime, txtSalary])
         
@@ -74,6 +77,8 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         self.setupDateField()
         
         self.setupTimeField()
+        
+        self.loadExistingData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,18 +104,43 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     }
     
     @objc func save() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
+        var date = formatter.date(from: "\(self.txtDate.text!) \(self.txtHour.text!)")
+        
+        if switchFixo.isOn {
+            let groupId = String.random()
+            for _ in 0...30 {
+                saveOne(groupId, date: date!)
+                
+                let minute:TimeInterval = 60.0
+                let hour:TimeInterval = 60.0 * minute
+                let day:TimeInterval = 24 * hour
+                let week: TimeInterval = 7 * day
+                date?.addTimeInterval(week)
+            }
+        } else {
+            saveOne(nil, date: date!)
+        }
+        
+        cancel()
+    }
+    
+    private func saveOne(_ groupId: String?, date: Date) {
         var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
         
         let pdcShift = Shift()
+        pdcShift.groupId = groupId
         pdcShift.id = String.random()
         pdcShift.salary = Double(txtSalary.text!)
         pdcShift.company = companyChoosed
+        pdcShift.date = date
+        pdcShift.paymentType = txtPaymentType.text!
+        pdcShift.shiftTime = txtShiftTime.text!.contains("6") ? 6 : 12
         
         let shift = NSKeyedArchiver.archivedData(withRootObject: pdcShift)
         shifts[pdcShift.id] = shift
         UserDefaults.standard.set(shifts, forKey: "shifts")
-        
-        cancel()
     }
     
     @objc func cancel() {
@@ -290,6 +320,23 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     
     @objc func doneTime() {
         txtPaymentType.becomeFirstResponder()
+    }
+    
+    private func loadExistingData() {
+        if let id = self.id {
+            var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
+            let shift = NSKeyedUnarchiver.unarchiveObject(with: shifts[id]!) as! Shift
+            txtCompany.text = shift.company.name
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            txtDate.text = formatter.string(from: shift.date)
+            formatter.dateFormat = "HH:mm"
+            txtHour.text = formatter.string(from: shift.date)
+            switchFixo.isOn = shift.groupId != nil
+            txtPaymentType.text = shift.paymentType
+            txtShiftTime.text = shift.shiftTime == 6 ? "6 Horas" : "12 Horas"
+            txtSalary.text = String(shift.salary)
+        }
     }
 }
 

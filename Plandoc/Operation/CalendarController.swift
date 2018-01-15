@@ -9,16 +9,19 @@
 import UIKit
 import FSCalendar
 
-class CalendarController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate {
+class CalendarController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource {
     //MARK: Properties
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tableShifts: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var constraintCalendar: NSLayoutConstraint!
+    @IBOutlet weak var calendarHeightConstant: NSLayoutConstraint!
     
     var shifts: [Data]!
     let colors = [UIColor.blue, UIColor.yellow, UIColor.magenta, UIColor.red, UIColor.brown]
+    var events: [String:Shift]!
+    var id: String!
     
     //MARK: Actions
     override func viewDidLoad() {
@@ -30,7 +33,10 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         tableShifts.dataSource = self
         
         calendar.delegate = self
+        calendar.dataSource = self
         calendar.locale = Locale(identifier: "pt_BR")
+        
+        self.events = [:]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,12 +44,24 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         
         if let dict = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] {
             
-            self.shifts = Array<Data>(dict.values)
+            self.shifts = [Data](dict.values)
+            
+            for data in self.shifts {
+                let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
+                
+                let formatter = DateFormatter()
+                formatter.dateFormat = "ddMMyyyy"
+                let id = formatter.string(from: shiftPdc.date)
+                
+                self.events[id] = shiftPdc
+            }
             
             tableShifts.reloadData()
         } else {
             self.shifts = []
         }
+        
+        self.loadCalendarEvents()
     }
     
     func setNavigationBar() {
@@ -56,6 +74,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func add() {
+        self.id = nil
         self.performSegue(withIdentifier: "SegueCalendarToShift", sender: self)
     }
     
@@ -95,6 +114,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         if segue.identifier == "SegueCalendarToShift" {
             let controller = segue.destination as! ShiftController
             controller.sender = self
+            controller.id = self.id
         }
     }
     
@@ -109,6 +129,20 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: shift) as! Shift
         cell.color.backgroundColor = UIColor(hexString: shiftPdc.company.color)
         cell.company.text = "\(shiftPdc.company.type!) \(shiftPdc.company.name!)"
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "pt_BR")
+        cell.salary.text = formatter.string(from: shiftPdc.salary! as NSNumber)
+        var calendar = Calendar.current
+        calendar.locale = Locale(identifier: "pt_BR")
+        let day = calendar.component(.day, from: shiftPdc.date)
+        cell.day.text = String(format: "%02d", day)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE"
+        dateFormatter.locale = Locale(identifier: "pt_BR")
+        cell.weekDay.text = dateFormatter.string(from: shiftPdc.date)
+        
+        self.id = shiftPdc.id
         
         return cell
     }
@@ -124,6 +158,31 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             
+        }
+    }
+    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        self.calendarHeightConstant.constant = bounds.size.height
+        
+        self.view.layoutIfNeeded()
+    }
+    
+    func calendar(_ calendar: FSCalendar, hasEventFor date: Date) -> Bool {
+        if let events = self.events {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "ddMMyyyy"
+            let id = formatter.string(from: date as Date)
+            
+            return events[id] != nil
+        }
+        
+        return false
+    }
+    
+    private func loadCalendarEvents() {
+        for shift in self.shifts {
+            let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: shift) as! Shift
+            //calendar.
         }
     }
 }
