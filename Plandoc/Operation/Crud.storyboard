@@ -975,6 +975,9 @@
                                 <state key="normal" title="RECEBI O PAGAMENTO">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pay" destination="fy8-l9-nGX" eventType="touchUpInside" id="8RG-p2-EE8"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Valor" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fNz-s5-NFX">
                                 <rect key="frame" x="260" y="434" width="100" height="36"/>
@@ -1036,6 +1039,7 @@
                         <viewLayoutGuide key="safeArea" id="VPO-86-mUN"/>
                     </view>
                     <connections>
+                        <outlet property="btnPaid" destination="RIh-wz-bVX" id="fRP-Wq-luz"/>
                         <outlet property="colorIndicator" destination="Kgm-Xo-Y0u" id="aQ3-TU-LzS"/>
                         <outlet property="imgPicture" destination="xfW-as-aL2" id="zuS-03-f7z"/>
                         <outlet property="navBar" destination="sgV-oA-FVz" id="xEK-ac-DQc"/>
@@ -1050,6 +1054,7 @@
                         <segue destination="sXZ-K7-SNw" kind="show" identifier="SegueShiftsToFirstSteps" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="LNd-Cq-P0l"/>
                         <segue destination="b8m-ci-RdN" kind="show" identifier="SegueShiftToCalendar" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="1mF-Z8-FGI"/>
                         <segue destination="VA5-PV-IB3" kind="show" identifier="SegueShiftToCompany" id="e0d-fh-YCt"/>
+                        <segue destination="WH1-gs-zz0" kind="show" identifier="SegueShiftToCompanyCalendar" id="4uc-4p-Zkt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fs1-C5-13e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1062,7 +1067,15 @@
                 <viewControllerPlaceholder storyboardName="Calendar" referencedIdentifier="CalendarViewController" id="b8m-ci-RdN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryR-GT-6Kp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1432" y="625"/>
+            <point key="canvasLocation" x="1228" y="577"/>
+        </scene>
+        <!--CalendarViewController-->
+        <scene sceneID="mVS-g0-wxz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Calendar" referencedIdentifier="CalendarViewController" id="WH1-gs-zz0" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FL2-cr-HI6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1586" y="576"/>
         </scene>
         <!--Perfil-->
         <scene sceneID="Jjx-Bc-RDu">

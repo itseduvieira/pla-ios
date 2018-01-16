@@ -16,11 +16,10 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableShifts: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var constraintCalendar: NSLayoutConstraint!
-    @IBOutlet weak var calendarHeightConstant: NSLayoutConstraint!
     
     var shifts: [Data]!
     let colors = [UIColor.blue, UIColor.yellow, UIColor.magenta, UIColor.red, UIColor.brown]
-    var events: [String:Shift]!
+    var events: [String]! = []
     var id: String!
     
     //MARK: Actions
@@ -35,8 +34,24 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         calendar.delegate = self
         calendar.dataSource = self
         calendar.locale = Locale(identifier: "pt_BR")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        self.events = [:]
+        if let dict = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] {
+            for data in [Data](dict.values) {
+                let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
+                
+                let formatter = DateFormatter()
+                formatter.dateFormat = "ddMMyyyy"
+                let id = formatter.string(from: shiftPdc.date)
+                
+                self.events.append(id)
+            }
+        }
+        
+        calendar.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,24 +59,34 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         
         if let dict = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] {
             
-            self.shifts = [Data](dict.values)
-            
-            for data in self.shifts {
+            self.shifts = [Data](dict.values.filter({data in
                 let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
                 
                 let formatter = DateFormatter()
-                formatter.dateFormat = "ddMMyyyy"
-                let id = formatter.string(from: shiftPdc.date)
+                var date = calendar.currentPage
                 
-                self.events[id] = shiftPdc
-            }
-            
-            tableShifts.reloadData()
+                if calendar.selectedDate != nil {
+                    date = calendar.selectedDate!
+                    formatter.dateFormat = "ddMMyyyy"
+                } else if calendar.scope == .month {
+                    formatter.dateFormat = "MMyyyy"
+                } else {
+                    formatter.dateFormat = "ddMMyyyy"
+                }
+                
+                return formatter.string(from: shiftPdc.date) == formatter.string(from: date)
+            })).sorted(by: { (one, two) in
+                let sOne = NSKeyedUnarchiver.unarchiveObject(with: one) as! Shift
+                
+                let sTwo = NSKeyedUnarchiver.unarchiveObject(with: two) as! Shift
+                
+                return sOne.date < sTwo.date
+            })
         } else {
             self.shifts = []
         }
         
-        self.loadCalendarEvents()
+        tableShifts.reloadData()
     }
     
     func setNavigationBar() {
@@ -81,9 +106,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func changeCalendarType() {
         if calendar.scope == .month {
             calendar.scope = .week
-            calendar.appearance.titleFont = UIFont(descriptor: calendar.appearance.titleFont.fontDescriptor, size: 18)
-            
-            constraintCalendar.constant = 92
+            calendar.appearance.titleFont = UIFont(descriptor: calendar.appearance.titleFont.fontDescriptor, size: 16)
             
             navItem.leftBarButtonItem?.title = "Mês"
         } else {
@@ -91,23 +114,11 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
             
             calendar.appearance.titleFont = UIFont(descriptor: calendar.appearance.titleFont.fontDescriptor, size: 12)
             
-            constraintCalendar.constant = 240
-            
             navItem.leftBarButtonItem?.title = "Semana"
         }
         
-        
+        self.viewWillAppear(true)
         self.updateViewConstraints()
-    }
-    
-    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-        if calendar.selectedDate == date {
-            calendar.deselect(date)
-            
-            return false
-        }
-        
-        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -140,7 +151,9 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE"
         dateFormatter.locale = Locale(identifier: "pt_BR")
-        cell.weekDay.text = dateFormatter.string(from: shiftPdc.date)
+        cell.weekDay.text = dateFormatter.string(from: shiftPdc.date).uppercased()
+        dateFormatter.dateFormat = "HH:mm"
+        cell.desc.text = "\(dateFormatter.string(from: shiftPdc.date)) • Jornada de \(shiftPdc.shiftTime!) Horas"
         
         self.id = shiftPdc.id
         
@@ -157,12 +170,21 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            
+            if var dict = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] {
+                
+                let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: self.shifts[indexPath.row]) as! Shift
+                dict.removeValue(forKey: shiftPdc.id)
+                self.shifts.remove(at: indexPath.row)
+                
+                UserDefaults.standard.set(dict, forKey: "shifts")
+                
+                self.viewWillAppear(true)
+            }
         }
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        self.calendarHeightConstant.constant = bounds.size.height
+        self.constraintCalendar.constant = bounds.size.height
         
         self.view.layoutIfNeeded()
     }
@@ -173,16 +195,29 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
             formatter.dateFormat = "ddMMyyyy"
             let id = formatter.string(from: date as Date)
             
-            return events[id] != nil
+            return events.contains(id)
         }
         
         return false
     }
     
-    private func loadCalendarEvents() {
-        for shift in self.shifts {
-            let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: shift) as! Shift
-            //calendar.
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        self.viewWillAppear(true)
+    }
+    
+    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        if calendar.selectedDate == date {
+            calendar.deselect(date)
+            
+            self.viewWillAppear(true)
+            
+            return false
         }
+        
+        return true
+    }
+    
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        self.viewWillAppear(true)
     }
 }

@@ -21,12 +21,12 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var colorIndicator: UIView!
     @IBOutlet weak var switchFixo: UISwitch!
+    @IBOutlet weak var btnPaid: UIRoundedButton!
     
     weak var sender: UIViewController!
     var id: String!
     
     var past: Bool! = false
-    var pending: Bool! = false
     
     var picker: UIPickerView!
     
@@ -53,8 +53,6 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         
         self.setupPictureRound()
         
-        self.applyBorders()
-        
         self.hideKeyboardWhenTappedAround()
         
         self.setNavigationBar()
@@ -79,6 +77,17 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         self.setupTimeField()
         
         self.loadExistingData()
+        
+        if self.id != nil {
+            var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
+            let shift = NSKeyedUnarchiver.unarchiveObject(with: shifts[id]!) as! Shift
+            if !shift.paid {
+                btnPaid.isHidden = false
+            }
+        } else {
+            btnPaid.isHidden = true
+            self.applyBorders()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -137,6 +146,28 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         pdcShift.date = date
         pdcShift.paymentType = txtPaymentType.text!
         pdcShift.shiftTime = txtShiftTime.text!.contains("6") ? 6 : 12
+        pdcShift.paid = false
+        
+        let minute:TimeInterval = 60.0
+        let hour:TimeInterval = 60.0 * minute
+        let day:TimeInterval = 24 * hour
+        let oneWeek: TimeInterval = 7 * day
+        let twoWeeks: TimeInterval = 2 * oneWeek
+        let threeWeeks: TimeInterval = 3 * oneWeek
+        
+        pdcShift.paymentDueDate = pdcShift.date
+        
+        if pdcShift.paymentType == "Final do Mês Atual" {
+            pdcShift.paymentDueDate = pdcShift.date
+        } else if pdcShift.paymentType == "Final do Próximo Mês" {
+            pdcShift.paymentDueDate = pdcShift.date
+        } else if pdcShift.paymentType == "Após 1 semana" {
+            pdcShift.paymentDueDate = pdcShift.date.addingTimeInterval(oneWeek)
+        } else if pdcShift.paymentType == "Após 2 semana" {
+            pdcShift.paymentDueDate = pdcShift.date.addingTimeInterval(twoWeeks)
+        } else if pdcShift.paymentType == "Após 3 semana" {
+            pdcShift.paymentDueDate = pdcShift.date.addingTimeInterval(threeWeeks)
+        }
         
         let shift = NSKeyedArchiver.archivedData(withRootObject: pdcShift)
         shifts[pdcShift.id] = shift
@@ -148,7 +179,19 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             self.performSegue(withIdentifier: "SegueShiftsToFirstSteps", sender: self)
         } else if self.sender.restorationIdentifier == "CalendarViewController" {
             self.performSegue(withIdentifier: "SegueShiftToCalendar", sender: self)
+        } else if self.sender.restorationIdentifier == "CompanyViewController" {
+            self.performSegue(withIdentifier: "SegueShiftToCompanyCalendar", sender: self)
         }
+    }
+    
+    @IBAction func pay() {
+        var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
+        let pdcShift = NSKeyedUnarchiver.unarchiveObject(with: shifts[id]!) as! Shift
+        pdcShift.paid = true
+        let shift = NSKeyedArchiver.archivedData(withRootObject: pdcShift)
+        shifts[pdcShift.id] = shift
+        UserDefaults.standard.set(shifts, forKey: "shifts")
+        cancel()
     }
     
     @IBAction func enterDate() {
@@ -183,7 +226,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     }
     
     func setNavigationBar() {
-        if pending {
+        if false {
             navBar.barTintColor = UIColor(hexString: "#E93F33")
         } else {
             navBar.setBackgroundImage(UIImage(), for: .default)
@@ -192,7 +235,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         
         let backItem = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(cancel))
         navItem.leftBarButtonItem = backItem
-        if !pending {
+        if self.id == nil {
             let doneItem = UIBarButtonItem(title: "Salvar", style: .done, target: self, action: #selector(save))
             navItem.rightBarButtonItem = doneItem
         }
@@ -336,6 +379,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             txtPaymentType.text = shift.paymentType
             txtShiftTime.text = shift.shiftTime == 6 ? "6 Horas" : "12 Horas"
             txtSalary.text = String(shift.salary)
+            colorIndicator.backgroundColor = UIColor(hexString: shift.company.color)
         }
     }
 }

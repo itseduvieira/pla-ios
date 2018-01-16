@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		25BCB6677C2DCECE86B87D7A /* Pods_Plandoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF2AC1154E943F506F5EADE6 /* Pods_Plandoc.framework */; };
 		340143A01FFBEF2D00E48C83 /* CompanyCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3401439F1FFBEF2D00E48C83 /* CompanyCustomCell.swift */; };
+		3413D62E200E267000F6E6C6 /* MembershipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3413D62D200E266F00F6E6C6 /* MembershipController.swift */; };
 		341BDBBE1F9E592A000DEFCB /* InitialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341BDBBD1F9E592A000DEFCB /* InitialController.swift */; };
 		341BDBC01F9E5F04000DEFCB /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 341BDBBF1F9E5F04000DEFCB /* Menu.storyboard */; };
 		3426E1AF1FAB756A0087E1A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3426E1AE1FAB756A0087E1A5 /* User.swift */; };
@@ -23,6 +24,7 @@
 		343C54172009BD13009F5EFB /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343C54162009BD13009F5EFB /* PreferencesController.swift */; };
 		34415CDB1FC07A8C0093F761 /* ForgotPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */; };
 		344353581FE5DEA000363111 /* FinanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344353571FE5DEA000363111 /* FinanceController.swift */; };
+		34489410200E74BA0077A88A /* FinanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3448940F200E74BA0077A88A /* FinanceData.swift */; };
 		3450E7A61F94284000A239E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3450E7A51F94281F00A239E4 /* GoogleService-Info.plist */; };
 		3450E7A91F950D6E00A239E4 /* SignupNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450E7A81F950D6E00A239E4 /* SignupNameController.swift */; };
 		3450E7AB1F953DD900A239E4 /* UIStoryboardSegueSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3450E7AA1F953BBF00A239E4 /* UIStoryboardSegueSlide.swift */; };
@@ -30,7 +32,6 @@
 		3455CEEA1FA64279001DB405 /* CompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455CEE91FA64279001DB405 /* CompanyController.swift */; };
 		3455CEEC1FA642A7001DB405 /* ShiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455CEEB1FA642A7001DB405 /* ShiftController.swift */; };
 		3455CEEE1FA65C0A001DB405 /* CompletionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455CEED1FA65C0A001DB405 /* CompletionController.swift */; };
-		345943832005339D008F15B0 /* ShiftGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345943822005339D008F15B0 /* ShiftGroup.swift */; };
 		3459438520054BAD008F15B0 /* FinanceCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3459438420054BAD008F15B0 /* FinanceCustomCell.swift */; };
 		346322091F93D67A00F0CCF4 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 346322081F93D67A00F0CCF4 /* Podfile */; };
 		346BDC3A1FB0F02000635ABA /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346BDC391FB0F02000635ABA /* Company.swift */; };
@@ -65,6 +66,7 @@
 /* Begin PBXFileReference section */
 		08BEAE92DC79734E59535580 /* Pods-Plandoc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plandoc.release.xcconfig"; path = "Pods/Target Support Files/Pods-Plandoc/Pods-Plandoc.release.xcconfig"; sourceTree = "<group>"; };
 		3401439F1FFBEF2D00E48C83 /* CompanyCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCustomCell.swift; sourceTree = "<group>"; };
+		3413D62D200E266F00F6E6C6 /* MembershipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipController.swift; sourceTree = "<group>"; };
 		341BDBBD1F9E592A000DEFCB /* InitialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialController.swift; sourceTree = "<group>"; };
 		341BDBBF1F9E5F04000DEFCB /* Menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		3426E1AE1FAB756A0087E1A5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		343C54162009BD13009F5EFB /* PreferencesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesController.swift; sourceTree = "<group>"; };
 		34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordController.swift; sourceTree = "<group>"; };
 		344353571FE5DEA000363111 /* FinanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceController.swift; sourceTree = "<group>"; };
+		3448940F200E74BA0077A88A /* FinanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceData.swift; sourceTree = "<group>"; };
 		3450E7A51F94281F00A239E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3450E7A71F94437700A239E4 /* Plandoc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Plandoc.entitlements; sourceTree = "<group>"; };
 		3450E7A81F950D6E00A239E4 /* SignupNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNameController.swift; sourceTree = "<group>"; };
@@ -87,7 +90,6 @@
 		3455CEE91FA64279001DB405 /* CompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyController.swift; sourceTree = "<group>"; };
 		3455CEEB1FA642A7001DB405 /* ShiftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftController.swift; sourceTree = "<group>"; };
 		3455CEED1FA65C0A001DB405 /* CompletionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionController.swift; sourceTree = "<group>"; };
-		345943822005339D008F15B0 /* ShiftGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftGroup.swift; sourceTree = "<group>"; };
 		3459438420054BAD008F15B0 /* FinanceCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceCustomCell.swift; sourceTree = "<group>"; };
 		346322081F93D67A00F0CCF4 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		346BDC391FB0F02000635ABA /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
@@ -144,7 +146,7 @@
 				3426E1B01FABA59C0087E1A5 /* Profile.swift */,
 				3426E1B21FABA5B30087E1A5 /* Shift.swift */,
 				346BDC391FB0F02000635ABA /* Company.swift */,
-				345943822005339D008F15B0 /* ShiftGroup.swift */,
+				3448940F200E74BA0077A88A /* FinanceData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,6 +202,7 @@
 				34D056061F96608100C0344B /* SignupCodeController.swift */,
 				341BDBBD1F9E592A000DEFCB /* InitialController.swift */,
 				34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */,
+				3413D62D200E266F00F6E6C6 /* MembershipController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				347765541F8FE93200082442 /* AppDelegate.swift in Sources */,
 				340143A01FFBEF2D00E48C83 /* CompanyCustomCell.swift in Sources */,
 				3459438520054BAD008F15B0 /* FinanceCustomCell.swift in Sources */,
+				34489410200E74BA0077A88A /* FinanceData.swift in Sources */,
 				34D056071F96608100C0344B /* SignupCodeController.swift in Sources */,
 				3455CEEC1FA642A7001DB405 /* ShiftController.swift in Sources */,
 				3426E1B31FABA5B30087E1A5 /* Shift.swift in Sources */,
@@ -476,13 +480,13 @@
 				3426E1AF1FAB756A0087E1A5 /* User.swift in Sources */,
 				347765721F905F8400082442 /* UIExtensions.swift in Sources */,
 				34D056051F9583F800C0344B /* SignupPhoneController.swift in Sources */,
+				3413D62E200E267000F6E6C6 /* MembershipController.swift in Sources */,
 				34415CDB1FC07A8C0093F761 /* ForgotPasswordController.swift in Sources */,
 				34AD2D581F976D010083E942 /* PageController.swift in Sources */,
 				34305F411FFACED000396D61 /* MenuCustomCell.swift in Sources */,
 				34305F431FFAFA9800396D61 /* CompanyListController.swift in Sources */,
 				3450E7A91F950D6E00A239E4 /* SignupNameController.swift in Sources */,
 				346BDC3E1FB4B9D300635ABA /* AccountController.swift in Sources */,
-				345943832005339D008F15B0 /* ShiftGroup.swift in Sources */,
 				346BDC3A1FB0F02000635ABA /* Company.swift in Sources */,
 				343B60181FCF8E83004A4418 /* ShiftCustomCell.swift in Sources */,
 				341BDBBE1F9E592A000DEFCB /* InitialController.swift in Sources */,

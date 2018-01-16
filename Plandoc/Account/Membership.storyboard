@@ -12,16 +12,15 @@
         <!--Pagamento-->
         <scene sceneID="ifB-LK-gVj">
             <objects>
-                <viewController id="4kx-zW-FPQ" sceneMemberID="viewController">
+                <viewController id="4kx-zW-FPQ" customClass="MembershipController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8kT-aB-x6v">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAyment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ck0-PH-t6f">
-                                <rect key="frame" x="166" y="323" width="68" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Versão Alpha." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ck0-PH-t6f">
+                                <rect key="frame" x="135" y="308.5" width="105.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="cb9-t8-TNe"/>
-                                    <constraint firstAttribute="width" constant="68" id="s96-nb-3Iw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -34,11 +33,12 @@
                                     <constraint firstAttribute="height" constant="64" id="8qt-Xz-RiB"/>
                                 </constraints>
                             </view>
-                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jH9-OJ-aq8">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jH9-OJ-aq8">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="pba-q6-Dmu"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </textAttributes>
@@ -49,20 +49,36 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Ck0-PH-t6f" firstAttribute="top" secondItem="nBG-qe-IP0" secondAttribute="top" constant="303" id="3gM-oZ-Nhs"/>
+                            <constraint firstItem="jH9-OJ-aq8" firstAttribute="leading" secondItem="nBG-qe-IP0" secondAttribute="leading" id="7Xg-3v-B25"/>
+                            <constraint firstItem="Ck0-PH-t6f" firstAttribute="centerY" secondItem="nBG-qe-IP0" secondAttribute="centerY" id="7iK-ae-31c"/>
+                            <constraint firstItem="Ck0-PH-t6f" firstAttribute="centerX" secondItem="nBG-qe-IP0" secondAttribute="centerX" id="8ol-Vf-BKq"/>
                             <constraint firstItem="9Y6-at-jRh" firstAttribute="top" secondItem="8kT-aB-x6v" secondAttribute="top" id="9EU-WU-r87"/>
-                            <constraint firstItem="Ck0-PH-t6f" firstAttribute="leading" secondItem="nBG-qe-IP0" secondAttribute="leading" constant="166" id="CCR-U5-lwN"/>
+                            <constraint firstItem="jH9-OJ-aq8" firstAttribute="trailing" secondItem="nBG-qe-IP0" secondAttribute="trailing" id="Aul-cq-RbT"/>
                             <constraint firstItem="9Y6-at-jRh" firstAttribute="trailing" secondItem="nBG-qe-IP0" secondAttribute="trailing" id="Pjt-EL-ver"/>
                             <constraint firstItem="9Y6-at-jRh" firstAttribute="leading" secondItem="nBG-qe-IP0" secondAttribute="leading" id="n0A-eY-Nue"/>
+                            <constraint firstItem="jH9-OJ-aq8" firstAttribute="top" secondItem="8kT-aB-x6v" secondAttribute="top" constant="20" id="uVo-WV-LdE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nBG-qe-IP0"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Pagamento" id="NEf-2t-faj"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="navBar" destination="jH9-OJ-aq8" id="6Zh-wA-my2"/>
+                        <outlet property="navItem" destination="bNm-zg-PcQ" id="69H-dg-nid"/>
+                        <segue destination="Jzf-Ci-ZTs" kind="show" identifier="SeguePaymentToExtended" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="szz-J1-Rkd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EI0-la-1wC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-134" y="78"/>
+        </scene>
+        <!--ExtendedViewController-->
+        <scene sceneID="7Sr-Nq-t5Q">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Menu" referencedIdentifier="ExtendedViewController" id="Jzf-Ci-ZTs" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BkG-fN-35P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="489" y="67"/>
         </scene>
     </scenes>
 </document>

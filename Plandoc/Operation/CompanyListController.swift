@@ -31,7 +31,7 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
         super.viewWillAppear(animated)
         
         let dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
-        self.companies = Array<Data>(dictCompanies.values)
+        self.companies = [Data](dictCompanies.values)
         id = nil
         
         companyTable.reloadData()

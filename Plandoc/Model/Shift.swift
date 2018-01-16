@@ -17,6 +17,7 @@ class Shift: NSObject, NSCoding {
     var shiftTime: Int!
     var paymentDueDate: Date!
     var salary: Double!
+    var paid: Bool!
     
     override init() {
         super.init()
@@ -31,6 +32,7 @@ class Shift: NSObject, NSCoding {
         shiftTime = decoder.decodeObject(forKey: "shiftTime") as? Int
         paymentDueDate = decoder.decodeObject(forKey: "paymentDueDate") as? Date
         salary = decoder.decodeObject(forKey: "salary") as? Double
+        paid = decoder.decodeObject(forKey: "paid") as? Bool
     }
     
     public func encode(with aCoder: NSCoder) {
@@ -42,6 +44,7 @@ class Shift: NSObject, NSCoding {
         aCoder.encode(shiftTime, forKey: "shiftTime")
         aCoder.encode(paymentDueDate, forKey: "paymentDueDate")
         aCoder.encode(salary, forKey: "salary")
+        aCoder.encode(paid, forKey: "paid")
     }
 }
 

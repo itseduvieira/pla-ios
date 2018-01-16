@@ -53,6 +53,22 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GHV-EY-Zhd" id="0M8-Tt-h99">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacidade e Termos de Uso" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdb-ch-naX">
+                                                    <rect key="frame" x="32" y="11.5" width="251" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="251" id="5vs-nf-kiH"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Rdb-ch-naX" firstAttribute="top" secondItem="0M8-Tt-h99" secondAttribute="top" constant="11.5" id="GtU-DQ-1FE"/>
+                                                <constraint firstAttribute="bottom" secondItem="Rdb-ch-naX" secondAttribute="bottom" constant="11.5" id="Jwl-RM-pNY"/>
+                                                <constraint firstItem="Rdb-ch-naX" firstAttribute="leading" secondItem="0M8-Tt-h99" secondAttribute="leading" constant="32" id="L3w-yM-XSR"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RZN-MI-q0A">

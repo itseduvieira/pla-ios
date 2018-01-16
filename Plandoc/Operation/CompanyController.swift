@@ -78,12 +78,6 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
         } else {
             var companies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
             
-//            if let companiesSaved = UserDefaults.standard.array(forKey: "companies") as? Array<Data> {
-//                companies = companiesSaved
-//            } else {
-//                companies = Array()
-//            }
-            
             var pdcCompany: Company
             
             if !companies.isEmpty, id != nil {
@@ -123,7 +117,7 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueCompanyToShift" {
             let controller = segue.destination as! ShiftController
-            controller.sender = self.sender
+            controller.sender = self
         }
     }
     

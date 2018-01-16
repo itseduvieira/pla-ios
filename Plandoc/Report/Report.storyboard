@@ -58,7 +58,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7U-7c-Jxx" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
-                                <rect key="frame" x="16" y="607" width="343" height="40"/>
+                                <rect key="frame" x="16" y="611" width="343" height="40"/>
                                 <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Y0S-kU-HCj"/>
@@ -105,7 +105,7 @@
                             <constraint firstItem="yt8-ug-Pbw" firstAttribute="leading" secondItem="sFP-SC-tA6" secondAttribute="leading" id="eJf-HL-2HC"/>
                             <constraint firstItem="yt8-ug-Pbw" firstAttribute="trailing" secondItem="sFP-SC-tA6" secondAttribute="trailing" id="fco-nx-ukT"/>
                             <constraint firstItem="Xc9-y9-f2T" firstAttribute="leading" secondItem="sFP-SC-tA6" secondAttribute="leading" id="nV5-lH-TRf"/>
-                            <constraint firstItem="sFP-SC-tA6" firstAttribute="bottom" secondItem="P7U-7c-Jxx" secondAttribute="bottom" constant="20" id="sLr-JH-MXL"/>
+                            <constraint firstItem="sFP-SC-tA6" firstAttribute="bottom" secondItem="P7U-7c-Jxx" secondAttribute="bottom" constant="16" id="sLr-JH-MXL"/>
                             <constraint firstItem="sFP-SC-tA6" firstAttribute="trailing" secondItem="P7U-7c-Jxx" secondAttribute="trailing" constant="16" id="u7S-iB-vII"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sFP-SC-tA6"/>

@@ -21,10 +21,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="iL6-UW-NDv" userLabel="SplashPlandoc">
-                                <rect key="frame" x="127.5" y="253.5" width="120" height="180"/>
+                                <rect key="frame" x="127.5" y="263.5" width="120" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="B95-tD-PNp"/>
-                                    <constraint firstAttribute="height" constant="180" id="JGv-kc-pvd"/>
+                                    <constraint firstAttribute="height" constant="160" id="JGv-kc-pvd"/>
                                 </constraints>
                             </imageView>
                         </subviews>
