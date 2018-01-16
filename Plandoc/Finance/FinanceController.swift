@@ -57,6 +57,8 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
                 financeData[id] = FinanceData()
             }
         }
+        
+        tableFinance.reloadData()
     }
     
     func setNavigationBar() {
