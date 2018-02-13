@@ -207,7 +207,16 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
                 let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: self.shifts[indexPath.row]) as! Shift
                 
                 if shiftPdc.groupId == nil {
-                    self.removeOne(shiftPdc)
+                    let alert = UIAlertController(title: "Remover Plantão", message: "Ao remover um plantão, os dados não poderão ser recuperados. Você deseja realmente remover este plantao?", preferredStyle: .actionSheet)
+                    
+                    alert.addAction(UIAlertAction(title: "Sim, desejo remover", style: .destructive, handler: { action in
+                        
+                        self.removeOne(shiftPdc)
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+                    
+                    self.present(alert, animated: true)
                 } else {
                     let alert = UIAlertController(title: "Remover Plantão Fixo", message: "O plantão escolhido é do tipo fixo. Você deseja remover apenas este agendamento ou todos os agendamentos deste fixo?", preferredStyle: .actionSheet)
                     
