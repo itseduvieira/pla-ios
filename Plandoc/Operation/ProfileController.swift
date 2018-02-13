@@ -28,13 +28,13 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
         "Cirurgia Plástica", "Cirurgia Torácica", "Cirurgia Vascular", "Clínica Médica", "Coloproctologia", "Dermatologia", "Endocrinologia", "Endoscopia", "Gastroenterologia", "Genética Médica", "Geriatria", "Ginecologia e Obstetrícia",
         "Hematologia e Hemoterapia", "Homeopatia", "Infectologia", "Mastologia", "Medicina de Família e Comunidade", "Medicina do Trabalho", "Medicina de Tráfego", "Medicina Esportiva", "Medicina Física e Reabilitação", "Medicina Intensiva", "Medicina Legal", "Medicina Nuclear",
         "Medicina Preventiva e Social", "Nefrologia", "Neurocirurgia", "Neurologia", "Nutrologia", "Oftalmologia", "Ortopedia e Traumatologia", "Otorrinolaringologia", "Patologia", "Patologia Clínica/Medicina Laboratorial", "Pediatria", "Pneumologia",
-        "Psiquiatria", "Radiologia e Diagnóstico por Imagem", "Radioterapia", "Reumatologia", "Urologia"
+        "Psiquiatria", "Radiologia e Diagnóstico por Imagem", "Radioterapia", "Reumatologia", "Urologia", "Outra"
     ]
     
     let pickerUFData = [
         "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO",
-        "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ",
-        "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
+        "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI",
+        "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
     ]
     
     //MARK: Actions
@@ -99,7 +99,7 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
             self.performSegue(withIdentifier: "SegueProfileToFirstSteps", sender: self)
         } else {
             if self.sender.restorationIdentifier == "AccountViewController" {
-                self.performSegue(withIdentifier: "SegueProfileToAccount", sender: self)
+                self.performSegue(withIdentifier: "SegueUnwindToAccount", sender: self)
             }
         }
     }

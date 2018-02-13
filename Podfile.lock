@@ -9,6 +9,18 @@ PODS:
     - Charts/Core (= 3.0.4)
   - Charts/Core (3.0.4)
   - ChromaColorPicker (1.5.1)
+  - FacebookCore (0.3.0):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.27)
+  - FacebookLogin (0.3.0):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.3)
+    - FBSDKCoreKit (~> 4.27)
+    - FBSDKLoginKit (~> 4.27)
+  - FBSDKCoreKit (4.29.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.29.0):
+    - FBSDKCoreKit
   - Firebase/Auth (4.7.0):
     - Firebase/Core
     - FirebaseAuth (= 4.4.0)
@@ -68,6 +80,7 @@ DEPENDENCIES:
   - Bolts
   - Charts
   - ChromaColorPicker
+  - FacebookLogin
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
@@ -81,6 +94,10 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Charts: 0705898046257443f0afbbc3179f4b67507b6e48
   ChromaColorPicker: cc7fc1d92569a8a9198fe89d9a420147e508462c
+  FacebookCore: 3ffa190a3f1f96cec0e44d3fc221bc322c595ffa
+  FacebookLogin: 0af839ea858faef99550d16596b87b4a8e8906e6
+  FBSDKCoreKit: 6f139173dc63a1deaff4430a55f2fe5bb222d2af
+  FBSDKLoginKit: 56a057ca6822535ea0faa25f57a7c41edb697fd4
   Firebase: dbfb98ccec2dcfcd21ab9cc1b4981a3f3c8c5e26
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
   FirebaseAuth: cdeee95b528958dbb7dcf220ad0fb804d3a284b0
@@ -98,6 +115,6 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
 
-PODFILE CHECKSUM: 8dd638e48af718357a44ee63d30d94aaabeaf7d5
+PODFILE CHECKSUM: 98a69e012a2e2a35b2faa3b0e43526810d305d6f
 
 COCOAPODS: 1.3.1

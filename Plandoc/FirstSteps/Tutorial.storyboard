@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cUF-hN-ZFc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cUF-hN-ZFc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,14 +14,13 @@
         <scene sceneID="0MA-Mx-xJb">
             <objects>
                 <viewController storyboardIdentifier="FirstStepViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XZr-jo-D0y" customClass="PageController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides/>
                     <view key="view" contentMode="scaleToFill" id="7gD-nQ-Vb3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49C-vw-VUa" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
                                 <rect key="frame" x="115.5" y="573" width="144" height="40"/>
-                                <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.18431372549019609" green="0.58431372549019611" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="144" id="fkr-xf-W9o"/>
                                     <constraint firstAttribute="height" constant="40" id="s7B-WM-JIR"/>
@@ -65,8 +64,11 @@
                                     <constraint firstItem="PcU-zw-lWD" firstAttribute="top" secondItem="LHi-Ge-CaZ" secondAttribute="top" constant="5" id="dwO-Ja-HwB"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Título 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddl-Is-bRf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddl-Is-bRf">
                                 <rect key="frame" x="87" y="409" width="201" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="201" id="PZR-Dp-Www"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -109,14 +111,13 @@
         <scene sceneID="6yq-8C-ysR">
             <objects>
                 <viewController storyboardIdentifier="SecondStepViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1LL-jk-0HE" customClass="PageController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides/>
                     <view key="view" contentMode="scaleToFill" id="Z4T-89-9Jt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJb-8x-FFp" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
                                 <rect key="frame" x="115.5" y="573" width="144" height="40"/>
-                                <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.18431372549019609" green="0.58431372549019611" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="144" id="WI8-so-tJ6"/>
                                     <constraint firstAttribute="height" constant="40" id="bkK-Sa-o67"/>
@@ -160,8 +161,11 @@
                                     <constraint firstAttribute="bottom" secondItem="lJe-3B-enr" secondAttribute="bottom" id="qVV-Hi-kUG"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Título 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0c-v5-YK9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0c-v5-YK9">
                                 <rect key="frame" x="87" y="409" width="201" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="201" id="Ng2-qv-7ys"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -220,14 +224,13 @@
         <scene sceneID="DiU-hk-9aP">
             <objects>
                 <viewController storyboardIdentifier="ThirdStepViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ovl-Ia-ePU" customClass="PageController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides/>
                     <view key="view" contentMode="scaleToFill" id="8TS-El-69V">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6v-jt-Ubg" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
                                 <rect key="frame" x="115.5" y="573" width="144" height="40"/>
-                                <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.18431372549019609" green="0.58431372549019611" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="144" id="5a4-IW-tyz"/>
                                     <constraint firstAttribute="height" constant="40" id="PNd-fO-Xo0"/>
@@ -256,7 +259,10 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAp-5Q-VKG">
-                                <rect key="frame" x="136.5" y="409" width="102" height="33"/>
+                                <rect key="frame" x="87" y="409" width="201" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="201" id="Lkz-vN-1uN"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -302,6 +308,6 @@
         <image name="Step3" width="849" height="995"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KtJ-ke-Tdt"/>
+        <segue reference="xXC-j5-phO"/>
     </inferredMetricsTieBreakers>
 </document>

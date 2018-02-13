@@ -13,6 +13,8 @@ class ExtendedMenuController: UIViewController,  UITableViewDelegate, UITableVie
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tableMenu: UITableView!
     
+    @IBAction func unwindToExtendedMenu(segue: UIStoryboardSegue) {}
+    
     let menu = ["Empresas", "Pagamentos", "Preferências"]
     let icons = [UIImage(named: "IconBarCompany"), UIImage(named: "IconBarPayment"), UIImage(named: "IconBarPreferences")]
     let segue = ["SegueCompanies", "SegueMembership", "SeguePreferences"]
@@ -46,6 +48,10 @@ class ExtendedMenuController: UIViewController,  UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as! MenuCustomCell
+        
+        cell.layoutMargins = UIEdgeInsets.zero
+        cell.separatorInset = UIEdgeInsets.zero
+        
         cell.menu.text = self.menu[indexPath.row]
         
         let templateImage = self.icons[indexPath.row]?.withRenderingMode(.alwaysTemplate)

@@ -62,11 +62,6 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-    
     @IBAction func save() {
         if txtType.text! == "" || txtCompany.text! == "" || txtAddress.text! == "" || txtAdmin.text! == "" || txtPhone.text! == "" {
             let alertController = UIAlertController(title: "Erro", message: "Preencha corretamente os campos.", preferredStyle: .alert)
@@ -108,7 +103,7 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
         if self.sender.restorationIdentifier == "FirstStepsViewController" {
             self.performSegue(withIdentifier: "SegueCompanyToFirstSteps", sender: self)
         } else if self.sender.restorationIdentifier == "ListCompaniesViewController" {
-            self.performSegue(withIdentifier: "SegueCompanyToList", sender: self)
+            self.performSegue(withIdentifier: "SegueUnwindToList", sender: self)
         } else if self.sender.restorationIdentifier == "ShiftsViewController" {
             self.performSegue(withIdentifier: "SegueCompanyToShift", sender: self)
         }

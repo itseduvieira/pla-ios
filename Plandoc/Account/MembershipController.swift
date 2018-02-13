@@ -28,6 +28,6 @@ class MembershipController: UIViewController {
     }
     
     @objc func cancel() {
-        self.performSegue(withIdentifier: "SeguePaymentToExtended", sender: self)
+        self.performSegue(withIdentifier: "SegueUnwindToExtendedMenu", sender: self)
     }
 }

@@ -14,6 +14,8 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var companyTable: UITableView!
     
+    @IBAction func unwindToCompaniesList(segue: UIStoryboardSegue) {}
+    
     var companies: [Data]!
     var id: String!
     
@@ -51,7 +53,7 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
     }
     
     @objc func back() {
-        self.performSegue(withIdentifier: "SegueCompanyToMenu", sender: self)
+        self.performSegue(withIdentifier: "SegueUnwindToExtendedMenu", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

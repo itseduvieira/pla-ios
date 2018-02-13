@@ -10,6 +10,8 @@ import UIKit
 import FirebaseAuth
 import FirebaseStorage
 import FBSDKLoginKit
+import FacebookCore
+import FacebookLogin
 
 class LoginController : UIViewController {
     //MARK: Properties
@@ -17,6 +19,8 @@ class LoginController : UIViewController {
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UINavigationItem!
+    
+    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {}
     
     //MARK: Actions
     override func viewDidLoad() {
@@ -60,40 +64,10 @@ class LoginController : UIViewController {
             self.present(alertController, animated: true, completion: nil)
             
         } else {
+            self.presentAlert()
             Auth.auth().signIn(withEmail: self.txtLogin.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: self.txtPassword.text!) { (user, error) in
                 
-                if error == nil {
-                    UserDefaults.standard.set(self.txtLogin.text!.trimmingCharacters(in: .whitespacesAndNewlines), forKey: "username")
-                    UserDefaults.standard.set(self.txtPassword.text!, forKey: "password")
-                    if let user = user {
-                        let pdcUser = User(id: user.uid, name: user.displayName!, email: user.email!, phone: user.phoneNumber!)
-                        
-                        let storage = Storage.storage()
-                        let ref = storage.reference().child("\(user.uid)/profile.jpg")
-                        
-                        ref.getData(maxSize: 8 * 1024 * 1024) { data, error in
-                            if let error = error {
-                                print(error)
-                                
-                                self.saveCredentialsAndGoToCalendar(pdcUser: pdcUser)
-                            } else {
-                                pdcUser.picture = data!
-                                
-                                self.saveCredentialsAndGoToCalendar(pdcUser: pdcUser)
-                            }
-                        }                        
-                    }
-                    
-                    
-                    
-                } else {
-                    let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-                    
-                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(defaultAction)
-                    
-                    self.present(alertController, animated: true, completion: nil)
-                }
+                self.doLogin(user, error)
             }
         }
     }
@@ -123,5 +97,60 @@ class LoginController : UIViewController {
     
     @IBAction func showOrHidePass(_ sender: UIButton) {
         txtPassword.isSecureTextEntry = !txtPassword.isSecureTextEntry
+    }
+    
+    @IBAction func loginFacebook() {
+        let loginManager = LoginManager()
+        
+        loginManager.logIn(readPermissions: [.publicProfile], viewController: self, completion: { loginResult in
+            switch loginResult {
+                case .failed(let error):
+                    print(error)
+                case .cancelled:
+                    print("User cancelled login.")
+                case .success(let _, let _, let _):
+                    print("Logged in!")
+                    
+                    let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                    
+                    Auth.auth().signIn(with: credential) { (user, error) in
+                        self.doLogin(user, error)
+                    }
+            }
+        })
+    }
+    
+    private func doLogin(_ user: FirebaseAuth.User?, _ error: Error?) {
+        if error == nil {
+            UserDefaults.standard.set(self.txtLogin.text!.trimmingCharacters(in: .whitespacesAndNewlines), forKey: "username")
+            UserDefaults.standard.set(self.txtPassword.text!, forKey: "password")
+            if let user = user {
+                let pdcUser = User(id: user.uid, name: user.displayName!, email: user.email!, phone: user.phoneNumber!)
+                
+                let storage = Storage.storage()
+                let ref = storage.reference().child("\(user.uid)/profile.jpg")
+                
+                ref.getData(maxSize: 8 * 1024 * 1024) { data, error in
+                    if let error = error {
+                        print(error)
+                        
+                        self.saveCredentialsAndGoToCalendar(pdcUser: pdcUser)
+                    } else {
+                        pdcUser.picture = data!
+                        
+                        self.saveCredentialsAndGoToCalendar(pdcUser: pdcUser)
+                    }
+                }
+            }
+        } else {
+            let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+        self.dismissCustomAlert()
     }
 }

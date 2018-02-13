@@ -12,6 +12,7 @@ import FirebaseAuth
 
 class InitialController : UIViewController {
     //MARK: Properties
+    @IBAction func unwindToSignup(segue: UIStoryboardSegue) {}
     
     //MARK: Actions
     override func viewDidLoad() {

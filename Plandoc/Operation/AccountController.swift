@@ -22,6 +22,8 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UINavigationItem!
     
+    @IBAction func unwindToAccount(segue: UIStoryboardSegue) {}
+    
     //MARK: Actions
     override func viewDidLoad() {
         super.viewDidLoad()

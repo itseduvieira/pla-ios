@@ -155,6 +155,26 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    func presentAlert() {
+        let nib = UINib(nibName: "CustomAlertLoadingView", bundle: nil)
+        let customAlert = nib.instantiate(withOwner: self, options: nil).first as! CustomAlertLoadingView
+        
+        customAlert.tag = 12345
+        customAlert.indicator.startAnimating()
+        
+        
+        let screen = UIScreen.main.bounds
+        customAlert.center = CGPoint(x: screen.midX, y: screen.midY)
+        
+        self.view.addSubview(customAlert)
+    }
+    
+    func dismissCustomAlert() {
+        if let view = self.view.viewWithTag(12345) {
+            view.removeFromSuperview()
+        }
+    }
 }
 
 extension String {

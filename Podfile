@@ -14,4 +14,5 @@ target 'Plandoc' do
     pod 'MapboxStatic.swift', '~> 0.9'
     pod 'Bolts'
     pod 'Charts'
+    pod 'FacebookLogin'
 end

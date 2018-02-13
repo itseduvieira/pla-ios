@@ -28,7 +28,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Y6-at-jRh">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.18431372549019609" green="0.58431372549019611" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="8qt-Xz-RiB"/>
                                 </constraints>
@@ -65,20 +65,13 @@
                     <connections>
                         <outlet property="navBar" destination="jH9-OJ-aq8" id="6Zh-wA-my2"/>
                         <outlet property="navItem" destination="bNm-zg-PcQ" id="69H-dg-nid"/>
-                        <segue destination="Jzf-Ci-ZTs" kind="show" identifier="SeguePaymentToExtended" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="szz-J1-Rkd"/>
+                        <segue destination="tdF-mw-PbH" kind="unwind" identifier="SegueUnwindToExtendedMenu" unwindAction="unwindToExtendedMenuWithSegue:" id="3yB-Ll-IbI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EI0-la-1wC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="tdF-mw-PbH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-134" y="78"/>
-        </scene>
-        <!--ExtendedViewController-->
-        <scene sceneID="7Sr-Nq-t5Q">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Menu" referencedIdentifier="ExtendedViewController" id="Jzf-Ci-ZTs" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BkG-fN-35P" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="489" y="67"/>
         </scene>
     </scenes>
 </document>

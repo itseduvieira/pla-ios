@@ -44,7 +44,7 @@ class ForgotPasswordController: UIViewController {
     }
     
     @objc func back() {
-        self.performSegue(withIdentifier: "SegueForgotToLogin", sender: self)
+        self.performSegue(withIdentifier: "SegueUnwindToLogin", sender: self)
     }
     
     @IBAction func sendRecover() {

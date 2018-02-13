@@ -15,15 +15,7 @@
                 <viewControllerPlaceholder storyboardName="Menu" id="aQG-fV-duX" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="moc-zk-jCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-370" y="381"/>
-        </scene>
-        <!--Signup-->
-        <scene sceneID="g2X-ab-Fsf">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Signup" id="IO7-xn-Wku" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AMn-kx-Frx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-185" y="381"/>
+            <point key="canvasLocation" x="-278" y="354"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="rYB-QA-uZQ">
@@ -70,7 +62,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CF-fD-C5J" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
                                 <rect key="frame" x="20" y="386.5" width="335" height="40"/>
-                                <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.18431372549019609" green="0.58431372549019611" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="c7A-cW-OXf"/>
                                 </constraints>
@@ -104,6 +96,9 @@
                                 <state key="normal" title="ENTRAR COM FACEBOOK">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginFacebook" destination="LQB-pO-zZ1" eventType="touchUpInside" id="OvR-PQ-fVX"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEh-62-i9y">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -178,10 +173,11 @@
                         <outlet property="txtLogin" destination="VgU-Ab-tLg" id="y9Y-HY-ABp"/>
                         <outlet property="txtPassword" destination="58Z-eH-IvZ" id="9GZ-le-tiE"/>
                         <segue destination="aQG-fV-duX" kind="show" identifier="SegueLoginToMenu" id="up2-7p-s9h"/>
-                        <segue destination="IO7-xn-Wku" kind="show" identifier="SegueLoginToSignup" animates="NO" id="QmW-sd-crn"/>
+                        <segue destination="PBX-st-oaM" kind="unwind" identifier="SegueUnwindToSignup" unwindAction="unwindToSignupWithSegue:" id="hx6-cx-lB6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Yv-Vr-wu6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="PBX-st-oaM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-277.60000000000002" y="-76.011994002998506"/>
         </scene>
@@ -222,7 +218,7 @@
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R62-CX-v1Y" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
                                 <rect key="frame" x="20" y="386.5" width="335" height="40"/>
-                                <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.18431372549019609" green="0.58431372549019611" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="vvj-MO-5rA"/>
                                 </constraints>
@@ -281,10 +277,11 @@
                         <outlet property="navBar" destination="RLw-MN-6SN" id="rL7-l9-76s"/>
                         <outlet property="navItem" destination="4zW-l4-WA0" id="rgX-7Q-tvx"/>
                         <outlet property="txtEmail" destination="xSk-Ye-uqV" id="iyP-gz-Pu3"/>
-                        <segue destination="LQB-pO-zZ1" kind="show" identifier="SegueForgotToLogin" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="Q1B-Vb-w9C"/>
+                        <segue destination="hIA-nE-R9C" kind="unwind" identifier="SegueUnwindToLogin" unwindAction="unwindToLoginWithSegue:" id="zuG-wI-5GD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mtR-WD-EJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="hIA-nE-R9C" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="520.79999999999995" y="-76.011994002998506"/>
         </scene>

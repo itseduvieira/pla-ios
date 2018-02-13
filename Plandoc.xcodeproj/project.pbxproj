@@ -58,9 +58,14 @@
 		34D409FE1F9F8948002F3F51 /* FirstStepsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D409FD1F9F8948002F3F51 /* FirstStepsController.swift */; };
 		34D40A001F9FAB66002F3F51 /* Crud.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34D409FF1F9FAB66002F3F51 /* Crud.storyboard */; };
 		34D40A021F9FBD81002F3F51 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D40A011F9FBD81002F3F51 /* ProfileController.swift */; };
+		34DD141A20103F8500CA9BEE /* FinanceDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DD141920103F8500CA9BEE /* FinanceDetailController.swift */; };
+		34DD141C2012840D00CA9BEE /* PdfViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DD141B2012840D00CA9BEE /* PdfViewerController.swift */; };
+		34DD141E201591AA00CA9BEE /* ReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DD141D201591AA00CA9BEE /* ReportData.swift */; };
 		34E17B6C1FE899D500D2973F /* Membership.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34E17B6B1FE899D500D2973F /* Membership.storyboard */; };
 		34EFC43B1FC5B9AF003640CC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EFC4391FC5B9AD003640CC /* FBSDKCoreKit.framework */; };
 		34EFC43C1FC5B9AF003640CC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EFC43A1FC5B9AE003640CC /* FBSDKLoginKit.framework */; };
+		34FA6AA1202B7666002F9B0D /* CustomAlertLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34FA6AA0202B7666002F9B0D /* CustomAlertLoadingView.xib */; };
+		34FA6AA3202B77F8002F9B0D /* CustomAlertLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FA6AA2202B77F8002F9B0D /* CustomAlertLoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,9 +123,14 @@
 		34D409FD1F9F8948002F3F51 /* FirstStepsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStepsController.swift; sourceTree = "<group>"; };
 		34D409FF1F9FAB66002F3F51 /* Crud.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Crud.storyboard; sourceTree = "<group>"; };
 		34D40A011F9FBD81002F3F51 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		34DD141920103F8500CA9BEE /* FinanceDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceDetailController.swift; sourceTree = "<group>"; };
+		34DD141B2012840D00CA9BEE /* PdfViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewerController.swift; sourceTree = "<group>"; };
+		34DD141D201591AA00CA9BEE /* ReportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportData.swift; sourceTree = "<group>"; };
 		34E17B6B1FE899D500D2973F /* Membership.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Membership.storyboard; sourceTree = "<group>"; };
 		34EFC4391FC5B9AD003640CC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		34EFC43A1FC5B9AE003640CC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		34FA6AA0202B7666002F9B0D /* CustomAlertLoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertLoadingView.xib; sourceTree = "<group>"; };
+		34FA6AA2202B77F8002F9B0D /* CustomAlertLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertLoadingView.swift; sourceTree = "<group>"; };
 		9D2DF7B5344CC92E9B49A5F9 /* Pods-Plandoc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plandoc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plandoc/Pods-Plandoc.debug.xcconfig"; sourceTree = "<group>"; };
 		DF2AC1154E943F506F5EADE6 /* Pods_Plandoc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plandoc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -233,6 +243,7 @@
 			children = (
 				346EDE391FBD0E7F00F03EF4 /* Finance.storyboard */,
 				344353571FE5DEA000363111 /* FinanceController.swift */,
+				34DD141920103F8500CA9BEE /* FinanceDetailController.swift */,
 				3459438420054BAD008F15B0 /* FinanceCustomCell.swift */,
 			);
 			path = Finance;
@@ -243,6 +254,8 @@
 			children = (
 				346EDE371FBD0C6E00F03EF4 /* Report.storyboard */,
 				34C478861FE48F9400FF6E05 /* MainReportController.swift */,
+				34DD141B2012840D00CA9BEE /* PdfViewerController.swift */,
+				34DD141D201591AA00CA9BEE /* ReportData.swift */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -251,11 +264,13 @@
 			isa = PBXGroup;
 			children = (
 				34A075D51FAFFA2F006DDF68 /* Util.storyboard */,
+				34FA6AA0202B7666002F9B0D /* CustomAlertLoadingView.xib */,
 				3426E1B61FAD0FB60087E1A5 /* MonthYearPickerView.swift */,
 				3450E7AA1F953BBF00A239E4 /* UIStoryboardSegueSlide.swift */,
 				347765711F905F8400082442 /* UIExtensions.swift */,
 				34A075D71FAFFB2F006DDF68 /* AlertController.swift */,
 				343C54162009BD13009F5EFB /* PreferencesController.swift */,
+				34FA6AA2202B77F8002F9B0D /* CustomAlertLoadingView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -368,6 +383,7 @@
 				34D40A001F9FAB66002F3F51 /* Crud.storyboard in Resources */,
 				3477655B1F8FE93200082442 /* Assets.xcassets in Resources */,
 				341BDBC01F9E5F04000DEFCB /* Menu.storyboard in Resources */,
+				34FA6AA1202B7666002F9B0D /* CustomAlertLoadingView.xib in Resources */,
 				3426E1B51FACE01D0087E1A5 /* Calendar.storyboard in Resources */,
 				346EDE381FBD0C6E00F03EF4 /* Report.storyboard in Resources */,
 				34AD2D571F976D010083E942 /* Tutorial.storyboard in Resources */,
@@ -392,7 +408,11 @@
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
@@ -407,7 +427,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
@@ -469,6 +493,7 @@
 				3426E1B11FABA59C0087E1A5 /* Profile.swift in Sources */,
 				345568371FBF535E00B32627 /* CalendarController.swift in Sources */,
 				34C478871FE48F9400FF6E05 /* MainReportController.swift in Sources */,
+				34FA6AA3202B77F8002F9B0D /* CustomAlertLoadingView.swift in Sources */,
 				347765541F8FE93200082442 /* AppDelegate.swift in Sources */,
 				340143A01FFBEF2D00E48C83 /* CompanyCustomCell.swift in Sources */,
 				3459438520054BAD008F15B0 /* FinanceCustomCell.swift in Sources */,
@@ -477,11 +502,13 @@
 				3455CEEC1FA642A7001DB405 /* ShiftController.swift in Sources */,
 				3426E1B31FABA5B30087E1A5 /* Shift.swift in Sources */,
 				34D409FE1F9F8948002F3F51 /* FirstStepsController.swift in Sources */,
+				34DD141A20103F8500CA9BEE /* FinanceDetailController.swift in Sources */,
 				3426E1AF1FAB756A0087E1A5 /* User.swift in Sources */,
 				347765721F905F8400082442 /* UIExtensions.swift in Sources */,
 				34D056051F9583F800C0344B /* SignupPhoneController.swift in Sources */,
 				3413D62E200E267000F6E6C6 /* MembershipController.swift in Sources */,
 				34415CDB1FC07A8C0093F761 /* ForgotPasswordController.swift in Sources */,
+				34DD141E201591AA00CA9BEE /* ReportData.swift in Sources */,
 				34AD2D581F976D010083E942 /* PageController.swift in Sources */,
 				34305F411FFACED000396D61 /* MenuCustomCell.swift in Sources */,
 				34305F431FFAFA9800396D61 /* CompanyListController.swift in Sources */,
@@ -493,6 +520,7 @@
 				3455CEEE1FA65C0A001DB405 /* CompletionController.swift in Sources */,
 				3450E7AB1F953DD900A239E4 /* UIStoryboardSegueSlide.swift in Sources */,
 				3455CEEA1FA64279001DB405 /* CompanyController.swift in Sources */,
+				34DD141C2012840D00CA9BEE /* PdfViewerController.swift in Sources */,
 				343C54172009BD13009F5EFB /* PreferencesController.swift in Sources */,
 				346BDC3C1FB21E4B00635ABA /* MenuController.swift in Sources */,
 				347765691F8FF60100082442 /* LoginController.swift in Sources */,
@@ -651,6 +679,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Plandoc/Plandoc.entitlements;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = KYAUQ77CED;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -15,4 +15,5 @@ class ShiftCustomCell: UITableViewCell {
     @IBOutlet weak var salary: UILabel!
     @IBOutlet weak var day: UILabel!
     @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var lblPaid: UILabel!
 }
