@@ -92,7 +92,7 @@ class LoginController : UIViewController {
     }
     
     @objc func back() {
-        self.performSegue(withIdentifier: "SegueLoginToSignup", sender: self)
+        self.performSegue(withIdentifier: "SegueUnwindToSignup", sender: self)
     }
     
     @IBAction func showOrHidePass(_ sender: UIButton) {

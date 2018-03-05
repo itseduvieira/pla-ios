@@ -88,6 +88,7 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
             pdcCompany.admin = txtAdmin.text
             pdcCompany.phone = txtPhone.text
             pdcCompany.color = colorIndicator.backgroundColor?.hexCode
+            pdcCompany.active = true
             
             let company = NSKeyedArchiver.archivedData(withRootObject: pdcCompany)
             

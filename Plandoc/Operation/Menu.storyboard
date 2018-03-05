@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LhB-1a-PdK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LhB-1a-PdK">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,7 +28,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ao6-YC-6fw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1425" y="336"/>
+            <point key="canvasLocation" x="1150" y="336"/>
         </scene>
         <!--Membership-->
         <scene sceneID="jQw-ws-rdb">
@@ -38,7 +38,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f0F-Fr-0AS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1688" y="336"/>
+            <point key="canvasLocation" x="1419" y="336"/>
         </scene>
         <!--ListCompaniesViewController-->
         <scene sceneID="8yo-Yl-7zs">
@@ -48,7 +48,31 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jzy-bZ-fQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1968" y="336"/>
+            <point key="canvasLocation" x="1699" y="336"/>
+        </scene>
+        <!--Storyboard Reference-->
+        <scene sceneID="SGP-fL-Nhd">
+            <objects>
+                <viewControllerPlaceholder id="cYl-8T-adp" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fef-iR-svx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2751" y="336"/>
+        </scene>
+        <!--ExpensesViewController-->
+        <scene sceneID="fZ3-BR-I4g">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Finance" referencedIdentifier="ExpensesViewController" id="VpY-YH-i1D" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m9a-PJ-KlA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2310" y="336"/>
+        </scene>
+        <!--GoalsViewController-->
+        <scene sceneID="Pxf-Ks-5vA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Finance" referencedIdentifier="GoalsViewController" id="kIG-JQ-tRv" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qr4-kK-48r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2013" y="336"/>
         </scene>
         <!--CalendarViewController-->
         <scene sceneID="6Wo-Tp-rve">
@@ -80,14 +104,15 @@
             </objects>
             <point key="canvasLocation" x="603" y="336"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="LgQ-13-l2s">
             <objects>
-                <tabBarController id="LhB-1a-PdK" sceneMemberID="viewController">
+                <tabBarController id="LhB-1a-PdK" customClass="MainTabBarController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="6DC-RY-ihf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="selectedImageTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.1843137255" green="0.58431372550000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.1843137255" green="0.58431372550000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="cxk-15-cEf" kind="relationship" relationship="viewControllers" id="rxw-nx-fEd"/>
@@ -130,10 +155,10 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1P3-Qd-iWv">
-                                <rect key="frame" x="0.0" y="119" width="375" height="170"/>
+                                <rect key="frame" x="0.0" y="119" width="375" height="230"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="170" id="hFl-hz-ycl"/>
+                                    <constraint firstAttribute="height" constant="230" id="hFl-hz-ycl"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuCell" id="D7u-hr-o0O" customClass="MenuCustomCell" customModule="Plandoc" customModuleProvider="target">
@@ -250,6 +275,8 @@
                         <segue destination="SrI-d8-63b" kind="show" identifier="SeguePreferences" id="6Eq-7Z-tA7"/>
                         <segue destination="IVy-XK-eKs" kind="show" identifier="SegueMembership" id="OBG-g1-ljx"/>
                         <segue destination="bIB-Dg-UQN" kind="show" identifier="SegueCompanies" id="4nU-sx-BOl"/>
+                        <segue destination="kIG-JQ-tRv" kind="show" identifier="SegueGoals" id="edE-cT-ha5"/>
+                        <segue destination="VpY-YH-i1D" kind="show" identifier="SegueExpenses" id="KuI-8t-G0r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWQ-zp-exX" userLabel="First Responder" sceneMemberID="firstResponder"/>

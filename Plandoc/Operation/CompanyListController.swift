@@ -18,6 +18,7 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
     
     var companies: [Data]!
     var id: String!
+    var dictCompanies: [String:Data]!
     
     //MARK: Actions
     override func viewDidLoad() {
@@ -32,8 +33,12 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
-        self.companies = [Data](dictCompanies.values)
+        dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
+        self.companies = [Data](dictCompanies.values).filter({ (data) -> Bool in
+            let company = NSKeyedUnarchiver.unarchiveObject(with: data) as! Company
+            return company.active
+        })
+        
         id = nil
         
         companyTable.reloadData()
@@ -71,6 +76,9 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CompanyCell", for: indexPath) as! CompanyCustomCell
         
+        cell.layoutMargins = UIEdgeInsets.zero
+        cell.separatorInset = UIEdgeInsets.zero
+        
         let company = self.companies[indexPath.row]
         let companyPdc = NSKeyedUnarchiver.unarchiveObject(with: company) as! Company
         
@@ -97,9 +105,22 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            companies.remove(at: indexPath.row)
-            UserDefaults.standard.set(companies, forKey: "companies")
-            tableView.reloadData()
+            let alert = UIAlertController(title: "Remover Empresa", message: "Ao remover uma empresa, os dados não poderão ser recuperados. Você deseja realmente remover esta empresa?", preferredStyle: .actionSheet)
+            
+            alert.addAction(UIAlertAction(title: "Sim, desejo remover", style: .destructive, handler: { action in
+                
+                let company = self.companies[indexPath.row]
+                let companyPdc = NSKeyedUnarchiver.unarchiveObject(with: company) as! Company
+                companyPdc.active = false
+                self.dictCompanies[companyPdc.id] = NSKeyedArchiver.archivedData(withRootObject: companyPdc)
+                UserDefaults.standard.set(self.dictCompanies, forKey: "companies")
+                
+                self.viewWillAppear(true)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true)
         }
     }
 }

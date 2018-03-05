@@ -46,12 +46,16 @@
 		347765691F8FF60100082442 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347765681F8FF60100082442 /* LoginController.swift */; };
 		3477656F1F904BEC00082442 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3477656E1F904BEC00082442 /* Signup.storyboard */; };
 		347765721F905F8400082442 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347765711F905F8400082442 /* UIExtensions.swift */; };
+		34981B062042323E00A815F1 /* ExpensesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34981B052042323E00A815F1 /* ExpensesController.swift */; };
+		34981B082042336700A815F1 /* GoalsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34981B072042336700A815F1 /* GoalsController.swift */; };
+		34981B0A2042453D00A815F1 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34981B092042453D00A815F1 /* MainTabBarController.swift */; };
 		34A075D61FAFFA2F006DDF68 /* Util.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34A075D51FAFFA2F006DDF68 /* Util.storyboard */; };
 		34A075D81FAFFB2F006DDF68 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A075D71FAFFB2F006DDF68 /* AlertController.swift */; };
 		34AD2D4F1F966AE00083E942 /* FirstSteps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34AD2D4E1F966AE00083E942 /* FirstSteps.storyboard */; };
 		34AD2D561F976D010083E942 /* TutorialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AD2D521F976D010083E942 /* TutorialController.swift */; };
 		34AD2D571F976D010083E942 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34AD2D531F976D010083E942 /* Tutorial.storyboard */; };
 		34AD2D581F976D010083E942 /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AD2D541F976D010083E942 /* PageController.swift */; };
+		34C417482047193B00C06342 /* ExpenseDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C417472047193B00C06342 /* ExpenseDetailController.swift */; };
 		34C478871FE48F9400FF6E05 /* MainReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C478861FE48F9400FF6E05 /* MainReportController.swift */; };
 		34D056051F9583F800C0344B /* SignupPhoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D056041F9583F800C0344B /* SignupPhoneController.swift */; };
 		34D056071F96608100C0344B /* SignupCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D056061F96608100C0344B /* SignupCodeController.swift */; };
@@ -85,7 +89,7 @@
 		343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftCustomCell.swift; sourceTree = "<group>"; };
 		343C54162009BD13009F5EFB /* PreferencesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesController.swift; sourceTree = "<group>"; };
 		34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordController.swift; sourceTree = "<group>"; };
-		344353571FE5DEA000363111 /* FinanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceController.swift; sourceTree = "<group>"; };
+		344353571FE5DEA000363111 /* FinanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceController.swift; sourceTree = "<group>"; usesTabs = 1; };
 		3448940F200E74BA0077A88A /* FinanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceData.swift; sourceTree = "<group>"; };
 		3450E7A51F94281F00A239E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3450E7A71F94437700A239E4 /* Plandoc.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Plandoc.entitlements; sourceTree = "<group>"; };
@@ -111,12 +115,16 @@
 		347765681F8FF60100082442 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		3477656E1F904BEC00082442 /* Signup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		347765711F905F8400082442 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		34981B052042323E00A815F1 /* ExpensesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesController.swift; sourceTree = "<group>"; };
+		34981B072042336700A815F1 /* GoalsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsController.swift; sourceTree = "<group>"; };
+		34981B092042453D00A815F1 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		34A075D51FAFFA2F006DDF68 /* Util.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Util.storyboard; sourceTree = "<group>"; };
 		34A075D71FAFFB2F006DDF68 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		34AD2D4E1F966AE00083E942 /* FirstSteps.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FirstSteps.storyboard; sourceTree = "<group>"; };
 		34AD2D521F976D010083E942 /* TutorialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialController.swift; sourceTree = "<group>"; };
 		34AD2D531F976D010083E942 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		34AD2D541F976D010083E942 /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
+		34C417472047193B00C06342 /* ExpenseDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailController.swift; sourceTree = "<group>"; };
 		34C478861FE48F9400FF6E05 /* MainReportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainReportController.swift; sourceTree = "<group>"; };
 		34D056041F9583F800C0344B /* SignupPhoneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPhoneController.swift; sourceTree = "<group>"; };
 		34D056061F96608100C0344B /* SignupCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCodeController.swift; sourceTree = "<group>"; };
@@ -234,6 +242,7 @@
 				34305F401FFACED000396D61 /* MenuCustomCell.swift */,
 				34305F421FFAFA9800396D61 /* CompanyListController.swift */,
 				3401439F1FFBEF2D00E48C83 /* CompanyCustomCell.swift */,
+				34981B092042453D00A815F1 /* MainTabBarController.swift */,
 			);
 			path = Operation;
 			sourceTree = "<group>";
@@ -245,6 +254,9 @@
 				344353571FE5DEA000363111 /* FinanceController.swift */,
 				34DD141920103F8500CA9BEE /* FinanceDetailController.swift */,
 				3459438420054BAD008F15B0 /* FinanceCustomCell.swift */,
+				34981B052042323E00A815F1 /* ExpensesController.swift */,
+				34981B072042336700A815F1 /* GoalsController.swift */,
+				34C417472047193B00C06342 /* ExpenseDetailController.swift */,
 			);
 			path = Finance;
 			sourceTree = "<group>";
@@ -493,19 +505,23 @@
 				3426E1B11FABA59C0087E1A5 /* Profile.swift in Sources */,
 				345568371FBF535E00B32627 /* CalendarController.swift in Sources */,
 				34C478871FE48F9400FF6E05 /* MainReportController.swift in Sources */,
+				34C417482047193B00C06342 /* ExpenseDetailController.swift in Sources */,
 				34FA6AA3202B77F8002F9B0D /* CustomAlertLoadingView.swift in Sources */,
 				347765541F8FE93200082442 /* AppDelegate.swift in Sources */,
 				340143A01FFBEF2D00E48C83 /* CompanyCustomCell.swift in Sources */,
+				34981B082042336700A815F1 /* GoalsController.swift in Sources */,
 				3459438520054BAD008F15B0 /* FinanceCustomCell.swift in Sources */,
 				34489410200E74BA0077A88A /* FinanceData.swift in Sources */,
 				34D056071F96608100C0344B /* SignupCodeController.swift in Sources */,
 				3455CEEC1FA642A7001DB405 /* ShiftController.swift in Sources */,
+				34981B062042323E00A815F1 /* ExpensesController.swift in Sources */,
 				3426E1B31FABA5B30087E1A5 /* Shift.swift in Sources */,
 				34D409FE1F9F8948002F3F51 /* FirstStepsController.swift in Sources */,
 				34DD141A20103F8500CA9BEE /* FinanceDetailController.swift in Sources */,
 				3426E1AF1FAB756A0087E1A5 /* User.swift in Sources */,
 				347765721F905F8400082442 /* UIExtensions.swift in Sources */,
 				34D056051F9583F800C0344B /* SignupPhoneController.swift in Sources */,
+				34981B0A2042453D00A815F1 /* MainTabBarController.swift in Sources */,
 				3413D62E200E267000F6E6C6 /* MembershipController.swift in Sources */,
 				34415CDB1FC07A8C0093F761 /* ForgotPasswordController.swift in Sources */,
 				34DD141E201591AA00CA9BEE /* ReportData.swift in Sources */,
@@ -664,12 +680,13 @@
 					"~/Documents/FacebookSDK",
 				);
 				INFOPLIST_FILE = Plandoc/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = app.plandoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_REFLECTION_METADATA_LEVEL = none;
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -688,12 +705,13 @@
 					"~/Documents/FacebookSDK",
 				);
 				INFOPLIST_FILE = Plandoc/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = app.plandoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_REFLECTION_METADATA_LEVEL = none;
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

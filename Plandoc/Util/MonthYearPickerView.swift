@@ -51,8 +51,10 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
         // population months with localized names
         var months: [String] = []
         var month = 0
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "pt_BR")
         for _ in 1...12 {
-            months.append(DateFormatter().monthSymbols[month].capitalized)
+            months.append(df.monthSymbols[month])
             month += 1
         }
         self.months = months

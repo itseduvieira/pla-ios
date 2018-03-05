@@ -103,6 +103,7 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
         super.viewWillAppear(animated)
         
         let dictShifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
+        
         reportData = [Data](dictShifts.values).filter({ (data) -> Bool in
             let shift = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
             
@@ -128,7 +129,9 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
             report.hours = shift.shiftTime
             
             return report
-        }
+        }.sorted(by: { (one, two) in
+            return one.date < two.date
+        })
         
         var entries: [PieChartDataEntry] = []
         
@@ -136,7 +139,7 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
             var group: [String:Double] = [:]
             
             for data in reportData {
-                group[data.company] = group[data.company] ?? 0 + data.salary
+                group[data.company] = (group[data.company] ?? 0) + data.salary
             }
             
             entries = group.map { company, value in
@@ -149,10 +152,10 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
             formatter.dateFormat = "MMyyyy"
             
             for data in reportData {
-                group[formatter.string(from: data.date)] = group[formatter.string(from: data.date)] ?? 0 + data.salary
+                group[formatter.string(from: data.date)] = (group[formatter.string(from: data.date)] ?? 0) + data.salary
             }
             
-            for index in 1...12 {
+            for index in 1...6 {
                 let key = String(format: "%02d", index) + "2018"
                 if let element = group[key] {
                     entries.append(PieChartDataEntry(value: element,
@@ -289,11 +292,11 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
         
         let data = PieChartData(dataSet: set)
         
-        data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 8)!)
+        data.setValueFont(chartView.entryLabelFont?.withSize(10))
         data.setValueTextColor(.white)
         let nf = NumberFormatter()
         nf.currencySymbol = "R$"
-        nf.numberStyle = .none
+        nf.numberStyle = .currency
         data.setValueFormatter(DefaultValueFormatter(formatter: nf))
         
         chartView.data = data
@@ -310,8 +313,8 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
         chartView.legend.enabled = true
         chartView.legend.horizontalAlignment = .center
         chartView.legend.verticalAlignment = .top
-        chartView.legend.font = UIFont(name:"HelveticaNeue-Light", size:10)!
-        chartView.setExtraOffsets(left: 20, top: -40, right: 20, bottom: 0)
+        chartView.legend.font = chartView.legend.font.withSize(10)
+        chartView.setExtraOffsets(left: 20, top: -10, right: 20, bottom: 0)
         chartView.drawCenterTextEnabled = false
         chartView.drawHoleEnabled = true
         chartView.rotationAngle = 0
@@ -325,7 +328,7 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
         chartView.maxAngle = 180
         chartView.rotationAngle = 180
         chartView.entryLabelColor = .white
-        chartView.entryLabelFont = UIFont(name:"HelveticaNeue-Light", size:10)!
+        chartView.entryLabelFont = chartView.entryLabelFont?.withSize(10)
     }
     
     @IBAction func showPicker(_ sender: UITextField) {

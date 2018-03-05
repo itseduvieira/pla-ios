@@ -17,6 +17,7 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var txtTotalProfit: UILabel!
     @IBOutlet weak var txtProfitPaid: UILabel!
     @IBOutlet weak var txtQtdCompanies: UILabel!
+    @IBOutlet weak var txtProfitLeft: UILabel!
     
     @IBAction func unwindToFinance(segue: UIStoryboardSegue) {}
     
@@ -109,6 +110,8 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
             txtProfitPaid.text = "R$\(Int(profitPaid))"
 //        }
         
+        txtProfitLeft.text = "R$\(Int(totalProfit - profitPaid))"
+        
         tableFinance.reloadData()
     }
     
@@ -116,7 +119,7 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
         navBar.setBackgroundImage(UIImage(), for: .default)
         navBar.shadowImage = UIImage()
         
-        let yearItem = UIBarButtonItem(title: "2018", style: .plain, target: self, action: #selector(displayYears))
+        let yearItem = UIBarButtonItem(title: String(Calendar.current.dateComponents([.year], from: Date()).year!), style: .plain, target: self, action: #selector(displayYears))
         navItem.rightBarButtonItem = yearItem
     }
     
@@ -171,7 +174,7 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
             
         if let finance = financeData[String(format: "%02d", indexPath.row + 1) + (navItem.rightBarButtonItem?.title)!] {
         
-            cell.scheduled.text = "\(finance.totalShifts!) recebimentos"
+            cell.scheduled.text = "\(finance.totalShifts!) receita" + (finance.totalShifts! != 1 ? "s" : "")
             let formatter = NumberFormatter()
             formatter.numberStyle = .currency
             formatter.locale = Locale(identifier: "pt_BR")
@@ -184,7 +187,7 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
                 
                 cell.constraintCompletion.constant = total * percent
                 
-                cell.salaryPaid.text = "\(String(Int(percent * 100)))% • R$\(Int(finance.salaryPaid)) recebidos"
+                cell.salaryPaid.text = "R$\(Int(finance.salaryPaid)) (\(String(Int(percent * 100)))%) já recebidos"
                 cell.salary.text = "R$\(Int(finance.salaryTotal))"
                 
                 cell.completion.isHidden = false

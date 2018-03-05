@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="E9f-n2-leV">
-    <device id="retina4_0" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14092" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="E9f-n2-leV">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14081.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,14 +14,14 @@
             <objects>
                 <viewController storyboardIdentifier="FirstStepsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="E9f-n2-leV" customClass="FirstStepsController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cRJ-qx-nWT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cvr-qE-HK4">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                                 <subviews>
                                     <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSJ-tY-l1t">
-                                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="pDY-1z-l5T"/>
                                         </constraints>
@@ -43,7 +43,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bem vindo, %s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gc-O7-NZC">
-                                <rect key="frame" x="16" y="79" width="288" height="29"/>
+                                <rect key="frame" x="16" y="79" width="343" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="kXA-VS-Eia"/>
                                 </constraints>
@@ -52,7 +52,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sua experiência é muito importante para nós, portanto iremos guiar seus primeiros passos" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMh-cO-1R1">
-                                <rect key="frame" x="24" y="106" width="272" height="34"/>
+                                <rect key="frame" x="24" y="106" width="327" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="8H9-i2-Z5x"/>
                                 </constraints>
@@ -61,7 +61,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rx-Jw-jLa" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
-                                <rect key="frame" x="16" y="512" width="288" height="40"/>
+                                <rect key="frame" x="16" y="611" width="343" height="40"/>
                                 <color key="backgroundColor" red="0.1137254902" green="0.61568627450000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="l8y-e8-7l9"/>
@@ -75,19 +75,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cadastre seu Perfil Médico" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QJ-Lq-Y3B">
-                                <rect key="frame" x="38" y="190" width="232" height="20"/>
+                                <rect key="frame" x="38" y="190" width="287" height="20"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cadastre uma Empresa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRs-aM-i92">
-                                <rect key="frame" x="38" y="277.5" width="254" height="20"/>
+                                <rect key="frame" x="38" y="277.5" width="309" height="20"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cadastre um Plantão" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7N-vF-Q1s">
-                                <rect key="frame" x="38" y="365.5" width="254" height="20"/>
+                                <rect key="frame" x="38" y="365.5" width="309" height="20"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -114,19 +114,19 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seu perfil contém informações relativas à sua carreira na área médica" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZS-mX-kxc">
-                                <rect key="frame" x="50" y="213.5" width="258" height="24"/>
+                                <rect key="frame" x="50" y="213.5" width="313" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uma empresa representa qualquer clínica ou hospital onde você trabalha" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdw-rp-Y9H">
-                                <rect key="frame" x="50" y="301.5" width="258" height="24"/>
+                                <rect key="frame" x="50" y="301.5" width="313" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agende seu plantão, informando local, horário e visualize-o no calendário" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voC-iW-bbc">
-                                <rect key="frame" x="50" y="389.5" width="258" height="24"/>
+                                <rect key="frame" x="50" y="389.5" width="313" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -225,18 +225,18 @@
             <objects>
                 <viewController id="njY-j9-6MH" customClass="CompletionController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6DW-xP-V7C">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="re6-vb-7dD">
-                                <rect key="frame" x="92" y="213.5" width="136" height="141"/>
+                                <rect key="frame" x="119.5" y="263" width="136" height="141"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="141" id="0Y9-8J-7es"/>
                                     <constraint firstAttribute="width" constant="136" id="BBL-j6-oyP"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSC-rf-QCB" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
-                                <rect key="frame" x="16" y="512" width="288" height="40"/>
+                                <rect key="frame" x="16" y="611" width="343" height="40"/>
                                 <color key="backgroundColor" red="0.18431372549019609" green="0.58431372549019611" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="bAa-sk-mTm"/>
@@ -250,14 +250,14 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="lPu-h9-eVc">
-                                <rect key="frame" x="201" y="34" width="105" height="47"/>
+                                <rect key="frame" x="256" y="34" width="105" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="7mf-Kt-nAw"/>
                                     <constraint firstAttribute="width" constant="105" id="Xcj-gd-oZP"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agora sim, tudo pronto!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crc-DI-woh">
-                                <rect key="frame" x="10" y="112.5" width="300" height="29"/>
+                                <rect key="frame" x="37.5" y="162" width="300" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="6TU-de-aq0"/>
                                     <constraint firstAttribute="width" constant="300" id="erI-jU-Mdi"/>
@@ -267,7 +267,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verifique sua caixa de email para cadastrar uma senha :)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWa-Er-8Ry">
-                                <rect key="frame" x="40" y="141.5" width="240" height="60"/>
+                                <rect key="frame" x="67.5" y="191" width="240" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="QZy-uM-EzO"/>
                                     <constraint firstAttribute="width" constant="240" id="fye-Aj-BH2"/>
@@ -277,7 +277,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toque no botão abaixo para começar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vpr-Ah-LZb">
-                                <rect key="frame" x="40" y="366.5" width="240" height="60"/>
+                                <rect key="frame" x="67.5" y="416" width="240" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="1WO-Fw-08M"/>
                                     <constraint firstAttribute="width" constant="240" id="xUD-wW-4Ig"/>

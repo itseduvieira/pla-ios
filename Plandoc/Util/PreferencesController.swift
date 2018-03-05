@@ -81,11 +81,12 @@ class PreferencesController: UITableViewController {
     func logoff() {
         do {
             try Auth.auth().signOut()
-            UserDefaults.standard.removeObject(forKey: "loggedUser")
-            self.performSegue(withIdentifier: "SeguePreferencesToLogin", sender: self)
         } catch {
-            
+            print("Error at signOut")
         }
+        
+        UserDefaults.standard.removeObject(forKey: "loggedUser")
+        self.performSegue(withIdentifier: "SeguePreferencesToLogin", sender: self)
     }
     
     func eraseData(_ index: IndexPath) {

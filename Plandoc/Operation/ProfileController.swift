@@ -107,21 +107,27 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
     @IBAction func openPicker(_ sender: UITextField) {
         let datePickerView = MonthYearPickerView()
         
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "pt_BR")
+        df.dateFormat = "MMMM 'de' yyyy"
+        
         sender.inputView = datePickerView
         
+        if (txtGraduationDate.text?.isEmpty)! {
+            txtGraduationDate.text = df.string(from: Date())
+        }
+        
         datePickerView.onDateSelected = { (month: Int, year: Int) in
-            self.txtGraduationDate.text = DateFormatter().monthSymbols[month - 1].capitalized + " de " + String(year)
+            self.txtGraduationDate.text = "\(df.monthSymbols[month - 1]) de \(String(year))"
         }
     }
     
     @objc func datePickerValueChanged(sender:UIDatePicker) {
-        let dateFormatter = DateFormatter()
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "pt_BR")
+        df.dateFormat = "MMMM 'de' yyyy"
         
-        dateFormatter.dateStyle = DateFormatter.Style.short
-        
-        dateFormatter.timeStyle = DateFormatter.Style.none
-        
-        txtGraduationDate.text = dateFormatter.string(for: sender.date)
+        txtGraduationDate.text = df.string(for: sender.date)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -182,6 +188,8 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
         textField.inputAccessoryView = toolBar
         
         if txtField.text!.isEmpty {
+            self.picker.delegate?.pickerView!(self.picker, didSelectRow: 0, inComponent: 0)
+        } else if txtUF.text!.isEmpty {
             self.picker.delegate?.pickerView!(self.picker, didSelectRow: 0, inComponent: 0)
         }
     }

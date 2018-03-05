@@ -22,20 +22,26 @@ class InitialController : UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let user = Auth.auth().currentUser {
-            if UserDefaults.standard.object(forKey: "loggedUser") == nil {
-                let pdcUser = User(id: user.uid, name: user.displayName!, email: user.email!, phone: user.phoneNumber!)
-                let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
-                UserDefaults.standard.set(encoded, forKey: "loggedUser")
-            }
-            
-            self.performSegue(withIdentifier: "SegueSignupToMenu", sender: self)
-        } else if let data = UserDefaults.standard.object(forKey: "activation") as? NSData,
+        if let data = UserDefaults.standard.object(forKey: "activation") as? NSData,
                 let pdcUser = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? User {
             if pdcUser.phoneValid != nil && pdcUser.phoneValid {
                 self.performSegue(withIdentifier: "SegueSignupToFirstSteps", sender: self)
             } else if pdcUser.name != nil {
                 self.performSegue(withIdentifier: "SegueSignupToPhone", sender: self)
+            }
+        } else if Auth.auth().currentUser != nil {
+            if UserDefaults.standard.object(forKey: "loggedUser") == nil {
+                do {
+                    try Auth.auth().signOut()
+                } catch {
+                    print("Error at signOut")
+                }
+                
+                for v in view.subviews {
+                    v.isHidden = false
+                }
+            } else {
+                self.performSegue(withIdentifier: "SegueSignupToMenu", sender: self)
             }
         } else {
             for v in view.subviews {

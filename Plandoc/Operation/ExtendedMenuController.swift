@@ -15,9 +15,9 @@ class ExtendedMenuController: UIViewController,  UITableViewDelegate, UITableVie
     
     @IBAction func unwindToExtendedMenu(segue: UIStoryboardSegue) {}
     
-    let menu = ["Empresas", "Pagamentos", "Preferências"]
-    let icons = [UIImage(named: "IconBarCompany"), UIImage(named: "IconBarPayment"), UIImage(named: "IconBarPreferences")]
-    let segue = ["SegueCompanies", "SegueMembership", "SeguePreferences"]
+    let menu = ["Empresas", "Despesas", "Meta Financeira", "Plandoc Premium", "Preferências"]
+    let icons = [UIImage(named: "IconBarCompany"), UIImage(named: "IconBarExpenses"), UIImage(named: "IconBarPayment"), UIImage(named: "IconBarPremium"), UIImage(named: "IconBarPreferences")]
+    let segue = ["SegueCompanies", "SegueExpenses", "SegueGoals", "SegueMembership", "SeguePreferences"]
     
     //MARK: Actions
     override func viewDidLoad() {

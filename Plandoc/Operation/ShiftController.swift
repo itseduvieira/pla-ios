@@ -59,7 +59,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     }()
     
     var paymentTypeData = ["A Vista", "Final do Mês Atual", "Final do Próximo Mês", "Após X Semanas", "A Prazo"]
-    var companyChoosed: Company!
+    var companyChoosed: String!
     
     lazy var datePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -90,10 +90,6 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         self.hideKeyboardWhenTappedAround()
         
         self.setNavigationBar()
-        
-        let dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
-        
-        self.companiesData = [Data](dictCompanies.values)
         
         UITextField.connectFields(fields: [txtCompany, txtDate, txtHour, txtPaymentType, txtShiftTime, txtSalary])
         
@@ -146,7 +142,10 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         
         let dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
         
-        self.companiesData = [Data](dictCompanies.values)
+        self.companiesData = [Data](dictCompanies.values).filter({ (data) -> Bool in
+            let company = NSKeyedUnarchiver.unarchiveObject(with: data) as! Company
+            return company.active
+        })
         
         if companiesData.isEmpty && self.id == nil {
             let alertController = UIAlertController(title: "Nenhuma Empresa Cadastrada", message: "Para cadastrar um plantão, primeiro você deve cadastrar uma empresa.", preferredStyle: .alert)
@@ -228,7 +227,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             pdcShift = NSKeyedUnarchiver.unarchiveObject(with: shifts[id]!) as! Shift
         } else {
             pdcShift.id = String.random()
-            pdcShift.company = companyChoosed
+            pdcShift.companyId = companyChoosed
             pdcShift.groupId = groupId
             pdcShift.paid = false
         }
@@ -256,6 +255,10 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         }
         
         print(pdcShift.paymentDueDate)
+        
+        let dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
+        let company = NSKeyedUnarchiver.unarchiveObject(with: dictCompanies[pdcShift.companyId]!) as! Company
+        pdcShift.company = company
         
         let shift = NSKeyedArchiver.archivedData(withRootObject: pdcShift)
         shifts[pdcShift.id] = shift
@@ -402,7 +405,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             return txtFixo.text = "por \(fixoData[row])"
         } else if txtCompany.isFirstResponder {
             let company = NSKeyedUnarchiver.unarchiveObject(with: companiesData[row]) as! Company
-            self.companyChoosed = company
+            self.companyChoosed = company.id
             colorIndicator.backgroundColor = UIColor(hexString: company.color)
             txtCompany.text = "\(company.type!) \(company.name!)"
         } else if txtShiftTime.isFirstResponder {
@@ -628,7 +631,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     private func scheduleNotification(_ shift: Shift) {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
-        content.title = "Receita de Plantão"
+        content.title = "Lembrete de Recebimento"
         content.body = "Seu plantão na empresa \(shift.company.name!) venceu há 1 dia"
         content.sound = UNNotificationSound.default()
         content.badge = content.badge == nil ? 1 : (Int(truncating: content.badge!) + 1) as NSNumber

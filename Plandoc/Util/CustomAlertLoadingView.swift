@@ -11,4 +11,5 @@ import UIKit
 class CustomAlertLoadingView: UIView {
     @IBOutlet weak var titleAlertLabel: UILabel!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var container: UIView!
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class FinanceDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -143,12 +144,13 @@ class FinanceDetailController: UIViewController, UITableViewDelegate, UITableVie
         cell.weekDay.text = dateFormatter.string(from: shiftPdc.paymentDueDate).uppercased()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
         cell.desc.text = "\(dateFormatter.string(from: shiftPdc.date)) • Jornada de \(shiftPdc.shiftTime!) Horas"
+        cell.lblPaid.setRadius(radius: 2)
         
         if shiftPdc.paid {
             cell.lblPaid.backgroundColor = UIColor(hexString: "#59AF4F")
-            cell.lblPaid.text = "PAGO   "
+            cell.lblPaid.text = "PAGO  "
         } else {
-            
+            cell.lblPaid.text = "PENDENTE   "
             if Calendar.current.date(byAdding: DateComponents(day: 1), to: shiftPdc.paymentDueDate)! < Date() {
                 cell.lblPaid.backgroundColor = UIColor(hexString: "#E94362")
             } else {
@@ -165,5 +167,61 @@ class FinanceDetailController: UIViewController, UITableViewDelegate, UITableVie
             controller.sender = self
             controller.id = self.idShift
         }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        
+        let shift = self.shifts[editActionsForRowAt.row]
+        let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: shift) as! Shift
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Apagar") { action, index in
+            let alert = UIAlertController(title: "Plantão Não Realizado", message: "Este plantão não foi realizado e será apagado. Você deseja realmente remover este plantao?", preferredStyle: .actionSheet)
+            
+            alert.addAction(UIAlertAction(title: "Sim, desejo remover", style: .destructive, handler: { action in
+                
+                var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
+                dict.removeValue(forKey: shiftPdc.id)
+                
+                UserDefaults.standard.set(dict, forKey: "shifts")
+                
+                self.viewWillAppear(true)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true)
+        }
+        
+        let pay = UITableViewRowAction(style: .normal, title: "Já Recebi") { action, index in
+            var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
+            shiftPdc.paid = true
+            dict[shiftPdc.id] = NSKeyedArchiver.archivedData(withRootObject: shiftPdc)
+            UserDefaults.standard.set(dict, forKey: "shifts")
+            
+            let center = UNUserNotificationCenter.current()
+            center.removeDeliveredNotifications(withIdentifiers: [shiftPdc.id])
+            center.removePendingNotificationRequests(withIdentifiers: [shiftPdc.id])
+            
+            self.viewWillAppear(true)
+        }
+        pay.backgroundColor = UIColor(hexString: "#59AF4F")
+        
+        var actions = [delete]
+        
+        if !shiftPdc.paid {
+            actions.insert(pay, at: 0)
+            
+            if shiftPdc.date < Date() {
+                delete.title = "Não Compareci"
+            } else {
+                delete.title = "Não Irei"
+            }
+        }
+
+        return actions
     }
 }

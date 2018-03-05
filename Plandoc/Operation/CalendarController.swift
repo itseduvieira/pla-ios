@@ -176,6 +176,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         dateFormatter.dateFormat = "dd/MM/yyyy"
         
         cell.lblPaid.text = "\(dateFormatter.string(from: shiftPdc.paymentDueDate))   "
+        cell.lblPaid.setRadius(radius: 2)
         
         if shiftPdc.paid {
             cell.lblPaid.backgroundColor = UIColor(hexString: "#59AF4F")
@@ -200,11 +201,12 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
+    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Apagar") { action, index in
             if var dict = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] {
                 
-                let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: self.shifts[indexPath.row]) as! Shift
+                let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: self.shifts[editActionsForRowAt.row]) as! Shift
                 
                 if shiftPdc.groupId == nil {
                     let alert = UIAlertController(title: "Remover Plantão", message: "Ao remover um plantão, os dados não poderão ser recuperados. Você deseja realmente remover este plantao?", preferredStyle: .actionSheet)
@@ -224,18 +226,18 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
                         self.removeOne(shiftPdc)
                     }))
                     alert.addAction(UIAlertAction(title: "Remover Todos", style: .destructive, handler: { action in
-
-                            for data in dict.values {
-                                let s = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
-                                if s.groupId == shiftPdc.groupId {
-                                    dict.removeValue(forKey: s.id)
-                                }
+                        
+                        for data in dict.values {
+                            let s = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
+                            if s.groupId == shiftPdc.groupId {
+                                dict.removeValue(forKey: s.id)
                             }
-                    
-                            UserDefaults.standard.set(dict, forKey: "shifts")
-                    
-                            self.viewWillAppear(true)
-                            self.viewDidAppear(true)
+                        }
+                        
+                        UserDefaults.standard.set(dict, forKey: "shifts")
+                        
+                        self.viewWillAppear(true)
+                        self.viewDidAppear(true)
                     }))
                     alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
                     
@@ -243,6 +245,8 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }
         }
+        
+        return [delete]
     }
     
     func removeOne(_ shift: Shift) {
