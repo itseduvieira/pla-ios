@@ -17,6 +17,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var constraintCalendar: NSLayoutConstraint!
     @IBOutlet weak var emptyText: UILabel!
+    @IBOutlet weak var headerShifts: UIView!
     
     @IBAction func unwindToCalendar(segue: UIStoryboardSegue) {}
     
@@ -38,6 +39,9 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         calendar.dataSource = self
         calendar.clipsToBounds = true
         calendar.locale = Locale(identifier: "pt_BR")
+        
+        headerShifts.layer.addBorder(edge: .top, color: UIColor(hexString: "#26000000"), thickness: 0.3)
+        headerShifts.layer.addBorder(edge: .bottom, color: UIColor(hexString: "#26000000"), thickness: 0.3)
     }
     
     override func viewDidAppear(_ animated: Bool) {

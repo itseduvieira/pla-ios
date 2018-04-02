@@ -34,13 +34,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>14</string>
+	<string>20</string>
 	<key>FacebookAppID</key>
 	<string>156564041527880</string>
 	<key>FacebookDisplayName</key>
 	<string>Plandoc</string>
 	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string>public.app-category.productivity</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbauth2</string>
@@ -68,19 +68,13 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>arm64</string>
 	</array>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

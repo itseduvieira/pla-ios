@@ -22,6 +22,9 @@ class LoginController : UIViewController {
     
     @IBAction func unwindToLogin(segue: UIStoryboardSegue) {}
     
+    var name: String!
+    var email: String!
+    
     //MARK: Actions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,16 +44,6 @@ class LoginController : UIViewController {
         self.setNavigationBar()
         
         UITextField.connectFields(fields: [txtLogin, txtPassword])
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     @IBAction func login() {
@@ -97,32 +90,102 @@ class LoginController : UIViewController {
     
     @IBAction func showOrHidePass(_ sender: UIButton) {
         txtPassword.isSecureTextEntry = !txtPassword.isSecureTextEntry
+        if txtPassword.isSecureTextEntry {
+            sender.setImage(UIImage(named: "RevealPasswordIcon"), for: .normal)
+        } else {
+            sender.setImage(UIImage(named: "HidePasswordIcon"), for: .normal)
+        }
     }
     
     @IBAction func loginFacebook() {
         let loginManager = LoginManager()
         
-        loginManager.logIn(readPermissions: [.publicProfile], viewController: self, completion: { loginResult in
+        loginManager.logIn(readPermissions: [.publicProfile, .email], viewController: self, completion: { loginResult in
             switch loginResult {
-                case .failed(let error):
-                    print(error)
-                case .cancelled:
-                    print("User cancelled login.")
-                case .success(let _, let _, let _):
-                    print("Logged in!")
-                    
-                    let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                    
-                    Auth.auth().signIn(with: credential) { (user, error) in
-                        self.doLogin(user, error)
-                    }
+            case .failed(let error):
+                print(error)
+            case .cancelled:
+                print("User cancelled login.")
+            case .success(let _, let _, let _):
+                var name = "", email = ""
+                
+                if((FBSDKAccessToken.current()) != nil) {
+                    FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+                        if (error == nil) {
+                            let dict = result as! [String : AnyObject]
+                            name = dict["name"] as! String
+                            email = dict["email"] as! String
+                            
+                            self.trySignInFirebase(name, email)
+                        }
+                    })
+                }
             }
         })
     }
     
+    private func trySignInFirebase(_ name: String, _ email: String) {
+        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        
+        Auth.auth().signIn(with: credential) { (user, error) in
+            if let error = error {
+                print(error)
+                
+                let errCode = AuthErrorCode(rawValue: error._code)!
+                
+                switch errCode {
+                case .accountExistsWithDifferentCredential:
+                    let alertController = UIAlertController(title: "Perfil Existente", message: "Já existe um usuário utilizando este email que não está vinculado em sua conta do Facebook. Entre com email e senha e vincule os perfis.", preferredStyle: .alert)
+                    
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(defaultAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                    break
+                default:
+                    print(error)
+                }
+            } else if let user = user {
+                if user.providerData.count == 1 &&
+                    user.providerData[0].providerID == "facebook.com" {
+                    self.name = name
+                    self.email = email
+                    self.performSegue(withIdentifier: "SegueSignupToPassword", sender: self)
+                } else {
+                    if user.phoneNumber == nil {
+                        let pdcUser = User()
+                        pdcUser.id = user.uid
+                        pdcUser.email = email
+                        pdcUser.name = name
+                        let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
+                        UserDefaults.standard.set(encoded, forKey: "activation")
+                        self.performSegue(withIdentifier: "SegueLoginToPhone", sender: self)
+                    } else {
+                        let pdcUser = User(id: user.uid, name: user.displayName!, email: user.email!, phone: user.phoneNumber!)
+                        
+                        let storage = Storage.storage()
+                        let ref = storage.reference().child("\(user.uid)/profile.jpg")
+                        
+                        ref.getData(maxSize: 8 * 1024 * 1024) { data, error in
+                            if let error = error {
+                                print(error)
+                                
+                                self.saveCredentialsAndGoToCalendar(pdcUser: pdcUser)
+                            } else {
+                                pdcUser.picture = data!
+                                
+                                self.saveCredentialsAndGoToCalendar(pdcUser: pdcUser)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     private func doLogin(_ user: FirebaseAuth.User?, _ error: Error?) {
         if error == nil {
-            UserDefaults.standard.set(self.txtLogin.text!.trimmingCharacters(in: .whitespacesAndNewlines), forKey: "username")
+        UserDefaults.standard.set(self.txtLogin.text!.trimmingCharacters(in: .whitespacesAndNewlines), forKey: "username")
             UserDefaults.standard.set(self.txtPassword.text!, forKey: "password")
             if let user = user {
                 let pdcUser = User(id: user.uid, name: user.displayName!, email: user.email!, phone: user.phoneNumber!)
@@ -143,7 +206,7 @@ class LoginController : UIViewController {
                 }
             }
         } else {
-            let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Erro", message: error?.localizedDescription, preferredStyle: .alert)
             
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(defaultAction)
@@ -152,5 +215,13 @@ class LoginController : UIViewController {
         }
         
         self.dismissCustomAlert()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueSignupToPassword" {
+            let vc = segue.destination as! SignupPasswordController
+            vc.name = self.name
+            vc.email = self.email
+        }
     }
 }

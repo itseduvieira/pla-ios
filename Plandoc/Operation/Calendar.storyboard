@@ -87,32 +87,12 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BeY-Vj-TpR">
-                                        <rect key="frame" x="0.0" y="32" width="375" height="1"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="BQq-XB-Ocy"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXa-EO-YFP">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="WaY-EZ-q2n"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="cXa-EO-YFP" secondAttribute="trailing" id="2hm-FR-71U"/>
                                     <constraint firstItem="8Sx-K4-d98" firstAttribute="centerY" secondItem="hYe-kG-MfV" secondAttribute="centerY" id="JDT-4l-uAe"/>
                                     <constraint firstItem="8Sx-K4-d98" firstAttribute="leading" secondItem="hYe-kG-MfV" secondAttribute="leading" constant="14" id="O3i-ri-E5m"/>
-                                    <constraint firstItem="cXa-EO-YFP" firstAttribute="top" secondItem="hYe-kG-MfV" secondAttribute="top" id="SkI-cR-5Xy"/>
-                                    <constraint firstAttribute="trailing" secondItem="BeY-Vj-TpR" secondAttribute="trailing" id="Tmw-aB-vg4"/>
                                     <constraint firstAttribute="height" constant="33" id="XeA-IG-0yP"/>
-                                    <constraint firstItem="BeY-Vj-TpR" firstAttribute="leading" secondItem="hYe-kG-MfV" secondAttribute="leading" id="fgD-sk-tle"/>
-                                    <constraint firstItem="cXa-EO-YFP" firstAttribute="leading" secondItem="hYe-kG-MfV" secondAttribute="leading" id="gda-3C-afp"/>
-                                    <constraint firstAttribute="bottom" secondItem="BeY-Vj-TpR" secondAttribute="bottom" id="i6q-qX-Av1"/>
                                 </constraints>
                             </view>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gm4-jG-Nrw">
@@ -287,6 +267,7 @@
                         <outlet property="calendar" destination="xrv-KX-ml9" id="BSr-Rr-eeO"/>
                         <outlet property="constraintCalendar" destination="Zbk-1t-p6m" id="dRx-p8-GMG"/>
                         <outlet property="emptyText" destination="M1Q-gq-mNk" id="giz-Mw-FRE"/>
+                        <outlet property="headerShifts" destination="hYe-kG-MfV" id="OAV-Ky-9M0"/>
                         <outlet property="navBar" destination="XM4-Yc-75O" id="dHM-L3-XGI"/>
                         <outlet property="navItem" destination="h6u-WL-GFy" id="mfE-KI-R5X"/>
                         <outlet property="tableShifts" destination="gm4-jG-Nrw" id="px7-ee-Ld3"/>

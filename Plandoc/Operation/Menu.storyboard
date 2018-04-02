@@ -50,13 +50,13 @@
             </objects>
             <point key="canvasLocation" x="1699" y="336"/>
         </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="SGP-fL-Nhd">
+        <!--GoalsViewController-->
+        <scene sceneID="iyr-9H-XnF">
             <objects>
-                <viewControllerPlaceholder id="cYl-8T-adp" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fef-iR-svx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Finance" referencedIdentifier="GoalsViewController" id="uQd-Kj-R4n" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZTD-Ja-TLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2751" y="336"/>
+            <point key="canvasLocation" x="2021" y="339"/>
         </scene>
         <!--ExpensesViewController-->
         <scene sceneID="fZ3-BR-I4g">
@@ -65,14 +65,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m9a-PJ-KlA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2310" y="336"/>
-        </scene>
-        <!--GoalsViewController-->
-        <scene sceneID="Pxf-Ks-5vA">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Finance" referencedIdentifier="GoalsViewController" id="kIG-JQ-tRv" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qr4-kK-48r" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2013" y="336"/>
         </scene>
         <!--CalendarViewController-->
         <scene sceneID="6Wo-Tp-rve">
@@ -155,10 +147,10 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1P3-Qd-iWv">
-                                <rect key="frame" x="0.0" y="119" width="375" height="230"/>
+                                <rect key="frame" x="0.0" y="119" width="375" height="210"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="230" id="hFl-hz-ycl"/>
+                                    <constraint firstAttribute="height" constant="210" id="hFl-hz-ycl"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuCell" id="D7u-hr-o0O" customClass="MenuCustomCell" customModule="Plandoc" customModuleProvider="target">
@@ -222,32 +214,12 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D6n-oQ-scK">
-                                        <rect key="frame" x="0.0" y="54" width="375" height="1"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="E3I-mz-wlT"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfa-mG-Twa">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="k4b-8u-rWN"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="vfa-mG-Twa" secondAttribute="trailing" id="05Z-8u-cL9"/>
-                                    <constraint firstItem="vfa-mG-Twa" firstAttribute="leading" secondItem="mkz-Xy-Hn8" secondAttribute="leading" id="1Io-u6-0On"/>
-                                    <constraint firstAttribute="trailing" secondItem="D6n-oQ-scK" secondAttribute="trailing" id="5V4-cC-9x9"/>
                                     <constraint firstAttribute="height" constant="55" id="K0I-ie-hwf"/>
-                                    <constraint firstItem="vfa-mG-Twa" firstAttribute="top" secondItem="mkz-Xy-Hn8" secondAttribute="top" id="K8l-Rp-fgG"/>
-                                    <constraint firstAttribute="bottom" secondItem="D6n-oQ-scK" secondAttribute="bottom" id="Lco-6m-dJr"/>
                                     <constraint firstItem="2uz-5T-eyS" firstAttribute="leading" secondItem="mkz-Xy-Hn8" secondAttribute="leading" constant="14" id="i9e-uX-XXg"/>
                                     <constraint firstAttribute="bottom" secondItem="2uz-5T-eyS" secondAttribute="bottom" constant="3" id="lWs-VW-PcX"/>
-                                    <constraint firstItem="D6n-oQ-scK" firstAttribute="leading" secondItem="mkz-Xy-Hn8" secondAttribute="leading" id="tJZ-k4-mpj"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -270,13 +242,14 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Mais" image="IconBarMore" id="IiM-6Y-Lgm"/>
                     <connections>
+                        <outlet property="headerMenu" destination="mkz-Xy-Hn8" id="xzc-zX-Tna"/>
                         <outlet property="navBar" destination="J71-P4-b8J" id="NuM-zc-ROQ"/>
                         <outlet property="tableMenu" destination="1P3-Qd-iWv" id="QA1-u7-xln"/>
                         <segue destination="SrI-d8-63b" kind="show" identifier="SeguePreferences" id="6Eq-7Z-tA7"/>
                         <segue destination="IVy-XK-eKs" kind="show" identifier="SegueMembership" id="OBG-g1-ljx"/>
                         <segue destination="bIB-Dg-UQN" kind="show" identifier="SegueCompanies" id="4nU-sx-BOl"/>
-                        <segue destination="kIG-JQ-tRv" kind="show" identifier="SegueGoals" id="edE-cT-ha5"/>
                         <segue destination="VpY-YH-i1D" kind="show" identifier="SegueExpenses" id="KuI-8t-G0r"/>
+                        <segue destination="uQd-Kj-R4n" kind="show" identifier="SegueGoals" id="MIb-Zl-s7f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWQ-zp-exX" userLabel="First Responder" sceneMemberID="firstResponder"/>

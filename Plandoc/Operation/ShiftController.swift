@@ -30,6 +30,8 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     @IBOutlet weak var txtPaymentDueDate: UITextField!
     @IBOutlet weak var lblPaymentDueDate: UILabel!
     @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var constraintHeader: NSLayoutConstraint!
+    @IBOutlet weak var constraintTxtCompany: NSLayoutConstraint!
     
     weak var sender: UIViewController!
     var id: String!
@@ -116,6 +118,16 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         
         txtSalary.delegate = self
         txtSalary.placeholder = updateAmount()
+        
+        if UIScreen.main.bounds.height < 500 {
+            self.adjust4s()
+        }
+    }
+    
+    private func adjust4s() {
+        imgPicture.isHidden = true
+        constraintHeader.constant = 78
+        constraintTxtCompany.constant = 94
     }
     
     @IBAction func changeFixo(_ sender: UISwitch) {

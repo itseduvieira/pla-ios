@@ -75,13 +75,42 @@ extension UIView {
     }
 }
 
+extension CALayer {
+    
+    func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
+        
+        let border = CALayer()
+        
+        switch edge {
+        case UIRectEdge.top:
+            border.frame = CGRect.init(x: 0, y: 0, width: frame.width, height: thickness)
+            break
+        case UIRectEdge.bottom:
+            border.frame = CGRect.init(x: 0, y: frame.height - thickness, width: frame.width, height: thickness)
+            break
+        case UIRectEdge.left:
+            border.frame = CGRect.init(x: 0, y: 0, width: thickness, height: frame.height)
+            break
+        case UIRectEdge.right:
+            border.frame = CGRect.init(x: frame.width - thickness, y: 0, width: thickness, height: frame.height)
+            break
+        default:
+            break
+        }
+        
+        border.backgroundColor = color.cgColor;
+        
+        self.addSublayer(border)
+    }
+}
+
 extension UIColor {
     convenience init(hexString: String) {
         let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int = UInt32()
         Scanner(string: hex).scanHexInt32(&int)
         let a, r, g, b: UInt32
-        switch hex.characters.count {
+        switch hex.count {
         case 3: // RGB (12-bit)
             (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
         case 6: // RGB (24-bit)
@@ -164,9 +193,12 @@ extension UIViewController {
         customAlert.indicator.startAnimating()
         customAlert.container.setRadius(radius: 10)
         
-        
         let screen = UIScreen.main.bounds
         customAlert.center = CGPoint(x: screen.midX, y: screen.midY)
+        
+        if let tbc = self.tabBarController {
+            tbc.setTabBarVisible(visible: false, duration: 0.4, animated: true)
+        }
         
         self.view.addSubview(customAlert)
     }
@@ -175,6 +207,31 @@ extension UIViewController {
         if let view = self.view.viewWithTag(12345) {
             view.removeFromSuperview()
         }
+        
+        if let tbc = self.tabBarController {
+            tbc.setTabBarVisible(visible: true, duration: 0.3, animated: true)
+        }
+    }
+}
+
+extension UITabBarController {
+    func setTabBarVisible(visible:Bool, duration: TimeInterval, animated:Bool) {
+        if (tabBarIsVisible() == visible) { return }
+        let frame = self.tabBar.frame
+        let height = frame.size.height
+        let offsetY = (visible ? -height : height)
+        
+        // animation
+        UIViewPropertyAnimator(duration: duration, curve: .linear) {
+            self.tabBar.frame.offsetBy(dx:0, dy:offsetY)
+            self.view.frame = CGRect(x:0,y:0,width: self.view.frame.width, height: self.view.frame.height + offsetY)
+            self.view.setNeedsDisplay()
+            self.view.layoutIfNeeded()
+            }.startAnimation()
+    }
+    
+    func tabBarIsVisible() ->Bool {
+        return self.tabBar.frame.origin.y < UIScreen.main.bounds.height
     }
 }
 

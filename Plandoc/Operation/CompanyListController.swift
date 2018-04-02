@@ -13,6 +13,7 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var companyTable: UITableView!
+    @IBOutlet weak var headerCompanies: UIView!
     
     @IBAction func unwindToCompaniesList(segue: UIStoryboardSegue) {}
     
@@ -28,6 +29,9 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
         
         companyTable.dataSource = self
         companyTable.delegate = self
+        
+        headerCompanies.layer.addBorder(edge: .top, color: UIColor(hexString: "#26000000"), thickness: 0.3)
+        headerCompanies.layer.addBorder(edge: .bottom, color: UIColor(hexString: "#26000000"), thickness: 0.3)
     }
     
     override func viewWillAppear(_ animated: Bool) {

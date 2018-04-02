@@ -57,8 +57,6 @@ class FirstStepsController : UIViewController {
         } else {
             btnCompleteStep.setTitle("CADASTRAR PERFIL", for: .normal)
         }
-        
-        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -94,11 +92,6 @@ class FirstStepsController : UIViewController {
             animate(label: txtProfile, img: nil)
             animate(label: txtDescProfile, img: nil)
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = .default
     }
     
     @IBAction func completeStep() {

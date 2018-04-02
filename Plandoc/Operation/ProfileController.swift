@@ -18,6 +18,9 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var txtField: UITextField!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var constraintHeader: NSLayoutConstraint!
+    @IBOutlet weak var constraintTxtCRM: NSLayoutConstraint!
+    @IBOutlet weak var constraintTxtUF: NSLayoutConstraint!
     
     var picker: UIPickerView!
     
@@ -56,11 +59,17 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
         self.loadExistingData()
         
         UITextField.connectFields(fields: [txtCRM, txtUF, txtGraduationDate, txtGraduation, txtField])
+    
+        if UIScreen.main.bounds.height < 500 {
+            self.adjust4s()
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
+    private func adjust4s() {
+        imgPicture.isHidden = true
+        constraintHeader.constant = 64
+        constraintTxtCRM.constant = 70
+        constraintTxtUF.constant = 70
     }
     
     @objc func save() {

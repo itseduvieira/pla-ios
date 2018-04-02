@@ -24,6 +24,9 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var colorIndicator: UIView!
     @IBOutlet weak var stackColors: UIStackView!
+    @IBOutlet weak var constraintTxtTipo: NSLayoutConstraint!
+    @IBOutlet weak var constraintTxtName: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeader: NSLayoutConstraint!
     
     var picker: UIPickerView!
     
@@ -60,6 +63,17 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 btn.addTarget(self, action: #selector(changeColor), for: .touchUpInside)
             }
         }
+    
+        if UIScreen.main.bounds.height < 500 {
+            self.adjust4s()
+        }
+    }
+    
+    private func adjust4s() {
+        imgPicture.isHidden = true
+        constraintHeader.constant = 78
+        constraintTxtTipo.constant = 94
+        constraintTxtName.constant = 94
     }
     
     @IBAction func save() {

@@ -13,6 +13,7 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
     //MARK: Properties
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
+    @IBOutlet weak var txtPass: UITextField!
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UINavigationItem!
@@ -21,33 +22,30 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        txtName.delegate = self
         txtName.applyBottomBorder()
         
         txtEmail.delegate = self
         txtEmail.applyBottomBorder()
         
+        txtPass.delegate = self
+        txtPass.applyBottomBorder()
+        
         self.hideKeyboardWhenTappedAround()
         
         self.setNavigationBar()
         
-        UITextField.connectFields(fields: [txtName, txtEmail])
+        UITextField.connectFields(fields: [txtName, txtEmail, txtPass])
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         txtName?.becomeFirstResponder()
-        
-        UIApplication.shared.statusBarStyle = .default
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     @IBAction func goToPhoneVerification() {
-        Auth.auth().createUser(withEmail: txtEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: String(random(6)), completion: { (user: FirebaseAuth.User?, error) in
+        Auth.auth().createUser(withEmail: txtEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: txtPass.text!, completion: { (user: FirebaseAuth.User?, error) in
             if let error = error {
                 print(error)
                 
@@ -83,23 +81,15 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        var text = txtPass.text!
         
-        btnNext.isEnabled = !text.isEmpty && !(txtName.text?.isEmpty)!
+        if txtPass.isFirstResponder {
+            text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        }
+        
+        btnNext.isEnabled = text.count >= 6 && !txtName.text!.isEmpty && !txtEmail.text!.isEmpty
         
         return true
-    }
-    
-    func random(_ digitNumber: Int) -> String {
-        var number = ""
-        for i in 0..<digitNumber {
-            var randomNumber = arc4random_uniform(10)
-            while randomNumber == 0 && i == 0 {
-                randomNumber = arc4random_uniform(10)
-            }
-            number += "\(randomNumber)"
-        }
-        return number
     }
     
     func setNavigationBar() {
@@ -111,5 +101,15 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
     
     @objc func back() {
         self.performSegue(withIdentifier: "SegueNameToInitial", sender: self)
+    }
+    
+    @IBAction func showOrHidePassword(_ sender: UIButton) {
+        txtPass.isSecureTextEntry = !txtPass.isSecureTextEntry
+        
+        if txtPass.isSecureTextEntry {
+            sender.setImage(UIImage(named: "RevealPasswordIcon"), for: .normal)
+        } else {
+            sender.setImage(UIImage(named: "HidePasswordIcon"), for: .normal)
+        }
     }
 }

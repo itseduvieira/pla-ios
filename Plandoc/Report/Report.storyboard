@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -235,6 +236,7 @@
                     <connections>
                         <outlet property="btnGenerateReport" destination="P7U-7c-Jxx" id="mXv-Gi-Bn6"/>
                         <outlet property="chartView" destination="Y7G-N4-fQo" id="BQm-ST-YGV"/>
+                        <outlet property="constraintTxtCompany" destination="HXw-Dn-XEc" id="ZA1-ra-boo"/>
                         <outlet property="emptyText" destination="SBo-Pf-Zw4" id="srm-B7-qFS"/>
                         <outlet property="navBar" destination="LHF-l7-zJY" id="Qf3-JU-ewk"/>
                         <outlet property="switchSend" destination="kR2-PQ-h60" id="3Da-nN-KN1"/>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LQB-pO-zZ1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LQB-pO-zZ1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,6 +16,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="moc-zk-jCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-278" y="354"/>
+        </scene>
+        <!--PhoneAuthViewController-->
+        <scene sceneID="hjg-I0-lvK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Signup" referencedIdentifier="PhoneAuthViewController" id="rfN-e7-dbe" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GyQ-3j-YIZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="112" y="341"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="rYB-QA-uZQ">
@@ -174,6 +182,7 @@
                         <outlet property="txtPassword" destination="58Z-eH-IvZ" id="9GZ-le-tiE"/>
                         <segue destination="aQG-fV-duX" kind="show" identifier="SegueLoginToMenu" id="up2-7p-s9h"/>
                         <segue destination="PBX-st-oaM" kind="unwind" identifier="SegueUnwindToSignup" unwindAction="unwindToSignupWithSegue:" id="hx6-cx-lB6"/>
+                        <segue destination="rfN-e7-dbe" kind="show" identifier="SegueLoginToPhone" id="Cbz-Jm-4KE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Yv-Vr-wu6" userLabel="First Responder" sceneMemberID="firstResponder"/>

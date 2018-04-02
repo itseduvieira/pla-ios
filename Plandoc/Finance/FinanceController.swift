@@ -18,6 +18,8 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var txtProfitPaid: UILabel!
     @IBOutlet weak var txtQtdCompanies: UILabel!
     @IBOutlet weak var txtProfitLeft: UILabel!
+    @IBOutlet weak var headerSummary: UIView!
+    @IBOutlet weak var headerMonths: UIView!
     
     @IBAction func unwindToFinance(segue: UIStoryboardSegue) {}
     
@@ -35,6 +37,12 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         tableFinance.delegate = self
         tableFinance.dataSource = self
+        
+        headerSummary.layer.addBorder(edge: .top, color: UIColor(hexString: "#26000000"), thickness: 0.3)
+        headerSummary.layer.addBorder(edge: .bottom, color: UIColor(hexString: "#26000000"), thickness: 0.3)
+        
+        headerMonths.layer.addBorder(edge: .top, color: UIColor(hexString: "#26000000"), thickness: 0.3)
+        headerMonths.layer.addBorder(edge: .bottom, color: UIColor(hexString: "#26000000"), thickness: 0.3)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,29 +95,9 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
         }
         
         txtTotalShifts.text = String(totalShifts)
-        
-//        if totalProfit > 1000 {
-//            if totalProfit.truncatingRemainder(dividingBy: 1000) == 0 {
-//                txtTotalProfit.text = "R$\(Int(totalProfit / 1000))K"
-//            } else {
-//                txtTotalProfit.text = "R$\(String(format: "%.1f", totalProfit / 1000))K"
-//            }
-//        } else {
-            txtTotalProfit.text = "R$\(Int(totalProfit))"
-//        }
-        
+        txtTotalProfit.text = "R$\(Int(totalProfit))"
         txtQtdCompanies.text = String(companies.count)
-        
-//        if profitPaid > 1000 {
-//            if profitPaid.truncatingRemainder(dividingBy: 1000) == 0 {
-//                txtProfitPaid.text = "R$\(Int(profitPaid / 1000))K"
-//            } else {
-//                txtProfitPaid.text = "R$\(String(format: "%.1f", profitPaid / 1000))K"
-//            }
-//        } else {
-            txtProfitPaid.text = "R$\(Int(profitPaid))"
-//        }
-        
+        txtProfitPaid.text = "R$\(Int(profitPaid))"
         txtProfitLeft.text = "R$\(Int(totalProfit - profitPaid))"
         
         tableFinance.reloadData()
@@ -185,7 +173,14 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
                 let screenSize = UIScreen.main.bounds
                 let total = screenSize.width - 22
                 
-                cell.constraintCompletion.constant = total * percent
+                if finance.paidShifts > 0 {
+                    cell.constraintCompletion.constant = total * percent
+                    UIView.animate(withDuration: 1, animations: {
+                        cell.layoutIfNeeded()
+                    }, completion: nil)
+                } else {
+                    cell.constraintCompletion.constant = 0
+                }
                 
                 cell.salaryPaid.text = "R$\(Int(finance.salaryPaid)) (\(String(Int(percent * 100)))%) já recebidos"
                 cell.salary.text = "R$\(Int(finance.salaryTotal))"

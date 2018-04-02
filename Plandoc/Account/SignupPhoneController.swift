@@ -35,13 +35,6 @@ class SignupPhoneController : UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         txtPhone?.becomeFirstResponder()
-        
-        UIApplication.shared.statusBarStyle = .default
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -65,7 +58,7 @@ class SignupPhoneController : UIViewController, UITextFieldDelegate {
             
             PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { (verificationID, error) in
                 if let error = error {
-                    print(error.localizedDescription)
+                    print(error)
                 } else {
                     let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
                     UserDefaults.standard.set(encoded, forKey: "activation")

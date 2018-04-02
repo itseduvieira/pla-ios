@@ -20,6 +20,7 @@
 		34305F3F1FFAC0FA00396D61 /* ExtendedMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34305F3E1FFAC0FA00396D61 /* ExtendedMenuController.swift */; };
 		34305F411FFACED000396D61 /* MenuCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34305F401FFACED000396D61 /* MenuCustomCell.swift */; };
 		34305F431FFAFA9800396D61 /* CompanyListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34305F421FFAFA9800396D61 /* CompanyListController.swift */; };
+		343563E42069F142007C6F21 /* SignupPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343563E32069F142007C6F21 /* SignupPasswordController.swift */; };
 		343B60181FCF8E83004A4418 /* ShiftCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */; };
 		343C54172009BD13009F5EFB /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343C54162009BD13009F5EFB /* PreferencesController.swift */; };
 		34415CDB1FC07A8C0093F761 /* ForgotPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */; };
@@ -57,6 +58,7 @@
 		34AD2D581F976D010083E942 /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AD2D541F976D010083E942 /* PageController.swift */; };
 		34C417482047193B00C06342 /* ExpenseDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C417472047193B00C06342 /* ExpenseDetailController.swift */; };
 		34C478871FE48F9400FF6E05 /* MainReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C478861FE48F9400FF6E05 /* MainReportController.swift */; };
+		34CDE7A32056092D00219263 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CDE7A22056092D00219263 /* Expense.swift */; };
 		34D056051F9583F800C0344B /* SignupPhoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D056041F9583F800C0344B /* SignupPhoneController.swift */; };
 		34D056071F96608100C0344B /* SignupCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D056061F96608100C0344B /* SignupCodeController.swift */; };
 		34D409FE1F9F8948002F3F51 /* FirstStepsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D409FD1F9F8948002F3F51 /* FirstStepsController.swift */; };
@@ -86,6 +88,7 @@
 		34305F3E1FFAC0FA00396D61 /* ExtendedMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedMenuController.swift; sourceTree = "<group>"; };
 		34305F401FFACED000396D61 /* MenuCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCustomCell.swift; sourceTree = "<group>"; };
 		34305F421FFAFA9800396D61 /* CompanyListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyListController.swift; sourceTree = "<group>"; };
+		343563E32069F142007C6F21 /* SignupPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPasswordController.swift; sourceTree = "<group>"; };
 		343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftCustomCell.swift; sourceTree = "<group>"; };
 		343C54162009BD13009F5EFB /* PreferencesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesController.swift; sourceTree = "<group>"; };
 		34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordController.swift; sourceTree = "<group>"; };
@@ -126,6 +129,7 @@
 		34AD2D541F976D010083E942 /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
 		34C417472047193B00C06342 /* ExpenseDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailController.swift; sourceTree = "<group>"; };
 		34C478861FE48F9400FF6E05 /* MainReportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainReportController.swift; sourceTree = "<group>"; };
+		34CDE7A22056092D00219263 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		34D056041F9583F800C0344B /* SignupPhoneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPhoneController.swift; sourceTree = "<group>"; };
 		34D056061F96608100C0344B /* SignupCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCodeController.swift; sourceTree = "<group>"; };
 		34D409FD1F9F8948002F3F51 /* FirstStepsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStepsController.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 				3426E1B21FABA5B30087E1A5 /* Shift.swift */,
 				346BDC391FB0F02000635ABA /* Company.swift */,
 				3448940F200E74BA0077A88A /* FinanceData.swift */,
+				34CDE7A22056092D00219263 /* Expense.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 				341BDBBD1F9E592A000DEFCB /* InitialController.swift */,
 				34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */,
 				3413D62D200E266F00F6E6C6 /* MembershipController.swift */,
+				343563E32069F142007C6F21 /* SignupPasswordController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -266,7 +272,6 @@
 			children = (
 				346EDE371FBD0C6E00F03EF4 /* Report.storyboard */,
 				34C478861FE48F9400FF6E05 /* MainReportController.swift */,
-				34DD141B2012840D00CA9BEE /* PdfViewerController.swift */,
 				34DD141D201591AA00CA9BEE /* ReportData.swift */,
 			);
 			path = Report;
@@ -283,6 +288,7 @@
 				34A075D71FAFFB2F006DDF68 /* AlertController.swift */,
 				343C54162009BD13009F5EFB /* PreferencesController.swift */,
 				34FA6AA2202B77F8002F9B0D /* CustomAlertLoadingView.swift */,
+				34DD141B2012840D00CA9BEE /* PdfViewerController.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -526,6 +532,7 @@
 				34415CDB1FC07A8C0093F761 /* ForgotPasswordController.swift in Sources */,
 				34DD141E201591AA00CA9BEE /* ReportData.swift in Sources */,
 				34AD2D581F976D010083E942 /* PageController.swift in Sources */,
+				34CDE7A32056092D00219263 /* Expense.swift in Sources */,
 				34305F411FFACED000396D61 /* MenuCustomCell.swift in Sources */,
 				34305F431FFAFA9800396D61 /* CompanyListController.swift in Sources */,
 				3450E7A91F950D6E00A239E4 /* SignupNameController.swift in Sources */,
@@ -539,6 +546,7 @@
 				34DD141C2012840D00CA9BEE /* PdfViewerController.swift in Sources */,
 				343C54172009BD13009F5EFB /* PreferencesController.swift in Sources */,
 				346BDC3C1FB21E4B00635ABA /* MenuController.swift in Sources */,
+				343563E42069F142007C6F21 /* SignupPasswordController.swift in Sources */,
 				347765691F8FF60100082442 /* LoginController.swift in Sources */,
 				34A075D81FAFFB2F006DDF68 /* AlertController.swift in Sources */,
 				34305F3F1FFAC0FA00396D61 /* ExtendedMenuController.swift in Sources */,
@@ -592,7 +600,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -672,6 +680,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Plandoc/Plandoc.entitlements;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = KYAUQ77CED;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -680,7 +689,7 @@
 					"~/Documents/FacebookSDK",
 				);
 				INFOPLIST_FILE = Plandoc/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = app.plandoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -696,7 +705,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Plandoc/Plandoc.entitlements;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = KYAUQ77CED;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -705,8 +714,9 @@
 					"~/Documents/FacebookSDK",
 				);
 				INFOPLIST_FILE = Plandoc/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = app.plandoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_REFLECTION_METADATA_LEVEL = none;

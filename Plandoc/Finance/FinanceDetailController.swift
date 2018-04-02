@@ -18,6 +18,8 @@ class FinanceDetailController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var txtTotalShifts: UILabel!
     @IBOutlet weak var txtTotalProfit: UILabel!
     @IBOutlet weak var txtProfitPaid: UILabel!
+    @IBOutlet weak var headerSummary: UIView!
+    @IBOutlet weak var headerDetail: UIView!
     
     @IBAction internal func unwindToFinanceDetail(segue: UIStoryboardSegue) {}
     
@@ -40,6 +42,12 @@ class FinanceDetailController: UIViewController, UITableViewDelegate, UITableVie
         let month = formatter.date(from: self.id)
         formatter.dateFormat = "MMMM 'de' yyyy"
         navItem.title = formatter.string(from: month!)
+        
+        headerSummary.layer.addBorder(edge: .top, color: UIColor(hexString: "#26000000"), thickness: 0.3)
+        headerSummary.layer.addBorder(edge: .bottom, color: UIColor(hexString: "#26000000"), thickness: 0.3)
+        
+        headerDetail.layer.addBorder(edge: .top, color: UIColor(hexString: "#26000000"), thickness: 0.3)
+        headerDetail.layer.addBorder(edge: .bottom, color: UIColor(hexString: "#26000000"), thickness: 0.3)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,26 +85,8 @@ class FinanceDetailController: UIViewController, UITableViewDelegate, UITableVie
         }
         
         txtTotalShifts.text = String(self.shifts.count)
-        
-//        if totalProfit > 1000 {
-//            if totalProfit.truncatingRemainder(dividingBy: 1000) == 0 {
-//                txtTotalProfit.text = "R$\(Int(totalProfit / 1000))K"
-//            } else {
-//                txtTotalProfit.text = "R$\(String(format: "%.1f", totalProfit / 1000))K"
-//            }
-//        } else {
-            txtTotalProfit.text = "R$\(Int(totalProfit))"
-//        }
-        
-//        if profitPaid > 1000 {
-//            if profitPaid.truncatingRemainder(dividingBy: 1000) == 0 {
-//                txtProfitPaid.text = "R$\(Int(profitPaid / 1000))K"
-//            } else {
-//                txtProfitPaid.text = "R$\(String(format: "%.1f", profitPaid / 1000))K"
-//            }
-//        } else {
-            txtProfitPaid.text = "R$\(Int(profitPaid))"
-//        }
+        txtTotalProfit.text = "R$\(Int(totalProfit))"
+        txtProfitPaid.text = "R$\(Int(profitPaid))"
         
         tableShifts.reloadData()
     }

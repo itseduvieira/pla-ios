@@ -12,12 +12,17 @@ class ExtendedMenuController: UIViewController,  UITableViewDelegate, UITableVie
     //MARK: Properties
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tableMenu: UITableView!
+    @IBOutlet weak var headerMenu: UIView!
     
     @IBAction func unwindToExtendedMenu(segue: UIStoryboardSegue) {}
     
-    let menu = ["Empresas", "Despesas", "Meta Financeira", "Plandoc Premium", "Preferências"]
-    let icons = [UIImage(named: "IconBarCompany"), UIImage(named: "IconBarExpenses"), UIImage(named: "IconBarPayment"), UIImage(named: "IconBarPremium"), UIImage(named: "IconBarPreferences")]
-    let segue = ["SegueCompanies", "SegueExpenses", "SegueGoals", "SegueMembership", "SeguePreferences"]
+//    let menu = ["Empresas", "Despesas", "Meta Financeira", "Plandoc Premium", "Preferências"]
+//    let icons = [UIImage(named: "IconBarCompany"), UIImage(named: "IconBarExpenses"), UIImage(named: "IconBarPayment"), UIImage(named: "IconBarPremium"), UIImage(named: "IconBarPreferences")]
+//    let segue = ["SegueCompanies", "SegueExpenses", "SegueGoals", "SegueMembership", "SeguePreferences"]
+    
+    let menu = ["Empresas", "Despesas", "Meta Financeira", "Preferências"]
+    let icons = [UIImage(named: "IconBarCompany"), UIImage(named: "IconBarExpenses"), UIImage(named: "IconBarPayment"), UIImage(named: "IconBarPreferences")]
+    let segue = ["SegueCompanies", "SegueExpenses", "SegueGoals", "SeguePreferences"]
     
     //MARK: Actions
     override func viewDidLoad() {
@@ -27,6 +32,9 @@ class ExtendedMenuController: UIViewController,  UITableViewDelegate, UITableVie
         tableMenu.delegate = self
         
         self.setNavigationBar()
+        
+        headerMenu.layer.addBorder(edge: .top, color: UIColor(hexString: "#26000000"), thickness: 0.3)
+        headerMenu.layer.addBorder(edge: .bottom, color: UIColor(hexString: "#26000000"), thickness: 0.3)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +70,6 @@ class ExtendedMenuController: UIViewController,  UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: segue[indexPath.row], sender: self)
+            self.performSegue(withIdentifier: segue[indexPath.row], sender: self)
     }
 }

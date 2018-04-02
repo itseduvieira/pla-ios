@@ -21,6 +21,8 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var constraintHeader: NSLayoutConstraint!
+    @IBOutlet weak var constraintTxtName: NSLayoutConstraint!
     
     @IBAction func unwindToAccount(segue: UIStoryboardSegue) {}
     
@@ -41,6 +43,16 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
         UITextField.connectFields(fields: [txtName, txtPhone, txtEmail, txtPassword])
         
         self.loadExistingData()
+        
+        if UIScreen.main.bounds.height < 500 {
+            self.adjust4s()
+        }
+    }
+    
+    private func adjust4s() {
+        imgPicture.isHidden = true
+        constraintHeader.constant = 64
+        constraintTxtName.constant = 70
     }
     
     @IBAction func choosePicture() {
@@ -137,14 +149,34 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
             }
             
             changeRequest.commitChanges { (error) in
-                let archivedUser = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
-                UserDefaults.standard.set(archivedUser, forKey: "loggedUser")
+                if let error = error {
+                    print(error)
+                    
+                    let alertController = UIAlertController(title: "Perfil", message: "Erro ao salvar o perfil.", preferredStyle: .alert)
+                    
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(defaultAction)
+                } else {
+                    let archivedUser = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
+                    UserDefaults.standard.set(archivedUser, forKey: "loggedUser")
+                    
+                    let alertController = UIAlertController(title: "Perfil", message: "O Perfil foi salvo com sucesso.", preferredStyle: .alert)
+                    
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(defaultAction)
+                }
             }
         }
     }
     
     @IBAction func showOrHidePassword(_ sender: UIButton) {
         txtPassword.isSecureTextEntry = !txtPassword.isSecureTextEntry
+        
+        if txtPassword.isSecureTextEntry {
+            sender.setImage(UIImage(named: "RevealPasswordIcon"), for: .normal)
+        } else {
+            sender.setImage(UIImage(named: "HidePasswordIcon"), for: .normal)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

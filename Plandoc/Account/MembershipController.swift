@@ -12,12 +12,24 @@ class MembershipController: UIViewController {
     //MARK: Properties
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var mainContainer: UIView!
     
     //MARK: Actions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setNavigationBar()
+        
+        mainContainer.setRadius(radius: 4)
+        mainContainer.alpha = 0
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        UIView.animate(withDuration: 1.5, animations: {
+            self.mainContainer.alpha = 1
+        })
     }
     
     func setNavigationBar() {

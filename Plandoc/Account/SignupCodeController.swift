@@ -27,13 +27,6 @@ class SignupCodeController : UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         txtCode?.becomeFirstResponder()
-        
-        UIApplication.shared.statusBarStyle = .default
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -47,6 +40,36 @@ class SignupCodeController : UIViewController, UITextFieldDelegate {
             Auth.auth().currentUser?.link(with: credential) { (user, error) in
                 if let error = error {
                     print(error)
+                    
+                    let errCode = AuthErrorCode(rawValue: error._code)!
+                    
+                    switch errCode {
+                    case .credentialAlreadyInUse:
+                        let alertController = UIAlertController(title: "Perfil Existente", message: "Já existe outro usuário utilizando este telefone.", preferredStyle: .alert)
+                        
+                        let defaultAction = UIAlertAction(title: "Trocar Telefone", style: .default, handler: { action in
+                            self.retry()
+                        })
+                        let cancelAction = UIAlertAction(title: "Cancelar Cadastro", style: .destructive, handler: { action in
+                            
+                            UserDefaults.standard.removeObject(forKey: "activation")
+                            
+                            Auth.auth().currentUser?.delete(completion: { (error) in
+                                if let error = error {
+                                    print(error)
+                                }
+                                
+                                self.performSegue(withIdentifier: "SegueUnwindToSignup", sender: self)
+                            })
+                        })
+                        alertController.addAction(cancelAction)
+                        alertController.addAction(defaultAction)
+                        
+                        self.present(alertController, animated: true, completion: nil)
+                        break
+                    default:
+                        print(error)
+                    }
                 } else {
                     if let data = UserDefaults.standard.object(forKey: "activation") as? NSData,
                         let pdcUser = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? User {
@@ -55,11 +78,9 @@ class SignupCodeController : UIViewController, UITextFieldDelegate {
                         let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
                         UserDefaults.standard.set(encoded, forKey: "activation")
                         
-                        Auth.auth().sendPasswordReset(withEmail: (user?.email)!) { (error) in
-                            let when = DispatchTime.now() + 0.1
-                            DispatchQueue.main.asyncAfter(deadline: when) {
-                                self.performSegue(withIdentifier: "SegueCodeToFirstSteps", sender: self)
-                            }
+                        let when = DispatchTime.now() + 0.1
+                        DispatchQueue.main.asyncAfter(deadline: when) {
+                            self.performSegue(withIdentifier: "SegueCodeToFirstSteps", sender: self)
                         }
                     }
                 }

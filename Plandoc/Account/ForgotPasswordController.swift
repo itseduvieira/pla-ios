@@ -26,16 +26,6 @@ class ForgotPasswordController: UIViewController {
         txtEmail.applyBottomBorder()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-    
     func setNavigationBar() {
         navBar.setBackgroundImage(UIImage(), for: .default)
         navBar.shadowImage = UIImage()

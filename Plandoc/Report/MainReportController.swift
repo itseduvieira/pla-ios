@@ -20,6 +20,7 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
     @IBOutlet weak var emptyText: UILabel!
     @IBOutlet weak var btnGenerateReport: UIRoundedButton!
     @IBOutlet weak var switchSend: UISwitch!
+    @IBOutlet weak var constraintTxtCompany: NSLayoutConstraint!
     
     @IBAction func unwindToReport(segue: UIStoryboardSegue) {}
     
@@ -79,6 +80,16 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
         txtPeriod.text = "Mês Atual"
         
         applyCurrentMonth()
+        
+        if UIScreen.main.bounds.height < 500 {
+            self.adjust4s()
+        }
+    }
+    
+    private func adjust4s() {
+        constraintTxtCompany.constant = 0
+        emptyText.isHidden = true
+        chartView.isHidden = true
     }
     
     private func applyCurrentMonth() {
@@ -164,11 +175,16 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
             }
         }
         
-        emptyText.isHidden = !entries.isEmpty
-        chartView.isHidden = entries.isEmpty
         btnGenerateReport.isHidden = entries.isEmpty
         
-        self.updateChartData(entries)
+        if UIScreen.main.bounds.height > 500 {
+            emptyText.isHidden = !entries.isEmpty
+            chartView.isHidden = entries.isEmpty
+            
+            self.updateChartData(entries)
+        }
+        
+        
     }
     
     @IBAction func generateReport() {
@@ -178,7 +194,7 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
             let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
             let destinationFileUrl = documentsUrl!.appendingPathComponent("report.pdf")
             
-            let fileURL = URL(string: "http://pdc-api.herokuapp.com/v1/report")
+            let fileURL = URL(string: "http://api.plandoc.com.br/v1/report")
             
             let sessionConfig = URLSessionConfiguration.default
             let session = URLSession(configuration: sessionConfig)
