@@ -20,6 +20,7 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var txtProfitLeft: UILabel!
     @IBOutlet weak var headerSummary: UIView!
     @IBOutlet weak var headerMonths: UIView!
+    @IBOutlet weak var labelMonths: UILabel!
     
     @IBAction func unwindToFinance(segue: UIStoryboardSegue) {}
     
@@ -43,6 +44,9 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         headerMonths.layer.addBorder(edge: .top, color: UIColor(hexString: "#26000000"), thickness: 0.3)
         headerMonths.layer.addBorder(edge: .bottom, color: UIColor(hexString: "#26000000"), thickness: 0.3)
+        
+        let goalActive = UserDefaults.standard.bool(forKey: "goalActive")
+        labelMonths.text = goalActive ? "MESES (META ATIVA)" : "MESES"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,6 +152,8 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FinanceCell", for: indexPath) as! FinanceCustomCell
         
+        let goalActive = UserDefaults.standard.bool(forKey: "goalActive")
+        
         cell.layoutMargins = UIEdgeInsets.zero
         cell.separatorInset = UIEdgeInsets.zero
         
@@ -191,6 +197,39 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
                 cell.completion.isHidden = true
                 cell.salaryPaid.text = "R$0 recebidos"
                 cell.salary.text = "R$0"
+            }
+            
+            if goalActive {
+                let goalValue = UserDefaults.standard.double(forKey: "goalValue")
+                
+                let expenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]
+                
+                var hasGoal = false
+                var accomplish = false
+                
+                for ex in expenses.values {
+                    let pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: ex) as! Expense
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "MMyyyy"
+                    
+                    let monthRow = String(format: "%02d", indexPath.row + 1) + navItem.rightBarButtonItem!.title!
+                    if monthRow == formatter.string(from: pdcExpense.date) {
+                        hasGoal = true
+                        accomplish = (finance.salaryTotal - pdcExpense.value) >= goalValue
+                        
+                        break
+                    }
+                }
+                
+                cell.iconGoal.isHidden = !hasGoal
+                cell.iconForward.isHidden = hasGoal
+                
+                if hasGoal {
+                    cell.iconGoal.image = UIImage(named: accomplish ? "IconFinanceUp.png" : "IconFinanceDown.png")
+                }
+            }  else {
+                cell.iconGoal.isHidden = true
+                cell.iconForward.isHidden = false
             }
         }
         

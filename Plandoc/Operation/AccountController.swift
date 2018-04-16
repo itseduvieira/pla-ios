@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseStorage
+import SwiftKeychainWrapper
 
 class AccountController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     //MARK: Properties
@@ -56,14 +57,17 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
     }
     
     @IBAction func choosePicture() {
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = true
         imagePicker.sourceType = .photoLibrary
         
         present(imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            imgPicture.contentMode = .scaleAspectFill
+            imgPicture.image = pickedImage
+        } else if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imgPicture.contentMode = .scaleAspectFill
             imgPicture.image = pickedImage
         }
@@ -98,7 +102,7 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
         txtName.text = pdcUser.name
         txtPhone.text = pdcUser.phone
         txtEmail.text = pdcUser.email
-        txtPassword.text = UserDefaults.standard.string(forKey: "password")
+        txtPassword.text = KeychainWrapper.standard.string(forKey: "pdcPassword")
         if let img = pdcUser.picture {
             imgPicture.image = UIImage(data: img)
         }
@@ -152,7 +156,7 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
                 if let error = error {
                     print(error)
                     
-                    let alertController = UIAlertController(title: "Perfil", message: "Erro ao salvar o perfil.", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Dados Pessoais", message: "Erro ao salvar o perfil.", preferredStyle: .alert)
                     
                     let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(defaultAction)
@@ -160,10 +164,14 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
                     let archivedUser = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
                     UserDefaults.standard.set(archivedUser, forKey: "loggedUser")
                     
-                    let alertController = UIAlertController(title: "Perfil", message: "O Perfil foi salvo com sucesso.", preferredStyle: .alert)
+                    KeychainWrapper.standard.set(self.txtPassword.text!, forKey: "pdcPassword")
+                    
+                    let alertController = UIAlertController(title: "Dados Pessoais", message: "Seu perfil foi salvo com sucesso.", preferredStyle: .alert)
                     
                     let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(defaultAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
                 }
             }
         }

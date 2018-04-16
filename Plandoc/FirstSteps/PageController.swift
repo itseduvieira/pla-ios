@@ -22,6 +22,10 @@ class PageController: UIViewController {
     }
     
     @IBAction func goToMenu() {
+        let data = UserDefaults.standard.object(forKey: "activation")
+        
+        UserDefaults.standard.set(data, forKey: "loggedUser")
+        
         UserDefaults.standard.removeObject(forKey: "activation")
         
         self.performSegue(withIdentifier: "SegueTutorialToMenu", sender: self)

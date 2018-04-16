@@ -34,6 +34,7 @@
 		3455CEEC1FA642A7001DB405 /* ShiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455CEEB1FA642A7001DB405 /* ShiftController.swift */; };
 		3455CEEE1FA65C0A001DB405 /* CompletionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455CEED1FA65C0A001DB405 /* CompletionController.swift */; };
 		3459438520054BAD008F15B0 /* FinanceCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3459438420054BAD008F15B0 /* FinanceCustomCell.swift */; };
+		3460C1402075713E002C5ADF /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3460C13F2075713E002C5ADF /* LocalAuthentication.framework */; };
 		346322091F93D67A00F0CCF4 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 346322081F93D67A00F0CCF4 /* Podfile */; };
 		346BDC3A1FB0F02000635ABA /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346BDC391FB0F02000635ABA /* Company.swift */; };
 		346BDC3C1FB21E4B00635ABA /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346BDC3B1FB21E4B00635ABA /* MenuController.swift */; };
@@ -103,6 +104,7 @@
 		3455CEEB1FA642A7001DB405 /* ShiftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftController.swift; sourceTree = "<group>"; };
 		3455CEED1FA65C0A001DB405 /* CompletionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionController.swift; sourceTree = "<group>"; };
 		3459438420054BAD008F15B0 /* FinanceCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceCustomCell.swift; sourceTree = "<group>"; };
+		3460C13F2075713E002C5ADF /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		346322081F93D67A00F0CCF4 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		346BDC391FB0F02000635ABA /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		346BDC3B1FB21E4B00635ABA /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3460C1402075713E002C5ADF /* LocalAuthentication.framework in Frameworks */,
 				25BCB6677C2DCECE86B87D7A /* Pods_Plandoc.framework in Frameworks */,
 				34EFC43B1FC5B9AF003640CC /* FBSDKCoreKit.framework in Frameworks */,
 				34EFC43C1FC5B9AF003640CC /* FBSDKLoginKit.framework in Frameworks */,
@@ -318,6 +321,7 @@
 		E81CAC70CACD9A451F4E57D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3460C13F2075713E002C5ADF /* LocalAuthentication.framework */,
 				34EFC4391FC5B9AD003640CC /* FBSDKCoreKit.framework */,
 				34EFC43A1FC5B9AE003640CC /* FBSDKLoginKit.framework */,
 				DF2AC1154E943F506F5EADE6 /* Pods_Plandoc.framework */,
@@ -437,6 +441,7 @@
 				"${BUILT_PRODUCTS_DIR}/MapboxGeocoder.swift/MapboxGeocoder.framework",
 				"${BUILT_PRODUCTS_DIR}/MapboxStatic.swift/MapboxStatic.framework",
 				"${BUILT_PRODUCTS_DIR}/SearchTextField/SearchTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -456,6 +461,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxGeocoder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxStatic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SearchTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);

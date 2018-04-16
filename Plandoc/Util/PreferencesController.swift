@@ -17,7 +17,6 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var imgFacebook: UIImageView!
-    @IBOutlet weak var txtFacebook: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     var path: URL!
@@ -146,6 +145,8 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
                     case 0:
                         if let switchMenu = cell.viewWithTag(20) as? UISwitch {
                             switchMenu.isHidden = false
+                            switchMenu.isOn = UserDefaults.standard.bool(forKey: "biometrics")
+                            switchMenu.addTarget(self, action: #selector(biometricsChanged), for: .valueChanged)
                         }
                         
                         break
@@ -157,12 +158,16 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
                 case 0:
                     if let switchMenu = cell.viewWithTag(20) as? UISwitch {
                         switchMenu.isHidden = false
+                        switchMenu.isOn = UserDefaults.standard.bool(forKey: "notificationIncome")
+                        switchMenu.addTarget(self, action: #selector(notificationIncomeChanged), for: .valueChanged)
                     }
                     
                     break
                 case 1:
                     if let switchMenu = cell.viewWithTag(20) as? UISwitch {
                         switchMenu.isHidden = false
+                        switchMenu.isOn = UserDefaults.standard.bool(forKey: "notificationShifts")
+                        switchMenu.addTarget(self, action: #selector(notificationShiftsChanged), for: .valueChanged)
                     }
                     
                     break
@@ -170,11 +175,45 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
                     print("Row \(indexPath.row)")
                 }
             default:
+                if let switchMenu = cell.viewWithTag(20) as? UISwitch {
+                    switchMenu.isHidden = true
+                }
+                
                 print("Row \(indexPath.section)")
             }
         }
         
         return cell
+    }
+    
+    @objc func biometricsChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "biometrics")
+        
+        if sender.isOn {
+            print("on")
+        } else {
+            print("off")
+        }
+    }
+    
+    @objc func notificationIncomeChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "notificationIncome")
+        
+        if sender.isOn {
+            print("on")
+        } else {
+            print("off")
+        }
+    }
+    
+    @objc func notificationShiftsChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "notificationShifts")
+        
+        if sender.isOn {
+            print("on")
+        } else {
+            print("off")
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -197,8 +236,23 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
             }
         case TableSection.social.rawValue:
             switch indexPath.row {
+            case 0:
+                let textToShare = "Doutor, tenha o controle de suas finanças na palma da mão. Confira mais no site "
+                
+                if let myWebsite = NSURL(string: "http://www.plandoc.com.br") {
+                    let objectsToShare = [textToShare, myWebsite] as [Any]
+                    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                    
+                    activityVC.popoverPresentationController?.sourceView = tableView
+                    self.present(activityVC, animated: true, completion: {
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    })
+                }
+                
+                break
             case 1:
-                checkFacebook(indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+                checkFacebook(indexPath, (cell.viewWithTag(10) as! UILabel))
                 
                 break
             default:
@@ -255,6 +309,10 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
             UserDefaults.standard.removeObject(forKey: "password")
             UserDefaults.standard.removeObject(forKey: "goalActive")
             UserDefaults.standard.removeObject(forKey: "goalValue")
+            UserDefaults.standard.removeObject(forKey: "notificationIncome")
+            UserDefaults.standard.removeObject(forKey: "notificationShifts")
+            UserDefaults.standard.removeObject(forKey: "biometrics")
+            
             self.logoff()
         }))
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: { action in
@@ -316,8 +374,16 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    func checkFacebook(_ index: IndexPath) {
-        if txtFacebook.text == "Vinculado ao Facebook" {
+    func checkFacebook(_ index: IndexPath, _ txt: UILabel) {
+        var hasFacebook = false
+        for info in Auth.auth().currentUser!.providerData {
+            if info.providerID == "facebook.com" {
+                hasFacebook = true
+                break
+            }
+        }
+        
+        if hasFacebook {
             self.tableView.deselectRow(at: index, animated: true)
             
             return
@@ -336,7 +402,7 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 
                 Auth.auth().currentUser?.link(with: credential, completion: { (user, err) in
-                    self.txtFacebook.text = "Vinculado ao Facebook"
+                    txt.text = "Vinculado ao Facebook"
                 })
             }
         })

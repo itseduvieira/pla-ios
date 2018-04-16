@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import SwiftKeychainWrapper
 
 class SignupNameController : UIViewController, UITextFieldDelegate {
     //MARK: Properties
@@ -71,6 +72,10 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
                         pdcUser.id = user?.uid
                         pdcUser.email = self.txtEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                         pdcUser.name = self.txtName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                        
+                        KeychainWrapper.standard.set(pdcUser.email, forKey: "pdcEmail")
+                        KeychainWrapper.standard.set(self.txtPass.text!, forKey: "pdcPassword")
+                        
                         let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
                         UserDefaults.standard.set(encoded, forKey: "activation")
                         self.performSegue(withIdentifier: "SegueNameToPhone", sender: self)

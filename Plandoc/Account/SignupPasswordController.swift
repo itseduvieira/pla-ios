@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import SwiftKeychainWrapper
 
 class SignupPasswordController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var navBar: UINavigationBar!
@@ -58,9 +59,12 @@ class SignupPasswordController: UIViewController, UITextFieldDelegate {
                     pdcUser.id = user?.uid
                     pdcUser.email = self.email
                     pdcUser.name = self.name
-                    pdcUser.password = self.txtPassword.text!
                     let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
                     UserDefaults.standard.set(encoded, forKey: "activation")
+                    
+                   
+                    KeychainWrapper.standard.set(self.email, forKey: "pdcEmail")
+                    KeychainWrapper.standard.set(self.txtPassword.text!, forKey: "pdcPassword")
                 }
                 
                 self.performSegue(withIdentifier: "SeguePasswordToPhone", sender: self)

@@ -139,12 +139,22 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconFinanceUp" translatesAutoresizingMaskIntoConstraints="NO" id="t6h-T2-Rzl">
+                                                    <rect key="frame" x="344" y="24" width="22" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="22" id="7sm-gi-Dbn"/>
+                                                        <constraint firstAttribute="width" constant="22" id="bnt-Zb-beT"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="hHC-AZ-0GP" firstAttribute="leading" secondItem="oP6-3g-1kV" secondAttribute="trailing" constant="17" id="0me-Qb-sHa"/>
                                                 <constraint firstAttribute="trailing" secondItem="vfT-Lh-Axj" secondAttribute="trailing" constant="8" id="20y-7y-bPs"/>
                                                 <constraint firstItem="Dz7-pm-Ujg" firstAttribute="centerY" secondItem="mb8-rA-fhI" secondAttribute="centerY" id="8Rn-qg-icO"/>
                                                 <constraint firstItem="q2r-AD-d46" firstAttribute="top" secondItem="mb8-rA-fhI" secondAttribute="top" constant="19" id="BIR-G3-aFI"/>
+                                                <constraint firstAttribute="trailing" secondItem="t6h-T2-Rzl" secondAttribute="trailing" constant="9" id="HYC-2L-t4j"/>
+                                                <constraint firstAttribute="trailing" secondItem="Dz7-pm-Ujg" secondAttribute="trailing" constant="36" id="MId-Ey-jzc"/>
+                                                <constraint firstItem="t6h-T2-Rzl" firstAttribute="centerY" secondItem="mb8-rA-fhI" secondAttribute="centerY" id="NVl-4g-zTv"/>
                                                 <constraint firstItem="vfT-Lh-Axj" firstAttribute="centerY" secondItem="mb8-rA-fhI" secondAttribute="centerY" id="OLg-LJ-NjK"/>
                                                 <constraint firstItem="oP6-3g-1kV" firstAttribute="top" secondItem="mb8-rA-fhI" secondAttribute="top" id="Of3-Tp-NZE"/>
                                                 <constraint firstAttribute="bottom" secondItem="oP6-3g-1kV" secondAttribute="bottom" id="VRJ-66-lSr"/>
@@ -155,13 +165,14 @@
                                                 <constraint firstItem="7xe-i8-AKj" firstAttribute="leading" secondItem="oP6-3g-1kV" secondAttribute="trailing" id="fbr-7e-1u6"/>
                                                 <constraint firstAttribute="bottom" secondItem="7xe-i8-AKj" secondAttribute="bottom" id="js8-cR-Sk3"/>
                                                 <constraint firstItem="hHC-AZ-0GP" firstAttribute="top" secondItem="q2r-AD-d46" secondAttribute="bottom" constant="2" id="wMV-ua-bGh"/>
-                                                <constraint firstItem="vfT-Lh-Axj" firstAttribute="leading" secondItem="Dz7-pm-Ujg" secondAttribute="trailing" constant="10" id="wTF-N5-v4n"/>
                                                 <constraint firstItem="XQn-H2-bGn" firstAttribute="leading" secondItem="oP6-3g-1kV" secondAttribute="trailing" id="zbq-YH-6bI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="completion" destination="XQn-H2-bGn" id="vIK-N6-DUu"/>
                                             <outlet property="constraintCompletion" destination="2ms-bt-dBL" id="oSW-UN-uzJ"/>
+                                            <outlet property="iconForward" destination="vfT-Lh-Axj" id="KSE-ki-DTh"/>
+                                            <outlet property="iconGoal" destination="t6h-T2-Rzl" id="oeC-Xb-YbP"/>
                                             <outlet property="left" destination="7xe-i8-AKj" id="DUY-5I-bOm"/>
                                             <outlet property="salary" destination="Dz7-pm-Ujg" id="dNX-p9-eJg"/>
                                             <outlet property="salaryPaid" destination="hHC-AZ-0GP" id="CJY-iy-Iho"/>
@@ -436,6 +447,7 @@
                     <connections>
                         <outlet property="headerMonths" destination="EHf-Qj-fJB" id="Bf3-V0-Xq2"/>
                         <outlet property="headerSummary" destination="VfJ-kf-cWG" id="Afk-AB-eoq"/>
+                        <outlet property="labelMonths" destination="zrO-H2-7E7" id="U8r-h7-NT3"/>
                         <outlet property="navBar" destination="sjF-7A-4wC" id="aHH-rt-96l"/>
                         <outlet property="navItem" destination="tgc-qh-j1a" id="UrV-9v-Zt8"/>
                         <outlet property="tableFinance" destination="wuM-M2-yQw" id="6zn-OT-eou"/>
@@ -1064,6 +1076,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="enterDate" destination="e4P-bS-SZY" eventType="editingDidBegin" id="HlV-87-DrJ"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLy-XZ-IfH">
                                 <rect key="frame" x="195.5" y="252" width="82" height="10"/>
@@ -1330,5 +1345,6 @@
         <image name="Forward" width="80" height="82"/>
         <image name="IconBarFinancial" width="25" height="25"/>
         <image name="IconExpensens" width="700" height="596"/>
+        <image name="IconFinanceUp" width="78" height="76"/>
     </resources>
 </document>

@@ -15,4 +15,5 @@ target 'Plandoc' do
     pod 'Bolts'
     pod 'Charts'
     pod 'FacebookLogin'
+    pod 'SwiftKeychainWrapper'
 end

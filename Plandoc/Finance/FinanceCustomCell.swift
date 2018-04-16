@@ -16,4 +16,6 @@ class FinanceCustomCell: UITableViewCell {
     @IBOutlet weak var scheduled: UILabel!
     @IBOutlet weak var salaryPaid: UILabel!
     @IBOutlet weak var salary: UILabel!
+    @IBOutlet weak var iconGoal: UIImageView!
+    @IBOutlet weak var iconForward: UIImageView!
 }

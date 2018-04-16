@@ -112,8 +112,10 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if let tableSection = TableSection(rawValue: section), let movieData = data[tableSection], movieData.count > 0 {
-            if selectedHeader != nil && section == selectedHeader {
-                return SectionHeaderHeight + 100
+            if UserDefaults.standard.bool(forKey: "goalActive") {
+                if selectedHeader != nil && section == selectedHeader {
+                    return SectionHeaderHeight + 100
+                }
             }
             return SectionHeaderHeight
         }
@@ -131,8 +133,15 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor(hexString: "#78000000")
         
-        let img = UIImageView(image: UIImage(named: "IconFinanceUp.png"))
-        img.frame = CGRect(x: tableView.bounds.width - 32, y: 8, width: 22, height: 22)
+        if UserDefaults.standard.bool(forKey: "goalActive") {
+            let goalValue = UserDefaults.standard.double(forKey: "goalValue")
+            
+            
+            
+            let img = UIImageView(image: UIImage(named: "IconFinanceUp.png"))
+            img.frame = CGRect(x: tableView.bounds.width - 32, y: 8, width: 22, height: 22)
+            view.addSubview(img)
+        }
         
         if let tableSection = TableSection(rawValue: section) {
             switch tableSection {
@@ -169,16 +178,15 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
             view.addGestureRecognizer(gesture)
         }
         view.addSubview(label)
-        view.addSubview(img)
         
         return view
     }
     
     @objc func clickHeader(_ sender: UIGestureRecognizer) {
-        let current = sender.view!.tag - 100
-        selectedHeader = (selectedHeader != nil && selectedHeader == current) ? nil : current
-        table.beginUpdates()
-        table.endUpdates()
+//        let current = sender.view!.tag - 100
+//        selectedHeader = (selectedHeader != nil && selectedHeader == current) ? nil : current
+//        table.beginUpdates()
+//        table.endUpdates()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -244,7 +252,7 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
                 let expensePdc = self.data[section]![editActionsForRowAt.row]
                 
                 if expensePdc.groupId == nil {
-                    let alert = UIAlertController(title: "Remover Plantão", message: "Ao remover um plantão, os dados não poderão ser recuperados. Você deseja realmente remover este plantao?", preferredStyle: .actionSheet)
+                    let alert = UIAlertController(title: "Remover Despesa", message: "Ao remover uma despesa, os dados não poderão ser recuperados. Você deseja realmente remover este despesa?", preferredStyle: .actionSheet)
                     
                     alert.addAction(UIAlertAction(title: "Sim, desejo remover", style: .destructive, handler: { action in
                         
@@ -255,7 +263,7 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
                     
                     self.present(alert, animated: true)
                 } else {
-                    let alert = UIAlertController(title: "Remover Plantão Fixo", message: "O plantão escolhido é do tipo fixo. Você deseja remover apenas este agendamento ou todos os agendamentos deste fixo?", preferredStyle: .actionSheet)
+                    let alert = UIAlertController(title: "Remover Despesa Fixa", message: "A despesa escolhida é do tipo fixa. Você deseja remover apenas este registro ou todos os agendamentos deste fixo?", preferredStyle: .actionSheet)
                     
                     alert.addAction(UIAlertAction(title: "Apenas Este", style: .default, handler: { action in
                         self.removeOne(expensePdc)

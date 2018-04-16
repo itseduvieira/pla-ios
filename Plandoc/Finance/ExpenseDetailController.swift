@@ -106,6 +106,15 @@ class ExpenseDetailController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
+    @IBAction func enterDate() {
+        if (txtDate.text?.isEmpty)! {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            
+            txtDate.text = formatter.string(from: Date())
+        }
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if let digit = Int(string) {

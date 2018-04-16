@@ -35,6 +35,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     
     weak var sender: UIViewController!
     var id: String!
+    var dateFilled: Date!
     
     var past: Bool! = false
     
@@ -577,6 +578,12 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             if !shift.paid {
                 btnPaid.isHidden = Calendar.current.date(byAdding: DateComponents(day: 1), to: shift.paymentDueDate)! < Date()
             }
+        } else if let date = self.dateFilled {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            txtDate.text = formatter.string(from: date)
+            formatter.dateFormat = "HH:mm"
+            txtHour.text = formatter.string(from: Date())
         }
     }
     

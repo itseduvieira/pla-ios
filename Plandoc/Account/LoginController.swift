@@ -12,6 +12,8 @@ import FirebaseStorage
 import FBSDKLoginKit
 import FacebookCore
 import FacebookLogin
+import SwiftKeychainWrapper
+import LocalAuthentication
 
 class LoginController : UIViewController {
     //MARK: Properties
@@ -29,11 +31,11 @@ class LoginController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let username = UserDefaults.standard.string(forKey: "username") {
+        if let username = KeychainWrapper.standard.string(forKey: "pdcEmail") {
             txtLogin.text = username
         }
         
-        if let password = UserDefaults.standard.string(forKey: "password") {
+        if let password = KeychainWrapper.standard.string(forKey: "pdcPassword") {
             txtPassword.text = password
         }
         
@@ -42,6 +44,10 @@ class LoginController : UIViewController {
         self.applyBorders()
         
         self.setNavigationBar()
+        
+        if UserDefaults.standard.bool(forKey: "biometrics") && checkUserAndPass() {
+            self.authenticationWithTouchID()
+        }
         
         UITextField.connectFields(fields: [txtLogin, txtPassword])
     }
@@ -58,10 +64,17 @@ class LoginController : UIViewController {
             
         } else {
             self.presentAlert()
-            Auth.auth().signIn(withEmail: self.txtLogin.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: self.txtPassword.text!) { (user, error) in
-                
-                self.doLogin(user, error)
-            }
+            let user = self.txtLogin.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let pass = self.txtPassword.text!
+            
+            initLogin(user, pass)
+        }
+    }
+    
+    private func initLogin(_ user: String, _ pass: String) {
+        Auth.auth().signIn(withEmail: user, password: pass) { (user, error) in
+            
+            self.doLogin(user, error)
         }
     }
     
@@ -163,6 +176,8 @@ class LoginController : UIViewController {
                     } else {
                         let pdcUser = User(id: user.uid, name: user.displayName!, email: user.email!, phone: user.phoneNumber!)
                         
+                        KeychainWrapper.standard.set(pdcUser.email, forKey: "pdcEmail")
+                        
                         let storage = Storage.storage()
                         let ref = storage.reference().child("\(user.uid)/profile.jpg")
                         
@@ -185,8 +200,8 @@ class LoginController : UIViewController {
     
     private func doLogin(_ user: FirebaseAuth.User?, _ error: Error?) {
         if error == nil {
-        UserDefaults.standard.set(self.txtLogin.text!.trimmingCharacters(in: .whitespacesAndNewlines), forKey: "username")
-            UserDefaults.standard.set(self.txtPassword.text!, forKey: "password")
+        KeychainWrapper.standard.set(self.txtLogin.text!.trimmingCharacters(in: .whitespacesAndNewlines), forKey: "pdcEmail")
+            KeychainWrapper.standard.set(self.txtPassword.text!, forKey: "pdcPassword")
             if let user = user {
                 let pdcUser = User(id: user.uid, name: user.displayName!, email: user.email!, phone: user.phoneNumber!)
                 
@@ -223,5 +238,122 @@ class LoginController : UIViewController {
             vc.name = self.name
             vc.email = self.email
         }
+    }
+    
+    func authenticationWithTouchID() {
+        let localAuthenticationContext = LAContext()
+        localAuthenticationContext.localizedFallbackTitle = "Usar Passcode"
+        
+        var authError: NSError?
+        let reasonString = "Para acessar o aplicativo"
+        
+        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+            
+            localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString) { success, evaluateError in
+                
+                if success {
+                    
+                    //TODO: User authenticated successfully, take appropriate action
+                    let user = KeychainWrapper.standard.string(forKey: "pdcEmail")
+                    let pass = KeychainWrapper.standard.string(forKey: "pdcPassword")
+                    self.initLogin(user!, pass!)
+                    
+                } else {
+                    //TODO: User did not authenticate successfully, look at error and take appropriate action
+                    guard let error = evaluateError else {
+                        return
+                    }
+                    
+                    print(self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
+                    
+                    //TODO: If you have choosen the 'Fallback authentication mechanism selected' (LAError.userFallback). Handle gracefully
+                    
+                }
+            }
+        } else {
+            
+            guard let error = authError else {
+                return
+            }
+            //TODO: Show appropriate alert if biometry/TouchID/FaceID is lockout or not enrolled
+            print(self.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
+        }
+    }
+    
+    private func checkUserAndPass() -> Bool {
+        return KeychainWrapper.standard.string(forKey: "pdcEmail") != nil &&
+            KeychainWrapper.standard.string(forKey: "pdcPassword") != nil
+    }
+    
+    func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> String {
+        var message = ""
+        if #available(iOS 11.0, macOS 10.13, *) {
+            switch errorCode {
+            case LAError.biometryNotAvailable.rawValue:
+                message = "Authentication could not start because the device does not support biometric authentication."
+                
+            case LAError.biometryLockout.rawValue:
+                message = "Authentication could not continue because the user has been locked out of biometric authentication, due to failing authentication too many times."
+                
+            case LAError.biometryNotEnrolled.rawValue:
+                message = "Authentication could not start because the user has not enrolled in biometric authentication."
+                
+            default:
+                message = "Did not find error code on LAError object"
+            }
+        } else {
+            switch errorCode {
+            case LAError.touchIDLockout.rawValue:
+                message = "Too many failed attempts."
+                
+            case LAError.touchIDNotAvailable.rawValue:
+                message = "TouchID is not available on the device"
+                
+            case LAError.touchIDNotEnrolled.rawValue:
+                message = "TouchID is not enrolled on the device"
+                
+            default:
+                message = "Did not find error code on LAError object"
+            }
+        }
+        
+        return message;
+    }
+    
+    func evaluateAuthenticationPolicyMessageForLA(errorCode: Int) -> String {
+        
+        var message = ""
+        
+        switch errorCode {
+            
+        case LAError.authenticationFailed.rawValue:
+            message = "The user failed to provide valid credentials"
+            
+        case LAError.appCancel.rawValue:
+            message = "Authentication was cancelled by application"
+            
+        case LAError.invalidContext.rawValue:
+            message = "The context is invalid"
+            
+        case LAError.notInteractive.rawValue:
+            message = "Not interactive"
+            
+        case LAError.passcodeNotSet.rawValue:
+            message = "Passcode is not set on the device"
+            
+        case LAError.systemCancel.rawValue:
+            message = "Authentication was cancelled by the system"
+            
+        case LAError.userCancel.rawValue:
+            message = "The user did cancel"
+            
+        case LAError.userFallback.rawValue:
+            message = "The user chose to use the fallback"
+            
+        default:
+            message = evaluatePolicyFailErrorMessageForLA(errorCode: errorCode)
+        }
+        
+        return message
     }
 }

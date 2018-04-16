@@ -119,6 +119,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     
     @objc func add() {
         self.id = nil
+        
         self.performSegue(withIdentifier: "SegueCalendarToShift", sender: self)
     }
     
@@ -149,6 +150,10 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
             let controller = segue.destination as! ShiftController
             controller.sender = self
             controller.id = self.id
+            
+            if let date = calendar.selectedDate {
+                controller.dateFilled = date
+            }
         }
     }
     
