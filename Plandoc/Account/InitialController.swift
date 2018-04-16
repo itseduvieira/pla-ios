@@ -67,6 +67,8 @@ class InitialController : UIViewController {
                     print("User cancelled login.")
                 case .success(let _, let _, let _):
                     var name = "", email = ""
+                    
+                    self.presentAlert()
                 
                     if((FBSDKAccessToken.current()) != nil) {
                         FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in

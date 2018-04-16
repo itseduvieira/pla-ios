@@ -82,6 +82,8 @@ class LoginController : UIViewController {
         let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
         UserDefaults.standard.set(encoded, forKey: "loggedUser")
         
+        //self.dismissCustomAlert()
+        
         self.performSegue(withIdentifier: "SegueLoginToMenu", sender: self)
     }
     
@@ -121,6 +123,8 @@ class LoginController : UIViewController {
                 print("User cancelled login.")
             case .success(let _, let _, let _):
                 var name = "", email = ""
+                
+                self.presentAlert()
                 
                 if((FBSDKAccessToken.current()) != nil) {
                     FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
@@ -223,13 +227,13 @@ class LoginController : UIViewController {
         } else {
             let alertController = UIAlertController(title: "Erro", message: error?.localizedDescription, preferredStyle: .alert)
             
+            self.dismissCustomAlert()
+            
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(defaultAction)
             
             self.present(alertController, animated: true, completion: nil)
         }
-        
-        self.dismissCustomAlert()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

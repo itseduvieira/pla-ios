@@ -46,6 +46,8 @@ class SignupPhoneController : UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func verifyPhone() {
+        self.presentAlert()
+        
         var phone = txtPhone.text!
         
         if !phone.starts(with: "+55") {
@@ -59,6 +61,15 @@ class SignupPhoneController : UIViewController, UITextFieldDelegate {
             PhoneAuthProvider.provider().verifyPhoneNumber(phone, uiDelegate: nil) { (verificationID, error) in
                 if let error = error {
                     print(error)
+                    self.dismissCustomAlert()
+                    
+                    let alertController = UIAlertController(title: "Erro", message: "Erro de comunicação com o servidor.", preferredStyle: .alert)
+                    
+                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    
+                    alertController.addAction(defaultAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
                 } else {
                     let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
                     UserDefaults.standard.set(encoded, forKey: "activation")

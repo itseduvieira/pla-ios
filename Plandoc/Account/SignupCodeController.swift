@@ -33,6 +33,8 @@ class SignupCodeController : UIViewController, UITextFieldDelegate {
         let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
         if text.count == 6 {
+            self.presentAlert()
+            
             let credential = PhoneAuthProvider.provider().credential(
                 withVerificationID: self.verificationID,
                 verificationCode: text)
@@ -41,9 +43,20 @@ class SignupCodeController : UIViewController, UITextFieldDelegate {
                 if let error = error {
                     print(error)
                     
+                    self.dismissCustomAlert()
+                    
                     let errCode = AuthErrorCode(rawValue: error._code)!
                     
                     switch errCode {
+                    case .invalidVerificationCode:
+                        let alertController = UIAlertController(title: "Código Incorreto", message: "O código informado está incorreto.", preferredStyle: .alert)
+                        
+                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        
+                        alertController.addAction(defaultAction)
+                        
+                        self.present(alertController, animated: true, completion: nil)
+                        break
                     case .credentialAlreadyInUse:
                         let alertController = UIAlertController(title: "Perfil Existente", message: "Já existe outro usuário utilizando este telefone.", preferredStyle: .alert)
                         
