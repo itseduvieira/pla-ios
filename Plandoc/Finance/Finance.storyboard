@@ -492,7 +492,7 @@
                                 </items>
                             </navigationBar>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="72" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VQv-4N-JBJ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="102" width="375" height="565"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="72" id="ijc-6Y-x49">
@@ -582,7 +582,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você não possui despesas cadastradas  para o período" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lk3-yM-uXA">
-                                <rect key="frame" x="20" y="164" width="335" height="35"/>
+                                <rect key="frame" x="20" y="204" width="335" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="3R3-rs-2Qn"/>
                                 </constraints>
@@ -590,19 +590,51 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vh5-gY-yaA">
+                                <rect key="frame" x="0.0" y="64" width="375" height="38"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="despesas de 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zXX-zu-APC">
+                                        <rect key="frame" x="123.5" y="9" width="118" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="lPR-9r-0mD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconEdit" translatesAutoresizingMaskIntoConstraints="NO" id="e0A-wd-hoH">
+                                        <rect key="frame" x="247.5" y="13" width="12" height="12"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="12" id="Ldp-bI-6co"/>
+                                            <constraint firstAttribute="height" constant="12" id="hI3-vY-Ydg"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1843137255" green="0.58431372550000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="e0A-wd-hoH" firstAttribute="leading" secondItem="zXX-zu-APC" secondAttribute="trailing" constant="6" id="1du-Ei-1DZ"/>
+                                    <constraint firstItem="e0A-wd-hoH" firstAttribute="centerY" secondItem="vh5-gY-yaA" secondAttribute="centerY" id="GRa-31-SlK"/>
+                                    <constraint firstItem="zXX-zu-APC" firstAttribute="centerX" secondItem="vh5-gY-yaA" secondAttribute="centerX" constant="-5" id="fvA-UX-5vh"/>
+                                    <constraint firstItem="zXX-zu-APC" firstAttribute="centerY" secondItem="vh5-gY-yaA" secondAttribute="centerY" id="nGt-mM-Cdk"/>
+                                    <constraint firstAttribute="height" constant="38" id="zyc-pN-BMk"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="0F0-0b-Fqa" firstAttribute="leading" secondItem="EoI-CD-6D2" secondAttribute="leading" id="392-5I-1K1"/>
+                            <constraint firstItem="vh5-gY-yaA" firstAttribute="top" secondItem="0F0-0b-Fqa" secondAttribute="bottom" id="4Ob-f7-crZ"/>
                             <constraint firstItem="0F0-0b-Fqa" firstAttribute="trailing" secondItem="EoI-CD-6D2" secondAttribute="trailing" id="7GE-RR-yCR"/>
                             <constraint firstItem="VQv-4N-JBJ" firstAttribute="leading" secondItem="EoI-CD-6D2" secondAttribute="leading" id="AWw-j7-yE1"/>
+                            <constraint firstItem="vh5-gY-yaA" firstAttribute="trailing" secondItem="EoI-CD-6D2" secondAttribute="trailing" id="CYP-Ag-RVh"/>
                             <constraint firstItem="VQv-4N-JBJ" firstAttribute="trailing" secondItem="EoI-CD-6D2" secondAttribute="trailing" id="Kug-da-bpi"/>
-                            <constraint firstItem="VQv-4N-JBJ" firstAttribute="top" secondItem="0F0-0b-Fqa" secondAttribute="bottom" id="PMa-4m-9cG"/>
+                            <constraint firstItem="vh5-gY-yaA" firstAttribute="leading" secondItem="EoI-CD-6D2" secondAttribute="leading" id="Ptx-CV-cTg"/>
                             <constraint firstItem="EoI-CD-6D2" firstAttribute="trailing" secondItem="lk3-yM-uXA" secondAttribute="trailing" constant="20" id="Qvs-P9-jKG"/>
                             <constraint firstItem="BYL-qB-UQs" firstAttribute="leading" secondItem="EoI-CD-6D2" secondAttribute="leading" id="TV1-db-FCJ"/>
                             <constraint firstItem="VQv-4N-JBJ" firstAttribute="bottom" secondItem="EoI-CD-6D2" secondAttribute="bottom" id="TfS-A4-muJ"/>
-                            <constraint firstItem="lk3-yM-uXA" firstAttribute="top" secondItem="0F0-0b-Fqa" secondAttribute="bottom" constant="100" id="XfF-YO-AXa"/>
+                            <constraint firstItem="lk3-yM-uXA" firstAttribute="top" secondItem="0F0-0b-Fqa" secondAttribute="bottom" constant="140" id="XfF-YO-AXa"/>
                             <constraint firstItem="BYL-qB-UQs" firstAttribute="trailing" secondItem="EoI-CD-6D2" secondAttribute="trailing" id="djd-9n-PAw"/>
+                            <constraint firstItem="VQv-4N-JBJ" firstAttribute="top" secondItem="vh5-gY-yaA" secondAttribute="bottom" id="iBX-aa-5X2"/>
                             <constraint firstItem="lk3-yM-uXA" firstAttribute="leading" secondItem="EoI-CD-6D2" secondAttribute="leading" constant="20" id="nKc-dH-U8X"/>
                             <constraint firstItem="0F0-0b-Fqa" firstAttribute="top" secondItem="L3o-Ot-6Wd" secondAttribute="top" id="nWq-QZ-XJq"/>
                             <constraint firstItem="BYL-qB-UQs" firstAttribute="top" secondItem="EoI-CD-6D2" secondAttribute="top" id="s8H-kv-Qzh"/>
@@ -610,10 +642,12 @@
                         <viewLayoutGuide key="safeArea" id="EoI-CD-6D2"/>
                     </view>
                     <connections>
+                        <outlet property="btnHeaderYear" destination="vh5-gY-yaA" id="nEr-dG-gkI"/>
                         <outlet property="navBar" destination="BYL-qB-UQs" id="axz-n9-0tR"/>
                         <outlet property="navItem" destination="xuH-Pv-oMx" id="5BP-bK-L22"/>
                         <outlet property="table" destination="VQv-4N-JBJ" id="Lgi-ji-N90"/>
                         <outlet property="txtEmpty" destination="lk3-yM-uXA" id="ku4-gt-TJw"/>
+                        <outlet property="txtTitleYear" destination="zXX-zu-APC" id="iJs-ZS-OkR"/>
                         <segue destination="e4P-bS-SZY" kind="show" identifier="SegueExpensesToDetail" id="xTs-HT-MBF"/>
                         <segue destination="u6a-RA-Q6Q" kind="unwind" identifier="SegueUnwindToExtendedMenu" unwindAction="unwindToExtendedMenuWithSegue:" id="cDq-Q5-NU7"/>
                     </connections>
@@ -1344,6 +1378,7 @@
         <image name="CoverExpenses" width="1280" height="853"/>
         <image name="Forward" width="80" height="82"/>
         <image name="IconBarFinancial" width="25" height="25"/>
+        <image name="IconEdit" width="100" height="100"/>
         <image name="IconExpensens" width="700" height="596"/>
         <image name="IconFinanceUp" width="78" height="76"/>
     </resources>

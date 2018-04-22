@@ -46,9 +46,13 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func goToPhoneVerification() {
+        self.presentAlert()
+        
         Auth.auth().createUser(withEmail: txtEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: txtPass.text!, completion: { (user: FirebaseAuth.User?, error) in
             if let error = error {
                 print(error)
+                
+                self.dismissCustomAlert()
                 
                 if let errCode = AuthErrorCode(rawValue: error._code) {
                     switch errCode {
@@ -60,19 +64,49 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
                             print("Create User Error: \(errCode)")
                     }
                 }
-                
             } else {
                 let changeRequest = user?.createProfileChangeRequest()
                 changeRequest?.displayName = self.txtName.text
                 changeRequest?.commitChanges { error in
                     if let error = error {
                         print(error)
-                    } else {
-                        let pdcUser = User()
-                        pdcUser.id = user?.uid
-                        pdcUser.email = self.txtEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-                        pdcUser.name = self.txtName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
                         
+                        self.dismissCustomAlert()
+                    } else {
+                        
+                        self.confirmEmail(user!)
+                    }
+                }
+            }
+        })
+    }
+    
+    private func confirmEmail(_ user: FirebaseAuth.User) {
+        do {
+            let pdcUser = User()
+            pdcUser.id = user.uid
+            pdcUser.email = self.txtEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            pdcUser.name = self.txtName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            let confirmURL = URL(string: "http://api.plandoc.com.br/v1/confirm")
+            
+            let sessionConfig = URLSessionConfiguration.default
+            let session = URLSession(configuration: sessionConfig)
+            var request = URLRequest(url: confirmURL!)
+            request.httpMethod = "POST"
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            let body: [String:Any] = [
+                "name": pdcUser.name,
+                "email": pdcUser.email
+            ]
+            
+            let jsonData = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
+            
+            request.httpBody = jsonData
+            
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let data = data, error == nil, let response = response as? HTTPURLResponse {
+                    DispatchQueue.main.async {
                         KeychainWrapper.standard.set(pdcUser.email, forKey: "pdcEmail")
                         KeychainWrapper.standard.set(self.txtPass.text!, forKey: "pdcPassword")
                         
@@ -80,9 +114,20 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
                         UserDefaults.standard.set(encoded, forKey: "activation")
                         self.performSegue(withIdentifier: "SegueNameToPhone", sender: self)
                     }
+                    
+                } else {
+                    print("Error at confirm email")
+                    
+                    self.dismissCustomAlert()
                 }
             }
-        })
+            
+            task.resume()
+        } catch let error {
+            print("An error occurred while send report request \(error)")
+            
+            self.dismissCustomAlert()
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

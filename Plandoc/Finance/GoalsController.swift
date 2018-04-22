@@ -83,7 +83,7 @@ class GoalsController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func save() {
-        if txtValue.text! == "" {
+        if switchAtivo.isOn && txtValue.text! == "" {
             let alertController = UIAlertController(title: "Erro", message: "Preencha corretamente os campos.", preferredStyle: .alert)
             
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -92,7 +92,13 @@ class GoalsController: UIViewController, UITextFieldDelegate {
             self.present(alertController, animated: true, completion: nil)
         } else {
             UserDefaults.standard.set(switchAtivo.isOn, forKey: "goalActive")
-            let value = Double(txtValue.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))
+            
+            var value: Double = 0.0
+            
+            if txtValue.text! != "" {
+                value = Double(txtValue.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))!
+            }
+            
             UserDefaults.standard.set(value, forKey: "goalValue")
             
             let alertController = UIAlertController(title: "Meta Financeira", message: "A Meta Financeira foi salva com sucesso.", preferredStyle: .alert)

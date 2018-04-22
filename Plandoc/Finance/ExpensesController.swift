@@ -14,6 +14,8 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var txtEmpty: UILabel!
+    @IBOutlet weak var txtTitleYear: UILabel!
+    @IBOutlet weak var btnHeaderYear: UIView!
     
     @IBAction func unwindToExpenses(segue: UIStoryboardSegue) {}
     
@@ -31,6 +33,8 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
     var data = [TableSection: [Expense]]()
     
     var id: String!
+    var year: String!
+    var years: Set<String>! = []
     
     //MARK: Actions
     override func viewDidLoad() {
@@ -40,16 +44,39 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
         
         table.dataSource = self
         table.delegate = self
+        
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.displayYears(sender:)))
+        btnHeaderYear.addGestureRecognizer(gesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if year == nil {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "YYYY"
+            txtTitleYear.text! = "despesas de \(formatter.string(from: Date()))"
+        }
+        
+        year = String(txtTitleYear.text!.split(separator: " ")[2])
         
         data = [:]
         expenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]
         
         txtEmpty.isHidden = !expenses.isEmpty
         table.isHidden = expenses.isEmpty
+        
+        expenses = expenses.filter { (key, value) -> Bool in
+            let pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: value) as! Expense
+            let formatter = DateFormatter()
+            formatter.dateFormat = "YYYY"
+            
+            let y = formatter.string(from: pdcExpense.date)
+            
+            years.insert(y)
+            
+            return y == year
+        }
         
         for ex in expenses.values {
             let pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: ex) as! Expense
@@ -133,12 +160,34 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor(hexString: "#78000000")
         
+        var total = 0
+        for ex in expenses.values {
+            let pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: ex) as! Expense
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM"
+            let month = Int(formatter.string(from: pdcExpense.date))! - 1
+            if month == section {
+                total += Int(pdcExpense.value)
+            }
+        }
+        
         if UserDefaults.standard.bool(forKey: "goalActive") {
             let goalValue = UserDefaults.standard.double(forKey: "goalValue")
+            var totalIncome = 0
             
-            
-            
-            let img = UIImageView(image: UIImage(named: "IconFinanceUp.png"))
+            if let dict = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] {
+                for data in [Data](dict.values) {
+                    let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "MMyyyy"
+                    let reference = formatter.string(from: shiftPdc.paymentDueDate)
+                    if reference == (String(format: "%02d", section + 1) + year) {
+                        totalIncome += Int(shiftPdc.salary)
+                    }
+                }
+            }
+
+            let img = UIImageView(image: UIImage(named: ((totalIncome - total) >= Int(goalValue)) ? "IconFinanceUp.png" : "IconFinanceDown.png"))
             img.frame = CGRect(x: tableView.bounds.width - 32, y: 8, width: 22, height: 22)
             view.addSubview(img)
         }
@@ -177,9 +226,26 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
             view.tag = tableSection.rawValue + 100
             view.addGestureRecognizer(gesture)
         }
+        
+        label.text = "\(label.text!) • R$\(total)"
         view.addSubview(label)
         
         return view
+    }
+    
+    @objc func displayYears(sender : UITapGestureRecognizer) {
+        let alert = UIAlertController(title: "Escolher Ano", message: "Escolha o ano de exibição desejado", preferredStyle: .actionSheet)
+        
+        for year in self.years.sorted() {
+            alert.addAction(UIAlertAction(title: year, style: .default, handler: { action in
+                self.txtTitleYear.text = "despesas de \(year)"
+                self.viewWillAppear(true)
+            }))
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true)
     }
     
     @objc func clickHeader(_ sender: UIGestureRecognizer) {

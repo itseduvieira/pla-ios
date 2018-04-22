@@ -597,8 +597,7 @@
         <image name="RevealPasswordIcon" width="80" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8fI-1R-cSY"/>
-        <segue reference="0hP-4z-ssr"/>
+        <segue reference="iG0-Bt-aEf"/>
         <segue reference="YsE-0V-e33"/>
     </inferredMetricsTieBreakers>
 </document>
