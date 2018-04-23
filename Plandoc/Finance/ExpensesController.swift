@@ -59,6 +59,7 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         year = String(txtTitleYear.text!.split(separator: " ")[2])
+        years = [year]
         
         data = [:]
         expenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]

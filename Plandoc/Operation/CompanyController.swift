@@ -35,7 +35,7 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
 //    var geocoder: Geocoder!
     
     let pickerTypeData = [
-        "Clínica", "Hospital", "P. Socorro", "Outro"
+        "Clínica", "Hospital", "Pronto Socorro", "Evento", "Transporte/Ambulância", "Home Care", "Empresa", "UPA", "AMA", "ESF", "Policlínica", "UTI", "Perícia", "Consultório", "Samu", "Extra", "Outro"
     ]
     
     //MARK: Actions
@@ -77,7 +77,7 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     @IBAction func save() {
-        if txtType.text! == "" || txtCompany.text! == "" || txtAddress.text! == "" || txtAdmin.text! == "" || txtPhone.text! == "" {
+        if txtType.text! == "" || txtCompany.text! == "" || txtAddress.text! == "" {
             let alertController = UIAlertController(title: "Erro", message: "Preencha corretamente os campos.", preferredStyle: .alert)
             
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)

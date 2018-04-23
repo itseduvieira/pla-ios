@@ -180,6 +180,7 @@
                         <outlet property="imgCheckProfile" destination="z0H-mY-y7J" id="JLT-aq-dmZ"/>
                         <outlet property="imgCheckShift" destination="94X-Fo-Av3" id="DrA-XQ-J9e"/>
                         <outlet property="navBar" destination="FSJ-tY-l1t" id="MhL-Mj-lm9"/>
+                        <outlet property="navItem" destination="dPd-dn-M95" id="xu3-na-e04"/>
                         <outlet property="txtCompany" destination="rRs-aM-i92" id="RG9-JS-wDJ"/>
                         <outlet property="txtDescCompany" destination="fdw-rp-Y9H" id="nhn-28-qN1"/>
                         <outlet property="txtDescProfile" destination="aZS-mX-kxc" id="QFv-mZ-tVf"/>

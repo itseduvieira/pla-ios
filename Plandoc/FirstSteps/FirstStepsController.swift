@@ -21,6 +21,7 @@ class FirstStepsController : UIViewController {
     @IBOutlet weak var txtDescShift: UILabel!
     @IBOutlet weak var btnCompleteStep: UIRoundedButton!
     @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var navItem: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,5 +129,15 @@ class FirstStepsController : UIViewController {
     func setNavigationBar() {
         navBar.setBackgroundImage(UIImage(), for: .default)
         navBar.shadowImage = UIImage()
+        let skipItem = UIBarButtonItem(title: "Pular", style: .plain, target: self, action: #selector(skip))
+        navItem.rightBarButtonItem = skipItem
+    }
+    
+    @objc func skip() {
+        UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: Profile()), forKey: "profile")
+        UserDefaults.standard.set(Dictionary<String,Data>(), forKey: "companies")
+        UserDefaults.standard.set(Dictionary<String,Data>(), forKey: "shifts")
+        self.viewWillAppear(true)
+        self.viewDidAppear(true)
     }
 }

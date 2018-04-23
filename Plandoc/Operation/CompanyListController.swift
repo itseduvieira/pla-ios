@@ -14,6 +14,7 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var companyTable: UITableView!
     @IBOutlet weak var headerCompanies: UIView!
+    @IBOutlet weak var txtEmpty: UILabel!
     
     @IBAction func unwindToCompaniesList(segue: UIStoryboardSegue) {}
     
@@ -42,6 +43,9 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
             let company = NSKeyedUnarchiver.unarchiveObject(with: data) as! Company
             return company.active
         })
+        
+        txtEmpty.isHidden = !self.companies.isEmpty
+        companyTable.isHidden = self.companies.isEmpty
         
         id = nil
         
@@ -109,15 +113,25 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            let alert = UIAlertController(title: "Remover Empresa", message: "Ao remover uma empresa, os dados não poderão ser recuperados. Você deseja realmente remover esta empresa?", preferredStyle: .actionSheet)
+            let alert = UIAlertController(title: "Remover Empresa", message: "Ao remover uma empresa, seus dados e plantões serão removidos e não poderão ser recuperados. Você deseja realmente remover esta empresa e seus plantões?", preferredStyle: .actionSheet)
             
             alert.addAction(UIAlertAction(title: "Sim, desejo remover", style: .destructive, handler: { action in
                 
                 let company = self.companies[indexPath.row]
                 let companyPdc = NSKeyedUnarchiver.unarchiveObject(with: company) as! Company
-                companyPdc.active = false
+                
+                var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
+                shifts = shifts.filter({ (key, value) -> Bool in
+                    let pdcShift = NSKeyedUnarchiver.unarchiveObject(with: value) as! Shift
+                    return pdcShift.companyId != companyPdc.id
+                })
+                UserDefaults.standard.set(shifts, forKey: "shifts")
+                
                 self.dictCompanies[companyPdc.id] = NSKeyedArchiver.archivedData(withRootObject: companyPdc)
+                self.dictCompanies.removeValue(forKey: companyPdc.id)
                 UserDefaults.standard.set(self.dictCompanies, forKey: "companies")
+                
+                
                 
                 self.viewWillAppear(true)
             }))
