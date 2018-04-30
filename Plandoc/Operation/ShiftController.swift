@@ -155,10 +155,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         
         let dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
         
-        self.companiesData = [Data](dictCompanies.values).filter({ (data) -> Bool in
-            let company = NSKeyedUnarchiver.unarchiveObject(with: data) as! Company
-            return company.active
-        })
+        self.companiesData = [Data](dictCompanies.values)
         
         if companiesData.isEmpty && self.id == nil {
             let alertController = UIAlertController(title: "Nenhuma Empresa Cadastrada", message: "Para cadastrar um plantão, primeiro você deve cadastrar uma empresa.", preferredStyle: .alert)

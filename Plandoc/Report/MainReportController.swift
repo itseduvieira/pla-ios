@@ -60,11 +60,6 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
         
         var dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
         
-        dictCompanies = dictCompanies.filter { (key, value) -> Bool in
-            let companyPdc = NSKeyedUnarchiver.unarchiveObject(with: value) as! Company
-            return companyPdc.active
-        }
-        
         self.companiesData = [Data](dictCompanies.values)
         let allCompanies = Company()
         allCompanies.type = "Todas as"

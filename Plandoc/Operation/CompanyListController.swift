@@ -39,10 +39,7 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
         super.viewWillAppear(animated)
         
         dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
-        self.companies = [Data](dictCompanies.values).filter({ (data) -> Bool in
-            let company = NSKeyedUnarchiver.unarchiveObject(with: data) as! Company
-            return company.active
-        })
+        self.companies = [Data](dictCompanies.values)
         
         txtEmpty.isHidden = !self.companies.isEmpty
         companyTable.isHidden = self.companies.isEmpty

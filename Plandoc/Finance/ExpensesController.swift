@@ -24,7 +24,7 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     // This is the size of our header sections that we will use later on.
-    let SectionHeaderHeight: CGFloat = 40
+    let SectionHeaderHeight: CGFloat = 45
     var selectedHeader: Int!
     
     var expenses: [String:Data]!
@@ -189,7 +189,7 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
             }
 
             let img = UIImageView(image: UIImage(named: ((totalIncome - total) >= Int(goalValue)) ? "IconFinanceUp.png" : "IconFinanceDown.png"))
-            img.frame = CGRect(x: tableView.bounds.width - 32, y: 8, width: 22, height: 22)
+            img.frame = CGRect(x: tableView.bounds.width - 28, y: 11, width: 22, height: 22)
             view.addSubview(img)
         }
         
@@ -228,8 +228,14 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
             view.addGestureRecognizer(gesture)
         }
         
-        label.text = "\(label.text!) • R$\(total)"
         view.addSubview(label)
+        
+        let txtTotal = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width - 36, height: SectionHeaderHeight))
+        txtTotal.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        txtTotal.textColor = UIColor(hexString: "#BB000000")
+        txtTotal.text = "R$\(total)"
+        txtTotal.textAlignment = .right
+        view.addSubview(txtTotal)
         
         return view
     }

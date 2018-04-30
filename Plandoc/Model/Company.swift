@@ -16,7 +16,6 @@ class Company: NSObject, NSCoding {
     var phone: String!
     var admin: String!
     var color: String!
-    var active: Bool!
     
     override init() {
         super.init()
@@ -30,7 +29,6 @@ class Company: NSObject, NSCoding {
         phone = decoder.decodeObject(forKey: "phone") as? String
         admin = decoder.decodeObject(forKey: "admin") as? String
         color = decoder.decodeObject(forKey: "color") as? String
-        active = decoder.decodeObject(forKey: "active") as? Bool
     }
     
     public func encode(with aCoder: NSCoder) {
@@ -41,7 +39,6 @@ class Company: NSObject, NSCoding {
         aCoder.encode(phone, forKey: "phone")
         aCoder.encode(admin, forKey: "admin")
         aCoder.encode(color, forKey: "color")
-        aCoder.encode(active, forKey: "active")
     }
 }
 
