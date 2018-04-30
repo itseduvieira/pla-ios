@@ -46,6 +46,8 @@ class SignupPhoneController : UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func verifyPhone() {
+        txtPhone.resignFirstResponder()
+        
         self.presentAlert()
         
         var phone = txtPhone.text!

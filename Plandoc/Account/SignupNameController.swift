@@ -46,6 +46,10 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func goToPhoneVerification() {
+        txtName.resignFirstResponder()
+        txtEmail.resignFirstResponder()
+        txtPass.resignFirstResponder()
+        
         self.presentAlert()
         
         Auth.auth().createUser(withEmail: txtEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: txtPass.text!, completion: { (user: FirebaseAuth.User?, error) in
@@ -111,6 +115,7 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
                         KeychainWrapper.standard.set(self.txtPass.text!, forKey: "pdcPassword")
                         
                         let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
+                        
                         UserDefaults.standard.set(encoded, forKey: "activation")
                         self.performSegue(withIdentifier: "SegueNameToPhone", sender: self)
                     }

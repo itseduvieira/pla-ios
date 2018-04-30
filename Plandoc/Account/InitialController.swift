@@ -19,6 +19,7 @@ class InitialController : UIViewController {
     
     var name: String!
     var email: String!
+    var pictureUrl: String!
     
     //MARK: Actions
     override func viewDidLoad() {
@@ -65,8 +66,9 @@ class InitialController : UIViewController {
                     print(error)
                 case .cancelled:
                     print("User cancelled login.")
-                case .success(let _, let _, let _):
+                case .success:
                     var name = "", email = ""
+                    var pictureUrl: String? = nil
                     
                     self.presentAlert()
                 
@@ -76,8 +78,13 @@ class InitialController : UIViewController {
                                 let dict = result as! [String : AnyObject]
                                 name = dict["name"] as! String
                                 email = dict["email"] as! String
+                                
+                                if let data = dict["data"] as? Dictionary<String,AnyObject> {
+                                    pictureUrl = data["url"] as? String
+                                }
+                                
                             
-                                self.trySignInFirebase(name, email)
+                                self.trySignInFirebase(name, email, pictureUrl)
                             }
                         })
                     }
@@ -85,7 +92,7 @@ class InitialController : UIViewController {
         })
     }
     
-    private func trySignInFirebase(_ name: String, _ email: String) {
+    private func trySignInFirebase(_ name: String, _ email: String, _ pictureUrl: String?) {
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         
         Auth.auth().signIn(with: credential) { (user, error) in
@@ -111,6 +118,8 @@ class InitialController : UIViewController {
                     user.providerData[0].providerID == "facebook.com" {
                     self.name = name
                     self.email = email
+                    self.pictureUrl = pictureUrl
+                    
                         self.performSegue(withIdentifier: "SegueSignupToPassword", sender: self)
                 } else {
                     if user.phoneNumber == nil {
@@ -149,6 +158,7 @@ class InitialController : UIViewController {
             let vc = segue.destination as! SignupPasswordController
             vc.name = self.name
             vc.email = self.email
+            vc.pictureUrl = self.pictureUrl
         }
     }
     

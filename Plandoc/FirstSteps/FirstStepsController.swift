@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import UserNotifications
 
-class FirstStepsController : UIViewController {
+class FirstStepsController : UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var txtTitle: UILabel!
     @IBOutlet weak var imgCheckProfile: UIImageView!
     @IBOutlet weak var txtProfile: UILabel!
@@ -27,6 +28,20 @@ class FirstStepsController : UIViewController {
         super.viewDidLoad()
         
         self.setNavigationBar()
+        
+        let center = UNUserNotificationCenter.current()
+        let options: UNAuthorizationOptions = [.alert, .sound]
+        center.delegate = self
+        center.requestAuthorization(options: options) {
+            (granted, error) in
+            if !granted {
+                print("Something went wrong")
+            }
+        }
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {                     completionHandler(.alert)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -133,16 +133,8 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
                 let storage = Storage.storage()
                 let ref = storage.reference().child("\(user.uid)/profile.jpg")
                 
-                ref.putData(data!, metadata: nil) { (metadata, error) in
-                    guard let metadata = metadata else {
-                        
-                        return
-                    }
-                    
+                ref.putData(data!, metadata: nil) { (metadata, error) in                    
                     pdcUser.picture = data
-                    
-                    //changeRequest.photoURL = metadata.downloadURL()
-                    //print("Picture uploaded at \(metadata.downloadURL()!.absoluteString)")
                 }
             }
             

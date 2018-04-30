@@ -52,6 +52,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         return data
     }()
     
+    let fixoTitle = ["Semanal", "Quinzenal"]
     var fixoData: [String] = {
         var data: [String] = []
         data.append("1 Mês")
@@ -137,6 +138,8 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             lblFixo.isHidden = false
             txtFixo.becomeFirstResponder()
             
+            txtFixo.text = "por 1 Mês"
+            
             if txtPaymentType.text == "A Prazo" {
                 txtPaymentType.text = ""
             }
@@ -145,6 +148,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         } else {
             txtFixo.isHidden = true
             lblFixo.isHidden = true
+            txtFixo.resignFirstResponder()
             
             paymentTypeData.append("A Prazo")
         }
@@ -215,6 +219,10 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
                     if index == 0 {
                         saveOne(groupId, date: date)
                     } else {
+                        if lblFixo.text! == "Quinzenalmente" && index % 2 != 0 {
+                            continue
+                        }
+                        
                         saveOne(groupId, date: Calendar.current.date(byAdding: DateComponents(day: 7 * index), to: date)!)
                     }
                 }
@@ -378,12 +386,20 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        if txtFixo.isFirstResponder {
+            return 2
+        } else {
+            return 1
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if txtFixo.isFirstResponder {
-            return fixoData.count
+            if component == 0 {
+                return fixoTitle.count
+            } else {
+                return fixoData.count
+            }
         } else if txtCompany.isFirstResponder {
             return companiesData.count
         } else if txtShiftTime.isFirstResponder {
@@ -397,7 +413,11 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if txtFixo.isFirstResponder {
-            return (fixoData[row])
+            if component == 0 {
+                return (fixoTitle[row])
+            } else {
+                return (fixoData[row])
+            }
         } else if txtCompany.isFirstResponder {
             let company = NSKeyedUnarchiver.unarchiveObject(with: companiesData[row]) as! Company
             return "\(company.type!) \(company.name!)"
@@ -412,7 +432,11 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if txtFixo.isFirstResponder {
-            return txtFixo.text = "por \(fixoData[row])"
+            if component == 0 {
+                lblFixo.text = row == 0 ? "Semanalmente" : "Quinzenalmente"
+            } else {
+                txtFixo.text = "por \(fixoData[row])"
+            }
         } else if txtCompany.isFirstResponder {
             let company = NSKeyedUnarchiver.unarchiveObject(with: companiesData[row]) as! Company
             self.companyChoosed = company.id
