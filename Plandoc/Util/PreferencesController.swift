@@ -11,6 +11,7 @@ import FirebaseAuth
 import FacebookLogin
 import FacebookCore
 import FBSDKCoreKit
+import FirebaseStorage
 
 class PreferencesController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //MARK: Properties
@@ -133,7 +134,7 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
             if indexPath.section == TableSection.social.rawValue && indexPath.row == 1 {
                     for info in Auth.auth().currentUser!.providerData {
                         if info.providerID == "facebook.com" {
-                            (cell.viewWithTag(10) as! UILabel).text = "Vinculado ao Facebook"
+                            (cell.viewWithTag(10) as! UILabel).text = "Vinculado ao Facebook (Desvincular)"
                             break
                         }
                     }
@@ -384,10 +385,18 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         if hasFacebook {
-            self.tableView.deselectRow(at: index, animated: true)
+            Auth.auth().currentUser?.unlink(fromProvider: "facebook.com", completion: { (user, error) in
+                self.tableView.deselectRow(at: index, animated: true)
+                
+                txt.text = "Vincular Facebook"
+                
+                self.tableView.reloadData()
+            })
             
             return
         }
+        
+        self.presentAlert()
         
         let loginManager = LoginManager()
         
@@ -395,15 +404,74 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
             switch loginResult {
             case .failed(let error):
                 print(error)
+                
+                self.tableView.deselectRow(at: index, animated: true)
+                
+                self.dismissCustomAlert()
             case .cancelled:
                 print("User cancelled login.")
-            case .success(let _, let _, let _):
                 
-                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                self.tableView.deselectRow(at: index, animated: true)
                 
-                Auth.auth().currentUser?.link(with: credential, completion: { (user, err) in
-                    txt.text = "Vinculado ao Facebook"
-                })
+                self.dismissCustomAlert()
+            case .success:
+                if((FBSDKAccessToken.current()) != nil) {
+                    FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+                        if (error == nil) {
+                            var pictureUrl: String? = nil
+                            
+                            let dict = result as! [String : AnyObject]
+                            
+                            if let picture = dict["picture"] as? [String : AnyObject] {
+                                if let data = picture["data"] as? [String : AnyObject] {
+                                    pictureUrl = data["url"] as? String
+                                }
+                            }
+                            
+                            if pictureUrl != nil && pictureUrl != "" {
+                                let sessionConfig = URLSessionConfiguration.default
+                                let session = URLSession(configuration: sessionConfig)
+                                let request = URLRequest(url: URL(string: pictureUrl!)!)
+                                let task = session.dataTask(with: request) { (data, response, error) in
+                                    let storage = Storage.storage()
+                                    let ref = storage.reference().child("\(Auth.auth().currentUser!.uid)/profile.jpg")
+                                    
+                                    ref.putData(data!, metadata: nil) { (metadata, error) in
+                                        let pdcUser = NSKeyedUnarchiver.unarchiveObject(with: UserDefaults.standard.object(forKey: "loggedUser") as! Data) as! User
+                                        pdcUser.picture = data!
+                                        let archivedUser = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
+                                        UserDefaults.standard.set(archivedUser, forKey: "loggedUser")
+                                        
+                                        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                                        
+                                        Auth.auth().currentUser?.link(with: credential, completion: { (user, err) in
+                                            self.tableView.deselectRow(at: index, animated: true)
+                                        
+                                            self.dismissCustomAlert()
+                                            
+                                            txt.text = "Vinculado ao Facebook (Desvincular)"
+                                            
+                                            self.tableView.reloadData()
+                                        })
+                                    }
+                                }
+                                task.resume()
+                            } else {
+                                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                                
+                                Auth.auth().currentUser?.link(with: credential, completion: { (user, err) in
+                                    self.tableView.deselectRow(at: index, animated: true)
+                                    
+                                    self.dismissCustomAlert()
+                                    
+                                    txt.text = "Vinculado ao Facebook (Desvincular)"
+                                    
+                                    self.tableView.reloadData()
+                                })
+                            }
+                        }
+                    })
+                }
             }
         })
     }

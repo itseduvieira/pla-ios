@@ -26,6 +26,7 @@ class LoginController : UIViewController {
     
     var name: String!
     var email: String!
+    var pictureUrl: String!
     
     //MARK: Actions
     override func viewDidLoad() {
@@ -121,8 +122,8 @@ class LoginController : UIViewController {
                 print(error)
             case .cancelled:
                 print("User cancelled login.")
-            case .success(let _, let _, let _):
-                var name = "", email = ""
+            case .success:
+                var name = "", email = "", pictureUrl = ""
                 
                 self.presentAlert()
                 
@@ -133,7 +134,13 @@ class LoginController : UIViewController {
                             name = dict["name"] as! String
                             email = dict["email"] as! String
                             
-                            self.trySignInFirebase(name, email)
+                            if let picture = dict["picture"] as? [String : AnyObject] {
+                                if let data = picture["data"] as? [String : AnyObject] {
+                                    pictureUrl = (data["url"] as? String)!
+                                }
+                            }
+                            
+                            self.trySignInFirebase(name, email, pictureUrl)
                         }
                     })
                 }
@@ -141,7 +148,7 @@ class LoginController : UIViewController {
         })
     }
     
-    private func trySignInFirebase(_ name: String, _ email: String) {
+    private func trySignInFirebase(_ name: String, _ email: String, _ pictureUrl: String) {
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         
         Auth.auth().signIn(with: credential) { (user, error) in
@@ -167,6 +174,7 @@ class LoginController : UIViewController {
                     user.providerData[0].providerID == "facebook.com" {
                     self.name = name
                     self.email = email
+                    self.pictureUrl = pictureUrl
                     self.performSegue(withIdentifier: "SegueSignupToPassword", sender: self)
                 } else {
                     if user.phoneNumber == nil {
@@ -241,6 +249,7 @@ class LoginController : UIViewController {
             let vc = segue.destination as! SignupPasswordController
             vc.name = self.name
             vc.email = self.email
+            vc.pictureUrl = self.pictureUrl
         }
     }
     
@@ -256,21 +265,16 @@ class LoginController : UIViewController {
             localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString) { success, evaluateError in
                 
                 if success {
-                    
-                    //TODO: User authenticated successfully, take appropriate action
                     let user = KeychainWrapper.standard.string(forKey: "pdcEmail")
                     let pass = KeychainWrapper.standard.string(forKey: "pdcPassword")
                     self.initLogin(user!, pass!)
                     
                 } else {
-                    //TODO: User did not authenticate successfully, look at error and take appropriate action
                     guard let error = evaluateError else {
                         return
                     }
                     
                     print(self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
-                    
-                    //TODO: If you have choosen the 'Fallback authentication mechanism selected' (LAError.userFallback). Handle gracefully
                     
                 }
             }
@@ -279,7 +283,6 @@ class LoginController : UIViewController {
             guard let error = authError else {
                 return
             }
-            //TODO: Show appropriate alert if biometry/TouchID/FaceID is lockout or not enrolled
             print(self.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
         }
     }

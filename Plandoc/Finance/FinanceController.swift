@@ -45,14 +45,16 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
         headerMonths.layer.addBorder(edge: .top, color: UIColor(hexString: "#26000000"), thickness: 0.3)
         headerMonths.layer.addBorder(edge: .bottom, color: UIColor(hexString: "#26000000"), thickness: 0.3)
         
-        let goalActive = UserDefaults.standard.bool(forKey: "goalActive")
-        labelMonths.text = goalActive ? "MESES (META ATIVA)" : "MESES"
+		
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.financeData = [:]
+		
+		let goalActive = UserDefaults.standard.bool(forKey: "goalActive")
+		labelMonths.text = goalActive ? "MESES (META ATIVA)" : "MESES"
         
         if let dict = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] {
             for data in [Data](dict.values) {
@@ -206,6 +208,8 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
                 
                 var hasGoal = false
                 var accomplish = false
+				
+				var sum = 0.0
                 
                 for ex in expenses.values {
                     let pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: ex) as! Expense
@@ -215,11 +219,11 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
                     let monthRow = String(format: "%02d", indexPath.row + 1) + navItem.rightBarButtonItem!.title!
                     if monthRow == formatter.string(from: pdcExpense.date) {
                         hasGoal = true
-                        accomplish = (finance.salaryTotal - pdcExpense.value) >= goalValue
-                        
-                        break
+						sum += pdcExpense.value
                     }
                 }
+				
+				accomplish = (finance.salaryTotal - sum) >= goalValue
                 
                 cell.iconGoal.isHidden = !hasGoal
                 cell.iconForward.isHidden = hasGoal

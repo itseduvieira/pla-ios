@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4kx-zW-FPQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4kx-zW-FPQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,46 +38,21 @@
                                     <navigationItem title="Plandoc Premium" id="bNm-zg-PcQ"/>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J9L-am-qoU">
-                                <rect key="frame" x="16" y="80" width="343" height="522"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tenha o controle de suas finanças na palma da mão." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oOj-oJ-P3S">
-                                        <rect key="frame" x="28" y="38" width="287" height="105"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="105" id="mFx-v9-6Oh"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="27"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.904296875" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="oOj-oJ-P3S" firstAttribute="leading" secondItem="J9L-am-qoU" secondAttribute="leading" constant="28" id="4FE-J8-y3a"/>
-                                    <constraint firstItem="oOj-oJ-P3S" firstAttribute="top" secondItem="J9L-am-qoU" secondAttribute="top" constant="38" id="lLR-nR-QQ8"/>
-                                    <constraint firstAttribute="trailing" secondItem="oOj-oJ-P3S" secondAttribute="trailing" constant="28" id="rZk-gR-JL8"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="nBG-qe-IP0" firstAttribute="bottom" secondItem="J9L-am-qoU" secondAttribute="bottom" constant="16" id="6FK-c2-NwM"/>
                             <constraint firstItem="jH9-OJ-aq8" firstAttribute="leading" secondItem="nBG-qe-IP0" secondAttribute="leading" id="7Xg-3v-B25"/>
                             <constraint firstItem="9Y6-at-jRh" firstAttribute="top" secondItem="8kT-aB-x6v" secondAttribute="top" id="9EU-WU-r87"/>
                             <constraint firstItem="jH9-OJ-aq8" firstAttribute="trailing" secondItem="nBG-qe-IP0" secondAttribute="trailing" id="Aul-cq-RbT"/>
                             <constraint firstItem="9Y6-at-jRh" firstAttribute="trailing" secondItem="nBG-qe-IP0" secondAttribute="trailing" id="Pjt-EL-ver"/>
                             <constraint firstItem="9Y6-at-jRh" firstAttribute="leading" secondItem="nBG-qe-IP0" secondAttribute="leading" id="n0A-eY-Nue"/>
-                            <constraint firstItem="nBG-qe-IP0" firstAttribute="trailing" secondItem="J9L-am-qoU" secondAttribute="trailing" constant="16" id="qnr-hN-pOd"/>
                             <constraint firstItem="jH9-OJ-aq8" firstAttribute="top" secondItem="8kT-aB-x6v" secondAttribute="top" constant="20" id="uVo-WV-LdE"/>
-                            <constraint firstItem="J9L-am-qoU" firstAttribute="top" secondItem="9Y6-at-jRh" secondAttribute="bottom" constant="16" id="uyk-sT-aAF"/>
-                            <constraint firstItem="J9L-am-qoU" firstAttribute="leading" secondItem="nBG-qe-IP0" secondAttribute="leading" constant="16" id="zvM-tr-obQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nBG-qe-IP0"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Pagamento" id="NEf-2t-faj"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="mainContainer" destination="J9L-am-qoU" id="xbs-xX-zzQ"/>
                         <outlet property="navBar" destination="jH9-OJ-aq8" id="6Zh-wA-my2"/>
                         <outlet property="navItem" destination="bNm-zg-PcQ" id="69H-dg-nid"/>
                         <segue destination="tdF-mw-PbH" kind="unwind" identifier="SegueUnwindToExtendedMenu" unwindAction="unwindToExtendedMenuWithSegue:" id="3yB-Ll-IbI"/>

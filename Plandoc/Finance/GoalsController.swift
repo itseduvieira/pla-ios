@@ -42,6 +42,12 @@ class GoalsController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.presentLargeAlert(self)
+    }
+    
     private func adjust4s() {
         imgPicture.isHidden = true
         constraintHeader.constant = 64

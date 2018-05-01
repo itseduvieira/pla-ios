@@ -212,6 +212,37 @@ extension UIViewController {
             tbc.setTabBarVisible(visible: true, duration: 0.3, animated: true)
         }
     }
+    
+    func presentLargeAlert(_ parent: UIViewController) {
+        let nib = UINib(nibName: "LargePopUp", bundle: nil)
+        let customAlert = nib.instantiate(withOwner: self, options: nil).first as! LargeAlertView
+        
+        customAlert.parent = parent
+        customAlert.tag = 12345
+        customAlert.container.setRadius(radius: 10)
+        
+        
+        let screen = UIScreen.main.bounds
+        customAlert.width.constant = screen.width - 32
+        customAlert.height.constant = screen.height - 54
+        customAlert.center = CGPoint(x: screen.midX, y: screen.midY)
+        
+        if let tbc = self.tabBarController {
+            tbc.setTabBarVisible(visible: false, duration: 0.4, animated: true)
+        }
+        
+        self.view.addSubview(customAlert)
+    }
+    
+    func dismissLargeAlert() {
+        if let view = self.view.viewWithTag(12345) {
+            view.removeFromSuperview()
+        }
+        
+        if let tbc = self.tabBarController {
+            tbc.setTabBarVisible(visible: true, duration: 0.3, animated: true)
+        }
+    }
 }
 
 extension UITabBarController {

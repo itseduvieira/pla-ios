@@ -65,6 +65,8 @@ class ExpenseDetailController: UIViewController, UIPickerViewDelegate, UIPickerV
         self.setupDateField()
         
         self.loadExistingData()
+        
+        self.hideKeyboardWhenTappedAround()
     
         if UIScreen.main.bounds.height < 500 {
             self.adjust4s()

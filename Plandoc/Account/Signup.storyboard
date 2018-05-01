@@ -181,7 +181,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCQ-c8-LGa">
                                 <rect key="frame" x="287" y="337" width="72" height="30"/>
@@ -597,7 +597,7 @@
         <image name="RevealPasswordIcon" width="80" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0hP-4z-ssr"/>
-        <segue reference="YsE-0V-e33"/>
+        <segue reference="iG0-Bt-aEf"/>
+        <segue reference="8uY-9c-2b6"/>
     </inferredMetricsTieBreakers>
 </document>

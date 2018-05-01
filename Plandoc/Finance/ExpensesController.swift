@@ -24,7 +24,7 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     // This is the size of our header sections that we will use later on.
-    let SectionHeaderHeight: CGFloat = 45
+    let SectionHeaderHeight: CGFloat = 55
     var selectedHeader: Int!
     
     var expenses: [String:Data]!
@@ -189,7 +189,8 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
             }
 
             let img = UIImageView(image: UIImage(named: ((totalIncome - total) >= Int(goalValue)) ? "IconFinanceUp.png" : "IconFinanceDown.png"))
-            img.frame = CGRect(x: tableView.bounds.width - 28, y: 11, width: 22, height: 22)
+            img.frame = CGRect(x: tableView.bounds.width - 28, y: 0, width: 22, height: SectionHeaderHeight)
+            img.contentMode = .scaleAspectFit
             view.addSubview(img)
         }
         

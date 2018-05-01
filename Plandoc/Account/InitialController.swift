@@ -79,8 +79,10 @@ class InitialController : UIViewController {
                                 name = dict["name"] as! String
                                 email = dict["email"] as! String
                                 
-                                if let data = dict["data"] as? Dictionary<String,AnyObject> {
-                                    pictureUrl = data["url"] as? String
+                                if let picture = dict["picture"] as? [String : AnyObject] {
+                                    if let data = picture["data"] as? [String : AnyObject] {
+                                        pictureUrl = data["url"] as? String
+                                    }
                                 }
                                 
                             

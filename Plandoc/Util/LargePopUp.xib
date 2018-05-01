@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LargeAlertView" customModule="Plandoc" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y4V-NX-A8y">
+                    <rect key="frame" x="26" y="46" width="323" height="595"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tenha o controle de suas finanças na palma da mão." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pm-xw-hyu">
+                            <rect key="frame" x="28" y="38" width="267" height="105"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="105" id="1NU-aj-HUX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="27"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.904296875" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WvU-4Q-EzH" customClass="UIRoundedButton" customModule="Plandoc" customModuleProvider="target">
+                            <rect key="frame" x="16" y="539" width="291" height="40"/>
+                            <color key="backgroundColor" red="0.1843137255" green="0.58431372550000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="kFm-0B-VVa"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="12"/>
+                            <state key="normal" title="ENTENDI">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="close:" destination="iN0-l3-epB" eventType="touchUpInside" id="K60-hP-0nj"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="1pm-xw-hyu" firstAttribute="top" secondItem="y4V-NX-A8y" secondAttribute="top" constant="38" id="78j-87-3Xb"/>
+                        <constraint firstItem="1pm-xw-hyu" firstAttribute="leading" secondItem="y4V-NX-A8y" secondAttribute="leading" constant="28" id="EuB-NK-yZO"/>
+                        <constraint firstAttribute="width" constant="323" id="Qak-2H-Yju"/>
+                        <constraint firstAttribute="bottom" secondItem="WvU-4Q-EzH" secondAttribute="bottom" constant="16" id="Sgv-AN-JDO"/>
+                        <constraint firstAttribute="trailing" secondItem="WvU-4Q-EzH" secondAttribute="trailing" constant="16" id="Te9-60-H1t"/>
+                        <constraint firstItem="WvU-4Q-EzH" firstAttribute="leading" secondItem="y4V-NX-A8y" secondAttribute="leading" constant="16" id="axk-Ke-pwY"/>
+                        <constraint firstAttribute="height" constant="595" id="ldp-TL-nGC"/>
+                        <constraint firstAttribute="trailing" secondItem="1pm-xw-hyu" secondAttribute="trailing" constant="28" id="u5F-fW-KfH"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="y4V-NX-A8y" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="Jqp-qS-3w8"/>
+                <constraint firstItem="y4V-NX-A8y" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="OlQ-XX-Ge7"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="container" destination="y4V-NX-A8y" id="vu3-2w-gTV"/>
+                <outlet property="height" destination="ldp-TL-nGC" id="5FV-Pa-tGl"/>
+                <outlet property="width" destination="Qak-2H-Yju" id="dIW-5O-adS"/>
+            </connections>
+        </view>
+    </objects>
+</document>

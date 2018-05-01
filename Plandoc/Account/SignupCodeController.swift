@@ -33,7 +33,7 @@ class SignupCodeController : UIViewController, UITextFieldDelegate {
         let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
         if text.count == 6 {
-            let when = DispatchTime.now() + 0.1
+            let when = DispatchTime.now() + 0.2
             DispatchQueue.main.asyncAfter(deadline: when) {
                 self.txtCode.resignFirstResponder()
             
