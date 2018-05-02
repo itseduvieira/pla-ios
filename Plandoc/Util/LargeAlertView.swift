@@ -14,8 +14,10 @@ class LargeAlertView: UIView {
     @IBOutlet weak var width: NSLayoutConstraint!
     
     weak var parent: UIViewController!
+    var dismiss: (() -> Swift.Void)!
     
     @IBAction func close(_ sender: Any) {
         self.parent.dismissLargeAlert()
+        dismiss()
     }
 }

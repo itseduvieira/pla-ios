@@ -45,7 +45,17 @@ class GoalsController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.presentLargeAlert(self)
+        if !UserDefaults.standard.bool(forKey: "goalTutorial") {
+            self.presentLargeAlert(self, {
+                UserDefaults.standard.set(true, forKey: "goalTutorial")
+            })
+        }
+    }
+    
+    @IBAction func openTutorial() {        
+        self.presentLargeAlert(self, {
+            UserDefaults.standard.set(true, forKey: "goalTutorial")
+        })
     }
     
     private func adjust4s() {
@@ -98,6 +108,7 @@ class GoalsController: UIViewController, UITextFieldDelegate {
             self.present(alertController, animated: true, completion: nil)
         } else {
             UserDefaults.standard.set(switchAtivo.isOn, forKey: "goalActive")
+            DataAccess.setPreference("goalActive", switchAtivo.isOn)
             
             var value: Double = 0.0
             
@@ -106,6 +117,7 @@ class GoalsController: UIViewController, UITextFieldDelegate {
             }
             
             UserDefaults.standard.set(value, forKey: "goalValue")
+            DataAccess.setPreference("goalValue", value)
             
             let alertController = UIAlertController(title: "Meta Financeira", message: "A Meta Financeira foi salva com sucesso.", preferredStyle: .alert)
             

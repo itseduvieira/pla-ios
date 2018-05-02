@@ -200,6 +200,8 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
     @objc func notificationIncomeChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "notificationIncome")
         
+        DataAccess.setPreference("notificationIncome", sender.isOn)
+        
         if sender.isOn {
             print("on")
         } else {
@@ -209,6 +211,8 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
     
     @objc func notificationShiftsChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "notificationShifts")
+        
+        DataAccess.setPreference("notificationShifts", sender.isOn)
         
         if sender.isOn {
             print("on")
@@ -296,6 +300,11 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         UserDefaults.standard.removeObject(forKey: "loggedUser")
+        UserDefaults.standard.removeObject(forKey: "goalActive")
+        UserDefaults.standard.removeObject(forKey: "goalValue")
+        UserDefaults.standard.removeObject(forKey: "notificationIncome")
+        UserDefaults.standard.removeObject(forKey: "notificationShifts")
+        
         self.performSegue(withIdentifier: "SeguePreferencesToLogin", sender: self)
     }
     
@@ -313,6 +322,7 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
             UserDefaults.standard.removeObject(forKey: "notificationIncome")
             UserDefaults.standard.removeObject(forKey: "notificationShifts")
             UserDefaults.standard.removeObject(forKey: "biometrics")
+            UserDefaults.standard.removeObject(forKey: "goalTutorial")
             
             self.logoff()
         }))

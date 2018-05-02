@@ -168,6 +168,8 @@ class InitialController : UIViewController {
         let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
         UserDefaults.standard.set(encoded, forKey: "loggedUser")
         
+        DataAccess.getPreferences()
+        
         self.performSegue(withIdentifier: "SegueSignupToMenu", sender: self)
     }
 }

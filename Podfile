@@ -16,4 +16,5 @@ target 'Plandoc' do
     pod 'Charts'
     pod 'FacebookLogin'
     pod 'SwiftKeychainWrapper'
+    pod 'Alamofire', '~> 4.7'
 end

@@ -59,6 +59,7 @@
 		34AD2D561F976D010083E942 /* TutorialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AD2D521F976D010083E942 /* TutorialController.swift */; };
 		34AD2D571F976D010083E942 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34AD2D531F976D010083E942 /* Tutorial.storyboard */; };
 		34AD2D581F976D010083E942 /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AD2D541F976D010083E942 /* PageController.swift */; };
+		34BE45A2209A05A00098EA62 /* DataAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BE45A1209A05A00098EA62 /* DataAccess.swift */; };
 		34C417482047193B00C06342 /* ExpenseDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C417472047193B00C06342 /* ExpenseDetailController.swift */; };
 		34C478871FE48F9400FF6E05 /* MainReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C478861FE48F9400FF6E05 /* MainReportController.swift */; };
 		34CDE7A32056092D00219263 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CDE7A22056092D00219263 /* Expense.swift */; };
@@ -133,6 +134,7 @@
 		34AD2D521F976D010083E942 /* TutorialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialController.swift; sourceTree = "<group>"; };
 		34AD2D531F976D010083E942 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		34AD2D541F976D010083E942 /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
+		34BE45A1209A05A00098EA62 /* DataAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAccess.swift; sourceTree = "<group>"; };
 		34C417472047193B00C06342 /* ExpenseDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailController.swift; sourceTree = "<group>"; };
 		34C478861FE48F9400FF6E05 /* MainReportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainReportController.swift; sourceTree = "<group>"; };
 		34CDE7A22056092D00219263 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				34FA6AA2202B77F8002F9B0D /* CustomAlertLoadingView.swift */,
 				34DD141B2012840D00CA9BEE /* PdfViewerController.swift */,
 				3454227C209815DD00EBAEEC /* LargeAlertView.swift */,
+				34BE45A1209A05A00098EA62 /* DataAccess.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -347,7 +350,6 @@
 				3477654D1F8FE93200082442 /* Frameworks */,
 				3477654E1F8FE93200082442 /* Resources */,
 				219FE6149B58D790730BB70B /* [CP] Embed Pods Frameworks */,
-				B12FFC458AD8536984F75A54 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -434,6 +436,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Plandoc/Pods-Plandoc-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
@@ -454,6 +457,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
@@ -495,25 +499,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B12FFC458AD8536984F75A54 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Plandoc/Pods-Plandoc-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Plandoc/Pods-Plandoc-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -528,6 +513,7 @@
 				34FA6AA3202B77F8002F9B0D /* CustomAlertLoadingView.swift in Sources */,
 				347765541F8FE93200082442 /* AppDelegate.swift in Sources */,
 				340143A01FFBEF2D00E48C83 /* CompanyCustomCell.swift in Sources */,
+				34BE45A2209A05A00098EA62 /* DataAccess.swift in Sources */,
 				34981B082042336700A815F1 /* GoalsController.swift in Sources */,
 				3459438520054BAD008F15B0 /* FinanceCustomCell.swift in Sources */,
 				34489410200E74BA0077A88A /* FinanceData.swift in Sources */,

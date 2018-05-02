@@ -19,11 +19,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y4V-NX-A8y">
                     <rect key="frame" x="26" y="46" width="323" height="595"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tenha o controle de suas finanças na palma da mão." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pm-xw-hyu">
-                            <rect key="frame" x="28" y="38" width="267" height="105"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="105" id="1NU-aj-HUX"/>
-                            </constraints>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tenha o controle definindo sua Meta Financeira" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pm-xw-hyu">
+                            <rect key="frame" x="28" y="30" width="267" height="97"/>
                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="27"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.904296875" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -42,17 +39,62 @@
                                 <action selector="close:" destination="iN0-l3-epB" eventType="touchUpInside" id="K60-hP-0nj"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Defina um valor que você deseja que sobre no fim do mês" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlw-do-n75">
+                            <rect key="frame" x="28" y="157" width="267" height="31.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Verifique se a meta está ativa" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dC2-2J-62P">
+                            <rect key="frame" x="28" y="208.5" width="267" height="16"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Toque em Salvar no canto superior direito" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7n7-AB-bFA">
+                            <rect key="frame" x="28" y="244.5" width="267" height="31.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E pronto! Confira as setas verdes e vermelhas nas telas de Financeiro e Despesas :)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h36-dy-ByT">
+                            <rect key="frame" x="28" y="306" width="267" height="50.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
+                            <color key="textColor" red="0.1843137255" green="0.58431372550000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elas indicam se você está dentro da meta de lucro mensal estipulada (RECEITAS vs DESPESAS)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbE-vL-cZ4">
+                            <rect key="frame" x="28" y="364.5" width="267" height="39.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
+                            <color key="textColor" red="0.1843137255" green="0.58431372550000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="1pm-xw-hyu" firstAttribute="top" secondItem="y4V-NX-A8y" secondAttribute="top" constant="38" id="78j-87-3Xb"/>
+                        <constraint firstItem="kbE-vL-cZ4" firstAttribute="leading" secondItem="y4V-NX-A8y" secondAttribute="leading" constant="28" id="4HW-Bi-fwf"/>
+                        <constraint firstItem="1pm-xw-hyu" firstAttribute="top" secondItem="y4V-NX-A8y" secondAttribute="top" constant="30" id="78j-87-3Xb"/>
                         <constraint firstItem="1pm-xw-hyu" firstAttribute="leading" secondItem="y4V-NX-A8y" secondAttribute="leading" constant="28" id="EuB-NK-yZO"/>
+                        <constraint firstItem="7n7-AB-bFA" firstAttribute="leading" secondItem="y4V-NX-A8y" secondAttribute="leading" constant="28" id="LPm-0M-uGQ"/>
+                        <constraint firstAttribute="trailing" secondItem="7n7-AB-bFA" secondAttribute="trailing" constant="28" id="Q1k-bB-NwV"/>
                         <constraint firstAttribute="width" constant="323" id="Qak-2H-Yju"/>
+                        <constraint firstItem="h36-dy-ByT" firstAttribute="top" secondItem="7n7-AB-bFA" secondAttribute="bottom" constant="30" id="Sah-lS-t4f"/>
                         <constraint firstAttribute="bottom" secondItem="WvU-4Q-EzH" secondAttribute="bottom" constant="16" id="Sgv-AN-JDO"/>
                         <constraint firstAttribute="trailing" secondItem="WvU-4Q-EzH" secondAttribute="trailing" constant="16" id="Te9-60-H1t"/>
+                        <constraint firstItem="7n7-AB-bFA" firstAttribute="top" secondItem="dC2-2J-62P" secondAttribute="bottom" constant="20" id="V0s-bF-5S6"/>
+                        <constraint firstAttribute="trailing" secondItem="xlw-do-n75" secondAttribute="trailing" constant="28" id="YzE-Q0-Puq"/>
                         <constraint firstItem="WvU-4Q-EzH" firstAttribute="leading" secondItem="y4V-NX-A8y" secondAttribute="leading" constant="16" id="axk-Ke-pwY"/>
+                        <constraint firstItem="dC2-2J-62P" firstAttribute="leading" secondItem="y4V-NX-A8y" secondAttribute="leading" constant="28" id="gGq-uA-xzY"/>
+                        <constraint firstItem="xlw-do-n75" firstAttribute="top" secondItem="1pm-xw-hyu" secondAttribute="bottom" constant="30" id="hIX-pr-YTd"/>
+                        <constraint firstAttribute="trailing" secondItem="dC2-2J-62P" secondAttribute="trailing" constant="28" id="jJR-sC-4o6"/>
+                        <constraint firstItem="kbE-vL-cZ4" firstAttribute="top" secondItem="h36-dy-ByT" secondAttribute="bottom" constant="8" id="l0T-3Z-pAB"/>
                         <constraint firstAttribute="height" constant="595" id="ldp-TL-nGC"/>
+                        <constraint firstItem="dC2-2J-62P" firstAttribute="top" secondItem="xlw-do-n75" secondAttribute="bottom" constant="20" id="mDb-kn-0ft"/>
                         <constraint firstAttribute="trailing" secondItem="1pm-xw-hyu" secondAttribute="trailing" constant="28" id="u5F-fW-KfH"/>
+                        <constraint firstAttribute="trailing" secondItem="h36-dy-ByT" secondAttribute="trailing" constant="28" id="x7e-0Q-Q4H"/>
+                        <constraint firstAttribute="trailing" secondItem="kbE-vL-cZ4" secondAttribute="trailing" constant="28" id="xZa-iY-etk"/>
+                        <constraint firstItem="h36-dy-ByT" firstAttribute="leading" secondItem="y4V-NX-A8y" secondAttribute="leading" constant="28" id="yAq-1N-32q"/>
+                        <constraint firstItem="xlw-do-n75" firstAttribute="leading" secondItem="y4V-NX-A8y" secondAttribute="leading" constant="28" id="zj6-yx-r0N"/>
                     </constraints>
                 </view>
             </subviews>

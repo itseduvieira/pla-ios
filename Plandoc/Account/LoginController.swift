@@ -83,8 +83,6 @@ class LoginController : UIViewController {
         let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
         UserDefaults.standard.set(encoded, forKey: "loggedUser")
         
-        //self.dismissCustomAlert()
-        
         self.performSegue(withIdentifier: "SegueLoginToMenu", sender: self)
     }
     
@@ -250,6 +248,8 @@ class LoginController : UIViewController {
             vc.name = self.name
             vc.email = self.email
             vc.pictureUrl = self.pictureUrl
+        } else if segue.identifier == "SegueLoginToMenu" {
+            DataAccess.getPreferences()
         }
     }
     

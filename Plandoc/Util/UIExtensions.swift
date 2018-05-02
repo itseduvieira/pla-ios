@@ -192,6 +192,7 @@ extension UIViewController {
         customAlert.tag = 12345
         customAlert.indicator.startAnimating()
         customAlert.container.setRadius(radius: 10)
+        customAlert.alpha = 0
         
         let screen = UIScreen.main.bounds
         customAlert.center = CGPoint(x: screen.midX, y: screen.midY)
@@ -201,6 +202,12 @@ extension UIViewController {
         }
         
         self.view.addSubview(customAlert)
+        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.8, animations: {
+                customAlert.alpha = 1.0
+            })
+        }
     }
     
     func dismissCustomAlert() {
@@ -213,14 +220,15 @@ extension UIViewController {
         }
     }
     
-    func presentLargeAlert(_ parent: UIViewController) {
+    func presentLargeAlert(_ parent: UIViewController, _ dismiss: @escaping () -> Swift.Void) {
         let nib = UINib(nibName: "LargePopUp", bundle: nil)
         let customAlert = nib.instantiate(withOwner: self, options: nil).first as! LargeAlertView
         
         customAlert.parent = parent
         customAlert.tag = 12345
         customAlert.container.setRadius(radius: 10)
-        
+        customAlert.alpha = 0
+        customAlert.dismiss = dismiss
         
         let screen = UIScreen.main.bounds
         customAlert.width.constant = screen.width - 32
@@ -232,6 +240,12 @@ extension UIViewController {
         }
         
         self.view.addSubview(customAlert)
+        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1, animations: {
+                customAlert.alpha = 1.0
+            })
+        }
     }
     
     func dismissLargeAlert() {
