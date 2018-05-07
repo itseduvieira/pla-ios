@@ -87,13 +87,17 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
         } else {
             var companies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
             
+            var isNew: Bool
+            
             var pdcCompany: Company
             
             if !companies.isEmpty, id != nil {
                 pdcCompany = NSKeyedUnarchiver.unarchiveObject(with: companies[id]!) as! Company
+                isNew = false
             } else {
                 pdcCompany = Company()
                 pdcCompany.id = String.random()
+                isNew = true
             }
             
             pdcCompany.type = txtType.text
@@ -108,6 +112,12 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
             companies[pdcCompany.id] = company
             
             UserDefaults.standard.set(companies, forKey: "companies")
+            
+            if isNew {
+                DataAccess.createCompany(pdcCompany)
+            } else {
+                DataAccess.updateCompany(pdcCompany)
+            }
             
             cancel()
         }

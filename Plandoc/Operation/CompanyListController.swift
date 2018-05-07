@@ -128,7 +128,7 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
                 self.dictCompanies.removeValue(forKey: companyPdc.id)
                 UserDefaults.standard.set(self.dictCompanies, forKey: "companies")
                 
-                
+                DataAccess.deleteCompany(companyPdc.id)
                 
                 self.viewWillAppear(true)
             }))

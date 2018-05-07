@@ -58,13 +58,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E pronto! Confira as setas verdes e vermelhas nas telas de Financeiro e Despesas :)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h36-dy-ByT">
-                            <rect key="frame" x="28" y="306" width="267" height="50.5"/>
-                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="14"/>
+                            <rect key="frame" x="28" y="306" width="267" height="43"/>
+                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="12"/>
                             <color key="textColor" red="0.1843137255" green="0.58431372550000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elas indicam se você está dentro da meta de lucro mensal estipulada (RECEITAS vs DESPESAS)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbE-vL-cZ4">
-                            <rect key="frame" x="28" y="364.5" width="267" height="39.5"/>
+                            <rect key="frame" x="28" y="361" width="267" height="39.5"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
                             <color key="textColor" red="0.1843137255" green="0.58431372550000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -87,7 +87,7 @@
                         <constraint firstItem="dC2-2J-62P" firstAttribute="leading" secondItem="y4V-NX-A8y" secondAttribute="leading" constant="28" id="gGq-uA-xzY"/>
                         <constraint firstItem="xlw-do-n75" firstAttribute="top" secondItem="1pm-xw-hyu" secondAttribute="bottom" constant="30" id="hIX-pr-YTd"/>
                         <constraint firstAttribute="trailing" secondItem="dC2-2J-62P" secondAttribute="trailing" constant="28" id="jJR-sC-4o6"/>
-                        <constraint firstItem="kbE-vL-cZ4" firstAttribute="top" secondItem="h36-dy-ByT" secondAttribute="bottom" constant="8" id="l0T-3Z-pAB"/>
+                        <constraint firstItem="kbE-vL-cZ4" firstAttribute="top" secondItem="h36-dy-ByT" secondAttribute="bottom" constant="12" id="l0T-3Z-pAB"/>
                         <constraint firstAttribute="height" constant="595" id="ldp-TL-nGC"/>
                         <constraint firstItem="dC2-2J-62P" firstAttribute="top" secondItem="xlw-do-n75" secondAttribute="bottom" constant="20" id="mDb-kn-0ft"/>
                         <constraint firstAttribute="trailing" secondItem="1pm-xw-hyu" secondAttribute="trailing" constant="28" id="u5F-fW-KfH"/>
@@ -109,6 +109,7 @@
                 <outlet property="height" destination="ldp-TL-nGC" id="5FV-Pa-tGl"/>
                 <outlet property="width" destination="Qak-2H-Yju" id="dIW-5O-adS"/>
             </connections>
+            <point key="canvasLocation" x="33.5" y="110.5"/>
         </view>
     </objects>
 </document>

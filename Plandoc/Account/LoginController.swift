@@ -249,7 +249,7 @@ class LoginController : UIViewController {
             vc.email = self.email
             vc.pictureUrl = self.pictureUrl
         } else if segue.identifier == "SegueLoginToMenu" {
-            DataAccess.getPreferences()
+            DataAccess.getData()
         }
     }
     
