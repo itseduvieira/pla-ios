@@ -124,22 +124,6 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func changeCalendarType() {
-//        if calendar.scope == .month {
-//            calendar.scope = .week
-//            calendar.appearance.titleFont = UIFont(descriptor: calendar.appearance.titleFont.fontDescriptor, size: 16)
-//
-//            navItem.leftBarButtonItem?.title = "Mês"
-//        } else {
-//            calendar.scope = .month
-//
-//            calendar.appearance.titleFont = UIFont(descriptor: calendar.appearance.titleFont.fontDescriptor, size: 12)
-//
-//            navItem.leftBarButtonItem?.title = "Semana"
-//        }
-//
-//        self.viewWillAppear(true)
-//        self.updateViewConstraints()
-        
         calendar.setCurrentPage(Date(), animated: true)
         self.viewWillAppear(true)
         self.viewDidAppear(true)
@@ -235,18 +219,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
                         self.removeOne(shiftPdc)
                     }))
                     alert.addAction(UIAlertAction(title: "Remover Todos", style: .destructive, handler: { action in
-                        
-                        for data in dict.values {
-                            let s = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
-                            if s.groupId == shiftPdc.groupId {
-                                dict.removeValue(forKey: s.id)
-                            }
-                        }
-                        
-                        UserDefaults.standard.set(dict, forKey: "shifts")
-                        
-                        self.viewWillAppear(true)
-                        self.viewDidAppear(true)
+                        self.removeGroup(shiftPdc)
                     }))
                     alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
                     
@@ -264,6 +237,26 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         
         UserDefaults.standard.set(dict, forKey: "shifts")
         
+        DataAccess.deleteShift(shift.id)
+        
+        self.viewWillAppear(true)
+        self.viewDidAppear(true)
+    }
+    
+    func removeGroup(_ shift: Shift) {
+        var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
+        
+        for data in dict.values {
+            let s = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
+            if s.groupId == shift.groupId {
+                dict.removeValue(forKey: s.id)
+            }
+        }
+        
+        UserDefaults.standard.set(dict, forKey: "shifts")
+        
+        DataAccess.deleteShiftGroup(shift.groupId)
+        
         self.viewWillAppear(true)
         self.viewDidAppear(true)
     }
@@ -273,18 +266,6 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.view.layoutIfNeeded()
     }
-    
-    /*func calendar(_ calendar: FSCalendar, hasEventFor date: Date) -> Bool {
-        if let events = self.events {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "ddMMyyyy"
-            let id = formatter.string(from: date as Date)
-            
-            return events.contains(id)
-        }
-        
-        return false
-    }*/
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         self.viewWillAppear(true)

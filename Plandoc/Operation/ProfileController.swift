@@ -91,6 +91,8 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
             let profile = NSKeyedArchiver.archivedData(withRootObject: pdcProfile)
             UserDefaults.standard.set(profile, forKey: "profile")
             
+            DataAccess.updateProfile(pdcProfile)
+            
             cancel()
         }
     }

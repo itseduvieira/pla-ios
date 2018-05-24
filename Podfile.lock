@@ -75,6 +75,10 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - PromiseKit/Alamofire (6.2.5):
+    - Alamofire (~> 4.0)
+    - PromiseKit/CorePromise
+  - PromiseKit/CorePromise (6.2.5)
   - SearchTextField (1.2.0)
   - SwiftKeychainWrapper (3.0.1)
 
@@ -91,6 +95,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - MapboxGeocoder.swift (~> 0.6)
   - MapboxStatic.swift (~> 0.9)
+  - PromiseKit/Alamofire (~> 6.0)
   - SearchTextField
   - SwiftKeychainWrapper
 
@@ -119,6 +124,7 @@ SPEC REPOS:
     - MapboxGeocoder.swift
     - MapboxStatic.swift
     - nanopb
+    - PromiseKit
     - SearchTextField
     - SwiftKeychainWrapper
 
@@ -146,9 +152,10 @@ SPEC CHECKSUMS:
   MapboxGeocoder.swift: b1277a2ca6a63c1a8edfa82871f5771075b1e015
   MapboxStatic.swift: 247d98dd6e11b8934aa5d122efcb50384f8d66f6
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  PromiseKit: a26828b0a8d5874960dfdb575b57a70790ec36f1
   SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: bcbd53b7148672b969cb08a8b0687c8ffeb4f6f1
+PODFILE CHECKSUM: c9b939c41b1d782d86edd24396a505964e783348
 
 COCOAPODS: 1.5.0

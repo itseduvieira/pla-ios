@@ -8,6 +8,7 @@
 
 import UIKit
 import Charts
+import FirebaseAuth
 
 class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     //MARK: Properties
@@ -201,6 +202,7 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
             var request = URLRequest(url: fileURL!)
             request.httpMethod = "POST"
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(Auth.auth().currentUser!.uid)", forHTTPHeaderField: "Authorization")
             
             var data: [[String]] = []
             

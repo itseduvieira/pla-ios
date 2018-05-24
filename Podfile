@@ -17,4 +17,5 @@ target 'Plandoc' do
     pod 'FacebookLogin'
     pod 'SwiftKeychainWrapper'
     pod 'Alamofire', '~> 4.7'
+    pod 'PromiseKit/Alamofire', '~> 6.0'
 end

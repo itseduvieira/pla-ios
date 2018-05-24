@@ -192,6 +192,8 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             
             UserDefaults.standard.set(dict, forKey: "shifts")
             
+            DataAccess.deleteShift(self.id)
+            
             self.cancel()
         }))
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
@@ -240,6 +242,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
         
         var pdcShift = Shift()
+        var isNew = false
         
         if let id = self.id {
             pdcShift = NSKeyedUnarchiver.unarchiveObject(with: shifts[id]!) as! Shift
@@ -248,6 +251,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             pdcShift.companyId = companyChoosed
             pdcShift.groupId = groupId
             pdcShift.paid = false
+            isNew = true
         }
         
         pdcShift.salary = Double(txtSalary.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))
@@ -288,6 +292,12 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         }
         
         UserDefaults.standard.set(shifts, forKey: "shifts")
+        
+        if isNew {
+            DataAccess.createShift(pdcShift)
+        } else {
+            DataAccess.updateShift(pdcShift)
+        }
     }
     
     @objc func cancel() {
@@ -307,6 +317,8 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         let shift = NSKeyedArchiver.archivedData(withRootObject: pdcShift)
         shifts[pdcShift.id] = shift
         UserDefaults.standard.set(shifts, forKey: "shifts")
+        
+        DataAccess.updateShift(pdcShift)
         
         let center = UNUserNotificationCenter.current()
         center.removeDeliveredNotifications(withIdentifiers: [id])

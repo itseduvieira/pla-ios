@@ -239,28 +239,35 @@ class ExpenseDetailController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     private func saveOne(_ groupId: String?, date: Date) {
+        var expenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]
         
-            var expenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]
-            
-            var pdcExpense = Expense()
-            
-            if let id = self.id {
-                pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: expenses[id]!) as! Expense
-            } else {
-                pdcExpense.id = String.random()
-                pdcExpense.groupId = groupId
-            }
-            
-            pdcExpense.title = txtDesc.text
-            pdcExpense.date = date
+        var pdcExpense = Expense()
+        var isNew = false
         
-            pdcExpense.value = Double(txtValue.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))
-            
-            let expense = NSKeyedArchiver.archivedData(withRootObject: pdcExpense)
-            
-            expenses[pdcExpense.id] = expense
-            
-            UserDefaults.standard.set(expenses, forKey: "expenses")
+        if let id = self.id {
+            pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: expenses[id]!) as! Expense
+        } else {
+            pdcExpense.id = String.random()
+            pdcExpense.groupId = groupId
+            isNew = true
+        }
+        
+        pdcExpense.title = txtDesc.text
+        pdcExpense.date = date
+    
+        pdcExpense.value = Double(txtValue.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))
+        
+        let expense = NSKeyedArchiver.archivedData(withRootObject: pdcExpense)
+        
+        expenses[pdcExpense.id] = expense
+        
+        UserDefaults.standard.set(expenses, forKey: "expenses")
+        
+        if isNew {
+            DataAccess.createExpense(pdcExpense)
+        } else {
+            DataAccess.updateExpense(pdcExpense)
+        }
     }
     
     @objc func cancel() {

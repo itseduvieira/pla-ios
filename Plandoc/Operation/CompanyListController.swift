@@ -35,9 +35,7 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
         headerCompanies.layer.addBorder(edge: .bottom, color: UIColor(hexString: "#26000000"), thickness: 0.3)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    func reloadData(_ reloadTable: Bool) {
         dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
         self.companies = [Data](dictCompanies.values)
         
@@ -46,7 +44,15 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
         
         id = nil
         
-        companyTable.reloadData()
+        if reloadTable {
+            companyTable.reloadData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadData(true)
     }
     
     func setNavigationBar() {
@@ -128,9 +134,15 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
                 self.dictCompanies.removeValue(forKey: companyPdc.id)
                 UserDefaults.standard.set(self.dictCompanies, forKey: "companies")
                 
+                self.companies = [Data](self.dictCompanies.values)
+                
                 DataAccess.deleteCompany(companyPdc.id)
                 
-                self.viewWillAppear(true)
+                self.reloadData(false)
+                
+                tableView.beginUpdates()
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.endUpdates()
             }))
             
             alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
