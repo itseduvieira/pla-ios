@@ -14,6 +14,7 @@ import FacebookCore
 import FacebookLogin
 import SwiftKeychainWrapper
 import LocalAuthentication
+import PromiseKit
 
 class LoginController : UIViewController {
     //MARK: Properties
@@ -83,7 +84,13 @@ class LoginController : UIViewController {
         let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
         UserDefaults.standard.set(encoded, forKey: "loggedUser")
         
-        self.performSegue(withIdentifier: "SegueLoginToMenu", sender: self)
+        firstly {
+            DataAccess.instance.getData()
+        }.done {
+            self.performSegue(withIdentifier: "SegueLoginToMenu", sender: self)
+        }.catch { error in
+            print(error)
+        }
     }
     
     private func applyBorders() {
@@ -248,8 +255,6 @@ class LoginController : UIViewController {
             vc.name = self.name
             vc.email = self.email
             vc.pictureUrl = self.pictureUrl
-        } else if segue.identifier == "SegueLoginToMenu" {
-            DataAccess.getData()
         }
     }
     

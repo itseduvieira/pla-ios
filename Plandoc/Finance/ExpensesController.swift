@@ -353,7 +353,7 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
                         
                         UserDefaults.standard.set(dict, forKey: "expenses")
                         
-                        DataAccess.deleteExpenseGroup(expensePdc.groupId)
+                        DataAccess.instance.deleteExpenseGroup(expensePdc.groupId)
                         
                         self.viewWillAppear(true)
                         self.viewDidAppear(true)
@@ -374,7 +374,7 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
         
         UserDefaults.standard.set(dict, forKey: "expenses")
         
-        DataAccess.deleteExpense(expense.id)
+        DataAccess.instance.deleteExpense(expense.id)
         
         self.viewWillAppear(true)
     }

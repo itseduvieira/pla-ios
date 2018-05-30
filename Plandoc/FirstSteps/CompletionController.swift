@@ -14,6 +14,8 @@ class CompletionController: UIViewController {
     
     //MARK: Actions
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         UIView.animate(withDuration: 1) {
             self.imgCheck.alpha = 1
         }

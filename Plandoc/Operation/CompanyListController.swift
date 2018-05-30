@@ -136,7 +136,7 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
                 
                 self.companies = [Data](self.dictCompanies.values)
                 
-                DataAccess.deleteCompany(companyPdc.id)
+                DataAccess.instance.deleteCompany(companyPdc.id)
                 
                 self.reloadData(false)
                 

@@ -192,7 +192,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             
             UserDefaults.standard.set(dict, forKey: "shifts")
             
-            DataAccess.deleteShift(self.id)
+            DataAccess.instance.deleteShift(self.id)
             
             self.cancel()
         }))
@@ -294,9 +294,9 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         UserDefaults.standard.set(shifts, forKey: "shifts")
         
         if isNew {
-            DataAccess.createShift(pdcShift)
+            DataAccess.instance.createShift(pdcShift)
         } else {
-            DataAccess.updateShift(pdcShift)
+            DataAccess.instance.updateShift(pdcShift)
         }
     }
     
@@ -318,7 +318,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         shifts[pdcShift.id] = shift
         UserDefaults.standard.set(shifts, forKey: "shifts")
         
-        DataAccess.updateShift(pdcShift)
+        DataAccess.instance.updateShift(pdcShift)
         
         let center = UNUserNotificationCenter.current()
         center.removeDeliveredNotifications(withIdentifiers: [id])

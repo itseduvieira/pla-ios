@@ -264,9 +264,9 @@ class ExpenseDetailController: UIViewController, UIPickerViewDelegate, UIPickerV
         UserDefaults.standard.set(expenses, forKey: "expenses")
         
         if isNew {
-            DataAccess.createExpense(pdcExpense)
+            DataAccess.instance.createExpense(pdcExpense)
         } else {
-            DataAccess.updateExpense(pdcExpense)
+            DataAccess.instance.updateExpense(pdcExpense)
         }
     }
     

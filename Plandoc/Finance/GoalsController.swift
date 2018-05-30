@@ -108,7 +108,7 @@ class GoalsController: UIViewController, UITextFieldDelegate {
             self.present(alertController, animated: true, completion: nil)
         } else {
             UserDefaults.standard.set(switchAtivo.isOn, forKey: "goalActive")
-            DataAccess.setPreference("goalActive", switchAtivo.isOn)
+            DataAccess.instance.setPreference("goalActive", switchAtivo.isOn)
             
             var value: Double = 0.0
             
@@ -117,7 +117,7 @@ class GoalsController: UIViewController, UITextFieldDelegate {
             }
             
             UserDefaults.standard.set(value, forKey: "goalValue")
-            DataAccess.setPreference("goalValue", value)
+            DataAccess.instance.setPreference("goalValue", value)
             
             let alertController = UIAlertController(title: "Meta Financeira", message: "A Meta Financeira foi salva com sucesso.", preferredStyle: .alert)
             

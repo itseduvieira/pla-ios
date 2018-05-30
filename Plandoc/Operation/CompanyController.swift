@@ -114,9 +114,9 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
             UserDefaults.standard.set(companies, forKey: "companies")
             
             if isNew {
-                DataAccess.createCompany(pdcCompany)
+                DataAccess.instance.createCompany(pdcCompany)
             } else {
-                DataAccess.updateCompany(pdcCompany)
+                DataAccess.instance.updateCompany(pdcCompany)
             }
             
             cancel()

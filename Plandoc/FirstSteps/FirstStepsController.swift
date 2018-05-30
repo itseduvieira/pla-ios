@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import PromiseKit
 
 class FirstStepsController : UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var txtTitle: UILabel!
@@ -94,7 +95,13 @@ class FirstStepsController : UIViewController, UNUserNotificationCenterDelegate 
                     
                     let when = DispatchTime.now() + 2
                     DispatchQueue.main.asyncAfter(deadline: when) {
-                        self.performSegue(withIdentifier: "SegueFirstStepsToCompletion", sender: self)
+                        firstly {
+                            DataAccess.instance.createPreferences()
+                        }.done {
+                            self.performSegue(withIdentifier: "SegueFirstStepsToCompletion", sender: self)
+                        }.catch { error in
+                            print(error)
+                        }
                     }
                 } else {
                     animate(label: txtShift, img: nil)
@@ -132,6 +139,7 @@ class FirstStepsController : UIViewController, UNUserNotificationCenterDelegate 
         if (segue.identifier == "SegueFirstStepsToProfile") {
             let vc = segue.destination as! ProfileController
             vc.sender = self
+            vc.isNew = true
         } else if (segue.identifier == "SegueFirstStepsToCompany") {
             let vc = segue.destination as! CompanyController
             vc.sender = self
@@ -150,8 +158,8 @@ class FirstStepsController : UIViewController, UNUserNotificationCenterDelegate 
     
     @objc func skip() {
         UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: Profile()), forKey: "profile")
-        UserDefaults.standard.set(Dictionary<String,Data>(), forKey: "companies")
-        UserDefaults.standard.set(Dictionary<String,Data>(), forKey: "shifts")
+        UserDefaults.standard.set([String:Data](), forKey: "companies")
+        UserDefaults.standard.set([String:Data](), forKey: "shifts")
         self.viewWillAppear(true)
         self.viewDidAppear(true)
     }

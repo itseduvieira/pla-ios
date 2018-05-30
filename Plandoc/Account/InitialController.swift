@@ -12,6 +12,7 @@ import FirebaseStorage
 import FBSDKCoreKit
 import FacebookCore
 import FacebookLogin
+import PromiseKit
 
 class InitialController : UIViewController {
     //MARK: Properties
@@ -168,8 +169,12 @@ class InitialController : UIViewController {
         let encoded = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
         UserDefaults.standard.set(encoded, forKey: "loggedUser")
         
-        DataAccess.getData()
-        
-        self.performSegue(withIdentifier: "SegueSignupToMenu", sender: self)
+        firstly {
+            DataAccess.instance.getData()
+        }.done {
+            self.performSegue(withIdentifier: "SegueSignupToMenu", sender: self)
+        }.catch { error in
+            print(error)
+        }
     }
 }

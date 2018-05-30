@@ -23,6 +23,7 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var constraintTxtUF: NSLayoutConstraint!
     
     var picker: UIPickerView!
+    var isNew: Bool!
     
     weak var sender: UIViewController!
     
@@ -91,7 +92,11 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
             let profile = NSKeyedArchiver.archivedData(withRootObject: pdcProfile)
             UserDefaults.standard.set(profile, forKey: "profile")
             
-            DataAccess.updateProfile(pdcProfile)
+            if isNew {
+                DataAccess.instance.createProfile(pdcProfile)
+            } else {
+                DataAccess.instance.updateProfile(pdcProfile)
+            }
             
             cancel()
         }

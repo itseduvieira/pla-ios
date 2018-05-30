@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,7 @@
                 <viewControllerPlaceholder storyboardName="Signup" id="oca-hT-w3u" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hqC-bl-r2C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="354"/>
+            <point key="canvasLocation" x="473" y="386"/>
         </scene>
         <!--Preferences Controller-->
         <scene sceneID="aZz-2P-Oxq">
@@ -175,5 +175,94 @@
             </objects>
             <point key="canvasLocation" x="1250" y="-65"/>
         </scene>
+        <!--Synchronize Controller-->
+        <scene sceneID="4pq-pU-UMN">
+            <objects>
+                <viewController storyboardIdentifier="SynchronizeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xJK-5k-ita" customClass="SynchronizeController" customModule="Plandoc" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FdI-jH-9pe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconSynchronize" translatesAutoresizingMaskIntoConstraints="NO" id="P8q-By-0yr">
+                                <rect key="frame" x="119.5" y="263" width="136" height="141"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="141" id="TAD-yy-010"/>
+                                    <constraint firstAttribute="width" constant="136" id="aTw-Oc-Czn"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoPlandoc" translatesAutoresizingMaskIntoConstraints="NO" id="uOK-1E-tdp">
+                                <rect key="frame" x="256" y="34" width="105" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="105" id="UqD-DN-gXi"/>
+                                    <constraint firstAttribute="height" constant="47" id="nps-7Q-ReW"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sincronizando dados..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbK-D5-qd9">
+                                <rect key="frame" x="37.5" y="162" width="300" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="6Ki-iA-ZQa"/>
+                                    <constraint firstAttribute="width" constant="300" id="J4N-UN-rhV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seu histórico neste aparelho está sendo importado para o servidor" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYR-iY-4Q0">
+                                <rect key="frame" x="54" y="191" width="268" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="0ui-5G-6bf"/>
+                                    <constraint firstAttribute="width" constant="268" id="NG8-1P-k9f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Não se preocupe, os próximos cadastros serão sincronizados automaticamente ;)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-39-XYM">
+                                <rect key="frame" x="67.5" y="416" width="240" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="0AR-xE-niB"/>
+                                    <constraint firstAttribute="width" constant="240" id="Van-qr-N7s"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rYR-iY-4Q0" firstAttribute="top" secondItem="PbK-D5-qd9" secondAttribute="bottom" id="1Jh-TH-izp"/>
+                            <constraint firstItem="j2y-39-XYM" firstAttribute="top" secondItem="P8q-By-0yr" secondAttribute="bottom" constant="12" id="6gl-iy-UvD"/>
+                            <constraint firstItem="ARN-yt-26B" firstAttribute="trailing" secondItem="uOK-1E-tdp" secondAttribute="trailing" constant="14" id="ICX-Cb-6aM"/>
+                            <constraint firstItem="P8q-By-0yr" firstAttribute="centerY" secondItem="FdI-jH-9pe" secondAttribute="centerY" id="NNn-nh-8ms"/>
+                            <constraint firstItem="j2y-39-XYM" firstAttribute="centerX" secondItem="ARN-yt-26B" secondAttribute="centerX" id="Nwd-p2-8J7"/>
+                            <constraint firstItem="PbK-D5-qd9" firstAttribute="centerX" secondItem="ARN-yt-26B" secondAttribute="centerX" id="TFl-GJ-8xT"/>
+                            <constraint firstItem="rYR-iY-4Q0" firstAttribute="centerX" secondItem="ARN-yt-26B" secondAttribute="centerX" id="ZX5-l7-B9A"/>
+                            <constraint firstItem="P8q-By-0yr" firstAttribute="top" secondItem="rYR-iY-4Q0" secondAttribute="bottom" constant="12" id="lob-1T-tbC"/>
+                            <constraint firstItem="P8q-By-0yr" firstAttribute="centerX" secondItem="ARN-yt-26B" secondAttribute="centerX" id="nPI-QZ-pki"/>
+                            <constraint firstItem="uOK-1E-tdp" firstAttribute="top" secondItem="ARN-yt-26B" secondAttribute="top" constant="14" id="wY2-Vi-Vun"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ARN-yt-26B"/>
+                    </view>
+                    <connections>
+                        <outlet property="imgSync" destination="P8q-By-0yr" id="JLE-Ll-CsD"/>
+                        <segue destination="cFK-w6-Gm7" kind="show" identifier="SegueSyncToCalendar" id="xRR-8U-ElP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zbJ-HP-cXA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1990" y="-65"/>
+        </scene>
+        <!--CalendarViewController-->
+        <scene sceneID="Amm-Gl-0Mt">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Calendar" referencedIdentifier="CalendarViewController" id="cFK-w6-Gm7" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gff-K8-7Eu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1990" y="386"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="IconSynchronize" width="512" height="512"/>
+        <image name="LogoPlandoc" width="774" height="413"/>
+    </resources>
 </document>

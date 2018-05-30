@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,15 @@
                 <viewControllerPlaceholder storyboardName="Crud" referencedIdentifier="ShiftsViewController" id="gnx-LV-MgV" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i84-NW-KWs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-48" y="457"/>
+            <point key="canvasLocation" x="-221" y="443"/>
+        </scene>
+        <!--SynchronizeViewController-->
+        <scene sceneID="TWb-v4-ihl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Util" referencedIdentifier="SynchronizeViewController" id="kAR-dO-ZVE" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NQN-fC-AFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="119" y="443"/>
         </scene>
         <!--Agenda-->
         <scene sceneID="reS-qD-d6D">
@@ -273,6 +281,7 @@
                         <outlet property="navItem" destination="h6u-WL-GFy" id="mfE-KI-R5X"/>
                         <outlet property="tableShifts" destination="gm4-jG-Nrw" id="px7-ee-Ld3"/>
                         <segue destination="gnx-LV-MgV" kind="show" identifier="SegueCalendarToShift" id="0vd-8x-I2J"/>
+                        <segue destination="kAR-dO-ZVE" kind="show" identifier="SegueCalendarToSync" id="d9X-Zg-Uhi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M1U-5A-GUc" userLabel="First Responder" sceneMemberID="firstResponder"/>

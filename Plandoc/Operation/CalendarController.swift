@@ -8,6 +8,7 @@
 
 import UIKit
 import FSCalendar
+import PromiseKit
 
 class CalendarController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     //MARK: Properties
@@ -69,6 +70,18 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         calendar.reloadData()
+        
+        if !UserDefaults.standard.bool(forKey: "online") {
+            let alertController = UIAlertController(title: "Sincronizar", message: "Sincronizando dados...", preferredStyle: .alert)
+
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+                self.performSegue(withIdentifier: "SegueCalendarToSync", sender: self)
+            })
+            
+            alertController.addAction(defaultAction)
+
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -237,7 +250,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         
         UserDefaults.standard.set(dict, forKey: "shifts")
         
-        DataAccess.deleteShift(shift.id)
+        DataAccess.instance.deleteShift(shift.id)
         
         self.viewWillAppear(true)
         self.viewDidAppear(true)
@@ -255,7 +268,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         
         UserDefaults.standard.set(dict, forKey: "shifts")
         
-        DataAccess.deleteShiftGroup(shift.groupId)
+        DataAccess.instance.deleteShiftGroup(shift.groupId)
         
         self.viewWillAppear(true)
         self.viewDidAppear(true)

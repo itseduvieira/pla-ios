@@ -23,6 +23,7 @@
 		343563E42069F142007C6F21 /* SignupPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343563E32069F142007C6F21 /* SignupPasswordController.swift */; };
 		343B60181FCF8E83004A4418 /* ShiftCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */; };
 		343C54172009BD13009F5EFB /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343C54162009BD13009F5EFB /* PreferencesController.swift */; };
+		34400A8720BBB4A300179BF6 /* SynchronizeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34400A8620BBB4A300179BF6 /* SynchronizeController.swift */; };
 		34415CDB1FC07A8C0093F761 /* ForgotPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */; };
 		344353581FE5DEA000363111 /* FinanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344353571FE5DEA000363111 /* FinanceController.swift */; };
 		34489410200E74BA0077A88A /* FinanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3448940F200E74BA0077A88A /* FinanceData.swift */; };
@@ -95,6 +96,7 @@
 		343563E32069F142007C6F21 /* SignupPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPasswordController.swift; sourceTree = "<group>"; };
 		343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftCustomCell.swift; sourceTree = "<group>"; };
 		343C54162009BD13009F5EFB /* PreferencesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesController.swift; sourceTree = "<group>"; };
+		34400A8620BBB4A300179BF6 /* SynchronizeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizeController.swift; sourceTree = "<group>"; };
 		34415CDA1FC07A8C0093F761 /* ForgotPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordController.swift; sourceTree = "<group>"; };
 		344353571FE5DEA000363111 /* FinanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceController.swift; sourceTree = "<group>"; usesTabs = 1; };
 		3448940F200E74BA0077A88A /* FinanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceData.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				34DD141B2012840D00CA9BEE /* PdfViewerController.swift */,
 				3454227C209815DD00EBAEEC /* LargeAlertView.swift */,
 				34BE45A1209A05A00098EA62 /* DataAccess.swift */,
+				34400A8620BBB4A300179BF6 /* SynchronizeController.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 			files = (
 				3426E1B11FABA59C0087E1A5 /* Profile.swift in Sources */,
 				345568371FBF535E00B32627 /* CalendarController.swift in Sources */,
+				34400A8720BBB4A300179BF6 /* SynchronizeController.swift in Sources */,
 				34C478871FE48F9400FF6E05 /* MainReportController.swift in Sources */,
 				34C417482047193B00C06342 /* ExpenseDetailController.swift in Sources */,
 				34FA6AA3202B77F8002F9B0D /* CustomAlertLoadingView.swift in Sources */,

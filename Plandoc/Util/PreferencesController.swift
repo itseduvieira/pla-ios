@@ -200,7 +200,7 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
     @objc func notificationIncomeChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "notificationIncome")
         
-        DataAccess.setPreference("notificationIncome", sender.isOn)
+        DataAccess.instance.setPreference("notificationIncome", sender.isOn)
         
         if sender.isOn {
             print("on")
@@ -212,7 +212,7 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
     @objc func notificationShiftsChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "notificationShifts")
         
-        DataAccess.setPreference("notificationShifts", sender.isOn)
+        DataAccess.instance.setPreference("notificationShifts", sender.isOn)
         
         if sender.isOn {
             print("on")
