@@ -72,9 +72,9 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         calendar.reloadData()
         
         if !UserDefaults.standard.bool(forKey: "online") {
-            let alertController = UIAlertController(title: "Sincronizar", message: "Sincronizando dados...", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Sincronizar dados", message: "Seus dados precisam ser importados para o servidor.", preferredStyle: .alert)
 
-            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+            let defaultAction = UIAlertAction(title: "Entendi", style: .default, handler: { action in
                 self.performSegue(withIdentifier: "SegueCalendarToSync", sender: self)
             })
             

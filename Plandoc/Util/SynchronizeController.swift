@@ -121,7 +121,7 @@ class SynchronizeController: UIViewController {
                 
                 let when = DispatchTime.now() + 3
                 DispatchQueue.main.asyncAfter(deadline: when) {
-                    self.performSegue(withIdentifier: "SegueSyncToCalendar", sender: self)
+                    self.performSegue(withIdentifier: "UnwindSyncToCalendar", sender: self)
                 }
             }
         }

@@ -12,6 +12,7 @@ import FacebookLogin
 import FacebookCore
 import FBSDKCoreKit
 import FirebaseStorage
+import SwiftKeychainWrapper
 
 class PreferencesController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //MARK: Properties
@@ -299,13 +300,18 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
             print("Error at signOut")
         }
         
-        UserDefaults.standard.removeObject(forKey: "loggedUser")
-        UserDefaults.standard.removeObject(forKey: "goalActive")
-        UserDefaults.standard.removeObject(forKey: "goalValue")
-        UserDefaults.standard.removeObject(forKey: "notificationIncome")
-        UserDefaults.standard.removeObject(forKey: "notificationShifts")
-        UserDefaults.standard.removeObject(forKey: "companies")
-        UserDefaults.standard.removeObject(forKey: "shifts")
+        if UserDefaults.standard.bool(forKey: "online") {
+            UserDefaults.standard.removeObject(forKey: "profile")
+            UserDefaults.standard.removeObject(forKey: "loggedUser")
+            UserDefaults.standard.removeObject(forKey: "goalActive")
+            UserDefaults.standard.removeObject(forKey: "goalValue")
+            UserDefaults.standard.removeObject(forKey: "notificationIncome")
+            UserDefaults.standard.removeObject(forKey: "notificationShifts")
+            UserDefaults.standard.removeObject(forKey: "online")
+            UserDefaults.standard.removeObject(forKey: "companies")
+            UserDefaults.standard.removeObject(forKey: "shifts")
+            UserDefaults.standard.removeObject(forKey: "expenses")
+        }
         
         self.performSegue(withIdentifier: "SeguePreferencesToLogin", sender: self)
     }
@@ -314,17 +320,9 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
         let alert = UIAlertController(title: "Remover Dados do Aplicativo", message: "Esta ação irá remover TODOS os dados do aplicativo. Deseja continuar?", preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Sim, remover os dados", style: .destructive, handler: { action in
-            UserDefaults.standard.removeObject(forKey: "shifts")
-            UserDefaults.standard.removeObject(forKey: "companies")
-            UserDefaults.standard.removeObject(forKey: "profile")
-            UserDefaults.standard.removeObject(forKey: "username")
-            UserDefaults.standard.removeObject(forKey: "password")
-            UserDefaults.standard.removeObject(forKey: "goalActive")
-            UserDefaults.standard.removeObject(forKey: "goalValue")
-            UserDefaults.standard.removeObject(forKey: "notificationIncome")
-            UserDefaults.standard.removeObject(forKey: "notificationShifts")
+            KeychainWrapper.standard.removeObject(forKey: "username")
+            KeychainWrapper.standard.removeObject(forKey: "password")
             UserDefaults.standard.removeObject(forKey: "biometrics")
-            UserDefaults.standard.removeObject(forKey: "goalTutorial")
             
             self.logoff()
         }))
