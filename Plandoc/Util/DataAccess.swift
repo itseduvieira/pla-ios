@@ -14,9 +14,15 @@ import PromiseKit
 class DataAccess {
     private let url = "http://api.plandoc.com.br/v1"
     
+    var sessionManager: SessionManager!
+    
     static let instance = DataAccess()
     
-    private init() { }
+    private init() {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 10
+        sessionManager = Alamofire.SessionManager(configuration: configuration)
+    }
     
     func getData() -> Promise<Void> {
         return Promise { seal in
@@ -31,8 +37,12 @@ class DataAccess {
             }.then {
                 self.getShifts()
             }.done {
+                UserDefaults.standard.set(true, forKey: "allDataOk")
+                
                 seal.fulfill(())
             }.catch { error in
+                UserDefaults.standard.removeObject(forKey: "allDataOk")
+                
                 seal.reject(error)
             }
         }
@@ -48,7 +58,7 @@ class DataAccess {
         
         print("\(String(method.rawValue)) \(fullUrl)")
         
-        Alamofire.request(fullUrl, method: method, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { response in
+        sessionManager.request(fullUrl, method: method, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { response in
             completion(response.result.value)
         }
     }
@@ -65,7 +75,7 @@ class DataAccess {
         
         return Promise { seal in
             firstly {
-                Alamofire.request(fullUrl, method: method, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON()
+                sessionManager.request(fullUrl, method: method, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON()
             }.done { (json, response) in
                 seal.fulfill(json)
             }.catch { error in
@@ -189,7 +199,7 @@ class DataAccess {
         }
     }
     
-    func updateCompany(_ company: Company) {
+    func updateCompany(_ company: Company) -> Promise<Void> {
         let parameters: Parameters = [
             "type": company.type!,
             "name": company.name!,
@@ -199,11 +209,19 @@ class DataAccess {
             "color": company.color!
         ]
         
-        createRequest("companies/\(company.id!)", method: .put, parameters: parameters, { response in
-            if let json = response as? Dictionary<String,Any> {
-                print(json)
+        return Promise { seal in
+            firstly {
+                createRequest("companies/\(company.id!)", method: .put, parameters: parameters)
+            }.done { response in
+                guard let json = response as? [String:Any], !json.isEmpty else {
+                    return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
+                }
+                
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
-        })
+        }
     }
     
     func getCompanies() -> Promise<Void> {
@@ -238,12 +256,20 @@ class DataAccess {
         }
     }
     
-    func deleteCompany(_ id: String) {
-        createRequest("companies/\(id)", method: .delete, { response in
-            if let json = response as? Dictionary<String,Any> {
-                print(json)
+    func deleteCompany(_ id: String) -> Promise<Void> {
+        return Promise { seal in
+            firstly {
+                createRequest("companies/\(id)", method: .delete)
+            }.done { response in
+                guard let json = response as? [String:Any], !json.isEmpty else {
+                    return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
+                }
+                    
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
-        })
+        }
     }
     
     // Profile
@@ -272,7 +298,7 @@ class DataAccess {
         }
     }
     
-    func updateProfile(_ profile: Profile) {
+    func updateProfile(_ profile: Profile) -> Promise<Void> {
         let parameters: Parameters = [
             "crm": profile.crm!,
             "uf": profile.uf!,
@@ -281,11 +307,19 @@ class DataAccess {
             "field": profile.field!
         ]
         
-        createRequest("profile", method: .put, parameters: parameters, { response in
-            if let json = response as? Dictionary<String,Any> {
-                print(json)
+        return Promise { seal in
+            firstly {
+                createRequest("profile", method: .put, parameters: parameters)
+            }.done { response in
+                guard let json = response as? [String:Any], !json.isEmpty else {
+                    return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
+                }
+                
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
-        })
+        }
     }
     
     func getProfile() -> Promise<Void> {
@@ -345,7 +379,7 @@ class DataAccess {
         }
     }
     
-    func updateExpense(_ expense: Expense) {
+    func updateExpense(_ expense: Expense) -> Promise<Void> {
         let parameters: Parameters = [
             "id": expense.id!,
             "title": expense.title!,
@@ -353,11 +387,19 @@ class DataAccess {
             "date": expense.date!
         ]
         
-        createRequest("expenses/\(expense.id!)", method: .put, parameters: parameters, { response in
-            if let json = response as? Dictionary<String,Any> {
-                print(json)
+        return Promise { seal in
+            firstly {
+                createRequest("expenses/\(expense.id!)", method: .put, parameters: parameters)
+            }.done { response in
+                guard let json = response as? [String: Any], !json.isEmpty else {
+                    return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
+                }
+                
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
-        })
+        }
     }
     
     func getExpenses() -> Promise<Void> {
@@ -400,20 +442,36 @@ class DataAccess {
         }
     }
     
-    func deleteExpense(_ id: String) {
-        createRequest("expenses/\(id)", method: .delete, { response in
-            if let json = response as? Dictionary<String,Any> {
-                print(json)
+    func deleteExpense(_ id: String) -> Promise<Void> {
+        return Promise { seal in
+            firstly {
+                createRequest("expenses/\(id)", method: .delete)
+            }.done { response in
+                guard let json = response as? [String:Any], !json.isEmpty else {
+                    return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
+                }
+                
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
-        })
+        }
     }
     
-    func deleteExpenseGroup(_ groupId: String) {
-        createRequest("expenses/group/\(groupId)", method: .delete, { response in
-            if let json = response as? Dictionary<String,Any> {
-                print(json)
+    func deleteExpenseGroup(_ groupId: String) -> Promise<Void> {
+        return Promise { seal in
+            firstly {
+                createRequest("expenses/group/\(groupId)", method: .delete)
+            }.done { response in
+                guard let json = response as? [String:Any], !json.isEmpty else {
+                    return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
+                }
+                
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
-        })
+        }
     }
     
     // Shift
@@ -448,7 +506,7 @@ class DataAccess {
         }
     }
     
-    func updateShift(_ shift: Shift) {
+    func updateShift(_ shift: Shift) -> Promise<Void> {
         let parameters: Parameters = [
             "companyId": shift.companyId!,
             "date": shift.date!,
@@ -459,11 +517,19 @@ class DataAccess {
             "shiftTime": shift.shiftTime!
         ]
         
-        createRequest("shifts/\(shift.id!)", method: .put, parameters: parameters, { response in
-            if let json = response as? Dictionary<String,Any> {
-                print(json)
+        return Promise { seal in
+            firstly {
+                createRequest("shifts/\(shift.id!)", method: .put, parameters: parameters)
+            }.done { response in
+                guard let json = response as? [String:Any], !json.isEmpty else {
+                    return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
+                }
+                
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
-        })
+        }
     }
     
     func getShifts() -> Promise<Void> {
@@ -510,20 +576,36 @@ class DataAccess {
         }
     }
     
-    func deleteShift(_ id: String) {
-        createRequest("shifts/\(id)", method: .delete, { response in
-            if let json = response as? Dictionary<String,Any> {
-                print(json)
+    func deleteShift(_ id: String) -> Promise<Void> {
+        return Promise { seal in
+            firstly {
+                createRequest("shifts/\(id)", method: .delete)
+                }.done { response in
+                    guard let json = response as? [String:Any], !json.isEmpty else {
+                        return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
+                    }
+                    
+                    seal.fulfill(())
+                }.catch { error in
+                    seal.reject(error)
             }
-        })
+        }
     }
     
-    func deleteShiftGroup(_ groupId: String) {
-        createRequest("shifts/group/\(groupId)", method: .delete, { response in
-            if let json = response as? Dictionary<String,Any> {
-                print(json)
+    func deleteShiftGroup(_ groupId: String) -> Promise<Void> {
+        return Promise { seal in
+            firstly {
+                createRequest("shifts/group/\(groupId)", method: .delete)
+            }.done { response in
+                guard let json = response as? [String:Any], !json.isEmpty else {
+                    return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
+                }
+                
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
-        })
+        }
     }
     
     // Util

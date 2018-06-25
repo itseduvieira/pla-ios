@@ -71,16 +71,20 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         
         calendar.reloadData()
         
-        if !UserDefaults.standard.bool(forKey: "online") {
-            let alertController = UIAlertController(title: "Sincronizar dados", message: "Seus dados precisam ser importados para o servidor.", preferredStyle: .alert)
+        if !UserDefaults.standard.bool(forKey: "allDataOk") {
+            self.dataNotOk()
+        } else {
+            if !UserDefaults.standard.bool(forKey: "online") {
+                let alertController = UIAlertController(title: "Sincronizar dados", message: "Seus dados precisam ser importados para o servidor.", preferredStyle: .alert)
 
-            let defaultAction = UIAlertAction(title: "Entendi", style: .default, handler: { action in
-                self.performSegue(withIdentifier: "SegueCalendarToSync", sender: self)
-            })
-            
-            alertController.addAction(defaultAction)
+                let defaultAction = UIAlertAction(title: "Entendi", style: .default, handler: { action in
+                    self.performSegue(withIdentifier: "SegueCalendarToSync", sender: self)
+                })
+                
+                alertController.addAction(defaultAction)
 
-            self.present(alertController, animated: true, completion: nil)
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
     }
     
@@ -332,5 +336,44 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         formatter.dateFormat = "ddMMyyyy"
         
         return self.colors[formatter.string(from: date)]
+    }
+    
+    func dataNotOk() {
+        let alertController = UIAlertController(title: "Problemas na Conectividade", message: "Houve um problema no carregamento dos dados. Verifique sua conexão com a Internet e tente novamente.", preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Agora Não", style: .default, handler: { action in
+            self.snackbarDataUnavailable()
+        })
+        
+        let defaultAction = UIAlertAction(title: "Tentar Novamente", style: .cancel, handler: { action in
+            firstly {
+                DataAccess.instance.getData()
+            }.done { result in
+                self.showMsg(msg: "Os dados foram recuperados com sucesso ;)")
+                self.viewDidLoad()
+                self.viewDidAppear(true)
+            }.catch { error in
+                self.snackbarDataUnavailable()
+            }
+        })
+        
+        alertController.addAction(defaultAction)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func snackbarDataUnavailable() {
+        self.showNetworkError(msg: "Quando não há conectividade com a Internet, as funcionalidades do aplicativo ficam limitadas.", {
+            firstly {
+                DataAccess.instance.getData()
+            }.done { result in
+                self.showMsg(msg: "Os dados foram recuperados com sucesso ;)")
+                self.viewDidLoad()
+                self.viewDidAppear(true)
+            }.catch { error in
+                self.snackbarDataUnavailable()
+            }
+        })
     }
 }

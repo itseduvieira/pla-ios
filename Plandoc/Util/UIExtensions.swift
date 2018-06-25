@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 extension UITextField {
     class func connectFields(fields:[UITextField]) -> Void {
@@ -256,6 +257,32 @@ extension UIViewController {
         if let tbc = self.tabBarController {
             tbc.setTabBarVisible(visible: true, duration: 0.3, animated: true)
         }
+    }
+    
+    func showNetworkError(msg: String, _ completion: @escaping (() -> Void)) {
+        let message = MDCSnackbarMessage()
+        message.text = msg
+        
+        let action = MDCSnackbarMessageAction()
+        let actionHandler = {() in
+            completion()
+        }
+        action.handler = actionHandler
+        action.title = "Repetir"
+        message.action = action
+        
+        MDCSnackbarManager.show(message)
+    }
+    
+    func showNetworkError(_ completion: @escaping (() -> Void)) {
+        self.showNetworkError(msg: "Houve um problema com o acesso à Internet. Verifique sua conexão e tente novamente.", completion)
+    }
+    
+    func showMsg(msg: String) {
+        let message = MDCSnackbarMessage()
+        message.text = msg
+        
+        MDCSnackbarManager.show(message)
     }
 }
 

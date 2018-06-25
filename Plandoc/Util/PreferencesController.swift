@@ -311,6 +311,7 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
             UserDefaults.standard.removeObject(forKey: "companies")
             UserDefaults.standard.removeObject(forKey: "shifts")
             UserDefaults.standard.removeObject(forKey: "expenses")
+            UserDefaults.standard.removeObject(forKey: "allDataOk")
         }
         
         self.performSegue(withIdentifier: "SeguePreferencesToLogin", sender: self)

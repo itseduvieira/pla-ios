@@ -175,6 +175,10 @@ class InitialController : UIViewController {
             self.performSegue(withIdentifier: "SegueSignupToMenu", sender: self)
         }.catch { error in
             print(error)
+            
+            self.showNetworkError {
+                self.saveCredentialsAndGoToCalendar(pdcUser: pdcUser)
+            }
         }
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 class CompanyListController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
     //MARK: Properties
@@ -119,35 +120,51 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
             let alert = UIAlertController(title: "Remover Empresa", message: "Ao remover uma empresa, seus dados e plantões serão removidos e não poderão ser recuperados. Você deseja realmente remover esta empresa e seus plantões?", preferredStyle: .actionSheet)
             
             alert.addAction(UIAlertAction(title: "Sim, desejo remover", style: .destructive, handler: { action in
-                
                 let company = self.companies[indexPath.row]
                 let companyPdc = NSKeyedUnarchiver.unarchiveObject(with: company) as! Company
                 
-                var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
-                shifts = shifts.filter({ (key, value) -> Bool in
-                    let pdcShift = NSKeyedUnarchiver.unarchiveObject(with: value) as! Shift
-                    return pdcShift.companyId != companyPdc.id
-                })
-                UserDefaults.standard.set(shifts, forKey: "shifts")
+                self.deleteCompany(companyPdc, indexPath, tableView)
                 
-                self.dictCompanies[companyPdc.id] = NSKeyedArchiver.archivedData(withRootObject: companyPdc)
-                self.dictCompanies.removeValue(forKey: companyPdc.id)
-                UserDefaults.standard.set(self.dictCompanies, forKey: "companies")
-                
-                self.companies = [Data](self.dictCompanies.values)
-                
-                DataAccess.instance.deleteCompany(companyPdc.id)
-                
-                self.reloadData(false)
-                
-                tableView.beginUpdates()
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                tableView.endUpdates()
             }))
             
             alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
             
             self.present(alert, animated: true)
+        }
+    }
+    
+    func deleteCompany(_ companyPdc: Company, _ indexPath: IndexPath, _ tableView: UITableView) {
+        firstly {
+            DataAccess.instance.deleteCompany(companyPdc.id)
+        }.done {
+            var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
+            shifts = shifts.filter({ (key, value) -> Bool in
+                let pdcShift = NSKeyedUnarchiver.unarchiveObject(with: value) as! Shift
+                return pdcShift.companyId != companyPdc.id
+            })
+            UserDefaults.standard.set(shifts, forKey: "shifts")
+            
+            self.dictCompanies[companyPdc.id] = NSKeyedArchiver.archivedData(withRootObject: companyPdc)
+            self.dictCompanies.removeValue(forKey: companyPdc.id)
+            UserDefaults.standard.set(self.dictCompanies, forKey: "companies")
+            
+            self.companies = [Data](self.dictCompanies.values)
+            
+            self.reloadData(false)
+            
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
+            
+            self.dismissCustomAlert()
+        }.catch { error in
+            self.dismissCustomAlert()
+            
+            self.showNetworkError (msg: "Não foi possível remover a Empresa. Verifique sua conexão com a Internet e tente novamente.", {
+                self.presentAlert()
+                
+                self.deleteCompany(companyPdc, indexPath, tableView)
+            })
         }
     }
 }

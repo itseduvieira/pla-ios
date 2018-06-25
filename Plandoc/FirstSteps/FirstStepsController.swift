@@ -97,7 +97,10 @@ class FirstStepsController : UIViewController, UNUserNotificationCenterDelegate 
                     DispatchQueue.main.asyncAfter(deadline: when) {
                         firstly {
                             DataAccess.instance.createPreferences()
+                        }.then {
+                            DataAccess.instance.setPreference("online", true)
                         }.done {
+                            UserDefaults.standard.set(true, forKey: "online")
                             self.performSegue(withIdentifier: "SegueFirstStepsToCompletion", sender: self)
                         }.catch { error in
                             print(error)

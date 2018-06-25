@@ -76,7 +76,7 @@ class SynchronizeController: UIViewController {
             }))
         }.then {
             // expsenses
-            when(fulfilled: (UserDefaults.standard.object(forKey: "expenses") as! [String:Data]).values.map({ expense -> Promise<Void> in
+            when(fulfilled: (UserDefaults.standard.object(forKey: "expenses") as? [String:Data] ?? [:]).values.map({ expense -> Promise<Void> in
                 let pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: expense) as! Expense
                 return Promise { seal in
                     firstly {

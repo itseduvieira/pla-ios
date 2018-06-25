@@ -40,7 +40,6 @@
 		3460C1402075713E002C5ADF /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3460C13F2075713E002C5ADF /* LocalAuthentication.framework */; };
 		346322091F93D67A00F0CCF4 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 346322081F93D67A00F0CCF4 /* Podfile */; };
 		346BDC3A1FB0F02000635ABA /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346BDC391FB0F02000635ABA /* Company.swift */; };
-		346BDC3C1FB21E4B00635ABA /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346BDC3B1FB21E4B00635ABA /* MenuController.swift */; };
 		346BDC3E1FB4B9D300635ABA /* AccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346BDC3D1FB4B9D300635ABA /* AccountController.swift */; };
 		346EDE381FBD0C6E00F03EF4 /* Report.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 346EDE371FBD0C6E00F03EF4 /* Report.storyboard */; };
 		346EDE3A1FBD0E7F00F03EF4 /* Finance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 346EDE391FBD0E7F00F03EF4 /* Finance.storyboard */; };
@@ -114,7 +113,6 @@
 		3460C13F2075713E002C5ADF /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		346322081F93D67A00F0CCF4 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		346BDC391FB0F02000635ABA /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
-		346BDC3B1FB21E4B00635ABA /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		346BDC3D1FB4B9D300635ABA /* AccountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountController.swift; sourceTree = "<group>"; };
 		346EDE371FBD0C6E00F03EF4 /* Report.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Report.storyboard; sourceTree = "<group>"; };
 		346EDE391FBD0E7F00F03EF4 /* Finance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Finance.storyboard; sourceTree = "<group>"; };
@@ -252,7 +250,6 @@
 				34D40A011F9FBD81002F3F51 /* ProfileController.swift */,
 				3455CEE91FA64279001DB405 /* CompanyController.swift */,
 				3455CEEB1FA642A7001DB405 /* ShiftController.swift */,
-				346BDC3B1FB21E4B00635ABA /* MenuController.swift */,
 				346BDC3D1FB4B9D300635ABA /* AccountController.swift */,
 				343B60171FCF8E83004A4418 /* ShiftCustomCell.swift */,
 				345568361FBF535E00B32627 /* CalendarController.swift */,
@@ -451,8 +448,11 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/MapboxGeocoder.swift/MapboxGeocoder.framework",
 				"${BUILT_PRODUCTS_DIR}/MapboxStatic.swift/MapboxStatic.framework",
+				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SearchTextField/SearchTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
@@ -473,8 +473,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxGeocoder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxStatic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SearchTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
@@ -551,7 +554,6 @@
 				3455CEEA1FA64279001DB405 /* CompanyController.swift in Sources */,
 				34DD141C2012840D00CA9BEE /* PdfViewerController.swift in Sources */,
 				343C54172009BD13009F5EFB /* PreferencesController.swift in Sources */,
-				346BDC3C1FB21E4B00635ABA /* MenuController.swift in Sources */,
 				343563E42069F142007C6F21 /* SignupPasswordController.swift in Sources */,
 				347765691F8FF60100082442 /* LoginController.swift in Sources */,
 				34A075D81FAFFB2F006DDF68 /* AlertController.swift in Sources */,

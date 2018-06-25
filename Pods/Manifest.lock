@@ -70,6 +70,43 @@ PODS:
   - leveldb-library (1.20)
   - MapboxGeocoder.swift (0.7.0)
   - MapboxStatic.swift (0.9.1)
+  - MaterialComponents/AnimationTiming (54.13.0)
+  - MaterialComponents/Buttons (54.13.0):
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/Shapes
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - MaterialComponents/Ink (54.13.0):
+    - MaterialComponents/private/Math
+  - MaterialComponents/OverlayWindow (54.13.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Application (54.13.0)
+  - MaterialComponents/private/KeyboardWatcher (54.13.0):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (54.13.0)
+  - MaterialComponents/private/Overlay (54.13.0)
+  - MaterialComponents/private/Shapes (54.13.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/ShadowElevations (54.13.0)
+  - MaterialComponents/ShadowLayer (54.13.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/Snackbar (54.13.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Buttons
+    - MaterialComponents/OverlayWindow
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Overlay
+    - MaterialComponents/Typography
+  - MaterialComponents/Typography (54.13.0):
+    - MaterialComponents/private/Application
+  - MDFInternationalization (1.0.4)
+  - MDFTextAccessibility (1.2.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -95,6 +132,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - MapboxGeocoder.swift (~> 0.6)
   - MapboxStatic.swift (~> 0.9)
+  - MaterialComponents/Snackbar
   - PromiseKit/Alamofire (~> 6.0)
   - SearchTextField
   - SwiftKeychainWrapper
@@ -123,6 +161,9 @@ SPEC REPOS:
     - leveldb-library
     - MapboxGeocoder.swift
     - MapboxStatic.swift
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
     - nanopb
     - PromiseKit
     - SearchTextField
@@ -151,11 +192,14 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   MapboxGeocoder.swift: b1277a2ca6a63c1a8edfa82871f5771075b1e015
   MapboxStatic.swift: 247d98dd6e11b8934aa5d122efcb50384f8d66f6
+  MaterialComponents: 3399c262334c35e4994a7b25ad1e9a3ce48dce07
+  MDFInternationalization: e355b0cebecf53d60233bd267084e49366c82513
+  MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PromiseKit: a26828b0a8d5874960dfdb575b57a70790ec36f1
   SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: c9b939c41b1d782d86edd24396a505964e783348
+PODFILE CHECKSUM: 92b5b7a0d77ba3d48554899da7de2c2277b162cc
 
 COCOAPODS: 1.5.0

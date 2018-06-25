@@ -9,6 +9,7 @@
 import UIKit
 import ChromaColorPicker
 import SearchTextField
+import PromiseKit
 //import MapboxGeocoder
 
 class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -85,41 +86,89 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             self.present(alertController, animated: true, completion: nil)
         } else {
+            self.presentAlert()
+            
             var companies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
             
-            var isNew: Bool
+            var isNew = false
             
             var pdcCompany: Company
             
             if !companies.isEmpty, id != nil {
                 pdcCompany = NSKeyedUnarchiver.unarchiveObject(with: companies[id]!) as! Company
-                isNew = false
             } else {
                 pdcCompany = Company()
                 pdcCompany.id = String.random()
                 isNew = true
             }
             
-            pdcCompany.type = txtType.text
-            pdcCompany.name = txtCompany.text
-            pdcCompany.address = txtAddress.text
-            pdcCompany.admin = txtAdmin.text
-            pdcCompany.phone = txtPhone.text
-            pdcCompany.color = colorIndicator.backgroundColor?.hexCode
-            
+            if isNew {
+                createCompany(pdcCompany)
+            } else {
+                updateCompany(pdcCompany)
+            }
+        }
+    }
+    
+    private func createCompany(_ pdcCompany: Company) {
+        var companies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
+        
+        pdcCompany.type = txtType.text
+        pdcCompany.name = txtCompany.text
+        pdcCompany.address = txtAddress.text
+        pdcCompany.admin = txtAdmin.text
+        pdcCompany.phone = txtPhone.text
+        pdcCompany.color = colorIndicator.backgroundColor?.hexCode
+        
+        firstly {
+            DataAccess.instance.createCompany(pdcCompany)
+        }.done {
             let company = NSKeyedArchiver.archivedData(withRootObject: pdcCompany)
             
             companies[pdcCompany.id] = company
             
             UserDefaults.standard.set(companies, forKey: "companies")
             
-            if isNew {
-                DataAccess.instance.createCompany(pdcCompany)
-            } else {
-                DataAccess.instance.updateCompany(pdcCompany)
-            }
+            self.cancel()
+        }.catch { error in
+            self.dismissCustomAlert()
             
-            cancel()
+            self.showNetworkError(msg: "Não foi possível enviar os dados da Empresa. Verifique sua conexão com a Internet e tente novamente.", {
+                self.presentAlert()
+                
+                self.createCompany(pdcCompany)
+            })
+        }
+    }
+    
+    private func updateCompany(_ pdcCompany: Company) {
+        var companies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
+        
+        pdcCompany.type = txtType.text
+        pdcCompany.name = txtCompany.text
+        pdcCompany.address = txtAddress.text
+        pdcCompany.admin = txtAdmin.text
+        pdcCompany.phone = txtPhone.text
+        pdcCompany.color = colorIndicator.backgroundColor?.hexCode
+        
+        firstly {
+            DataAccess.instance.updateCompany(pdcCompany)
+        }.done {
+            let company = NSKeyedArchiver.archivedData(withRootObject: pdcCompany)
+            
+            companies[pdcCompany.id] = company
+            
+            UserDefaults.standard.set(companies, forKey: "companies")
+            
+            self.cancel()
+        }.catch { error in
+            self.dismissCustomAlert()
+            
+            self.showNetworkError (msg: "Não foi possível enviar os dados da Empresa. Verifique sua conexão com a Internet e tente novamente.", {
+                self.presentAlert()
+                
+                self.updateCompany(pdcCompany)
+            })
         }
     }
     

@@ -18,4 +18,5 @@ target 'Plandoc' do
     pod 'SwiftKeychainWrapper'
     pod 'Alamofire', '~> 4.7'
     pod 'PromiseKit/Alamofire', '~> 6.0'
+    pod 'MaterialComponents/Snackbar'
 end

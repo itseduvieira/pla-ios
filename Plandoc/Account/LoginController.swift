@@ -65,7 +65,6 @@ class LoginController : UIViewController {
             self.present(alertController, animated: true, completion: nil)
             
         } else {
-            self.presentAlert()
             let user = self.txtLogin.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let pass = self.txtPassword.text!
             
@@ -74,6 +73,10 @@ class LoginController : UIViewController {
     }
     
     private func initLogin(_ user: String, _ pass: String) {
+        DispatchQueue.main.async {
+            self.presentAlert()
+        }
+        
         Auth.auth().signIn(withEmail: user, password: pass) { (user, error) in
             
             self.doLogin(user, error)
@@ -89,7 +92,7 @@ class LoginController : UIViewController {
         }.done {
             self.performSegue(withIdentifier: "SegueLoginToMenu", sender: self)
         }.catch { error in
-            print(error)
+            self.performSegue(withIdentifier: "SegueLoginToMenu", sender: self)
         }
     }
     
@@ -238,14 +241,28 @@ class LoginController : UIViewController {
                 }
             }
         } else {
-            let alertController = UIAlertController(title: "Erro", message: error?.localizedDescription, preferredStyle: .alert)
-            
             self.dismissCustomAlert()
             
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(defaultAction)
+            let errCode = AuthErrorCode(rawValue: error!._code)
             
-            self.present(alertController, animated: true, completion: nil)
+            if errCode == .networkError {
+                self.showNetworkError(msg: "Não foi possível realizar o login. Verifique sua conexão com a internet e tente novamente.", {
+                    self.login()
+                })
+            } else {
+                var message = "Erro ao realizar login"
+                
+                if errCode == .wrongPassword {
+                    message = "Usuário ou senha inválidos"
+                }
+                
+                let alertController = UIAlertController(title: "Erro", message: message, preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
     }
     

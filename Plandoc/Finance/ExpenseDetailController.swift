@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 class ExpenseDetailController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     //MARK: Properties
@@ -216,46 +217,74 @@ class ExpenseDetailController: UIViewController, UIPickerViewDelegate, UIPickerV
             
             self.present(alertController, animated: true, completion: nil)
         } else {
+            self.presentAlert()
+            
+            var expenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]
+
+            var pdcExpense = Expense()
+            var isNew = false
+            
+            if let id = self.id {
+                pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: expenses[id]!) as! Expense
+            } else {
+                isNew = true
+            }
+            
+            pdcExpense.title = txtDesc.text
             let formatter = DateFormatter()
             formatter.dateFormat = "dd/MM/yyyy"
             let date = formatter.date(from: self.txtDate.text!)!
+            pdcExpense.date = date
+            pdcExpense.value = Double(txtValue.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))
             
-            if switchFixo.isOn && !txtFixo.isHidden {
-                let months = Int(txtFixo.text!.split(separator: " ")[1])!
-                let groupId = String.random()
-                for index in 0..<months {
-                    if index == 0 {
-                        saveOne(groupId, date: date)
-                    } else {
-                        saveOne(groupId, date: Calendar.current.date(byAdding: DateComponents(month: index), to: date)!)
-                    }
+            if isNew {
+                if switchFixo.isOn && !txtFixo.isHidden {
+                    createExpenseGroup(pdcExpense)
+                } else {
+                    pdcExpense.id = String.random()
+                    
+                    createSingleExpense(pdcExpense)
                 }
             } else {
-                saveOne(nil, date: date)
+                updateExpense(pdcExpense)
             }
-            
-            cancel()
         }
     }
     
-    private func saveOne(_ groupId: String?, date: Date) {
-        var expenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]
-        
-        var pdcExpense = Expense()
-        var isNew = false
-        
-        if let id = self.id {
-            pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: expenses[id]!) as! Expense
-        } else {
-            pdcExpense.id = String.random()
-            pdcExpense.groupId = groupId
-            isNew = true
+    private func createSingleExpense(_ pdcExpense: Expense) {
+        firstly {
+            DataAccess.instance.createExpense(pdcExpense)
+        }.done {
+            self.saveLocalAndExit(pdcExpense)
+        }.catch { error in
+            self.dismissCustomAlert()
+            
+            self.showNetworkError(msg: "Não foi possível enviar os dados da Despesa. Verifique sua conexão com a Internet e tente novamente.", {
+                self.presentAlert()
+                
+                self.createSingleExpense(pdcExpense)
+            })
         }
-        
-        pdcExpense.title = txtDesc.text
-        pdcExpense.date = date
+    }
     
-        pdcExpense.value = Double(txtValue.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))
+    private func updateExpense(_ pdcExpense: Expense) {
+        firstly {
+            DataAccess.instance.updateExpense(pdcExpense)
+        }.done {
+            self.saveLocalAndExit(pdcExpense)
+        }.catch { error in
+            self.dismissCustomAlert()
+            
+            self.showNetworkError(msg: "Não foi possível enviar os dados da Despesa. Verifique sua conexão com a Internet e tente novamente.", {
+                self.presentAlert()
+                
+                self.updateExpense(pdcExpense)
+            })
+        }
+    }
+    
+    private func saveLocalAndExit(_ pdcExpense: Expense) {
+        var expenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]
         
         let expense = NSKeyedArchiver.archivedData(withRootObject: pdcExpense)
         
@@ -263,11 +292,70 @@ class ExpenseDetailController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         UserDefaults.standard.set(expenses, forKey: "expenses")
         
-        if isNew {
-            DataAccess.instance.createExpense(pdcExpense)
-        } else {
-            DataAccess.instance.updateExpense(pdcExpense)
+        self.cancel()
+    }
+    
+    private func createExpenseGroup(_ model: Expense) {
+        var expensesToSave: [Expense] = []
+        
+        let months = Int(txtFixo.text!.split(separator: " ")[1])!
+        let groupId = String.random()
+        let initialDate = model.date
+        
+        for index in 0..<months {
+            let pdcExpense = Expense()
+            pdcExpense.id = String.random()
+            pdcExpense.value = model.value
+            pdcExpense.title = model.title
+            pdcExpense.groupId = groupId
+            
+            if index > 0 {
+                pdcExpense.date = Calendar.current.date(byAdding: DateComponents(month: index), to: initialDate!)
+            } else {
+                pdcExpense.date = initialDate
+            }
+            
+            expensesToSave.append(pdcExpense)
         }
+        
+        when(fulfilled: expensesToSave.map({ expense -> Promise<Void> in
+            return Promise<Void> { seal in
+                firstly {
+                    DataAccess.instance.createExpense(expense)
+                }.done {
+                    seal.fulfill(())
+                }.catch { error in
+                    seal.reject(error)
+                }
+            }
+        })).done {
+            var expenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]
+
+            for ex in expensesToSave {
+                let expense = NSKeyedArchiver.archivedData(withRootObject: ex)
+                expenses[ex.id] = expense
+            }
+            
+            UserDefaults.standard.set(expenses, forKey: "expenses")
+            
+            self.cancel()
+        }.catch(policy: .allErrors) { error in
+            self.handleErrorGroup(model)
+        }
+    }
+    
+    private func handleErrorGroup(_ pdcExpense: Expense) {
+        self.dismissCustomAlert()
+        
+        self.showNetworkError(msg: "Não foi possível enviar os dados da Despesa. Verifique sua conexão com a Internet e tente novamente.", {
+            firstly {
+                DataAccess.instance.deleteExpenseGroup(pdcExpense.groupId)
+            }.ensure {
+                self.createExpenseGroup(pdcExpense)
+            }.catch { error in
+                self.handleErrorGroup(pdcExpense)
+            }
+        })
     }
     
     @objc func cancel() {

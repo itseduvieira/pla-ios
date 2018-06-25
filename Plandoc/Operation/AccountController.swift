@@ -146,27 +146,62 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
             
             changeRequest.commitChanges { (error) in
                 if let error = error {
-                    print(error)
-                    
-                    let alertController = UIAlertController(title: "Dados Pessoais", message: "Erro ao salvar o perfil.", preferredStyle: .alert)
-                    
-                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(defaultAction)
+                    self.showError(error)
                 } else {
-                    let archivedUser = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
-                    UserDefaults.standard.set(archivedUser, forKey: "loggedUser")
-                    
-                    KeychainWrapper.standard.set(self.txtPassword.text!, forKey: "pdcPassword")
-                    
-                    let alertController = UIAlertController(title: "Dados Pessoais", message: "Seu perfil foi salvo com sucesso.", preferredStyle: .alert)
-                    
-                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(defaultAction)
-                    
-                    self.present(alertController, animated: true, completion: nil)
+                    let currentPassword = KeychainWrapper.standard.string(forKey: "pdcPassword")
+                    if self.txtPassword.text!.count >= 6 {
+                        if self.txtPassword.text! != currentPassword {
+                            let credential = EmailAuthProvider.credential(withEmail: pdcUser.email, password: currentPassword!)
+                            Auth.auth().currentUser?.reauthenticate(with: credential, completion: { (error) in
+                                if let error = error {
+                                    self.showError(error)
+                                } else {
+                                    user.updatePassword(to: self.txtPassword.text!) { (error) in
+                                        if let error = error {
+                                            self.showError(error)
+                                        } else {
+                                            KeychainWrapper.standard.set(self.txtPassword.text!, forKey: "pdcPassword")
+                                            
+                                            self.showSuccess(pdcUser)
+                                        }
+                                    }
+                                }
+                            })
+                        } else {
+                            self.showSuccess(pdcUser)
+                        }
+                    } else {
+                        let alertController = UIAlertController(title: "Erro ao salvar o perfil", message: "A senha deve conter ao menos 6 caracteres.", preferredStyle: .alert)
+                        
+                        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                        alertController.addAction(defaultAction)
+                        
+                        self.present(alertController, animated: true, completion: nil)
+                    }
                 }
             }
         }
+    }
+    
+    private func showSuccess(_ pdcUser: User) {
+        let archivedUser = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
+        UserDefaults.standard.set(archivedUser, forKey: "loggedUser")
+        
+        let alertController = UIAlertController(title: "Dados Pessoais", message: "Seu perfil foi salvo com sucesso.", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(defaultAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showError(_ error: Error) {
+        print(error)
+        
+        let alertController = UIAlertController(title: "Dados Pessoais", message: "Erro ao salvar o perfil.", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(defaultAction)
     }
     
     @IBAction func showOrHidePassword(_ sender: UIButton) {
