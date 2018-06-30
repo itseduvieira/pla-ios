@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import PromiseKit
 
 class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate  {
     //MARK: Properties
@@ -186,7 +187,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         alert.addAction(UIAlertAction(title: "Já Recebi", style: .default, handler: { action in
             self.pay()
         }))
-        alert.addAction(UIAlertAction(title: "Não Compareci, Remover", style: .destructive, handler: { action in
+        alert.addAction(UIAlertAction(title: "Remover", style: .destructive, handler: { action in
             var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
             dict.removeValue(forKey: self.id)
             
@@ -210,94 +211,188 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             
             self.present(alertController, animated: true, completion: nil)
         } else {
+            self.presentAlert()
+            3
+            var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
+            
+            var pdcShift = Shift()
+            var isNew = false
+            
+            if let id = self.id {
+                pdcShift = NSKeyedUnarchiver.unarchiveObject(with: shifts[id]!) as! Shift
+            } else {
+                isNew = true
+            }
+            
             let formatter = DateFormatter()
             formatter.dateFormat = "dd/MM/yyyy HH:mm"
             let date = formatter.date(from: "\(self.txtDate.text!) \(self.txtHour.text!)")!
             
-            if switchFixo.isOn && !txtFixo.isHidden {
-                let weeks = Int(txtFixo.text!.split(separator: " ")[1])! * 4
-                let groupId = String.random()
-                for index in 0..<weeks {
-                    if index == 0 {
-                        saveOne(groupId, date: date)
-                    } else {
-                        if lblFixo.text! == "Quinzenalmente" && index % 2 != 0 {
-                            continue
-                        }
-                        
-                        saveOne(groupId, date: Calendar.current.date(byAdding: DateComponents(day: 7 * index), to: date)!)
-                    }
+            pdcShift.salary = Double(txtSalary.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))
+            pdcShift.date = date
+            pdcShift.paymentType = txtPaymentType.text!
+            pdcShift.shiftTime = Int(txtShiftTime.text!.components(separatedBy: " ")[0])
+            pdcShift.companyId = companyChoosed
+            pdcShift.paid = false
+            
+            let dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
+            let company = NSKeyedUnarchiver.unarchiveObject(with: dictCompanies[pdcShift.companyId]!) as! Company
+            pdcShift.company = company
+            
+            if isNew {
+                if switchFixo.isOn && !txtFixo.isHidden {
+                    let groupId = String.random()
+                    pdcShift.groupId = groupId
+                    
+                    createShiftGroup(pdcShift)
+                } else {
+                    pdcShift.id = String.random()
+                    pdcShift.paymentDueDate = calcDueDate(pdcShift)
+                    
+                    createSingleShift(pdcShift)
                 }
             } else {
-                saveOne(nil, date: date)
+                pdcShift.paymentDueDate = calcDueDate(pdcShift)
+                
+                updateShift(pdcShift)
             }
-            
-            cancel()
         }
     }
     
-    private func saveOne(_ groupId: String?, date: Date) {
-        let center = UNUserNotificationCenter.current()
-        
-        var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
-        
-        var pdcShift = Shift()
-        var isNew = false
-        
-        if let id = self.id {
-            pdcShift = NSKeyedUnarchiver.unarchiveObject(with: shifts[id]!) as! Shift
-        } else {
-            pdcShift.id = String.random()
-            pdcShift.companyId = companyChoosed
-            pdcShift.groupId = groupId
-            pdcShift.paid = false
-            isNew = true
-        }
-        
-        pdcShift.salary = Double(txtSalary.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))
-        pdcShift.date = date
-        pdcShift.paymentType = txtPaymentType.text!
-        pdcShift.shiftTime = Int(txtShiftTime.text!.components(separatedBy: " ")[0])
-        
-        pdcShift.paymentDueDate = pdcShift.date
-        
+    private func calcDueDate(_ pdcShift: Shift) -> Date {
         if pdcShift.paymentType == "Final do Mês Atual" {
             let interval = Calendar.current.dateInterval(of: .month, for: pdcShift.date)
-            pdcShift.paymentDueDate = Calendar.current.date(byAdding: DateComponents(day: -1), to: interval!.end)!
+            return Calendar.current.date(byAdding: DateComponents(day: -1), to: interval!.end)!
         } else if pdcShift.paymentType == "Final do Próximo Mês" {
             let interval = Calendar.current.dateInterval(of: .month, for: Calendar.current.date(byAdding: DateComponents(month: 1), to: pdcShift.date)!)
-            pdcShift.paymentDueDate = Calendar.current.date(byAdding: DateComponents(day: -1), to: interval!.end)!
+            return Calendar.current.date(byAdding: DateComponents(day: -1), to: interval!.end)!
         } else if pdcShift.paymentType.hasPrefix("Após") {
             let weeks = Int(pdcShift.paymentType.components(separatedBy: " ")[1])!
-            pdcShift.paymentDueDate = Calendar.current.date(byAdding: DateComponents(day: 7 * weeks), to: pdcShift.date)!
+            return Calendar.current.date(byAdding: DateComponents(day: 7 * weeks), to: pdcShift.date)!
         } else if pdcShift.paymentType == "A Prazo" {
             let formatter = DateFormatter()
             formatter.dateFormat = "dd/MM/yyyy"
-            pdcShift.paymentDueDate = formatter.date(from: txtPaymentDueDate.text!)
+            return formatter.date(from: txtPaymentDueDate.text!)!
+        } else {
+            return pdcShift.date
         }
-        
-        print(pdcShift.paymentDueDate)
-        
-        let dictCompanies = UserDefaults.standard.dictionary(forKey: "companies") as? [String:Data] ?? [:]
-        let company = NSKeyedUnarchiver.unarchiveObject(with: dictCompanies[pdcShift.companyId]!) as! Company
-        pdcShift.company = company
+    }
+    
+    private func createSingleShift(_ pdcShift: Shift) {
+        firstly {
+            DataAccess.instance.createShift(pdcShift)
+        }.done {
+            self.saveLocalAndExit(pdcShift)
+        }.catch { error in
+            self.dismissCustomAlert()
+            
+            self.showNetworkError(msg: "Não foi possível enviar os dados do Plantão. Verifique sua conexão com a Internet e tente novamente.", {
+                self.presentAlert()
+                
+                self.createSingleShift(pdcShift)
+            })
+        }
+    }
+    
+    private func updateShift(_ pdcShift: Shift) {
+        firstly {
+            DataAccess.instance.updateShift(pdcShift)
+        }.done {
+            self.saveLocalAndExit(pdcShift)
+        }.catch { error in
+            self.dismissCustomAlert()
+            
+            self.showNetworkError(msg: "Não foi possível enviar os dados do Plantão. Verifique sua conexão com a Internet e tente novamente.", {
+                self.presentAlert()
+                
+                self.updateShift(pdcShift)
+            })
+        }
+    }
+    
+    private func saveLocalAndExit(_ pdcShift: Shift) {
+        var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
         
         let shift = NSKeyedArchiver.archivedData(withRootObject: pdcShift)
-        shifts[pdcShift.id] = shift
         
-        center.getNotificationSettings { (settings) in
-            if settings.authorizationStatus == .authorized {
-                self.scheduleNotification(pdcShift)
-            }
-        }
+        shifts[pdcShift.id] = shift
         
         UserDefaults.standard.set(shifts, forKey: "shifts")
         
-        if isNew {
-            DataAccess.instance.createShift(pdcShift)
-        } else {
-            DataAccess.instance.updateShift(pdcShift)
+        self.cancel()
+    }
+    
+    private func createShiftGroup(_ model: Shift) {
+        var shiftsToSave: [Shift] = []
+        
+        let weeks = Int(txtFixo.text!.split(separator: " ")[1])! * 4
+        let initialDate = model.date
+        
+        for index in 0..<weeks {
+            let pdcShift = Shift()
+            pdcShift.id = String.random()
+            pdcShift.groupId = model.groupId
+            pdcShift.companyId = model.companyId
+            pdcShift.company = model.company
+            pdcShift.shiftTime = model.shiftTime
+            pdcShift.paymentType = model.paymentType
+            pdcShift.paymentDueDate = model.paymentDueDate
+            pdcShift.salary = model.salary
+            pdcShift.paid = model.paid
+            
+            if index > 0 {
+                if lblFixo.text! == "Quinzenalmente" && index % 2 != 0 {
+                    continue
+                }
+                
+                pdcShift.date = Calendar.current.date(byAdding: DateComponents(day: 7 * index), to: initialDate!)
+                pdcShift.paymentDueDate = calcDueDate(pdcShift)
+            } else {
+                pdcShift.date = initialDate
+                pdcShift.paymentDueDate = calcDueDate(pdcShift)
+            }
+            
+            shiftsToSave.append(pdcShift)
         }
+        
+        when(fulfilled: shiftsToSave.map({ shift -> Promise<Void> in
+            return Promise<Void> { seal in
+                firstly {
+                    DataAccess.instance.createShift(shift)
+                }.done {
+                    seal.fulfill(())
+                }.catch { error in
+                    seal.reject(error)
+                }
+            }
+        })).done {
+            var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
+            
+            for s in shiftsToSave {
+                let shift = NSKeyedArchiver.archivedData(withRootObject: s)
+                shifts[s.id] = shift
+            }
+            
+            UserDefaults.standard.set(shifts, forKey: "shifts")
+            
+            self.cancel()
+        }.catch(policy: .allErrors) { error in
+            self.handleErrorGroup(model)
+        }
+    }
+    
+    private func handleErrorGroup(_ pdcShift: Shift) {
+        self.dismissCustomAlert()
+        
+        self.showNetworkError(msg: "Não foi possível enviar os dados do Plantão. Verifique sua conexão com a Internet e tente novamente.", {
+            firstly {
+                DataAccess.instance.deleteShiftGroup(pdcShift.groupId)
+            }.ensure {
+                self.createShiftGroup(pdcShift)
+            }.catch { error in
+                self.handleErrorGroup(pdcShift)
+            }
+        })
     }
     
     @objc func cancel() {
@@ -590,6 +685,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             //txtFixo.isHidden = !switchFixo.isOn
             //txtFixo.isEnabled = false
             txtCompany.isEnabled = false
+            self.companyChoosed = shift.company.id
             txtPaymentType.text = shift.paymentType
             txtShiftTime.text = shift.shiftTime == 1 ? "1 Hora" : "\(shift.shiftTime!) Horas"
             let nf = NumberFormatter()

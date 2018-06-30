@@ -66,7 +66,9 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
     }
     
     @objc func add() {
-        self.performSegue(withIdentifier: "SegueListToCompany", sender: self)
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "SegueListToCompany", sender: self)
+        }
     }
     
     @objc func back() {
@@ -108,7 +110,10 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
         let company = self.companies[indexPath.row]
         let companyPdc = NSKeyedUnarchiver.unarchiveObject(with: company) as! Company
         self.id = companyPdc.id
-        self.performSegue(withIdentifier: "SegueListToCompany", sender: self)
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "SegueListToCompany", sender: self)
+        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -124,7 +129,6 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
                 let companyPdc = NSKeyedUnarchiver.unarchiveObject(with: company) as! Company
                 
                 self.deleteCompany(companyPdc, indexPath, tableView)
-                
             }))
             
             alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
@@ -134,8 +138,12 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
     }
     
     func deleteCompany(_ companyPdc: Company, _ indexPath: IndexPath, _ tableView: UITableView) {
+        self.presentAlert()
+        
         firstly {
             DataAccess.instance.deleteCompany(companyPdc.id)
+        }.then {
+            DataAccess.instance.deleteShiftsByCompany(companyPdc.id)
         }.done {
             var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
             shifts = shifts.filter({ (key, value) -> Bool in
@@ -144,7 +152,6 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
             })
             UserDefaults.standard.set(shifts, forKey: "shifts")
             
-            self.dictCompanies[companyPdc.id] = NSKeyedArchiver.archivedData(withRootObject: companyPdc)
             self.dictCompanies.removeValue(forKey: companyPdc.id)
             UserDefaults.standard.set(self.dictCompanies, forKey: "companies")
             
@@ -155,14 +162,10 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
-            
+        }.ensure {
             self.dismissCustomAlert()
         }.catch { error in
-            self.dismissCustomAlert()
-            
             self.showNetworkError (msg: "Não foi possível remover a Empresa. Verifique sua conexão com a Internet e tente novamente.", {
-                self.presentAlert()
-                
                 self.deleteCompany(companyPdc, indexPath, tableView)
             })
         }

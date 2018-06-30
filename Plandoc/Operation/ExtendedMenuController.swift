@@ -16,10 +16,6 @@ class ExtendedMenuController: UIViewController,  UITableViewDelegate, UITableVie
     
     @IBAction func unwindToExtendedMenu(segue: UIStoryboardSegue) {}
     
-//    let menu = ["Empresas", "Despesas", "Meta Financeira", "Plandoc Premium", "Preferências"]
-//    let icons = [UIImage(named: "IconBarCompany"), UIImage(named: "IconBarExpenses"), UIImage(named: "IconBarPayment"), UIImage(named: "IconBarPremium"), UIImage(named: "IconBarPreferences")]
-//    let segue = ["SegueCompanies", "SegueExpenses", "SegueGoals", "SegueMembership", "SeguePreferences"]
-    
     let menu = ["Empresas", "Despesas", "Meta Financeira", "Preferências"]
     let icons = [UIImage(named: "IconBarCompany"), UIImage(named: "IconBarExpenses"), UIImage(named: "IconBarPayment"), UIImage(named: "IconBarPreferences")]
     let segue = ["SegueCompanies", "SegueExpenses", "SegueGoals", "SeguePreferences"]
@@ -70,6 +66,8 @@ class ExtendedMenuController: UIViewController,  UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            self.performSegue(withIdentifier: segue[indexPath.row], sender: self)
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: self.segue[indexPath.row], sender: self)
+        }
     }
 }

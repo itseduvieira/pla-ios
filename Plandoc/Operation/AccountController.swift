@@ -119,6 +119,8 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
         let pdcUser = NSKeyedUnarchiver.unarchiveObject(with: UserDefaults.standard.object(forKey: "loggedUser") as! Data) as! User
         
         if let user = Auth.auth().currentUser {
+            self.presentAlert()
+            
             let changeRequest = user.createProfileChangeRequest()
             
             if txtName.text! != user.displayName {
@@ -133,14 +135,22 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
                 let storage = Storage.storage()
                 let ref = storage.reference().child("\(user.uid)/profile.jpg")
                 
-                ref.putData(data!, metadata: nil) { (metadata, error) in                    
-                    pdcUser.picture = data
+                ref.putData(data!, metadata: nil) { (metadata, error) in
+                    if let error = error {
+                        self.showError(error)
+                    } else {
+                        pdcUser.picture = data
+                    }
                 }
             }
             
             if txtEmail.text! != user.email {
                 user.updateEmail(to: txtEmail.text!, completion: { error in
-                    pdcUser.email = self.txtEmail.text!
+                    if let error = error {
+                        self.showError(error)
+                    } else {
+                        pdcUser.email = self.txtEmail.text!
+                    }
                 })
             }
             
@@ -171,6 +181,8 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
                             self.showSuccess(pdcUser)
                         }
                     } else {
+                        self.dismissCustomAlert()
+                        
                         let alertController = UIAlertController(title: "Erro ao salvar o perfil", message: "A senha deve conter ao menos 6 caracteres.", preferredStyle: .alert)
                         
                         let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -184,24 +196,25 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
     }
     
     private func showSuccess(_ pdcUser: User) {
+        self.dismissCustomAlert()
+        
         let archivedUser = NSKeyedArchiver.archivedData(withRootObject: pdcUser)
         UserDefaults.standard.set(archivedUser, forKey: "loggedUser")
         
-        let alertController = UIAlertController(title: "Dados Pessoais", message: "Seu perfil foi salvo com sucesso.", preferredStyle: .alert)
+        self.showMsg(msg: "Seu perfil foi salvo com sucesso ;)")
+    }
+    
+    private func showError(_ error: Error) {
+        self.dismissCustomAlert()
+        
+        print(error)
+        
+        let alertController = UIAlertController(title: "Dados Pessoais", message: "Erro ao salvar o Perfil. Verifique sua conexão com a Internet e tente novamente.", preferredStyle: .alert)
         
         let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(defaultAction)
         
         self.present(alertController, animated: true, completion: nil)
-    }
-    
-    private func showError(_ error: Error) {
-        print(error)
-        
-        let alertController = UIAlertController(title: "Dados Pessoais", message: "Erro ao salvar o perfil.", preferredStyle: .alert)
-        
-        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alertController.addAction(defaultAction)
     }
     
     @IBAction func showOrHidePassword(_ sender: UIButton) {

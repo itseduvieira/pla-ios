@@ -239,6 +239,9 @@ class ExpenseDetailController: UIViewController, UIPickerViewDelegate, UIPickerV
             
             if isNew {
                 if switchFixo.isOn && !txtFixo.isHidden {
+                    let groupId = String.random()
+                    pdcExpense.groupId = groupId
+                    
                     createExpenseGroup(pdcExpense)
                 } else {
                     pdcExpense.id = String.random()
@@ -299,7 +302,6 @@ class ExpenseDetailController: UIViewController, UIPickerViewDelegate, UIPickerV
         var expensesToSave: [Expense] = []
         
         let months = Int(txtFixo.text!.split(separator: " ")[1])!
-        let groupId = String.random()
         let initialDate = model.date
         
         for index in 0..<months {
@@ -307,7 +309,7 @@ class ExpenseDetailController: UIViewController, UIPickerViewDelegate, UIPickerV
             pdcExpense.id = String.random()
             pdcExpense.value = model.value
             pdcExpense.title = model.title
-            pdcExpense.groupId = groupId
+            pdcExpense.groupId = model.groupId
             
             if index > 0 {
                 pdcExpense.date = Calendar.current.date(byAdding: DateComponents(month: index), to: initialDate!)

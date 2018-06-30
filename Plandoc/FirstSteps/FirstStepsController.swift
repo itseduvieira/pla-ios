@@ -142,7 +142,6 @@ class FirstStepsController : UIViewController, UNUserNotificationCenterDelegate 
         if (segue.identifier == "SegueFirstStepsToProfile") {
             let vc = segue.destination as! ProfileController
             vc.sender = self
-            vc.isNew = true
         } else if (segue.identifier == "SegueFirstStepsToCompany") {
             let vc = segue.destination as! CompanyController
             vc.sender = self

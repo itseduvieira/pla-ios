@@ -346,6 +346,7 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
         let session = URLSession(configuration: sessionConfig)
         var request = URLRequest(url: fileURL!)
         request.httpMethod = "GET"
+        request.setValue("Bearer \(Auth.auth().currentUser!.uid)", forHTTPHeaderField: "Authorization")
         
         let task = session.dataTask(with: request) { (data, response, error) in
             if let data = data, error == nil, let response = response as? HTTPURLResponse {

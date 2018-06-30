@@ -137,7 +137,9 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func add() {
         self.id = nil
         
-        self.performSegue(withIdentifier: "SegueCalendarToShift", sender: self)
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "SegueCalendarToShift", sender: self)
+        }
     }
     
     @objc func changeCalendarType() {
@@ -204,7 +206,10 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: self.shifts[indexPath.row]) as! Shift
         self.id = shiftPdc.id
-        self.performSegue(withIdentifier: "SegueCalendarToShift", sender: self)
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "SegueCalendarToShift", sender: self)
+        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -223,7 +228,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     alert.addAction(UIAlertAction(title: "Sim, desejo remover", style: .destructive, handler: { action in
                         
-                        self.removeOne(shiftPdc)
+                        self.deleteShift(shiftPdc, editActionsForRowAt, tableView)
                     }))
                     
                     alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
@@ -233,10 +238,10 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
                     let alert = UIAlertController(title: "Remover Plantão Fixo", message: "O plantão escolhido é do tipo fixo. Você deseja remover apenas este agendamento ou todos os agendamentos deste fixo?", preferredStyle: .actionSheet)
                     
                     alert.addAction(UIAlertAction(title: "Apenas Este", style: .default, handler: { action in
-                        self.removeOne(shiftPdc)
+                        self.deleteShift(shiftPdc, editActionsForRowAt, tableView)
                     }))
                     alert.addAction(UIAlertAction(title: "Remover Todos", style: .destructive, handler: { action in
-                        self.removeGroup(shiftPdc)
+                        self.deleteShiftGroup(shiftPdc, editActionsForRowAt, tableView)
                     }))
                     alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
                     
@@ -248,34 +253,55 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         return [delete]
     }
     
-    func removeOne(_ shift: Shift) {
-        var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
-        dict.removeValue(forKey: shift.id)
+    func deleteShift(_ pdcShift: Shift, _ indexPath: IndexPath, _ tableView: UITableView) {
+        self.presentAlert()
         
-        UserDefaults.standard.set(dict, forKey: "shifts")
-        
-        DataAccess.instance.deleteShift(shift.id)
-        
-        self.viewWillAppear(true)
-        self.viewDidAppear(true)
+        firstly {
+            DataAccess.instance.deleteShift(pdcShift.id)
+        }.done {
+            var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
+            
+            dict.removeValue(forKey: pdcShift.id)
+            
+            UserDefaults.standard.set(dict, forKey: "shifts")
+            
+            self.viewWillAppear(true)
+            self.viewDidAppear(true)
+        }.ensure {
+            self.dismissCustomAlert()
+        }.catch { error in
+            self.showNetworkError (msg: "Não foi possível remover o Plantão. Verifique sua conexão com a Internet e tente novamente.", {
+                self.deleteShift(pdcShift, indexPath, tableView)
+            })
+        }
     }
     
-    func removeGroup(_ shift: Shift) {
-        var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
+    func deleteShiftGroup(_ pdcShift: Shift, _ indexPath: IndexPath, _ tableView: UITableView) {
+        self.presentAlert()
         
-        for data in dict.values {
-            let s = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
-            if s.groupId == shift.groupId {
-                dict.removeValue(forKey: s.id)
+        firstly {
+            DataAccess.instance.deleteShiftGroup(pdcShift.groupId)
+        }.done {
+            var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
+            
+            for data in dict.values {
+                let s = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
+                if s.groupId == pdcShift.groupId {
+                    dict.removeValue(forKey: s.id)
+                }
             }
+            
+            UserDefaults.standard.set(dict, forKey: "shifts")
+            
+            self.viewWillAppear(true)
+            self.viewDidAppear(true)
+        }.ensure {
+            self.dismissCustomAlert()
+        }.catch { error in
+            self.showNetworkError (msg: "Não foi possível remover as Despesas. Verifique sua conexão com a Internet e tente novamente.", {
+                self.deleteShiftGroup(pdcShift, indexPath, tableView)
+            })
         }
-        
-        UserDefaults.standard.set(dict, forKey: "shifts")
-        
-        DataAccess.instance.deleteShiftGroup(shift.groupId)
-        
-        self.viewWillAppear(true)
-        self.viewDidAppear(true)
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {

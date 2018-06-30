@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     //MARK: Properties
@@ -27,7 +28,7 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
     let SectionHeaderHeight: CGFloat = 55
     var selectedHeader: Int!
     
-    var expenses: [String:Data]!
+    var dictExpenses: [String:Data]!
     
     // Data variable to track our sorted data.
     var data = [TableSection: [Expense]]()
@@ -62,12 +63,12 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
         years = [year]
         
         data = [:]
-        expenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]
+        dictExpenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]
         
-        txtEmpty.isHidden = !expenses.isEmpty
-        table.isHidden = expenses.isEmpty
+        txtEmpty.isHidden = !dictExpenses.isEmpty
+        table.isHidden = dictExpenses.isEmpty
         
-        expenses = expenses.filter { (key, value) -> Bool in
+        dictExpenses = dictExpenses.filter { (key, value) -> Bool in
             let pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: value) as! Expense
             let formatter = DateFormatter()
             formatter.dateFormat = "YYYY"
@@ -76,20 +77,21 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
             
             years.insert(y)
             
-            return y == year
-        }
-        
-        for ex in expenses.values {
-            let pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: ex) as! Expense
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MM"
-            let month = Int(formatter.string(from: pdcExpense.date))! - 1
+            let filtered = (y == year)
             
-            if data[TableSection(rawValue: month)!] == nil {
-                data[TableSection(rawValue: month)!] = []
+            if filtered {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "MM"
+                let month = Int(formatter.string(from: pdcExpense.date))! - 1
+                
+                if data[TableSection(rawValue: month)!] == nil {
+                    data[TableSection(rawValue: month)!] = []
+                }
+                
+                data[TableSection(rawValue: month)!]!.append(pdcExpense)
             }
             
-            data[TableSection(rawValue: month)!]!.append(pdcExpense)
+            return filtered
         }
         
         id = nil
@@ -114,7 +116,9 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @objc func add() {
-        self.performSegue(withIdentifier: "SegueExpensesToDetail", sender: self)
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "SegueExpensesToDetail", sender: self)
+        }
     }
     
     @objc func back() {
@@ -128,7 +132,10 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = self.data[TableSection(rawValue: indexPath.section)!]
         self.id = section![indexPath.row].id
-        self.performSegue(withIdentifier: "SegueExpensesToDetail", sender: self)
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "SegueExpensesToDetail", sender: self)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -162,7 +169,7 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
         label.textColor = UIColor(hexString: "#78000000")
         
         var total = 0
-        for ex in expenses.values {
+        for ex in dictExpenses.values {
             let pdcExpense = NSKeyedUnarchiver.unarchiveObject(with: ex) as! Expense
             let formatter = DateFormatter()
             formatter.dateFormat = "MM"
@@ -329,8 +336,7 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
                     let alert = UIAlertController(title: "Remover Despesa", message: "Ao remover uma despesa, os dados não poderão ser recuperados. Você deseja realmente remover este despesa?", preferredStyle: .actionSheet)
                     
                     alert.addAction(UIAlertAction(title: "Sim, desejo remover", style: .destructive, handler: { action in
-                        
-                        self.removeOne(expensePdc)
+                        self.deleteExpense(expensePdc, editActionsForRowAt, tableView)
                     }))
                     
                     alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
@@ -340,23 +346,10 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
                     let alert = UIAlertController(title: "Remover Despesa Fixa", message: "A despesa escolhida é do tipo fixa. Você deseja remover apenas este registro ou todos os agendamentos deste fixo?", preferredStyle: .actionSheet)
                     
                     alert.addAction(UIAlertAction(title: "Apenas Este", style: .default, handler: { action in
-                        self.removeOne(expensePdc)
+                        self.deleteExpense(expensePdc, editActionsForRowAt, tableView)
                     }))
                     alert.addAction(UIAlertAction(title: "Remover Todos", style: .destructive, handler: { action in
-                        
-                        for data in dict.values {
-                            let s = NSKeyedUnarchiver.unarchiveObject(with: data) as! Expense
-                            if s.groupId == expensePdc.groupId {
-                                dict.removeValue(forKey: s.id)
-                            }
-                        }
-                        
-                        UserDefaults.standard.set(dict, forKey: "expenses")
-                        
-                        DataAccess.instance.deleteExpenseGroup(expensePdc.groupId)
-                        
-                        self.viewWillAppear(true)
-                        self.viewDidAppear(true)
+                        self.deleteExpenseGroup(expensePdc, editActionsForRowAt, tableView)
                     }))
                     alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
                     
@@ -368,14 +361,49 @@ class ExpensesController: UIViewController, UITableViewDataSource, UITableViewDe
         return [delete]
     }
     
-    func removeOne(_ expense: Expense) {
-        var dict = UserDefaults.standard.dictionary(forKey: "expenses") as! [String:Data]
-        dict.removeValue(forKey: expense.id)
+    func deleteExpense(_ expensePdc: Expense, _ indexPath: IndexPath, _ tableView: UITableView) {
+        self.presentAlert()
         
-        UserDefaults.standard.set(dict, forKey: "expenses")
+        firstly {
+            DataAccess.instance.deleteExpense(expensePdc.id)
+        }.done {
+            self.dictExpenses.removeValue(forKey: expensePdc.id)
+            
+            UserDefaults.standard.set(self.dictExpenses, forKey: "expenses")
+            
+            self.viewWillAppear(true)
+        }.ensure {
+            self.dismissCustomAlert()
+        }.catch { error in
+            self.showNetworkError (msg: "Não foi possível remover a Despesa. Verifique sua conexão com a Internet e tente novamente.", {
+                self.deleteExpense(expensePdc, indexPath, tableView)
+            })
+        }
+    }
+    
+    func deleteExpenseGroup(_ expensePdc: Expense, _ indexPath: IndexPath, _ tableView: UITableView) {
+        self.presentAlert()
         
-        DataAccess.instance.deleteExpense(expense.id)
-        
-        self.viewWillAppear(true)
+        firstly {
+            DataAccess.instance.deleteExpenseGroup(expensePdc.groupId)
+        }.done {
+            for data in self.dictExpenses.values {
+                let s = NSKeyedUnarchiver.unarchiveObject(with: data) as! Expense
+                if s.groupId == expensePdc.groupId {
+                    self.dictExpenses.removeValue(forKey: s.id)
+                }
+            }
+            
+            UserDefaults.standard.set(self.dictExpenses, forKey: "expenses")
+            
+            self.viewWillAppear(true)
+            self.viewDidAppear(true)
+        }.ensure {
+            self.dismissCustomAlert()
+        }.catch { error in
+            self.showNetworkError (msg: "Não foi possível remover as Despesas. Verifique sua conexão com a Internet e tente novamente.", {
+                self.deleteExpenseGroup(expensePdc, indexPath, tableView)
+            })
+        }
     }
 }

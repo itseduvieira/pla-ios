@@ -121,8 +121,20 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
             
             let formatter = DateFormatter()
             formatter.dateFormat = "dd/MM/yyyy"
-            let startDate = formatter.date(from: txtStartDate.text!)
-            let endDate = formatter.date(from: txtEndDate.text!)
+
+            var dateComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute, .second], from: formatter.date(from: txtStartDate.text!)!)
+            dateComponents.hour = 0
+            dateComponents.minute = 0
+            dateComponents.second = 0
+            
+            let startDate = Calendar.current.date(from: dateComponents)
+            
+            dateComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute, .second], from: formatter.date(from: txtEndDate.text!)!)
+            dateComponents.hour = 23
+            dateComponents.minute = 59
+            dateComponents.second = 59
+            
+            let endDate = Calendar.current.date(from: dateComponents)
             
             var result = shift.date > startDate! && shift.date < endDate!
             
@@ -167,7 +179,7 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
                 group[formatter.string(from: data.date)] = (group[formatter.string(from: data.date)] ?? 0) + data.salary
             }
             
-            for index in 1...6 {
+            for index in 1...10 {
                 let key = String(format: "%02d", index) + "2018"
                 if let element = group[key] {
                     entries.append(PieChartDataEntry(value: element,
@@ -186,6 +198,19 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
         }
         
         
+    }
+    
+    private func showError(_ error: Error) {
+        self.dismissCustomAlert()
+        
+        print(error)
+        
+        let alertController = UIAlertController(title: "Relatório", message: "Erro ao gerar o Relatório. Verifique sua conexão com a Internet e tente novamente.", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(defaultAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func generateReport() {
@@ -252,6 +277,8 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
                         try data.write(to: destinationFileUrl)
                         print(data)
                     } catch let error {
+                        self.showError(error)
+                        
                         print("An error occurred while moving file to destination url \(error)")
                     }
                     
@@ -261,12 +288,16 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
 
                         self.path = destinationFileUrl
                         
-                        self.performSegue(withIdentifier: "SegueReportToPdf", sender: self)
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "SegueReportToPdf", sender: self)
+                        }
                         
                         self.dismissCustomAlert()
                     }
                     
                 } else {
+                    self.showError(error!)
+                    
                     print("Error took place while downloading a file. Error description: %@", error?.localizedDescription ?? "");
                 }
             }
@@ -275,7 +306,7 @@ class MainReportController: UIViewController, ChartViewDelegate, UIPickerViewDel
         } catch let error {
             print("An error occurred while send report request \(error)")
             
-            self.dismissCustomAlert()
+            self.showError(error)
         }
     }
     

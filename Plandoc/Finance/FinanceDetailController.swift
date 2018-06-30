@@ -205,13 +205,65 @@ class FinanceDetailController: UIViewController, UITableViewDelegate, UITableVie
         if !shiftPdc.paid {
             actions.insert(pay, at: 0)
             
-            if shiftPdc.date < Date() {
-                delete.title = "Não Compareci"
-            } else {
-                delete.title = "Não Irei"
-            }
+            delete.title = "Remover"
         }
 
         return actions
+    }
+    
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let shift = self.shifts[indexPath.row]
+        let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: shift) as! Shift
+        
+        let delete = UIContextualAction(style: .destructive, title: "Remover") { (action, view, handler) in
+            let alert = UIAlertController(title: "Plantão Não Realizado", message: "Este plantão não foi realizado e será apagado. Você deseja realmente remover este plantao?", preferredStyle: .actionSheet)
+            
+            alert.addAction(UIAlertAction(title: "Sim, desejo remover", style: .destructive, handler: { action in
+                
+                var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
+                dict.removeValue(forKey: shiftPdc.id)
+                
+                UserDefaults.standard.set(dict, forKey: "shifts")
+                
+                self.viewWillAppear(true)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true)
+            
+            handler(true)
+        }
+        
+        let pay = UIContextualAction(style: .destructive, title: "Já Recebi") { (action, view, handler) in
+            var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
+            shiftPdc.paid = true
+            dict[shiftPdc.id] = NSKeyedArchiver.archivedData(withRootObject: shiftPdc)
+            UserDefaults.standard.set(dict, forKey: "shifts")
+            
+            let center = UNUserNotificationCenter.current()
+            center.removeDeliveredNotifications(withIdentifiers: [shiftPdc.id])
+            center.removePendingNotificationRequests(withIdentifiers: [shiftPdc.id])
+            
+            self.viewWillAppear(true)
+            
+            handler(true)
+        }
+        
+        pay.backgroundColor = UIColor(hexString: "#59AF4F")
+        
+        var act = [delete]
+        
+        if !shiftPdc.paid {
+            act.insert(pay, at: 0)
+        }
+        
+        let config = UISwipeActionsConfiguration(actions: act)
+        
+        config.performsFirstActionWithFullSwipe = false
+        
+        return config
     }
 }

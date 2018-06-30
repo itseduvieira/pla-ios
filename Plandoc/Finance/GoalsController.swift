@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 class GoalsController: UIViewController, UITextFieldDelegate {
     //MARK: Properties
@@ -72,8 +73,6 @@ class GoalsController: UIViewController, UITextFieldDelegate {
             nf.numberStyle = .currency
             nf.locale = Locale(identifier: "pt_BR")
             txtValue.text = nf.string(from: value as! NSNumber)
-            
-            
         }
     }
     
@@ -107,8 +106,7 @@ class GoalsController: UIViewController, UITextFieldDelegate {
             
             self.present(alertController, animated: true, completion: nil)
         } else {
-            UserDefaults.standard.set(switchAtivo.isOn, forKey: "goalActive")
-            DataAccess.instance.setPreference("goalActive", switchAtivo.isOn)
+            self.presentAlert()
             
             var value: Double = 0.0
             
@@ -116,15 +114,27 @@ class GoalsController: UIViewController, UITextFieldDelegate {
                 value = Double(txtValue.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))!
             }
             
-            UserDefaults.standard.set(value, forKey: "goalValue")
-            DataAccess.instance.setPreference("goalValue", value)
-            
-            let alertController = UIAlertController(title: "Meta Financeira", message: "A Meta Financeira foi salva com sucesso.", preferredStyle: .alert)
-            
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(defaultAction)
-            
-            self.present(alertController, animated: true, completion: nil)
+            firstly {
+                DataAccess.instance.setPreference("goalActive", switchAtivo.isOn)
+            }.then {
+                DataAccess.instance.setPreference("goalValue", value)
+            }.done {
+                UserDefaults.standard.set(self.switchAtivo.isOn, forKey: "goalActive")
+                UserDefaults.standard.set(value, forKey: "goalValue")
+                
+                let alertController = UIAlertController(title: "Meta Financeira", message: "A Meta Financeira foi salva com sucesso.", preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+            }.ensure {
+                self.dismissCustomAlert()
+            }.catch { error in
+                self.showNetworkError (msg: "Não foi possível salvar a Meta Financeira. Verifique sua conexão com a Internet e tente novamente.", {
+                    self.save()
+                })
+            }
         }
     }
     

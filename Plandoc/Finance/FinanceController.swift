@@ -140,8 +140,10 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         if finance!.totalShifts > 0 {
             self.id = id
-            
-            self.performSegue(withIdentifier: "SegueFinanceToDetail", sender: self)
+			
+			DispatchQueue.main.async {
+            	self.performSegue(withIdentifier: "SegueFinanceToDetail", sender: self)
+			}
         } else {
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -206,7 +208,7 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
                 
                 let expenses = UserDefaults.standard.dictionary(forKey: "expenses") as? [String:Data] ?? [:]
                 
-                var hasGoal = false
+                let hasGoal = UserDefaults.standard.bool(forKey: "goalActive")
                 var accomplish = false
 				
 				var sum = 0.0
@@ -218,7 +220,7 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
                     
                     let monthRow = String(format: "%02d", indexPath.row + 1) + navItem.rightBarButtonItem!.title!
                     if monthRow == formatter.string(from: pdcExpense.date) {
-                        hasGoal = true
+                        //hasGoal = true
 						sum += pdcExpense.value
                     }
                 }

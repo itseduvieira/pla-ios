@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     //MARK: Properties
@@ -23,7 +24,6 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var constraintTxtUF: NSLayoutConstraint!
     
     var picker: UIPickerView!
-    var isNew: Bool!
     
     weak var sender: UIViewController!
     
@@ -82,6 +82,8 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
             
             self.present(alertController, animated: true, completion: nil)
         } else {
+            self.presentAlert()
+            
             let pdcProfile = Profile()
             pdcProfile.crm = txtCRM.text
             pdcProfile.uf = txtUF.text
@@ -89,16 +91,51 @@ class ProfileController : UIViewController, UIPickerViewDataSource, UIPickerView
             pdcProfile.field = txtField.text
             pdcProfile.institution = txtGraduation.text
             
+            updateProfile(pdcProfile)
+        }
+    }
+    
+    private func createProfile(_ pdcProfile: Profile) {
+        firstly {
+            DataAccess.instance.createProfile(pdcProfile)
+        }.done {
             let profile = NSKeyedArchiver.archivedData(withRootObject: pdcProfile)
+            
             UserDefaults.standard.set(profile, forKey: "profile")
             
-            if isNew {
-                DataAccess.instance.createProfile(pdcProfile)
-            } else {
-                DataAccess.instance.updateProfile(pdcProfile)
-            }
+            self.cancel()
+        }.catch { error in
+            self.dismissCustomAlert()
             
-            cancel()
+            self.showNetworkError(msg: "Não foi possível enviar os dados do Perfil. Verifique sua conexão com a Internet e tente novamente.", {
+                self.presentAlert()
+                
+                self.createProfile(pdcProfile)
+            })
+        }
+    }
+    
+    private func updateProfile(_ pdcProfile: Profile) {
+        firstly {
+            DataAccess.instance.updateProfile(pdcProfile)
+        }.done {
+            let profile = NSKeyedArchiver.archivedData(withRootObject: pdcProfile)
+            
+            UserDefaults.standard.set(profile, forKey: "profile")
+            
+            self.cancel()
+        }.catch { error in
+            if (error as NSError).code == 404 {
+                self.createProfile(pdcProfile)
+            } else {
+                self.dismissCustomAlert()
+                
+                self.showNetworkError(msg: "Não foi possível enviar os dados do Perfil. Verifique sua conexão com a Internet e tente novamente.", {
+                    self.presentAlert()
+                    
+                    self.updateProfile(pdcProfile)
+                })
+            }
         }
     }
 

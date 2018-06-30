@@ -315,7 +315,11 @@ class DataAccess {
                     return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
                 }
                 
-                seal.fulfill(())
+                if json["message"] != nil && json["message"] as! String == "Id not found" {
+                    return seal.reject(NSError(domain:"", code: 404, userInfo: nil))
+                } else {
+                    seal.fulfill(())
+                }
             }.catch { error in
                 seal.reject(error)
             }
@@ -604,6 +608,22 @@ class DataAccess {
                 seal.fulfill(())
             }.catch { error in
                 seal.reject(error)
+            }
+        }
+    }
+    
+    func deleteShiftsByCompany(_ companyId: String) -> Promise<Void> {
+        return Promise { seal in
+            firstly {
+                createRequest("shifts/company/\(companyId)", method: .delete)
+                }.done { response in
+                    guard let json = response as? [String:Any], !json.isEmpty else {
+                        return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
+                    }
+                    
+                    seal.fulfill(())
+                }.catch { error in
+                    seal.reject(error)
             }
         }
     }
