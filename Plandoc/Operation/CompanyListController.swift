@@ -61,18 +61,12 @@ class CompanyListController: UIViewController,  UITableViewDelegate, UITableView
         navBar.shadowImage = UIImage()
         let doneItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
         navItem.rightBarButtonItem = doneItem
-        let calendarTypeItem = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(back))
-        navItem.leftBarButtonItem = calendarTypeItem
     }
     
     @objc func add() {
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "SegueListToCompany", sender: self)
         }
-    }
-    
-    @objc func back() {
-        self.performSegue(withIdentifier: "SegueUnwindToExtendedMenu", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

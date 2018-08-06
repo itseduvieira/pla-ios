@@ -16,7 +16,6 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var txtTotalShifts: UILabel!
     @IBOutlet weak var txtTotalProfit: UILabel!
     @IBOutlet weak var txtProfitPaid: UILabel!
-    @IBOutlet weak var txtQtdCompanies: UILabel!
     @IBOutlet weak var txtProfitLeft: UILabel!
     @IBOutlet weak var headerSummary: UIView!
     @IBOutlet weak var headerMonths: UIView!
@@ -102,7 +101,6 @@ class FinanceController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         txtTotalShifts.text = String(totalShifts)
         txtTotalProfit.text = "R$\(Int(totalProfit))"
-        txtQtdCompanies.text = String(companies.count)
         txtProfitPaid.text = "R$\(Int(profitPaid))"
         txtProfitLeft.text = "R$\(Int(totalProfit - profitPaid))"
         

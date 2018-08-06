@@ -71,7 +71,7 @@ static const NSTimeInterval MDCButtonAnimationDuration = 0.2;
 // https://material.io/go/design-buttons#buttons-main-buttons
 static const CGFloat MDCButtonDisabledAlpha = 0.12f;
 
-// Blue 500 from https://material.io/go/design-theming#color-color-palette .
+// Blue 500 from https://material.io/go/design-color-theming#color-color-palette .
 static const uint32_t MDCButtonDefaultBackgroundColor = 0x191919;
 
 // Creates a UIColor from a 24-bit RGB color encoded as an integer.
@@ -527,9 +527,10 @@ static NSAttributedString *uppercaseAttributedString(NSAttributedString *string)
 - (void)updateTitleCase {
   // This calls setTitle or setAttributedTitle for every title value we have stored. In each
   // respective setter the title is upcased if _uppercaseTitle is YES.
-  for (NSNumber *key in _nontransformedTitles.keyEnumerator) {
+  NSDictionary<NSNumber *, NSString *> *nontransformedTitles = [_nontransformedTitles copy];
+  for (NSNumber *key in nontransformedTitles.keyEnumerator) {
     UIControlState state = key.unsignedIntegerValue;
-    NSString *title = _nontransformedTitles[key];
+    NSString *title = nontransformedTitles[key];
     if ([title isKindOfClass:[NSAttributedString class]]) {
       [self setAttributedTitle:(NSAttributedString *)title forState:state];
     } else {

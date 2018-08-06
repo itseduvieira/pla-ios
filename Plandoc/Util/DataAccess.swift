@@ -20,8 +20,9 @@ class DataAccess {
     
     private init() {
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 10
+        configuration.timeoutIntervalForRequest = 8
         sessionManager = Alamofire.SessionManager(configuration: configuration)
+        sessionManager.retrier = PdcRetryHandler()
     }
     
     func getData() -> Promise<Void> {
@@ -48,21 +49,6 @@ class DataAccess {
         }
     }
     
-    private func createRequest(_ path: String, method: HTTPMethod, parameters: Parameters, _ completion: @escaping (Any?) -> Void) {
-        let headers = [
-            "Authorization": "Bearer \(Auth.auth().currentUser!.uid)",
-            "Accept": "application/json"
-        ]
-        
-        let fullUrl = "\(url)/\(path)"
-        
-        print("\(String(method.rawValue)) \(fullUrl)")
-        
-        sessionManager.request(fullUrl, method: method, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { response in
-            completion(response.result.value)
-        }
-    }
-    
     private func createRequest(_ path: String, method: HTTPMethod, parameters: Parameters) -> Promise<Any> {
         let headers = [
             "Authorization": "Bearer \(Auth.auth().currentUser!.uid)",
@@ -77,20 +63,26 @@ class DataAccess {
             firstly {
                 sessionManager.request(fullUrl, method: method, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON()
             }.done { (json, response) in
+                //self.retryCount = 0
+                
                 seal.fulfill(json)
             }.catch { error in
                 print("ERR \(String(method.rawValue)) \(fullUrl)")
-                print(error)
+                //print(error)
+                
+//                if error._code == NSURLErrorTimedOut && self.retryCount < 3 {
+//                    self.retryCount += 1
+//
+//                    self.retry(path, method: method, parameters: parameters, seal: seal)
+//                } else {
+//                    self.retryCount = 0
+//
+//                    seal.reject(error)
+//                }
                 
                 seal.reject(error)
             }
         }
-    }
-    
-    private func createRequest(_ path: String, method: HTTPMethod, _ completion: @escaping (Any) -> Void) {
-        let parameters: Parameters = [:]
-        
-        createRequest(path, method: method, parameters: parameters, completion)
     }
     
     private func createRequest(_ path: String, method: HTTPMethod) -> Promise<Any> {
@@ -616,14 +608,14 @@ class DataAccess {
         return Promise { seal in
             firstly {
                 createRequest("shifts/company/\(companyId)", method: .delete)
-                }.done { response in
-                    guard let json = response as? [String:Any], !json.isEmpty else {
-                        return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
-                    }
-                    
-                    seal.fulfill(())
-                }.catch { error in
-                    seal.reject(error)
+            }.done { response in
+                guard let json = response as? [String:Any], !json.isEmpty else {
+                    return seal.reject(AFError.responseValidationFailed(reason: .dataFileNil))
+                }
+                
+                seal.fulfill(())
+            }.catch { error in
+                seal.reject(error)
             }
         }
     }
@@ -643,6 +635,21 @@ class DataAccess {
             }.catch { error in
                 seal.reject(error)
             }
+        }
+    }
+}
+
+class PdcRetryHandler: RequestRetrier {
+    var retryCount = 0
+    
+    public func should(_ manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion) {
+        
+        if error._code == NSURLErrorTimedOut && retryCount < 3 {
+            retryCount += 1
+            completion(true, 1.0) // retry after 1 second
+        } else {
+            retryCount = 0
+            completion(false, 0.0) // don't retry
         }
     }
 }

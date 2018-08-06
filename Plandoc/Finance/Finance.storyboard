@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IO9-zP-AX1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IO9-zP-AX1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -186,7 +186,7 @@
                                 <rect key="frame" x="0.0" y="119" width="375" height="70"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zGb-Jd-Spf">
-                                        <rect key="frame" x="0.0" y="0.0" width="500" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="70"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXR-qi-9Ed">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="70"/>
@@ -344,49 +344,10 @@
                                                     <constraint firstItem="fPF-iX-Sc6" firstAttribute="top" secondItem="YoD-Qw-kI1" secondAttribute="top" constant="10" id="yRU-pn-cfE"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tp7-PN-gJT">
-                                                <rect key="frame" x="400" y="0.0" width="100" height="70"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHD-YQ-M0K">
-                                                        <rect key="frame" x="0.0" y="16" width="8" height="8"/>
-                                                        <color key="backgroundColor" red="0.91372549020000005" green="0.26274509800000001" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="8" id="VGe-m5-wPn"/>
-                                                            <constraint firstAttribute="width" constant="8" id="Yaj-VV-QXi"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMPRESAS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwL-So-XSb">
-                                                        <rect key="frame" x="12" y="10" width="46" height="21"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="21" id="JuP-Bq-S4W"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="8"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jv1-x6-AES">
-                                                        <rect key="frame" x="45.5" y="35" width="10" height="19.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="pHD-YQ-M0K" firstAttribute="leading" secondItem="Tp7-PN-gJT" secondAttribute="leading" id="5Dw-R6-Wg5"/>
-                                                    <constraint firstItem="jv1-x6-AES" firstAttribute="centerX" secondItem="Tp7-PN-gJT" secondAttribute="centerX" id="5WQ-RE-A1r"/>
-                                                    <constraint firstAttribute="height" constant="70" id="FhV-ro-fKZ"/>
-                                                    <constraint firstItem="pHD-YQ-M0K" firstAttribute="top" secondItem="Tp7-PN-gJT" secondAttribute="top" constant="16" id="OlA-jL-c1c"/>
-                                                    <constraint firstItem="ZwL-So-XSb" firstAttribute="leading" secondItem="pHD-YQ-M0K" secondAttribute="trailing" constant="4" id="POq-df-xdW"/>
-                                                    <constraint firstItem="ZwL-So-XSb" firstAttribute="top" secondItem="Tp7-PN-gJT" secondAttribute="top" constant="10" id="R3V-mm-7rF"/>
-                                                    <constraint firstAttribute="width" constant="100" id="Vmi-ZI-Mtt"/>
-                                                    <constraint firstItem="jv1-x6-AES" firstAttribute="top" secondItem="ZwL-So-XSb" secondAttribute="bottom" constant="4" id="ZTE-iC-KBX"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="N2b-lQ-7Z8"/>
-                                            <constraint firstAttribute="width" constant="500" id="lKc-A5-Y03"/>
+                                            <constraint firstAttribute="width" constant="400" id="lKc-A5-Y03"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -453,7 +414,6 @@
                         <outlet property="tableFinance" destination="wuM-M2-yQw" id="6zn-OT-eou"/>
                         <outlet property="txtProfitLeft" destination="u4z-Aq-bBf" id="ce7-Eb-pMo"/>
                         <outlet property="txtProfitPaid" destination="PuG-eD-2xH" id="l4V-jB-s3B"/>
-                        <outlet property="txtQtdCompanies" destination="jv1-x6-AES" id="EmJ-YS-nP7"/>
                         <outlet property="txtTotalProfit" destination="Gz9-ur-P50" id="YIl-zH-W9g"/>
                         <outlet property="txtTotalShifts" destination="fqD-gc-80l" id="e6x-YZ-Upy"/>
                         <segue destination="XbL-F8-5VH" kind="show" identifier="SegueFinanceToDetail" id="Rvo-Hh-Py2"/>

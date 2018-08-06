@@ -298,7 +298,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         }.ensure {
             self.dismissCustomAlert()
         }.catch { error in
-            self.showNetworkError (msg: "Não foi possível remover as Despesas. Verifique sua conexão com a Internet e tente novamente.", {
+            self.showNetworkError (msg: "Não foi possível remover os Plantões. Verifique sua conexão com a Internet e tente novamente.", {
                 self.deleteShiftGroup(pdcShift, indexPath, tableView)
             })
         }
@@ -377,6 +377,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
             }.done { result in
                 self.showMsg(msg: "Os dados foram recuperados com sucesso ;)")
                 self.viewDidLoad()
+                self.viewWillAppear(true)
                 self.viewDidAppear(true)
             }.catch { error in
                 self.snackbarDataUnavailable()

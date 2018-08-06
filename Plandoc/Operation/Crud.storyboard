@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -366,7 +366,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oyp-rs-ebW"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Empresas" id="jU7-AT-CjU"/>
+                    <tabBarItem key="tabBarItem" title="Empresas" image="IconBarCompany" id="jU7-AT-CjU"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="companyTable" destination="8Kz-vB-Bgc" id="nfu-0a-ucp"/>
@@ -375,11 +375,9 @@
                         <outlet property="navItem" destination="2wY-Jl-0hv" id="Ft6-MJ-olI"/>
                         <outlet property="txtEmpty" destination="Lz5-c7-bLJ" id="Epd-Ed-pYy"/>
                         <segue destination="VA5-PV-IB3" kind="show" identifier="SegueListToCompany" id="FB9-fi-Osd"/>
-                        <segue destination="zcK-sO-TI8" kind="unwind" identifier="SegueUnwindToExtendedMenu" unwindAction="unwindToExtendedMenuWithSegue:" id="khF-mb-PRx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VEa-Vr-fqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="zcK-sO-TI8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="669.60000000000002" y="-681.40929535232385"/>
         </scene>
@@ -758,8 +756,8 @@
                         <outlet property="txtPhone" destination="7yd-gH-R8Z" id="m0X-iY-w2C"/>
                         <outlet property="txtType" destination="Hqp-Hu-aym" id="U8N-qq-kFs"/>
                         <segue destination="sXZ-K7-SNw" kind="show" identifier="SegueCompanyToFirstSteps" customClass="UIStoryboardUnwindSegueFromRight" customModule="Plandoc" customModuleProvider="target" id="SBL-H7-X7T"/>
-                        <segue destination="fy8-l9-nGX" kind="show" identifier="SegueCompanyToShift" id="XBY-m4-yZ0"/>
                         <segue destination="sqG-oc-8KD" kind="unwind" identifier="SegueUnwindToList" unwindAction="unwindToCompaniesListWithSegue:" id="MPg-GR-KC9"/>
+                        <segue destination="sqG-oc-8KD" kind="unwind" identifier="SegueUnwindToCalendar" unwindAction="unwindToCalendarWithSegue:" id="M7T-Dz-n4U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m1O-TI-Pjn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1362,9 +1360,11 @@
                         <outlet property="txtName" destination="v33-71-ZID" id="YCT-Lh-CCe"/>
                         <outlet property="txtPassword" destination="9uj-zE-cnV" id="61I-RB-3wU"/>
                         <outlet property="txtPhone" destination="VVE-QO-s7b" id="vvY-mr-PJP"/>
+                        <segue destination="QdZ-sy-Q2D" kind="unwind" identifier="SegueUnwindToExtendedMenu" unwindAction="unwindToExtendedMenuWithSegue:" id="E0L-QK-Y8H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tHj-9J-uvj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="QdZ-sy-Q2D" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1033.125" y="109.85915492957747"/>
         </scene>
@@ -1374,6 +1374,7 @@
         <image name="CoverProfile" width="1280" height="853"/>
         <image name="CoverShift" width="1280" height="847"/>
         <image name="Forward" width="80" height="82"/>
+        <image name="IconBarCompany" width="25" height="25"/>
         <image name="IconBarProfile" width="25" height="25"/>
         <image name="IconCompany" width="700" height="596"/>
         <image name="IconShifts" width="700" height="596"/>

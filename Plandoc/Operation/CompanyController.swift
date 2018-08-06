@@ -173,12 +173,13 @@ class CompanyController : UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     @objc func cancel() {
-        if self.sender.restorationIdentifier == "FirstStepsViewController" {
+        if self.sender.restorationIdentifier == "ShiftsViewController" {
+            (self.sender as! ShiftController).ignoreAlert = true
+            self.performSegue(withIdentifier: "SegueUnwindToCalendar", sender: self)
+        } else if self.sender.restorationIdentifier == "FirstStepsViewController" {
             self.performSegue(withIdentifier: "SegueCompanyToFirstSteps", sender: self)
-        } else if self.sender.restorationIdentifier == "ListCompaniesViewController" {
+        } else {
             self.performSegue(withIdentifier: "SegueUnwindToList", sender: self)
-        } else if self.sender.restorationIdentifier == "ShiftsViewController" {
-            self.performSegue(withIdentifier: "SegueCompanyToShift", sender: self)
         }
     }
     

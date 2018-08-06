@@ -1,77 +1,63 @@
 PODS:
-  - Alamofire (4.7.2)
-  - Bolts (1.8.4):
-    - Bolts/AppLinks (= 1.8.4)
-    - Bolts/Tasks (= 1.8.4)
-  - Bolts/AppLinks (1.8.4):
+  - Alamofire (4.7.3)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.8.4)
-  - Charts (3.0.4):
-    - Charts/Core (= 3.0.4)
-  - Charts/Core (3.0.4)
-  - ChromaColorPicker (1.5.1)
-  - FacebookCore (0.3.0):
+  - Bolts/Tasks (1.9.0)
+  - Charts (3.1.1):
+    - Charts/Core (= 3.1.1)
+  - Charts/Core (3.1.1)
+  - ChromaColorPicker (1.7)
+  - Crashlytics (3.10.5):
+    - Fabric (~> 1.7.9)
+  - Fabric (1.7.9)
+  - FacebookCore (0.3.1):
     - Bolts (~> 1.8)
-    - FBSDKCoreKit (~> 4.27)
-  - FacebookLogin (0.3.0):
+    - FBSDKCoreKit (~> 4.33)
+  - FacebookLogin (0.3.1):
     - Bolts (~> 1.8)
-    - FacebookCore (~> 0.3)
-    - FBSDKCoreKit (~> 4.27)
-    - FBSDKLoginKit (~> 4.27)
-  - FBSDKCoreKit (4.29.0):
+    - FacebookCore (~> 0.3.1)
+    - FBSDKCoreKit (~> 4.33)
+    - FBSDKLoginKit (~> 4.33)
+  - FBSDKCoreKit (4.34.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.29.0):
+  - FBSDKLoginKit (4.34.0):
     - FBSDKCoreKit
-  - Firebase/Auth (4.7.0):
-    - Firebase/Core
-    - FirebaseAuth (= 4.4.0)
-  - Firebase/Core (4.7.0):
-    - FirebaseAnalytics (= 4.0.5)
-    - FirebaseCore (= 4.0.12)
-  - Firebase/Database (4.7.0):
-    - Firebase/Core
-    - FirebaseDatabase (= 4.1.2)
-  - Firebase/Storage (4.7.0):
-    - Firebase/Core
-    - FirebaseStorage (= 2.1.0)
-  - FirebaseAnalytics (4.0.5):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-    - nanopb (~> 0.3)
-  - FirebaseAuth (4.4.0):
-    - FirebaseAnalytics (~> 4.0)
-    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+  - Firebase/Auth (5.4.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (= 5.0.2)
+  - Firebase/CoreOnly (5.4.0):
+    - FirebaseCore (= 5.0.5)
+  - Firebase/Database (5.4.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (= 5.0.2)
+  - Firebase/Storage (5.4.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (= 3.0.0)
+  - FirebaseAuth (5.0.2):
+    - FirebaseCore (~> 5.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.12):
+  - FirebaseCore (5.0.5):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseDatabase (4.1.2):
-    - FirebaseAnalytics (~> 4.0)
-    - FirebaseCore (~> 4.0)
+  - FirebaseDatabase (5.0.2):
+    - FirebaseCore (~> 5.0)
     - leveldb-library (~> 1.18)
-  - FirebaseInstanceID (2.0.7)
-  - FirebaseStorage (2.1.0):
-    - FirebaseAnalytics (~> 4.0)
-    - FirebaseCore (~> 4.0)
+  - FirebaseStorage (3.0.0):
+    - FirebaseCore (~> 5.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - FSCalendar (2.7.9)
-  - GoogleToolboxForMac/DebugUtils (2.1.3):
-    - GoogleToolboxForMac/Defines (= 2.1.3)
-  - GoogleToolboxForMac/Defines (2.1.3)
-  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
-    - GoogleToolboxForMac/Defines (= 2.1.3)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3)":
-    - GoogleToolboxForMac/DebugUtils (= 2.1.3)
-    - GoogleToolboxForMac/Defines (= 2.1.3)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.1.3)"
-  - GTMSessionFetcher/Core (1.1.12)
-  - IQKeyboardManagerSwift (5.0.6)
+  - GoogleToolboxForMac/Defines (2.1.4)
+  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+    - GoogleToolboxForMac/Defines (= 2.1.4)
+  - GTMSessionFetcher/Core (1.1.15)
+  - IQKeyboardManagerSwift (6.1.0)
   - leveldb-library (1.20)
-  - MapboxGeocoder.swift (0.7.0)
+  - MapboxGeocoder.swift (0.9.0)
   - MapboxStatic.swift (0.9.1)
-  - MaterialComponents/AnimationTiming (54.13.0)
-  - MaterialComponents/Buttons (54.13.0):
+  - MaterialComponents/AnimationTiming (57.0.0)
+  - MaterialComponents/Buttons (57.0.0):
     - MaterialComponents/Ink
     - MaterialComponents/private/Math
     - MaterialComponents/private/Shapes
@@ -80,22 +66,22 @@ PODS:
     - MaterialComponents/Typography
     - MDFInternationalization
     - MDFTextAccessibility
-  - MaterialComponents/Ink (54.13.0):
+  - MaterialComponents/Ink (57.0.0):
     - MaterialComponents/private/Math
-  - MaterialComponents/OverlayWindow (54.13.0):
+  - MaterialComponents/OverlayWindow (57.0.0):
     - MaterialComponents/private/Application
-  - MaterialComponents/private/Application (54.13.0)
-  - MaterialComponents/private/KeyboardWatcher (54.13.0):
+  - MaterialComponents/private/Application (57.0.0)
+  - MaterialComponents/private/KeyboardWatcher (57.0.0):
     - MaterialComponents/private/Application
-  - MaterialComponents/private/Math (54.13.0)
-  - MaterialComponents/private/Overlay (54.13.0)
-  - MaterialComponents/private/Shapes (54.13.0):
+  - MaterialComponents/private/Math (57.0.0)
+  - MaterialComponents/private/Overlay (57.0.0)
+  - MaterialComponents/private/Shapes (57.0.0):
     - MaterialComponents/private/Math
     - MaterialComponents/ShadowLayer
-  - MaterialComponents/ShadowElevations (54.13.0)
-  - MaterialComponents/ShadowLayer (54.13.0):
+  - MaterialComponents/ShadowElevations (57.0.0)
+  - MaterialComponents/ShadowLayer (57.0.0):
     - MaterialComponents/ShadowElevations
-  - MaterialComponents/Snackbar (54.13.0):
+  - MaterialComponents/Snackbar (57.0.0):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Buttons
     - MaterialComponents/OverlayWindow
@@ -103,20 +89,16 @@ PODS:
     - MaterialComponents/private/KeyboardWatcher
     - MaterialComponents/private/Overlay
     - MaterialComponents/Typography
-  - MaterialComponents/Typography (54.13.0):
+  - MaterialComponents/Typography (57.0.0):
     - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
   - MDFInternationalization (1.0.4)
   - MDFTextAccessibility (1.2.0)
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
-  - PromiseKit/Alamofire (6.2.5):
+  - PromiseKit/Alamofire (6.3.4):
     - Alamofire (~> 4.0)
     - PromiseKit/CorePromise
-  - PromiseKit/CorePromise (6.2.5)
-  - SearchTextField (1.2.0)
+  - PromiseKit/CorePromise (6.3.4)
+  - SearchTextField (1.2.1)
   - SwiftKeychainWrapper (3.0.1)
 
 DEPENDENCIES:
@@ -124,6 +106,8 @@ DEPENDENCIES:
   - Bolts
   - Charts
   - ChromaColorPicker
+  - Crashlytics (~> 3.10.5)
+  - Fabric (~> 1.7.9)
   - FacebookLogin
   - Firebase/Auth
   - Firebase/Database
@@ -138,21 +122,21 @@ DEPENDENCIES:
   - SwiftKeychainWrapper
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - Bolts
     - Charts
     - ChromaColorPicker
+    - Crashlytics
+    - Fabric
     - FacebookCore
     - FacebookLogin
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
-    - FirebaseAnalytics
     - FirebaseAuth
     - FirebaseCore
     - FirebaseDatabase
-    - FirebaseInstanceID
     - FirebaseStorage
     - FSCalendar
     - GoogleToolboxForMac
@@ -164,42 +148,40 @@ SPEC REPOS:
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
-    - nanopb
     - PromiseKit
     - SearchTextField
     - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
-  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
-  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Charts: 0705898046257443f0afbbc3179f4b67507b6e48
-  ChromaColorPicker: cc7fc1d92569a8a9198fe89d9a420147e508462c
-  FacebookCore: 3ffa190a3f1f96cec0e44d3fc221bc322c595ffa
-  FacebookLogin: 0af839ea858faef99550d16596b87b4a8e8906e6
-  FBSDKCoreKit: 6f139173dc63a1deaff4430a55f2fe5bb222d2af
-  FBSDKLoginKit: 56a057ca6822535ea0faa25f57a7c41edb697fd4
-  Firebase: dbfb98ccec2dcfcd21ab9cc1b4981a3f3c8c5e26
-  FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
-  FirebaseAuth: cdeee95b528958dbb7dcf220ad0fb804d3a284b0
-  FirebaseCore: 6cf108b63997bc08c04a1ffa55a3ac0d71a59ffc
-  FirebaseDatabase: 18ecb23e15c7f58bb0c4527e9cace06897cc40ca
-  FirebaseInstanceID: 148c25c986c8699e67304b114e365713dce467f2
-  FirebaseStorage: 0930e97994dc79b404179bdfafb6b16f59433a82
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
+  ChromaColorPicker: 33efa67b17cca51dd253689d18b83ac7e05642c2
+  Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
+  Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
+  FacebookCore: 33078ef1d7d76b73f7e8c990dca7d3ea6db8d22f
+  FacebookLogin: 6f15bf4fefd7a8865abbfa8fcd7f3dfd87aa275f
+  FBSDKCoreKit: 0ff57f093b85c8c9d5aba697d3edf68a8960ce78
+  FBSDKLoginKit: 8c78f57a145afb756e4755e69195ebe08a42466e
+  Firebase: d66f4f29c23f22d96808d9abc174d81d8eee968f
+  FirebaseAuth: 096e457cdd4274412a66c4a35874787e411f5a03
+  FirebaseCore: 42b3267233bd21a5abd54117ccc38ca3dd0f8e83
+  FirebaseDatabase: 27be5ac5bc75e0b17537b2bbfada8258addcc8cd
+  FirebaseStorage: 7ca4bb7b58a25fa647b04f524033fc7cb7eb272b
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
-  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
-  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
-  IQKeyboardManagerSwift: 02bfbb0dff71c66d0ab77d80d25dfce0c3717735
+  GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
+  GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
+  IQKeyboardManagerSwift: f5004f5860d9a8ed23a7ef7a156ae168828eb018
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
-  MapboxGeocoder.swift: b1277a2ca6a63c1a8edfa82871f5771075b1e015
+  MapboxGeocoder.swift: 66d2e5e452c5de6b65ea9b01be436d1c5f100b7e
   MapboxStatic.swift: 247d98dd6e11b8934aa5d122efcb50384f8d66f6
-  MaterialComponents: 3399c262334c35e4994a7b25ad1e9a3ce48dce07
+  MaterialComponents: 0dfd3bf21642f205ecd59d633a4492e14571e53f
   MDFInternationalization: e355b0cebecf53d60233bd267084e49366c82513
   MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
-  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  PromiseKit: a26828b0a8d5874960dfdb575b57a70790ec36f1
-  SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
+  PromiseKit: e1425568123ec844a944c93f2bcb29d511d39cf5
+  SearchTextField: 261b0febd49194492f29555fff3c5c0019ca84d2
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: 92b5b7a0d77ba3d48554899da7de2c2277b162cc
+PODFILE CHECKSUM: 47efb5327a499c676a03362900012708976d61f9
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

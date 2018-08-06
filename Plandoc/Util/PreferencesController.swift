@@ -44,8 +44,7 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
             "Vincular Facebook"
         ],
         TableSection.general: [
-            "Privacidade e Termos de Uso",
-            "Apagar Dados"
+            "Privacidade e Termos de Uso"
         ],
         TableSection.end: [
             "Sair"

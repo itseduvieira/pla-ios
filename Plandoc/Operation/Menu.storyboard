@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--AccountViewController-->
+        <!--ListCompaniesViewController-->
         <scene sceneID="zyA-J3-Hcf">
             <objects>
-                <viewControllerPlaceholder storyboardName="Crud" referencedIdentifier="AccountViewController" id="ryk-yW-2SG" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Crud" referencedIdentifier="ListCompaniesViewController" id="ryk-yW-2SG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Perfil" id="g0d-sr-jDA"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDy-FM-y3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -41,10 +41,10 @@
             </objects>
             <point key="canvasLocation" x="1419" y="336"/>
         </scene>
-        <!--ListCompaniesViewController-->
+        <!--AccountViewController-->
         <scene sceneID="8yo-Yl-7zs">
             <objects>
-                <viewControllerPlaceholder storyboardName="Crud" referencedIdentifier="ListCompaniesViewController" id="bIB-Dg-UQN" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Crud" referencedIdentifier="AccountViewController" id="bIB-Dg-UQN" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Empresas" id="VoD-uM-JkG"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jzy-bZ-fQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -248,7 +248,7 @@
                         <outlet property="tableMenu" destination="1P3-Qd-iWv" id="QA1-u7-xln"/>
                         <segue destination="SrI-d8-63b" kind="show" identifier="SeguePreferences" id="6Eq-7Z-tA7"/>
                         <segue destination="IVy-XK-eKs" kind="show" identifier="SegueMembership" id="OBG-g1-ljx"/>
-                        <segue destination="bIB-Dg-UQN" kind="show" identifier="SegueCompanies" id="4nU-sx-BOl"/>
+                        <segue destination="bIB-Dg-UQN" kind="show" identifier="SegueProfile" id="4nU-sx-BOl"/>
                         <segue destination="VpY-YH-i1D" kind="show" identifier="SegueExpenses" id="KuI-8t-G0r"/>
                         <segue destination="uQd-Kj-R4n" kind="show" identifier="SegueGoals" id="MIb-Zl-s7f"/>
                     </connections>

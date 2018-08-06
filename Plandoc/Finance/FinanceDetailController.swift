@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import PromiseKit
 
 class FinanceDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -221,35 +222,34 @@ class FinanceDetailController: UIViewController, UITableViewDelegate, UITableVie
             let alert = UIAlertController(title: "Plantão Não Realizado", message: "Este plantão não foi realizado e será apagado. Você deseja realmente remover este plantao?", preferredStyle: .actionSheet)
             
             alert.addAction(UIAlertAction(title: "Sim, desejo remover", style: .destructive, handler: { action in
-                
-                var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
-                dict.removeValue(forKey: shiftPdc.id)
-                
-                UserDefaults.standard.set(dict, forKey: "shifts")
-                
-                self.viewWillAppear(true)
+                if shiftPdc.groupId == nil{
+                    self.deleteShift(shiftPdc, indexPath, tableView)
+                } else {
+                    let alert = UIAlertController(title: "Remover Plantão Fixo", message: "O plantão escolhido é do tipo fixo. Você deseja remover apenas este agendamento ou todos os agendamentos deste fixo?", preferredStyle: .actionSheet)
+                    
+                    alert.addAction(UIAlertAction(title: "Apenas Este", style: .default, handler: { action in
+                        self.deleteShift(shiftPdc, indexPath, tableView)
+                    }))
+                    alert.addAction(UIAlertAction(title: "Remover Todos", style: .destructive, handler: { action in
+                        self.deleteShiftGroup(shiftPdc, indexPath, tableView)
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+                    
+                    self.present(alert, animated: true)
+                }
             }))
             
             alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
             
             self.present(alert, animated: true)
             
-            handler(true)
+            handler(false)
         }
         
         let pay = UIContextualAction(style: .destructive, title: "Já Recebi") { (action, view, handler) in
-            var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
-            shiftPdc.paid = true
-            dict[shiftPdc.id] = NSKeyedArchiver.archivedData(withRootObject: shiftPdc)
-            UserDefaults.standard.set(dict, forKey: "shifts")
+            self.pay(shiftPdc.id)
             
-            let center = UNUserNotificationCenter.current()
-            center.removeDeliveredNotifications(withIdentifiers: [shiftPdc.id])
-            center.removePendingNotificationRequests(withIdentifiers: [shiftPdc.id])
-            
-            self.viewWillAppear(true)
-            
-            handler(true)
+            handler(false)
         }
         
         pay.backgroundColor = UIColor(hexString: "#59AF4F")
@@ -265,5 +265,85 @@ class FinanceDetailController: UIViewController, UITableViewDelegate, UITableVie
         config.performsFirstActionWithFullSwipe = false
         
         return config
+    }
+    
+    func pay(_ id: String) {
+        self.presentAlert()
+        
+        var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
+        let pdcShift = NSKeyedUnarchiver.unarchiveObject(with: shifts[id]!) as! Shift
+        pdcShift.paid = true
+        
+        firstly {
+            DataAccess.instance.updateShift(pdcShift)
+        }.done {
+            let shift = NSKeyedArchiver.archivedData(withRootObject: pdcShift)
+            shifts[pdcShift.id] = shift
+            UserDefaults.standard.set(shifts, forKey: "shifts")
+            
+            let center = UNUserNotificationCenter.current()
+            center.removeDeliveredNotifications(withIdentifiers: [id])
+            center.removePendingNotificationRequests(withIdentifiers: [id])
+            
+            self.viewWillAppear(true)
+        }.ensure {
+            self.dismissCustomAlert()
+        }.catch { error in
+            
+            self.showNetworkError(msg: "Não foi possível enviar os dados do Plantão. Verifique sua conexão com a Internet e tente novamente.", {
+                self.pay(id)
+            })
+        }
+    }
+    
+    func deleteShift(_ pdcShift: Shift, _ indexPath: IndexPath, _ tableView: UITableView) {
+        self.presentAlert()
+        
+        firstly {
+            DataAccess.instance.deleteShift(pdcShift.id)
+        }.done {
+            var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
+            
+            dict.removeValue(forKey: pdcShift.id)
+            
+            UserDefaults.standard.set(dict, forKey: "shifts")
+            
+            self.viewWillAppear(true)
+            self.viewDidAppear(true)
+        }.ensure {
+            self.dismissCustomAlert()
+        }.catch { error in
+            self.showNetworkError (msg: "Não foi possível remover o Plantão. Verifique sua conexão com a Internet e tente novamente.", {
+                self.deleteShift(pdcShift, indexPath, tableView)
+            })
+        }
+    }
+    
+    func deleteShiftGroup(_ pdcShift: Shift, _ indexPath: IndexPath, _ tableView: UITableView) {
+        self.presentAlert()
+        
+        firstly {
+            DataAccess.instance.deleteShiftGroup(pdcShift.groupId)
+        }.done {
+            var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
+            
+            for data in dict.values {
+                let s = NSKeyedUnarchiver.unarchiveObject(with: data) as! Shift
+                if s.groupId == pdcShift.groupId {
+                    dict.removeValue(forKey: s.id)
+                }
+            }
+            
+            UserDefaults.standard.set(dict, forKey: "shifts")
+            
+            self.viewWillAppear(true)
+            self.viewDidAppear(true)
+        }.ensure {
+            self.dismissCustomAlert()
+        }.catch { error in
+            self.showNetworkError (msg: "Não foi possível remover os Plantões. Verifique sua conexão com a Internet e tente novamente.", {
+                self.deleteShiftGroup(pdcShift, indexPath, tableView)
+            })
+        }
     }
 }

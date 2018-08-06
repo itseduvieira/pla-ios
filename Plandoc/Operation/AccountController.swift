@@ -113,6 +113,12 @@ class AccountController: UIViewController, UINavigationControllerDelegate, UIIma
         navBar.shadowImage = UIImage()
         let doneItem = UIBarButtonItem(title: "Salvar", style: .done, target: self, action: #selector(save))
         navItem.rightBarButtonItem = doneItem
+        let calendarTypeItem = UIBarButtonItem(title: "Voltar", style: .plain, target: self, action: #selector(back))
+        navItem.leftBarButtonItem = calendarTypeItem
+    }
+    
+    @objc func back() {
+        self.performSegue(withIdentifier: "SegueUnwindToExtendedMenu", sender: self)
     }
     
     @objc func save() {

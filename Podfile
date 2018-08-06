@@ -6,6 +6,8 @@ target 'Plandoc' do
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
     pod 'Firebase/Storage'
+    pod 'Fabric', '~> 1.7.9'
+    pod 'Crashlytics', '~> 3.10.5'
     pod 'IQKeyboardManagerSwift'
     pod 'ChromaColorPicker'
     pod 'FSCalendar'
@@ -19,4 +21,12 @@ target 'Plandoc' do
     pod 'Alamofire', '~> 4.7'
     pod 'PromiseKit/Alamofire', '~> 6.0'
     pod 'MaterialComponents/Snackbar'
+    
+    # Workaround for Cocoapods issue #7606
+    post_install do |installer|
+        installer.pods_project.build_configurations.each do |config|
+            config.build_settings.delete('CODE_SIGNING_ALLOWED')
+            config.build_settings.delete('CODE_SIGNING_REQUIRED')
+        end
+    end
 end

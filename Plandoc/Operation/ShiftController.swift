@@ -38,6 +38,8 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     var id: String!
     var dateFilled: Date!
     
+    var ignoreAlert = false
+    
     var past: Bool! = false
     
     var picker: UIPickerView!
@@ -162,13 +164,18 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         
         self.companiesData = [Data](dictCompanies.values)
         
-        if companiesData.isEmpty && self.id == nil {
+        if companiesData.isEmpty && self.id == nil && !ignoreAlert {
             let alertController = UIAlertController(title: "Nenhuma Empresa Cadastrada", message: "Para cadastrar um plantão, primeiro você deve cadastrar uma empresa.", preferredStyle: .alert)
             
             let defaultAction = UIAlertAction(title: "Entendi", style: .cancel, handler: {action in
                 self.performSegue(withIdentifier: "SegueShiftsToCompany", sender: self)
             })
             alertController.addAction(defaultAction)
+            
+            let dismissAction = UIAlertAction(title: "Agora Não", style: .destructive, handler: { action in
+                self.cancel()
+            })
+            alertController.addAction(dismissAction)
             
             self.present(alertController, animated: true, completion: nil)
         }
@@ -182,20 +189,16 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     }
     
     @objc func resolve() {
-        let alert = UIAlertController(title: "Resolver Plantão", message: "O pagamento já foi efetuado?", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Mais Opções", message: "O que você deseja fazer?", preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Já Recebi", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Salvar Alterações", style: .default, handler: { action in
+            self.save()
+        }))
+        alert.addAction(UIAlertAction(title: "Marcar Como Recebido", style: .default, handler: { action in
             self.pay()
         }))
-        alert.addAction(UIAlertAction(title: "Remover", style: .destructive, handler: { action in
-            var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
-            dict.removeValue(forKey: self.id)
-            
-            UserDefaults.standard.set(dict, forKey: "shifts")
-            
-            DataAccess.instance.deleteShift(self.id)
-            
-            self.cancel()
+        alert.addAction(UIAlertAction(title: "Remover Plantão", style: .destructive, handler: { action in
+            self.delete()
         }))
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
         
@@ -212,7 +215,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             self.present(alertController, animated: true, completion: nil)
         } else {
             self.presentAlert()
-            3
+            
             var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
             
             var pdcShift = Shift()
@@ -328,7 +331,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         let weeks = Int(txtFixo.text!.split(separator: " ")[1])! * 4
         let initialDate = model.date
         
-        for index in 0..<weeks {
+        for index in 0...weeks {
             let pdcShift = Shift()
             pdcShift.id = String.random()
             pdcShift.groupId = model.groupId
@@ -385,9 +388,11 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
         self.dismissCustomAlert()
         
         self.showNetworkError(msg: "Não foi possível enviar os dados do Plantão. Verifique sua conexão com a Internet e tente novamente.", {
+            self.presentAlert()
+            
             firstly {
                 DataAccess.instance.deleteShiftGroup(pdcShift.groupId)
-            }.ensure {
+            }.done {
                 self.createShiftGroup(pdcShift)
             }.catch { error in
                 self.handleErrorGroup(pdcShift)
@@ -406,20 +411,52 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
     }
     
     @IBAction func pay() {
+        self.presentAlert()
+        
         var shifts = UserDefaults.standard.dictionary(forKey: "shifts") as? [String:Data] ?? [:]
-        let pdcShift = NSKeyedUnarchiver.unarchiveObject(with: shifts[id]!) as! Shift
+        let pdcShift = NSKeyedUnarchiver.unarchiveObject(with: shifts[self.id]!) as! Shift
         pdcShift.paid = true
-        let shift = NSKeyedArchiver.archivedData(withRootObject: pdcShift)
-        shifts[pdcShift.id] = shift
-        UserDefaults.standard.set(shifts, forKey: "shifts")
         
-        DataAccess.instance.updateShift(pdcShift)
+        firstly {
+            DataAccess.instance.updateShift(pdcShift)
+        }.done {
+            let shift = NSKeyedArchiver.archivedData(withRootObject: pdcShift)
+            shifts[pdcShift.id] = shift
+            UserDefaults.standard.set(shifts, forKey: "shifts")
+            
+            let center = UNUserNotificationCenter.current()
+            center.removeDeliveredNotifications(withIdentifiers: [self.id])
+            center.removePendingNotificationRequests(withIdentifiers: [self.id])
+            
+            self.cancel()
+        }.catch { error in
+            self.dismissCustomAlert()
+            
+            self.showNetworkError(msg: "Não foi possível enviar os dados do Plantão. Verifique sua conexão com a Internet e tente novamente.", {
+                self.pay()
+            })
+        }
+    }
+    
+    private func delete() {
+        self.presentAlert()
         
-        let center = UNUserNotificationCenter.current()
-        center.removeDeliveredNotifications(withIdentifiers: [id])
-        center.removePendingNotificationRequests(withIdentifiers: [id])
-        
-        cancel()
+        firstly {
+            DataAccess.instance.deleteShift(self.id)
+        }.done {
+            var dict = UserDefaults.standard.dictionary(forKey: "shifts") as! [String:Data]
+            dict.removeValue(forKey: self.id)
+            
+            UserDefaults.standard.set(dict, forKey: "shifts")
+            
+            self.cancel()
+        }.catch { error in
+            self.dismissCustomAlert()
+            
+            self.showNetworkError(msg: "Não foi possível apagar o Plantão. Verifique sua conexão com a Internet e tente novamente.", {
+                self.delete()
+            })
+        }
     }
     
     @IBAction func enterDueDate() {
@@ -474,7 +511,7 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             if !pdcShift.paid && Calendar.current.date(byAdding: DateComponents(day: 1), to: pdcShift.paymentDueDate)! < Date()  {
                 notPaidIndicator.isHidden = false
                 navItem.title = "Pgto Pendente"
-                done = "Resolver"
+                done = "Mais..."
                 sel = #selector(resolve)
             }
         }

@@ -52,7 +52,7 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
         
         self.presentAlert()
         
-        Auth.auth().createUser(withEmail: txtEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: txtPass.text!, completion: { (user: FirebaseAuth.User?, error) in
+        Auth.auth().createUser(withEmail: txtEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines), password: txtPass.text!, completion: { (userResult, error) in
             if let error = error {
                 print(error)
                 
@@ -69,6 +69,7 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
                     }
                 }
             } else {
+                let user = userResult?.user
                 let changeRequest = user?.createProfileChangeRequest()
                 changeRequest?.displayName = self.txtName.text
                 changeRequest?.commitChanges { error in
