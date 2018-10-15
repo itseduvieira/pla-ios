@@ -455,7 +455,7 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
                                         
                                         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                                         
-                                        Auth.auth().currentUser?.link(with: credential, completion: { (user, err) in
+                                        Auth.auth().currentUser?.linkAndRetrieveData(with: credential, completion: { (userResult, err) in
                                             self.tableView.deselectRow(at: index, animated: true)
                                         
                                             self.dismissCustomAlert()
@@ -470,7 +470,7 @@ class PreferencesController: UIViewController, UITableViewDataSource, UITableVie
                             } else {
                                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                                 
-                                Auth.auth().currentUser?.link(with: credential, completion: { (user, err) in
+                                Auth.auth().currentUser?.linkAndRetrieveData(with: credential, completion: { (userResult, err) in
                                     self.tableView.deselectRow(at: index, animated: true)
                                     
                                     self.dismissCustomAlert()

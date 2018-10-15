@@ -98,7 +98,7 @@ class InitialController : UIViewController {
     private func trySignInFirebase(_ name: String, _ email: String, _ pictureUrl: String?) {
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         
-        Auth.auth().signIn(with: credential) { (user, error) in
+        Auth.auth().signInAndRetrieveData(with: credential) { (userResult, error) in
             if let error = error {
                 print(error)
                 
@@ -116,7 +116,7 @@ class InitialController : UIViewController {
                 default:
                     print(error)
                 }
-            } else if let user = user {
+            } else if let user = userResult?.user {
                 if user.providerData.count == 1 &&
                     user.providerData[0].providerID == "facebook.com" {
                     self.name = name

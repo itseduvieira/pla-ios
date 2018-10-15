@@ -98,6 +98,7 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
             let sessionConfig = URLSessionConfiguration.default
             let session = URLSession(configuration: sessionConfig)
             var request = URLRequest(url: confirmURL!)
+            request.addValue("Bearer \(user.uid)", forHTTPHeaderField: "Authorization")
             request.httpMethod = "POST"
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
             let body: [String:Any] = [
@@ -110,7 +111,7 @@ class SignupNameController : UIViewController, UITextFieldDelegate {
             request.httpBody = jsonData
             
             let task = session.dataTask(with: request) { (data, response, error) in
-                if let data = data, error == nil, let response = response as? HTTPURLResponse {
+                if let _ = data, error == nil, let _ = response as? HTTPURLResponse {
                     DispatchQueue.main.async {
                         KeychainWrapper.standard.set(pdcUser.email, forKey: "pdcEmail")
                         KeychainWrapper.standard.set(self.txtPass.text!, forKey: "pdcPassword")

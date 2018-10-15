@@ -607,7 +607,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWa-91-AAp">
                                                 <rect key="frame" x="264" y="0.0" width="44" height="44"/>
-                                                <color key="backgroundColor" red="0.24859493970870972" green="0.66112333536148071" blue="0.95819658041000366" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.24705882352941178" green="0.66274509803921566" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="qoM-sk-qGT"/>
                                                     <constraint firstAttribute="width" constant="44" id="vSX-lb-h0e"/>
@@ -615,7 +615,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ZC-mL-8WC">
                                                 <rect key="frame" x="308" y="0.0" width="44" height="44"/>
-                                                <color key="backgroundColor" red="0.32838356494903564" green="0.73586267232894897" blue="0.83434402942657471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.32941176470588235" green="0.73725490196078436" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="Hox-ca-alL"/>
                                                     <constraint firstAttribute="height" constant="44" id="VQL-tG-lA7"/>
@@ -623,7 +623,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3B2-eu-gPp">
                                                 <rect key="frame" x="352" y="0.0" width="44" height="44"/>
-                                                <color key="backgroundColor" red="0.27388197183609009" green="0.58618283271789551" blue="0.53265935182571411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.27450980392156865" green="0.58431372549019611" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="KN3-dL-wYL"/>
                                                     <constraint firstAttribute="height" constant="44" id="yTy-ZV-I4x"/>
@@ -1383,7 +1383,7 @@
         <image name="RevealPasswordIcon" width="80" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LNd-Cq-P0l"/>
+        <segue reference="SBL-H7-X7T"/>
         <segue reference="e0d-fh-YCt"/>
     </inferredMetricsTieBreakers>
 </document>

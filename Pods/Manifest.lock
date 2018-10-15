@@ -33,6 +33,9 @@ PODS:
   - Firebase/Database (5.4.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (= 5.0.2)
+  - Firebase/Messaging (5.4.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (= 3.0.3)
   - Firebase/Storage (5.4.0):
     - Firebase/CoreOnly
     - FirebaseStorage (= 3.0.0)
@@ -44,11 +47,20 @@ PODS:
   - FirebaseDatabase (5.0.2):
     - FirebaseCore (~> 5.0)
     - leveldb-library (~> 1.18)
+  - FirebaseInstanceID (3.1.1):
+    - FirebaseCore (~> 5.0)
+  - FirebaseMessaging (3.0.3):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - Protobuf (~> 3.1)
   - FirebaseStorage (3.0.0):
     - FirebaseCore (~> 5.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - FSCalendar (2.7.9)
   - GoogleToolboxForMac/Defines (2.1.4)
+  - GoogleToolboxForMac/Logger (2.1.4):
+    - GoogleToolboxForMac/Defines (= 2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - GTMSessionFetcher/Core (1.1.15)
@@ -98,6 +110,7 @@ PODS:
     - Alamofire (~> 4.0)
     - PromiseKit/CorePromise
   - PromiseKit/CorePromise (6.3.4)
+  - Protobuf (3.6.1)
   - SearchTextField (1.2.1)
   - SwiftKeychainWrapper (3.0.1)
 
@@ -111,6 +124,7 @@ DEPENDENCIES:
   - FacebookLogin
   - Firebase/Auth
   - Firebase/Database
+  - Firebase/Messaging
   - Firebase/Storage
   - FSCalendar
   - IQKeyboardManagerSwift
@@ -137,6 +151,8 @@ SPEC REPOS:
     - FirebaseAuth
     - FirebaseCore
     - FirebaseDatabase
+    - FirebaseInstanceID
+    - FirebaseMessaging
     - FirebaseStorage
     - FSCalendar
     - GoogleToolboxForMac
@@ -149,6 +165,7 @@ SPEC REPOS:
     - MDFInternationalization
     - MDFTextAccessibility
     - PromiseKit
+    - Protobuf
     - SearchTextField
     - SwiftKeychainWrapper
 
@@ -167,6 +184,8 @@ SPEC CHECKSUMS:
   FirebaseAuth: 096e457cdd4274412a66c4a35874787e411f5a03
   FirebaseCore: 42b3267233bd21a5abd54117ccc38ca3dd0f8e83
   FirebaseDatabase: 27be5ac5bc75e0b17537b2bbfada8258addcc8cd
+  FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
+  FirebaseMessaging: f43eb0c0e1da096e659de6f713038e74862a62cd
   FirebaseStorage: 7ca4bb7b58a25fa647b04f524033fc7cb7eb272b
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
@@ -179,9 +198,10 @@ SPEC CHECKSUMS:
   MDFInternationalization: e355b0cebecf53d60233bd267084e49366c82513
   MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
   PromiseKit: e1425568123ec844a944c93f2bcb29d511d39cf5
+  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SearchTextField: 261b0febd49194492f29555fff3c5c0019ca84d2
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: 47efb5327a499c676a03362900012708976d61f9
+PODFILE CHECKSUM: fb7fbb156fe396dc4f8ad04983770758317480c4
 
 COCOAPODS: 1.5.3

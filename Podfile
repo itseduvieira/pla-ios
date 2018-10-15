@@ -6,6 +6,7 @@ target 'Plandoc' do
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
     pod 'Firebase/Storage'
+    pod 'Firebase/Messaging'
     pod 'Fabric', '~> 1.7.9'
     pod 'Crashlytics', '~> 3.10.5'
     pod 'IQKeyboardManagerSwift'

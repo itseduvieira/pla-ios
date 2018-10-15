@@ -63,22 +63,9 @@ class DataAccess {
             firstly {
                 sessionManager.request(fullUrl, method: method, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON()
             }.done { (json, response) in
-                //self.retryCount = 0
-                
                 seal.fulfill(json)
             }.catch { error in
                 print("ERR \(String(method.rawValue)) \(fullUrl)")
-                //print(error)
-                
-//                if error._code == NSURLErrorTimedOut && self.retryCount < 3 {
-//                    self.retryCount += 1
-//
-//                    self.retry(path, method: method, parameters: parameters, seal: seal)
-//                } else {
-//                    self.retryCount = 0
-//
-//                    seal.reject(error)
-//                }
                 
                 seal.reject(error)
             }
