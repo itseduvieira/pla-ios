@@ -235,7 +235,12 @@ class ExpenseDetailController: UIViewController, UIPickerViewDelegate, UIPickerV
             formatter.dateFormat = "dd/MM/yyyy"
             let date = formatter.date(from: self.txtDate.text!)!
             pdcExpense.date = date
-            pdcExpense.value = Double(txtValue.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))
+            
+            let nf = NumberFormatter()
+            nf.numberStyle = .currency
+            nf.locale = Locale(identifier: "pt_BR")
+            let number = nf.number(from: txtValue.text!)
+            pdcExpense.value = number?.doubleValue
             
             if isNew {
                 if switchFixo.isOn && !txtFixo.isHidden {

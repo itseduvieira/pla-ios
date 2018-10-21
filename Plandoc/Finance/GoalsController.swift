@@ -111,7 +111,11 @@ class GoalsController: UIViewController, UITextFieldDelegate {
             var value: Double = 0.0
             
             if txtValue.text! != "" {
-                value = Double(txtValue.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))!
+                let nf = NumberFormatter()
+                nf.numberStyle = .currency
+                nf.locale = Locale(identifier: "pt_BR")
+                let number = nf.number(from: txtValue.text!)
+                value = number!.doubleValue
             }
             
             firstly {

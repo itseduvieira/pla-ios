@@ -174,7 +174,7 @@ class CalendarController: UIViewController, UITableViewDelegate, UITableViewData
         let shiftPdc = NSKeyedUnarchiver.unarchiveObject(with: shift) as! Shift
         cell.color.backgroundColor = UIColor(hexString: shiftPdc.company.color)
         cell.company.text = "\(shiftPdc.company.type!) \(shiftPdc.company.name!)"
-        cell.salary.text = "R$\(Int(shiftPdc.salary!))"
+        cell.salary.text = "R$\(Int(shiftPdc.salary ?? 0.0))"
         var calendar = Calendar.current
         calendar.locale = Locale(identifier: "pt_BR")
         let day = calendar.component(.day, from: shiftPdc.date)

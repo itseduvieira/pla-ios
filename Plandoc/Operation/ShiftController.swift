@@ -231,7 +231,12 @@ class ShiftController : UIViewController, UIPickerViewDelegate, UIPickerViewData
             formatter.dateFormat = "dd/MM/yyyy HH:mm"
             let date = formatter.date(from: "\(self.txtDate.text!) \(self.txtHour.text!)")!
             
-            pdcShift.salary = Double(txtSalary.text!.replacingOccurrences(of: "R$", with: "").replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: ",", with: "."))
+            let nf = NumberFormatter()
+            nf.numberStyle = .currency
+            nf.locale = Locale(identifier: "pt_BR")
+            let number = nf.number(from: txtSalary.text!)
+            pdcShift.salary = number?.doubleValue
+            
             pdcShift.date = date
             pdcShift.paymentType = txtPaymentType.text!
             pdcShift.shiftTime = Int(txtShiftTime.text!.components(separatedBy: " ")[0])
